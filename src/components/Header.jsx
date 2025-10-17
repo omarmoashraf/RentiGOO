@@ -159,7 +159,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={() => navigate(item.path)}
                   className={`flex items-center px-4 py-3 text-left rounded-xl transition-all duration-200 ${
                     currentPage === item.id
                       ? "bg-blue-50 text-blue-600 font-semibold"
@@ -175,7 +175,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
             <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-100">
               <Button
                 variant="outlined"
-                onClick={() => handleNavClick("favorites")}
+                onClick={() => navigate("/favourites")}
                 className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
               >
                 <FaHeart className="w-4 h-4" />
@@ -184,7 +184,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
 
               <Button
                 variant="outlined"
-                onClick={() => handleNavClick("wallet")}
+                onClick={() => navigate("/wallet")}
                 className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
               >
                 <FaWallet className="w-4 h-4" />
@@ -192,7 +192,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
               </Button>
 
               <Button
-                onClick={() => handleNavClick("login")}
+                onClick={() => navigate("/login")}
                 className="col-span-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 py-3 transform hover:scale-105"
               >
                 Sign In
