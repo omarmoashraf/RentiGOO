@@ -19,17 +19,12 @@ import {
 const About = () => {
   return (
     <div className="main">
-      <div className="  bg-gray-100 text-gray-800 p-16 top ">
-        <header className="flex justify-center mt-4 ">
-          <Button className="bg-blue-500  " disabled>
-            Our Story
-          </Button>
-        </header>
+      <div className="  bg-gray-100 text-gray-800 p-16 top mt-4">
         <div className="">
-          <h1 className="font-bold text-3xl text-black text-center mt-3 mb-3">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 text-black">
             Driving Dreams
           </h1>
-          <p className="text-center text-lg">
+          <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center">
             Born from a passion for exceptional automotive experiences, Rentigo
             has evolved into a trusted leader in premium car rentals, serving
             customers across the nation.
@@ -38,7 +33,9 @@ const About = () => {
       </div>
       <div className="text-white mt-7 p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <section className="left">
-          <h2 className="font-bold text-black text-2xl mb-5">Our Journey</h2>
+          <h2 className="font-bold text-black text-3xl md:text-4xl mb-5">
+            Our Journey
+          </h2>
           <p className="text-gray-600 leading-loose">
             Founded in 2024, RentiGO started with one goal — to make car rentals
             smarter, faster, and more transparent. Today, we serve thousands of
@@ -47,7 +44,7 @@ const About = () => {
             toward a smarter, customer-focused future in mobility.
           </p>
           <Typography as={Link} to="/contact" className="mt-6">
-            <Button className="bg-cyan-600 mb-4">Get Touch</Button>
+            <Button className="bg-blue-600 mb-4">Get Touch</Button>
           </Typography>
         </section>
         <section className="right rounded-3xl overflow-hidden shadow-lg">
@@ -66,7 +63,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
-              <Typography color="blue-gray" className="text-xl text-blue-800">
+              <Typography
+                color="blue-gray"
+                className="text-3xl font-bold text-[#06f]"
+              >
                 500+
               </Typography>
             </div>
@@ -86,7 +86,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
-              <Typography color="blue-gray" className="text-xl text-blue-800">
+              <Typography
+                color="blue-gray"
+                className="text-3xl font-bold text-[#06f]"
+              >
                 50K+
               </Typography>
             </div>
@@ -106,7 +109,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
-              <Typography color="blue-gray" className="text-xl text-blue-800">
+              <Typography
+                color="blue-gray"
+                className="text-3xl font-bold text-[#06f]"
+              >
                 25+
               </Typography>
             </div>
@@ -126,7 +132,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
-              <Typography color="blue-gray" className="text-xl text-blue-800">
+              <Typography
+                color="blue-gray"
+                className="text-3xl font-bold text-[#06f]"
+              >
                 4.9/5
               </Typography>
             </div>
@@ -143,8 +152,12 @@ const About = () => {
       <div className="cards2 lg:flex justify-center grid grid-cols-1 gap-4 p-4 justify-items-center  md:grid-cols-2   lg:gap-80 ">
         <Card className="mt-6 w-70 md:w-96 ">
           <CardBody>
-            <FiTarget className="text-5xl" />
-            <Typography variant="h5" color="blue-gray" className="mb-2">
+            <FiTarget className="text-5xl text-[#06f]" />
+            <Typography
+              variant="h5"
+              color="blue-gray"
+              className="mb-2 text-2xl font-bold"
+            >
               Our Mission
             </Typography>
             <Typography>
@@ -157,8 +170,12 @@ const About = () => {
         </Card>
         <Card className="mt-6 w-70 md:w-96">
           <CardBody>
-            <FaEye className="text-5xl text-black" />
-            <Typography variant="h5" color="blue-gray" className="mb-2">
+            <FaEye className="text-5xl text-[#06f]" />
+            <Typography
+              variant="h5"
+              color="blue-gray"
+              className="mb-2 text-2xl font-bold"
+            >
               Our Vision
             </Typography>
             <Typography>
@@ -171,7 +188,7 @@ const About = () => {
         </Card>
       </div>
       <div className="">
-        <h1 className="font-bold text-3xl text-black text-center mt-3 mb-3">
+        <h1 className="font-bold text-3xl text-black text-center mt-3 mb-3 ">
           Our Value
         </h1>
         <p className="text-center text-lg text-gray-600">
@@ -183,7 +200,7 @@ const About = () => {
         <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
           <CardBody>
             <div className="flex justify-center mb-4 ">
-              <FiTarget className="text-5xl text-black" />
+              <FiTarget className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
@@ -204,7 +221,7 @@ const About = () => {
         <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
           <CardBody>
             <div className="flex justify-center mb-4 ">
-              <MdPeople className="text-5xl text-black" />
+              <MdPeople className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
@@ -225,7 +242,7 @@ const About = () => {
         <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
           <CardBody>
             <div className="flex justify-center mb-4 ">
-              <FaEye className="text-5xl text-black" />
+              <FaEye className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
@@ -246,7 +263,7 @@ const About = () => {
         <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
           <CardBody>
             <div className="flex justify-center mb-4 ">
-              <BiSolidMedal className="text-5xl text-black" />
+              <BiSolidMedal className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
@@ -266,13 +283,22 @@ const About = () => {
         </Card>
       </div>
       <div className="bg-blue-600 flex-row p-7 text-center text-white">
-        <h1 className="mb-4">Ready to Experience the Difference?</h1>
-        <section className="content ">
+        <h1 className="mb-4 text-3xl md:text-4xl font-bold">
+          Ready to Experience the Difference?
+        </h1>
+        <section className="content1 ">
           <p>
             Join thousands of satisfied customers who have chosen Rentigo for
             their car rental needs. Discover why we're the preferred choice for
             discerning travelers.
           </p>
+        </section>
+        <section className="content2 flex flex-col items-center gap-7 mt-4 md:flex-row justify-center">
+          <Link to="/cars">
+            <Button className="bg-white text-blue-600">Browse Our Fleet</Button>
+          </Link>
+          <Link to="/contact"> <Button className="bg-white text-blue-600">Contact us</Button></Link>
+         
         </section>
       </div>
     </div>
