@@ -37,10 +37,14 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/paymentdetails" element={<PaymentDetails />} />
         <Route path="/paymentmethods" element={<PaymentMethods />} />
-        <Route path="/cardetails" element={<CarDetails />} />
+ 
+        <Route path="/cars/:carID" element={<CarDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {!hideLayout && <Footer />}
+ 
+         
+ 
     </div>
   );
 }
