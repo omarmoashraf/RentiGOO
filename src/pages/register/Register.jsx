@@ -183,9 +183,9 @@ const Register = () => {
                 </Typography>
               </div>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form className="space-y-6 " onSubmit={handleSubmit}>
                 {activeTab === "signup" && (
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 ">
                     <InputField
                       label="First Name"
                       placeholder="John"
