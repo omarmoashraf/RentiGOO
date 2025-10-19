@@ -24,8 +24,9 @@ function App() {
   return (
     <div>
       {!hideLayout && <Header />}
-      <main className={`${!hideLayout ? "pt-24" : ""}`}>  {/* this for appear on top pages and disappear in login and resgister */}
-        
+
+      <main className={`${!hideLayout ? "pt-24" : ""}`}>
+        {/* this for appear on top pages and disappear in login and register */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -39,11 +40,12 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/paymentdetails" element={<PaymentDetails />} />
           <Route path="/paymentmethods" element={<PaymentMethods />} />
-          <Route path="/cardetails" element={<CarDetails />} />
+          <Route path="/cars/:carID" element={<CarDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+
+      {!hideLayout && <Footer />}
     </div>
   );
 }
