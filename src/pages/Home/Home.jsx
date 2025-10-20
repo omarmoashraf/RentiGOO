@@ -24,7 +24,13 @@ const Home = () => {
   return (
     <div>
       <div className="overflow-hidden">
-        <Carousel className="rounded-xl h-[70vh] md:h-[80vh] lg:h-[90vh]">
+        <Carousel
+          className="rounded-xl h-[70vh] md:h-[80vh] lg:h-[90vh] "
+          autoplay
+          autoplayDelay={4000}
+          loop
+          transition={{ duration: 0.8 }}
+        >
           <div className="relative h-full w-full">
             <img
               src="./Home-1.jpg"
@@ -35,7 +41,7 @@ const Home = () => {
               <Typography
                 variant="h1"
                 color="white"
-                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                className="mb-4 text-3xl  md:text-4xl lg:text-5xl"
               >
                 Experience Luxury
               </Typography>
@@ -154,60 +160,84 @@ const Home = () => {
           </div>
         </Carousel>
       </div>
-      <form className="mt-8  w-full max-w-screen mx-auto px-4 bg-white shadow-lg rounded-xl p-4 m-10 mb-6 ">
-        <div className="flex flex-wrap justify-center gap-4 items-end md:gap-11">
-          <div className="flex flex-col w-40">
-            <Typography variant="p" color="blue-gray" className="-mb-1 flex">
-              <CiLocationOn className="text-[#06f] text-xl" />
-              Pickup Location
-            </Typography>
-            <Input
-              type="input"
-              size="md"
-              placeholder="Enter yoyr address"
-              className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-            />
-          </div>
-          <div className="flex flex-col w-40">
-            <Typography variant="p" color="blue-gray" className="-mb-1 flex">
-              <MdOutlineDateRange className="text-[#06f] text-xl" />
-              Pick Up data
-            </Typography>
-            <Input
-              type="date"
-              size="md"
-              placeholder="dd/mm/yy"
-              className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          </div>
-          <div className="flex flex-col w-40">
-            <Typography variant="p" color="blue-gray" className="-mb-1 flex">
-              <MdOutlineDateRange className="text-[#06f] text-xl" />
-              Return Date
-            </Typography>
-            <Input
-              type="date"
-              size="md"
-              placeholder="dd/mm/yy"
-              className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-            />
-          </div>
+      <div className="flex flex-col items-center px-4">
+        <form className="mt-8 w-full max-w-5xl bg-white shadow-lg rounded-2xl p-6 md:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {/* Pickup Location */}
+            <div className="flex flex-col w-full">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-1 mb-1"
+              >
+                <CiLocationOn className="text-[#06f] text-xl" />
+                Pickup Location
+              </Typography>
+              <Input
+                type="text"
+                size="md"
+                placeholder="Enter your address"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+              />
+            </div>
 
-          <div className="flex justify-center w-40">
-            <Link to="./cars">
-              <Button size="lg" color="blue-gray" className="bg-[#06f]">
-                Search
-              </Button>
-            </Link>
+            {/* Pick Up Date */}
+            <div className="flex flex-col w-full">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-1 mb-1"
+              >
+                <MdOutlineDateRange className="text-[#06f] text-xl" />
+                Pick Up Date
+              </Typography>
+              <Input
+                type="date"
+                size="md"
+                placeholder="dd/mm/yy"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+            </div>
+
+            {/* Return Date */}
+            <div className="flex flex-col w-full">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="flex items-center gap-1 mb-1"
+              >
+                <MdOutlineDateRange className="text-[#06f] text-xl" />
+                Return Date
+              </Typography>
+              <Input
+                type="date"
+                size="md"
+                placeholder="dd/mm/yy"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+              />
+            </div>
+
+            {/* Search Button */}
+            <div className="flex justify-center items-end w-full">
+              <Link to="./cars" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="bg-[#06f] text-white w-full sm:w-auto"
+                >
+                  Search
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+
       <div className="featured_cars">
         <header className="text-center m-11">
           <h1 className="font-bold text-xl md:text-4xl  mt-20 mb-5">
@@ -218,7 +248,7 @@ const Home = () => {
             any occasion.
           </p>
         </header>
-        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="cards flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
           <Card className="w-full max-w-[20rem] shadow-lg">
             <CardHeader floated={false} color="blue-gray">
               <img src="./Homecard-1.jpg" alt="ui/ux review check" />
@@ -275,7 +305,7 @@ const Home = () => {
               </section>
               <section className="price text-2xl mt-6 grid grid-cols-3">
                 <span className="text-[#06f]">$89</span>/day
-                <Link to="./cars">
+                <Link to="./cars/1">
                   <Button size="lg" fullWidth={true} className="bg-[#06f]">
                     Book
                   </Button>
@@ -343,7 +373,7 @@ const Home = () => {
               </section>
               <section className="price text-2xl mt-6 grid grid-cols-3">
                 <span className="text-[#06f]">$75</span>/day
-                <Link to="./cars">
+                <Link to="./cars/2">
                   <Button size="lg" fullWidth={true} className="bg-[#06f]">
                     Book
                   </Button>
@@ -378,7 +408,7 @@ const Home = () => {
                   color="blue-gray"
                   className="font-medium"
                 >
-                  Range Rover Sport
+                  Range Rover
                 </Typography>
               </div>
               <Typography color="gray">Luxury Sedan</Typography>
@@ -407,7 +437,7 @@ const Home = () => {
               </section>
               <section className="price text-2xl mt-6 grid grid-cols-3">
                 <span className="text-[#06f]">$120</span>/day
-                <Link to="./cars">
+                <Link to="./cars/3">
                   <Button size="lg" fullWidth={true} className="bg-[#06f]">
                     Book
                   </Button>
@@ -471,16 +501,14 @@ const Home = () => {
               </section>
               <section className="price text-2xl mt-6 grid grid-cols-3">
                 <span className="text-[#06f]">$200</span>/day
-                <Link to="./cars">
-                  <Button
-                    size="3xl"
-                    fullWidth={true}
-                    className="bg-[#06f] text-start w=[10em] "
-                    disabled
-                  >
-                    Unavaliable
-                  </Button>
-                </Link>
+                <Button
+                  size="3xl"
+                  fullWidth={true}
+                  className="bg-[#06f] text-start w=[10em] "
+                  disabled
+                >
+                  Booked
+                </Button>
               </section>
             </CardBody>
           </Card>
@@ -680,7 +708,8 @@ const Home = () => {
           </h1>
           <section className="content1 ">
             <p>
-            Join thousands of satisfied customers and experience the Rentigo difference today.
+              Join thousands of satisfied customers and experience the Rentigo
+              difference today.
             </p>
           </section>
           <section className="content2 flex flex-col items-center gap-7 mt-4 md:flex-row justify-center">
