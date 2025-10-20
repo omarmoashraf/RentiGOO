@@ -52,7 +52,7 @@ const Pricing = () => {
         <Card
           color=""
           variant="gradient"
-          className="w-full max-w-[20rem] p-8 bg-white "
+          className="w-full max-w-[20rem] p-8 bg-white transition-transform duration-500 hover:scale-105 "
         >
           <CardHeader
             floated={false}
@@ -78,10 +78,10 @@ const Pricing = () => {
             <Typography
               variant="h1"
               color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal text-[#06f]"
+              className="mt-6 flex justify-center gap-1 text-3xl md:text-7xl font-normal text-[#06f]"
             >
-              <span className="mt-2 text-4xl text-[#06f]">$</span>29{" "}
-              <span className="self-end text-4xl">/day</span>
+              <span className="mt-2 text-2xl md:text-4xl">$</span>29{" "}
+              <span className="self-end  text-2xl md:text-4xl">/day</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
@@ -153,7 +153,7 @@ const Pricing = () => {
         <Card
           color=""
           variant="gradient"
-          className="w-full max-w-[20rem] p-8 bg-white "
+          className="w-full max-w-[20rem] p-8 bg-white transition-transform duration-500 hover:scale-105 border-[0.5em] border-blue-700 "
         >
           <CardHeader
             floated={false}
@@ -178,10 +178,10 @@ const Pricing = () => {
             <Typography
               variant="h1"
               color=""
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal text-[#06f]"
+              className="mt-6 flex justify-center gap-1 text-3xl md:text-7xl font-normal text-[#06f]"
             >
-              <span className="mt-2 text-4xl">$</span>59{" "}
-              <span className="self-end text-4xl">/day</span>
+              <span className="mt-2 text-2xl md:text-4xl">$</span>59{" "}
+              <span className="self-end text-2xl md:text-4xl">/day</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
@@ -269,7 +269,7 @@ const Pricing = () => {
         <Card
           color=""
           variant="gradient"
-          className="w-full max-w-[20rem] p-8 bg-white "
+          className="w-full max-w-[20rem] p-8 bg-white transition-transform duration-500 hover:scale-105 "
         >
           <CardHeader
             floated={false}
@@ -294,10 +294,10 @@ const Pricing = () => {
             <Typography
               variant="h1"
               color=""
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal text-[#06f]"
+              className="mt-6 flex justify-center gap-1 text-3xl md:text-7xl font-normal text-[#06f]"
             >
-              <span className="mt-2 text-4xl">$</span>99{" "}
-              <span className="self-end text-4xl">/day</span>
+              <span className="mt-2 text-2xl md:text-4xl">$</span>99{" "}
+              <span className="self-end mt-2 text-2xl md:text-4xl">/day</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
@@ -623,23 +623,69 @@ const Pricing = () => {
         </div>
       </div>
       <div className="">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4 text-black">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center m-4 text-black">
           Pricing FAQ
         </h1>
-        <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center">
+        <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center mb-5">
           Common questions about our pricing and policies.
         </p>
       </div>
-      <div>
-        <section className="left grid grid-cols-2">
-          <h3>Are there any hidden fees?</h3>
-          <p>
-            No hidden fees! All prices shown include basic insurance and
-            standard equipment. Additional services are clearly listed with
-            transparent pricing.
-          </p>
+      <div className="grid grid-cols-1 p-8 text-center md:grid-cols-2">
+        <div className="left flex flex-col gap-4 mb-4">
+          <section>
+            {" "}
+            <h2 className="font-bold mb-2">Are there any hidden fees?</h2>
+            <p className="font-normal opacity-75" color="gray">
+              No hidden fees! All prices shown include basic insurance and
+              standard equipment. Additional services are clearly listed with
+              transparent pricing.
+            </p>
+          </section>
+          <section>
+            <h2 className="font-bold mb-2">
+              What's included in the insurance?
+            </h2>
+            <p className="font-normal opacity-75" color="gray">
+              Basic insurance covers collision damage waiver and theft
+              protection. Premium insurance offers zero deductible and enhanced
+              coverage.
+            </p>
+          </section>
+          <section>
+            <h2 className="font-bold mb-2">Can I cancel my reservation?</h2>
+            <p className="font-normal opacity-75" color="gray">
+              Yes! Cancellation policies vary by plan. Basic allows 24hr
+              cancellation, Premium allows 48hr, and Luxury allows anytime
+              cancellation.
+            </p>
+          </section>
+        </div>
+        <section className="right flex flex-col gap-4 mb-4 ">
+          <section>
+            <h2 className="font-bold mb-2">How do volume discounts work?</h2>
+            <p className="font-normal opacity-75" color="gray">
+              Discounts are automatically applied based on rental duration.
+              Weekly rentals save 15%, monthly save 25%, and long-term save 35%.
+            </p>
+          </section>
+          <section>
+            <h2 className="font-bold mb-2">
+              What payment methods do you accept?
+            </h2>
+            <p className="font-normal opacity-75" color="gray">
+              We accept all major credit cards, PayPal, and digital wallets. A
+              valid credit card is required for security deposit purposes.
+            </p>
+          </section>
+          <section>
+            <h2 className="font-bold mb-2">Is fuel included in the price?</h2>
+            <p className="font-normal opacity-75" color="gray">
+              Fuel is not included in standard pricing. However, our Luxury plan
+              includes premium fuel, and you can add fuel service for
+              convenience.
+            </p>
+          </section>
         </section>
-        <section className="right"></section>
       </div>
 
       <div className="bg-blue-600 flex-row p-7 text-center text-white">
