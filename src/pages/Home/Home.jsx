@@ -248,48 +248,45 @@ const Home = () => {
             any occasion.
           </p>
         </header>
-        <div className="cards flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
-          <Link to="./cars/1">
+        <div className="cards p-12 flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
+          
             <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-1.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                <div className="relative bottom-32 left-40 md:bottom-36 md:left-48">
+                  <Chip
+                    value="Available"
+                    color="green"
+                    size="sm"
+                    className="absolute bottom-3 left-3 font-semibold"
+                  />
+                </div>
               </CardHeader>
               <CardBody>
                 <div className="mb-3 flex items-center justify-between">
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-bold"
                   >
                     BMW 5 Series
                   </Typography>
+                  <div>
+                    <span className="text-[#06f]">$89</span>/day
+                  </div>
                 </div>
                 <Typography color="gray">Luxury Sedan</Typography>
+              
                 <Typography
                   color="blue-gray"
-                  className="flex items-center gap-1.5 font-normal"
+                  className="flex items-center mt-4 font-normal"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-700"
+                    className="-mt-0.5 h-5 w-5 text-yellow-400"
                   >
                     <path
                       fillRule="evenodd"
@@ -297,66 +294,68 @@ const Home = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  4.0 (127 reviews)
+                  5.0 (89 reviews)
                 </Typography>
                 <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip variant="outlined" value="Auto" />
-                  <Chip variant="outlined" value="5 Seats" />
-                  <Chip variant="outlined" value="Premium" />
+                  <Chip
+                    variant="ghost"
+                    value="Auto"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="5 Seats"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="Premium"
+                    className="text-gray-700"
+                  />
                 </section>
                 <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <span className="text-[#06f]">$89</span>/day
                   <Link to="./cars/1">
-                    <Button size="lg" fullWidth={true} className="bg-[#06f]">
-                      Book
-                    </Button>
+                    <Button color="blue">Book</Button>
                   </Link>
                 </section>
               </CardBody>
             </Card>
-          </Link>
+          
 
-          <Link to="./cars/2">
-            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
+          
+            <Card className="w-full md:max-w-[30rem] shadow-lg transition-transform duration-500 hover:scale-105 ">
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-5.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                <div className="relative bottom-36 left-40 md:bottom-40 md:left-48">
+                  <Chip
+                    value="Available"
+                    color="green"
+                    size="sm"
+                    className="absolute bottom-3 left-3 font-semibold"
+                  />
+                </div>
               </CardHeader>
               <CardBody>
                 <div className="mb-3 flex items-center justify-between">
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-bold"
                   >
                     Tesla Model 3
                   </Typography>
+                  <div>
+                    <span className="text-[#06f]">$75</span>/day
+                  </div>
                 </div>
-                <Typography color="gray">Electric Sedan</Typography>
-                <Typography
-                  color="blue-gray"
-                  className="flex items-center gap-1.5 font-normal"
-                >
+                <Typography color="gray ">Electric Sedan</Typography>
+                <Typography color="blue-gray" className="flex items-center ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-700"
+                    className="-mt-0.5 h-5 w-5 text-yellow-400"
                   >
                     <path
                       fillRule="evenodd"
@@ -366,68 +365,69 @@ const Home = () => {
                   </svg>
                   4.8 (89 reviews)
                 </Typography>
-                <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip variant="outlined" value="Electric" />
-                  <Chip variant="outlined" value="5 Seats" />
+                <section className="grid grid-cols-3 gap-2 mt-5 text-center ">
                   <Chip
-                    variant="outlined"
+                    variant="ghost"
+                    value="Electric"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="5 Seats"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
                     value="Eco Friendly"
-                    className="w-[8em]"
+                    className="w-[9em] text-gray-700"
                   />
                 </section>
                 <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <span className="text-[#06f]">$75</span>/day
                   <Link to="./cars/2">
-                    <Button size="lg" fullWidth={true} className="bg-[#06f]">
-                      Book
-                    </Button>
+                    <Button color="blue">Book</Button>
                   </Link>
                 </section>
               </CardBody>
             </Card>
-          </Link>
+          
 
-          <Link to="./cars/3">
+          
             <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-3.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                <div className="relative bottom-32 left-40 md:bottom-36 md:left-48">
+                  <Chip
+                    value="Available"
+                    color="green"
+                    size="sm"
+                    className="absolute bottom-3 left-3 font-semibold"
+                  />
+                </div>
               </CardHeader>
               <CardBody>
                 <div className="mb-3 flex items-center justify-between">
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="font-medium"
+                    className="font-bold"
                   >
                     Range Rover
                   </Typography>
+                  <section>
+                    <span className="text-[#06f]">$120</span>/day
+                  </section>
                 </div>
-                <Typography color="gray">Luxury Sedan</Typography>
+                <Typography color="gray ">Luxury Sedan</Typography>
                 <Typography
                   color="blue-gray"
-                  className="flex items-center gap-1.5 font-normal"
+                  className="flex items-center mt-4"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-700"
+                    className="-mt-0.5 h-5 w-5 text-yellow-400"
                   >
                     <path
                       fillRule="evenodd"
@@ -437,64 +437,70 @@ const Home = () => {
                   </svg>
                   4.0 (127 reviews)
                 </Typography>
-                <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip variant="outlined" value="Auto" />
-                  <Chip variant="outlined" value="5 Seats" />
-                  <Chip variant="outlined" value="Premium" />
+                <section className="grid grid-cols-3 gap-3 mt-5 text-center  ">
+                  <Chip
+                    variant="ghost"
+                    value="Auto"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="5 Seats"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="Premium"
+                    className="text-gray-700"
+                  />
                 </section>
                 <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <span className="text-[#06f]">$120</span>/day
                   <Link to="./cars/3">
-                    <Button size="lg" fullWidth={true} className="bg-[#06f]">
-                      Book
-                    </Button>
+                    <Button color="blue">Book</Button>
                   </Link>
                 </section>
               </CardBody>
             </Card>
-          </Link>
+          
 
-          <Link to="./cars/4">
+          
             <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-4.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <IconButton
-                  size="sm"
-                  color="red"
-                  variant="text"
-                  className="!absolute top-4 right-4 rounded-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                  </svg>
-                </IconButton>
+                <div className="relative bottom-32 left-32 md:bottom-36 md:left-40">
+                  <Chip
+                    value="Not Available"
+                    color="#red"
+                    size="xsm"
+                    className="absolute bottom-3 left-3 font-semibold bg-gray-600"
+                  />
+                </div>
               </CardHeader>
               <CardBody>
-                <div className="mb-3 flex items-center justify-between">
+                <div className="mb-3 flex  items-center justify-between">
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="font-medium"
+                    className=" font-bold"
                   >
                     Porsche 911
                   </Typography>
+                  <section>
+                    {" "}
+                    <span className="text-[#06f]">$200</span>/day
+                  </section>
                 </div>
                 <Typography color="gray">Luxury Sedan</Typography>
                 <Typography
                   color="blue-gray"
-                  className="flex items-center gap-1.5 font-normal"
+                  className="flex items-center mt-4 font-normal"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-700"
+                    className="-mt-0.5 h-5 w-5 text-yellow-400"
                   >
                     <path
                       fillRule="evenodd"
@@ -502,27 +508,33 @@ const Home = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  5 (89 reviews)
+                  5.0 (89 reviews)
                 </Typography>
                 <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip variant="outlined" value="Auto" />
-                  <Chip variant="outlined" value="2 Seats" />
-                  <Chip variant="outlined" value="Sports" />
+                  <Chip
+                    variant="ghost"
+                    value="Auto"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="2 Seats"
+                    className="text-gray-700"
+                  />
+                  <Chip
+                    variant="ghost"
+                    value="Sports"
+                    className="text-gray-700"
+                  />
                 </section>
                 <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <span className="text-[#06f]">$200</span>/day
-                  <Button
-                    size="3xl"
-                    fullWidth={true}
-                    className="bg-[#06f] text-start w=[10em] "
-                    disabled
-                  >
-                    Booked
+                  <Button color="blue" disabled>
+                    Book
                   </Button>
                 </section>
               </CardBody>
             </Card>
-          </Link>
+          
         </div>
       </div>
       <section className="flex justify-center m-8">
