@@ -254,7 +254,7 @@ const Home = () => {
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-1.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-32 left-40 md:bottom-36 md:left-48">
+                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
                   <Chip
                     value="Available"
                     color="green"
@@ -327,7 +327,7 @@ const Home = () => {
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-5.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-36 left-40 md:bottom-40 md:left-48">
+                <div className="relative bottom-28 left-32 md:bottom-40 md:left-48">
                   <Chip
                     value="Available"
                     color="green"
@@ -396,7 +396,7 @@ const Home = () => {
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-3.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-32 left-40 md:bottom-36 md:left-48">
+                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
                   <Chip
                     value="Available"
                     color="green"
@@ -468,7 +468,7 @@ const Home = () => {
               <CardHeader floated={false} color="blue-gray">
                 <img src="./Homecard-4.jpg" alt="ui/ux review check" />
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-32 left-32 md:bottom-36 md:left-40">
+                <div className="relative bottom-28 left-32 md:bottom-36 md:left-40">
                   <Chip
                     value="Not Available"
                     color="#red"
