@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { IconButton } from "@material-tailwind/react";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa6";
+import { FiLinkedin } from "react-icons/fi";
 import { FaTwitter } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
@@ -63,16 +63,29 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-4 mt-2">
-              <IconButton className="rounded bg-[#354aea] hover:opacity-80">
-                <FaLinkedin className="text-xl" />
+              <IconButton
+                variant="outlined"
+                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
+              >
+                <FiLinkedin className="text-xl" />
               </IconButton>
-              <IconButton className="rounded bg-[#1DA1F2] hover:opacity-80">
+
+              <IconButton
+                variant="outlined"
+                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
+              >
                 <FaFacebook className="text-xl" />
               </IconButton>
-              <IconButton className="rounded bg-[#ea4c89] hover:opacity-80">
+              <IconButton
+                variant="outlined"
+                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
+              >
                 <FaInstagram className="text-xl" />
               </IconButton>
-              <IconButton className="rounded bg-[#333333] hover:opacity-80">
+              <IconButton
+                variant="outlined"
+                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
+              >
                 <FaTwitter className="text-xl" />
               </IconButton>
             </div>
