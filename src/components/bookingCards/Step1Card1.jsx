@@ -72,8 +72,8 @@ function Step1Card1() {
                 <Option>Material Tailwind Angular</Option>
                 <Option>Material Tailwind Svelte</Option>
               </Select>
-              <div className="flex gap-3 w-full">
-                <div className="w-1/2">
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <div className="w-full sm:w-1/2">
                   <Input
                     icon={<FaCalendarAlt />}
                     label="Select date"
@@ -81,7 +81,7 @@ function Step1Card1() {
                     color="blue"
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="w-full sm:w-1/2">
                   <Input label="Time" variant="outlined" color="blue" />
                 </div>
               </div>
@@ -108,14 +108,18 @@ function Step1Card1() {
                 <Option>Material Tailwind Angular</Option>
                 <Option>Material Tailwind Svelte</Option>
               </Select>
-              <div className="flex gap-3 w-full">
-                <Input
-                  icon={<FaCalendarAlt />}
-                  label="Select date"
-                  variant="outlined"
-                  color="blue"
-                />
-                <Input label="Time" variant="outlined" color="blue" />
+              <div className="flex flex-col sm:flex-row gap-3 w-full">
+                <div className="w-full sm:w-1/2">
+                  <Input
+                    icon={<FaCalendarAlt />}
+                    label="Select date"
+                    variant="outlined"
+                    color="blue"
+                  />
+                </div>
+                <div className="w-full sm:w-1/2">
+                  <Input label="Time" variant="outlined" color="blue" />
+                </div>
               </div>
             </div>
           </div>
@@ -124,13 +128,6 @@ function Step1Card1() {
 
       {/* Divider */}
       <div className="w-[80%] mx-auto border-t border-gray-300 opacity-50 my-6"></div>
-
-      {/* Footer */}
-      <CardFooter className="flex justify-end p-0">
-        <Button color="blue" className="rounded-lg px-8 py-3">
-          Continue →
-        </Button>
-      </CardFooter>
     </Card>
   );
 }
