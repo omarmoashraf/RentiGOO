@@ -25,7 +25,7 @@ function App() {
     <div>
       {!hideLayout && <Header />}
 
-      <main className={`${!hideLayout ? "pt-24" : ""}`}>
+      <main className={`${!hideLayout ? "pt-24" : ""} bg-light-background dark:bg-dark-background`}>
         {/* this for appear on top pages and disappear in login and register */}
         <Routes>
           <Route path="/" element={<Home />} />
