@@ -30,7 +30,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
+    
     // Handle login logic here
     console.log("Logging in user:", { email, password });
     // After successful login, redirect to dashboard

@@ -149,7 +149,7 @@ const Header = ({ currentPage, onNavigate}) => {
               onClick={mode}
               className="text-gray-600 hover:text-blue-600"
             >
-              {theme ? (
+              {theme=="dark" ? (
                 <FaSun className="w-5 h-5" />
               ) : (
                 <FaMoon className="w-5 h-5" />
