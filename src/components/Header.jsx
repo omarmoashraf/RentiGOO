@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
 import { Button, Typography, IconButton } from "@material-tailwind/react";
-import { FaBars, FaTimes, FaSun, FaMoon, FaHeart, FaWallet } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaSun,
+  FaMoon,
+  FaHeart,
+  FaWallet,
+} from "react-icons/fa";
 import rentigoLogo from "../assets/rentigo-logo.png";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
+import usetheme from "../HOOKS/usetheme";
+
+
+const Header = ({ currentPage, onNavigate}) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
   const navItems = [
-    { id: "home", label: "Home"  , path:"/" },
-    { id: "about", label: "About", path:"/about" },
-    { id: "cars", label: "Cars", path:"/cars" },
-    { id: "pricing", label: "Pricing" , path:"/pricing"},
-    { id: "contact", label: "Contact" , path:"/contact"},
+    { id: "home", label: "Home", path: "/" },
+    { id: "about", label: "About", path: "/about" },
+    { id: "cars", label: "Cars", path: "/cars" },
+    { id: "pricing", label: "Pricing", path: "/pricing" },
+    { id: "contact", label: "Contact", path: "/contact" },
   ];
 
   // Handle scroll effect
@@ -32,22 +42,22 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
     onNavigate(page);
     setIsMobileMenuOpen(false);
   };
+  const { theme, mode } = usetheme();
 
   return (
-   <nav
-  className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ease-in-out ${
-    isScrolled
-      ? "bg-white/40 backdrop-blur-lg shadow-md border-gray-200"
-      : "bg-transparent backdrop-blur-0 border-transparent"
-  }`}
->
-
+    <nav
+      className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ease-in-out ${
+        isScrolled
+          ? "bg-white/40 backdrop-blur-lg shadow-md border-gray-200"
+          : "bg-transparent backdrop-blur-0 border-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <div
             className="flex items-center gap-3 cursor-pointer group"
-            onClick={() => navigate("/")} 
+            onClick={() => navigate("/")}
           >
             <div className="w-10 h-10 lg:w-12 lg:h-12 transition-transform duration-200 group-hover:scale-105">
               <img
@@ -96,10 +106,14 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
           <div className="hidden lg:flex items-center space-x-3">
             <IconButton
               variant="text"
-              onClick={onToggleTheme}
+              onClick={mode}
               className="rounded-lg text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition-colors"
             >
-              {isDarkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+              {theme=="dark" ? (
+                <FaSun className="w-5 h-5" />
+              ) : (
+                <FaMoon className="w-5 h-5" />
+              )}
             </IconButton>
 
             <Button
@@ -120,7 +134,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
               <span className="font-semibold">Wallet</span>
             </Button>
 
-             <Button
+            <Button
               onClick={() => navigate("/login")}
               className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
             >
@@ -132,10 +146,14 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
           <div className="flex lg:hidden items-center space-x-2">
             <IconButton
               variant="text"
-              onClick={onToggleTheme}
+              onClick={mode}
               className="text-gray-600 hover:text-blue-600"
             >
-              {isDarkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+              {theme ? (
+                <FaSun className="w-5 h-5" />
+              ) : (
+                <FaMoon className="w-5 h-5" />
+              )}
             </IconButton>
 
             <IconButton
@@ -144,7 +162,11 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-600 hover:text-blue-600"
             >
-              {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+              {isMobileMenuOpen ? (
+                <FaTimes className="w-6 h-6" />
+              ) : (
+                <FaBars className="w-6 h-6" />
+              )}
             </IconButton>
           </div>
         </div>
@@ -152,7 +174,7 @@ const Header = ({ currentPage, onNavigate, isDarkMode, onToggleTheme }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-<div className="lg:hidden bg-white/60 backdrop-blur-xl border-t border-gray-200 shadow-md">
+        <div className="lg:hidden bg-white/60 backdrop-blur-xl border-t border-gray-200 shadow-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
             {/* Mobile Navigation Items */}
             <div className="grid gap-2 mb-4">

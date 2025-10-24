@@ -19,9 +19,9 @@ import {
 const About = () => {
   return (
     <div className="main">
-      <div className="  bg-gray-100 text-gray-800 p-16 top mt-4">
+      <div className="  dark:bg-dark-background text-dark-gray p-16 top mt-4">
         <div className="">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 text-black">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 dark:text-dark-text text-light-text">
             Driving Dreams
           </h1>
           <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center">
@@ -33,7 +33,7 @@ const About = () => {
       </div>
       <div className="text-white mt-7 p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <section className="left">
-          <h2 className="font-bold text-black text-3xl md:text-4xl mb-5">
+          <h2 className="font-bold dark:text-dark-text text-light-text text-3xl md:text-4xl mb-5">
             Our Journey
           </h2>
           <p className="text-gray-600 leading-loose">
@@ -297,8 +297,10 @@ const About = () => {
           <Link to="/cars">
             <Button className="bg-white text-blue-600">Browse Our Fleet</Button>
           </Link>
-          <Link to="/contact"> <Button className="bg-white text-blue-600">Contact us</Button></Link>
-         
+          <Link to="/contact">
+            {" "}
+            <Button className="bg-white text-blue-600">Contact us</Button>
+          </Link>
         </section>
       </div>
     </div>
