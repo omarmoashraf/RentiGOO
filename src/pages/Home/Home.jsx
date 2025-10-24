@@ -62,7 +62,7 @@ const Home = () => {
                     color="white"
                     className="text-white bg-[#06f] hover:text-blue-200"
                   >
-                    {`Browse Luxury Fleet   >`}
+                    {`Browse Luxury Fleet   `}
                   </Button>
                 </Link>
                 <Link to="/about">
@@ -103,7 +103,7 @@ const Home = () => {
                     color="white"
                     className="text-white bg-[#06f] hover:text-blue-200"
                   >
-                    {`Go Electric >`}
+                    {`Go Electric `}
                   </Button>
                 </Link>
 
