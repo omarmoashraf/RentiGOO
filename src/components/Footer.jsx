@@ -1,12 +1,13 @@
-import { Typography } from "@material-tailwind/react";
-import { IconButton } from "@material-tailwind/react";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
+import { Typography, IconButton } from "@material-tailwind/react";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import { FiLinkedin } from "react-icons/fi";
-import { FaTwitter } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
-import { FaEnvelope } from "react-icons/fa";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LINKS = [
@@ -15,7 +16,7 @@ const LINKS = [
     items: [
       { label: "Home", to: "/" },
       { label: "About Us", to: "/about" },
-      { label: "our Fleet", to: "/cars" },
+      { label: "Our Fleet", to: "/cars" },
       { label: "Pricing", to: "/pricing" },
       { label: "Contact", to: "/contact" },
     ],
@@ -36,67 +37,54 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full bg-light-background dark:bg-dark-background mt-12">
-      <div className="mx-auto w-full max-w-7xl px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 justify-between">
-          <div className="flex flex-col gap-4 items-center md:items-start text-center md:text-left">
+    <footer className="relative w-full bg-light-background dark:bg-dark-background pt-10 text-blue-gray-900 transition-colors duration-300">
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-8">
+        {/* ===== Top Section ===== */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 justify-between">
+          {/* --- Left Info --- */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-4">
             <Typography
               as={Link}
               to="/"
               variant="h6"
-              className="mr-4 cursor-pointer py-1.5 flex items-center"
+              className="flex items-center cursor-pointer"
             >
               <img
                 src="./logo.png"
                 alt="RentiGO Logo"
                 className="h-10 w-auto mr-2"
               />
-              <section className="text-blue-400 text-xl font-bold">
-                RentiGO
-              </section>
+              <span className="text-blue-500 text-2xl font-bold">RentiGO</span>
             </Typography>
 
-            <p className="text-blue-gray-900 max-w-sm">
+            <p className="text-sm sm:text-base max-w-sm text-blue-gray-800 dark:text-gray-300">
               Your trusted partner for premium car rentals. Experience the
               freedom of the road with our modern, reliable fleet and
               exceptional service.
             </p>
 
-            <div className="flex gap-4 mt-2">
-              <IconButton
-                variant="outlined"
-                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
-              >
-                <FiLinkedin className="text-xl" />
-              </IconButton>
-
-              <IconButton
-                variant="outlined"
-                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
-              >
-                <FaFacebook className="text-xl" />
-              </IconButton>
-              <IconButton
-                variant="outlined"
-                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
-              >
-                <FaInstagram className="text-xl" />
-              </IconButton>
-              <IconButton
-                variant="outlined"
-                className="hover:bg-[#06f] hover:text-white transition-transform duration-500 hover:scale-105"
-              >
-                <FaTwitter className="text-xl" />
-              </IconButton>
+            <div className="flex gap-3 sm:gap-4 mt-3 flex-wrap justify-center lg:justify-start">
+              {[FiLinkedin, FaFacebook, FaInstagram, FaTwitter].map(
+                (Icon, i) => (
+                  <IconButton
+                    key={i}
+                    variant="outlined"
+                    className="hover:bg-[#06f] hover:text-white text-blue-gray-900 dark:text-gray-300 transition-transform duration-300 hover:scale-110"
+                  >
+                    <Icon className="text-lg sm:text-xl" />
+                  </IconButton>
+                )
+              )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 text-center sm:text-left">
+          {/* --- Links + Contact --- */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 text-center sm:text-left">
             {LINKS.map(({ title, items }, index) => (
               <ul key={index}>
                 <Typography
                   variant="small"
-                  className="mb-3 font-semibold text-xl text-black"
+                  className="mb-3 font-semibold text-lg sm:text-xl text-black dark:text-white"
                 >
                   {title}
                 </Typography>
@@ -106,7 +94,7 @@ const Footer = () => {
                       as={Link}
                       to={to}
                       color="gray"
-                      className="py-1.5 font-normal transition-colors hover:text-blue-500"
+                      className="py-1.5 block text-sm sm:text-base font-normal transition-colors hover:text-blue-500"
                     >
                       {label}
                     </Typography>
@@ -114,48 +102,45 @@ const Footer = () => {
                 ))}
               </ul>
             ))}
+
+            {/* --- Contact Info --- */}
             <div>
               <Typography
                 variant="small"
-                className="mb-3 font-semibold text-xl text-black "
+                className="mb-3 font-semibold text-lg sm:text-xl text-black dark:text-white"
               >
                 Contact Info
               </Typography>
 
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 justify-center sm:justify-start">
                   <div className="p-2 bg-blue-50 rounded-full text-blue-500">
                     <FaPhoneAlt />
                   </div>
                   <div>
-                    <p className="text-sm text-blue-gray-900">
-                      +1(555)123-4567
-                    </p>
-                    <p className="text-sm text-gray-500">24/7 Support</p>
+                    <p className="text-sm">+1 (555) 123-4567</p>
+                    <p className="text-xs text-gray-500">24/7 Support</p>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
+                <li className="flex items-start  justify-center sm:justify-start">
                   <div className="p-2 bg-blue-50 rounded-full text-blue-500">
                     <FaEnvelope />
                   </div>
-                  <div>
-                    <p className="font-medium text-blue-gray-900">
-                      hello@rentigo.com
-                    </p>
-                    <p className="text-sm text-gray-500">General Inquiries</p>
+                  <div className="">
+                    <p className="text-sm font-medium max">hello@rentigo.com</p>
+                    
+                    <p className="text-xs text-gray-500">General Inquiries</p>
                   </div>
                 </li>
 
-                <li className="flex items-start gap-3">
+                <li className="flex items-start gap-3 justify-center sm:justify-start">
                   <div className="p-2 bg-blue-50 rounded-full text-blue-500">
                     <FaMapMarkerAlt />
                   </div>
                   <div>
-                    <p className="text-sm text-blue-gray-900">
-                      123 Main Street
-                    </p>
-                    <p className="text-sm text-gray-500">New York, NY 10001</p>
+                    <p className="text-sm">123 Main Street</p>
+                    <p className="text-xs text-gray-500">New York, NY 10001</p>
                   </div>
                 </li>
               </ul>
@@ -163,14 +148,20 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row">
+        {/* ===== Bottom Bar ===== */}
+        <div className="mt-10 border-t border-blue-gray-100 dark:border-gray-700 py-4 text-center">
           <Typography
             variant="small"
-            className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
+            className="text-sm sm:text-base font-normal text-blue-gray-800 dark:text-gray-400"
           >
             &copy; {currentYear}{" "}
-            <a href="https://material-tailwind.com/">RentiGO</a>. All Rights
-            Reserved.
+            <a
+              href="https://material-tailwind.com/"
+              className="text-blue-500 hover:underline"
+            >
+              RentiGO
+            </a>
+            . All Rights Reserved.
           </Typography>
         </div>
       </div>
