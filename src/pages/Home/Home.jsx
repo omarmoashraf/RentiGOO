@@ -25,7 +25,7 @@ const Home = () => {
     <div>
       <div className="overflow-hidden">
         <Carousel
-          className="rounded-xl h-[70vh] md:h-[80vh] lg:h-[90vh] "
+          className=" h-[70vh] md:h-[80vh] lg:h-[90vh] "
           autoplay
           autoplayDelay={4000}
           loop
@@ -248,7 +248,8 @@ const Home = () => {
             any occasion.
           </p>
         </header>
-        <div className="cards p-12 flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
+
           
             <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
               <CardHeader floated={false} color="blue-gray">
@@ -542,7 +543,7 @@ const Home = () => {
           <Button
             variant="outlined"
             className="text-[#06f]"
-          >{`View All Vehicles >`}</Button>
+          >{`View All Vehicles `}</Button>
         </Link>
       </section>
       <div className="mt-22">
