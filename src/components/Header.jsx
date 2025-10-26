@@ -90,13 +90,13 @@ const Header = ({ currentPage, onNavigate}) => {
                 onClick={() => navigate(item.path)}
                 className={`relative px-4 py-2 text-sm font-semibold transition-all duration-200 rounded-lg ${
                   currentPage === item.id
-                    ? "text-blue-600 bg-blue-50"
-                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    ? "text-blue-900 bg-blue-50"
+                    : "text-gray-700 hover:text-blue-900 hover:bg-gray-50"
                 }`}
               >
                 {item.label}
                 {currentPage === item.id && (
-                  <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-600 rounded-full" />
+                  <div className="absolute bottom-0 left-4 right-4 h-0.5 bg-blue-900 rounded-full" />
                 )}
               </button>
             ))}
@@ -107,7 +107,7 @@ const Header = ({ currentPage, onNavigate}) => {
             <IconButton
               variant="text"
               onClick={mode}
-              className="rounded-lg text-gray-600 hover:text-blue-600 hover:bg-gray-50 transition-colors"
+              className="rounded-lg text-gray-600 hover:text-blue-900 hover:bg-gray-50 transition-colors"
             >
               {theme=="dark" ? (
                 <FaSun className="w-5 h-5" />
@@ -119,7 +119,7 @@ const Header = ({ currentPage, onNavigate}) => {
             <Button
               variant="text"
               onClick={() => navigate("/favourites")}
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              className="flex items-center gap-2 text-gray-700 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
             >
               <FaHeart className="w-4 h-4" />
               <span className="font-semibold">Favorites</span>
@@ -128,7 +128,7 @@ const Header = ({ currentPage, onNavigate}) => {
             <Button
               variant="text"
               onClick={() => navigate("/wallet")}
-              className="flex items-center gap-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              className="flex items-center gap-2 text-gray-700  hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors"
             >
               <FaWallet className="w-4 h-4" />
               <span className="font-semibold">Wallet</span>
@@ -136,7 +136,7 @@ const Header = ({ currentPage, onNavigate}) => {
 
             <Button
               onClick={() => navigate("/login")}
- className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"            >
+            className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"            >
               Sign In
             </Button>
           </div>
@@ -146,7 +146,7 @@ const Header = ({ currentPage, onNavigate}) => {
             <IconButton
               variant="text"
               onClick={mode}
-              className="text-gray-600 hover:text-blue-600"
+              className="text-gray-600 hover:text-blue-900"
             >
               {theme=="dark" ? (
                 <FaSun className="w-5 h-5" />
@@ -159,7 +159,7 @@ const Header = ({ currentPage, onNavigate}) => {
               variant="text"
               color="blue"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-600 hover:text-blue-600"
+              className="text-gray-600 hover:text-blue-900"
             >
               {isMobileMenuOpen ? (
                 <FaTimes className="w-6 h-6" />
@@ -173,8 +173,10 @@ const Header = ({ currentPage, onNavigate}) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/60 backdrop-blur-xl border-t border-gray-200 shadow-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="lg:hidden bg-white border-t border-gray-200 shadow-md">
+
+          <div className="max-w-md mx-auto px-4 py-3">
+
             {/* Mobile Navigation Items */}
             <div className="grid gap-2 mb-4">
               {navItems.map((item) => (
@@ -183,8 +185,8 @@ const Header = ({ currentPage, onNavigate}) => {
                   onClick={() => navigate(item.path)}
                   className={`flex items-center px-4 py-3 text-left rounded-xl transition-all duration-200 ${
                     currentPage === item.id
-                      ? "bg-blue-50 text-blue-600 font-semibold"
-                      : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                      ? "bg-blue-50 text-blue-900 font-semibold"
+                      : "text-gray-700 hover:bg-gray-50 hover:text-blue-900"
                   }`}
                 >
                   {item.label}
@@ -197,7 +199,7 @@ const Header = ({ currentPage, onNavigate}) => {
               <Button
                 variant="outlined"
                 onClick={() => navigate("/favourites")}
-                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
+                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-900 hover:text-blue-900"
               >
                 <FaHeart className="w-4 h-4" />
                 <span className="font-semibold">Favorites</span>
@@ -206,7 +208,7 @@ const Header = ({ currentPage, onNavigate}) => {
               <Button
                 variant="outlined"
                 onClick={() => navigate("/wallet")}
-                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
+                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-900 hover:text-blue-900"
               >
                 <FaWallet className="w-4 h-4" />
                 <span className="font-semibold">Wallet</span>
@@ -214,8 +216,9 @@ const Header = ({ currentPage, onNavigate}) => {
 
               <Button
                 onClick={() => navigate("/login")}
-                className="col-span-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 py-3 transform hover:scale-105"
-              >
+                 className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"            >
+
+              
                 Sign In
               </Button>
             </div>
