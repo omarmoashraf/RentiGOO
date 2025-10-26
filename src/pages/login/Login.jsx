@@ -192,7 +192,7 @@ const Login = () => {
                   />
                   <Link 
                     to="/forgot-password"
- className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
+                   className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
                     Forgot password?
                   </Link>
                 </div>
