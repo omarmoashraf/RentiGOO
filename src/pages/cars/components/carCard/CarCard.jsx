@@ -23,7 +23,7 @@ function CarCard({
     type,
     features,
     specs,
-    available, // added available key
+    available,
   },
 }) {
   const [isFavorite, setIsFavorite] = useState(false);

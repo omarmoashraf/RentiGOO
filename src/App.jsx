@@ -15,6 +15,12 @@ import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Pricing from "./pages/pricing/Pricing";
 import Wallet from "./pages/wallet/Wallet";
 import { Route, Routes, useLocation } from "react-router-dom";
+import AddNewCar from "./pages/Admin/AddNewCar";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import CarManagement from "./pages/Admin/CarManagement";
+import EditCar from "./pages/Admin/EditCar";
+import ViewCarDetails from "./pages/Admin/ViewCarDetails";
+import BookingDetails from "./pages/Admin/BookingDetails";
 
 function App() {
   const location = useLocation();
@@ -25,7 +31,11 @@ function App() {
     <div>
       {!hideLayout && <Header />}
 
-      <main className={`${!hideLayout ? "pt-20" : ""} bg-light-background dark:bg-dark-background`}>
+      <main
+        className={`${
+          !hideLayout ? "pt-20" : ""
+        } bg-light-background dark:bg-dark-background`}
+      >
         {/* this for appear on top pages and disappear in login and register */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,11 +51,18 @@ function App() {
           <Route path="/paymentdetails" element={<PaymentDetails />} />
           <Route path="/paymentmethods" element={<PaymentMethods />} />
           <Route path="/cars/:carID" element={<CarDetails />} />
+          <Route path="/addnewcar" element={<AddNewCar />} />
+          <Route path="/admindashboard" element={<AdminDashboard />} />
+          <Route path="/carmanagement" element={<CarManagement />} />
+          <Route path="/editcar" element={<EditCar />} />
+          <Route path="/viewcardetails" element={<ViewCarDetails />} />
+          <Route path="/bookingdetails" element={<BookingDetails />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      { <Footer />}
+      {<Footer />}
     </div>
   );
 }
