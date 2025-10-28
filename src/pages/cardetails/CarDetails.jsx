@@ -47,7 +47,7 @@ export default function CarDetails() {
   }
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const images = car.images || [car.image, car.image, car.image];
+  const images = car.image || [car.image, car.image, car.image];
 
   return (
     <div className="min-h-screen pt-20 lg:pt-24 px-4 bg-gray-50">
