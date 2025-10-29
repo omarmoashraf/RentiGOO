@@ -7,11 +7,20 @@ import {
   Button,
   Chip,
 } from "@material-tailwind/react";
-import { Star, Users, Settings, Fuel, Heart } from "lucide-react";
+import {
+  Star,
+  Users,
+  Settings,
+  Fuel,
+  Heart,
+  Eye,
+  SquarePen,
+  Trash2,
+} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function CarCard({
+function AdminCarCard({
   car: {
     id,
     name,
@@ -26,45 +35,15 @@ function CarCard({
     available,
   },
 }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
   return (
     <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative">
       {/* ----------- Image Section ----------- */}
       <div className="relative">
-        {/* Top left type tag */}
-        <Chip
-          value={type}
-          size="sm"
-          color="white"
-          className="absolute top-3 left-3 text-gray-800 bg-white/90 backdrop-blur-md shadow-md"
-        />
-
-        {/* Top right heart icon */}
-        <div
-          onClick={() => setIsFavorite(!isFavorite)}
-          className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md cursor-pointer hover:scale-110 transition-transform z-10"
+        <CardHeader
+          floated={false}
+          shadow={false}
+          className="h-52 overflow-hidden rounded-t-xl"
         >
-          <Heart
-            size={18}
-            className={`${
-              isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"
-            } transition-colors duration-300`}
-          />
-        </div>
-
-        {/* ----- Unavailable badge ----- */}
-        {!available && (
-          <Chip
-            value="Not Available"
-            size="sm"
-            color="red"
-            className="absolute top-12 right-3 text-white font-bold z-20"
-          />
-        )}
-
-        {/* Car image */}
-        <CardHeader floated={false} shadow={false} className="h-52">
           <img
             src={image}
             alt={name}
@@ -74,15 +53,15 @@ function CarCard({
           />
         </CardHeader>
 
-        {/* Discount badge */}
-        {originalPrice > price && (
-          <Chip
-            value={`Save $${originalPrice - price}`}
-            color="green"
-            size="sm"
-            className="absolute bottom-3 left-3 font-semibold"
-          />
-        )}
+        <span
+          className={`absolute top-8 right-8 px-2.5 py-0.5 text-[11px] font-medium rounded-full backdrop-blur-sm ${
+            available
+              ? "bg-green-200/50 text-green-800"
+              : "bg-blue-200/50 text-blue-800"
+          }`}
+        >
+          {available ? "Available" : "Rented"}
+        </span>
       </div>
 
       {/* ----------- Body Section ----------- */}
@@ -146,22 +125,46 @@ function CarCard({
 
       {/* ----------- Footer Section ----------- */}
       <CardFooter className="pt-0">
-        <Link to={available ? `/cars/${id}` : "#"}>
-          <Button
-            fullWidth
-            disabled={!available}
-            className={`text-white font-medium shadow-md transition-all bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg ${
-              !available
-                ? "opacity-50 cursor-not-allowed hover:from-[#0066ff] hover:to-[#0052cc] hover:shadow-md"
-                : ""
-            }`}
-          >
-            View Details
-          </Button>
-        </Link>
+        <div className="flex justify-between space-x-2 w-full">
+          {/* View Button */}
+          <Link to={`/carmanagement/${id}`} className="flex-1">
+            <Button
+              variant="outlined"
+              size="sm"
+              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 py-1"
+            >
+              <Eye className="w-4 h-4" />
+              View
+            </Button>
+          </Link>
+
+          {/* Edit Button */}
+          <Link to={`/editcar`} className="flex-1">
+            <Button
+              variant="outlined"
+              size="sm"
+              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 py-1"
+            >
+              <SquarePen className="w-4 h-4" />
+              Edit
+            </Button>
+          </Link>
+
+          {/* Delete Button */}
+          <div className="flex-1">
+            <Button
+              variant="text"
+              size="sm"
+              className="w-full flex items-center justify-center border border-gray-300 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 py-1"
+              aria-label="Delete"
+            >
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
       </CardFooter>
     </Card>
   );
 }
 
-export default CarCard;
+export default AdminCarCard;

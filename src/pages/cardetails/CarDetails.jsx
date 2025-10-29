@@ -47,10 +47,10 @@ export default function CarDetails() {
   }
 
   const [selectedImage, setSelectedImage] = useState(0);
-  const images = car.images || [car.image, car.image, car.image];
+  const images = Array(3).fill(car.image);
 
   return (
-    <div className="min-h-screen pt-20 lg:pt-24 px-4 bg-gray-50">
+    <div className="min-h-screen p-6 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Back button */}
         <div className="mb-6">

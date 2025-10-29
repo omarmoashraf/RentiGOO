@@ -90,7 +90,7 @@ const Login = () => {
           <div className="space-y-4">
             <Typography variant="h1" className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               Welcome Back to
-              <span className="text-blue-600 block">Your Drive</span>
+              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">Your Drive</span>
             </Typography>
             <Typography className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
               Sign in to access your premium car rental account and continue your journey with seamless booking and exceptional service.
@@ -188,12 +188,11 @@ const Login = () => {
                     }
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    color="blue"
+                     color="blue"
                   />
                   <Link 
                     to="/forgot-password"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-semibold transition-colors"
-                  >
+                   className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
                     Forgot password?
                   </Link>
                 </div>
@@ -202,8 +201,10 @@ const Login = () => {
                   type="submit"
                   size="lg"
                   fullWidth
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
+ className={`text-white font-medium shadow-md transition-all 
+              bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
+              hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg`}
+>                
                   Sign In
                 </Button>
 
@@ -240,8 +241,7 @@ const Login = () => {
                     Don't have an account?{" "}
                     <Link
                       to="/register"
-                      className="text-blue-600 hover:text-blue-800 font-semibold"
-                    >
+ className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                    >
                       Sign Up
                     </Link>
                   </Typography>

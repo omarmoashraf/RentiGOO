@@ -110,7 +110,7 @@ const Register = () => {
           <div className="space-y-4">
             <Typography variant="h1" className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               Drive Your
-              <span className="text-blue-600 block">Dream Car</span>
+              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">Dream Car</span>
             </Typography>
             <Typography className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
               Join thousands of satisfied customers experiencing premium car rental 
@@ -183,7 +183,7 @@ const Register = () => {
                 </Typography>
               </div>
 
-              <form className="space-y-6 " onSubmit={handleSubmit}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {activeTab === "signup" && (
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 ">
                     <InputField
@@ -255,11 +255,13 @@ const Register = () => {
                     />
                     <Typography variant="small" className="text-gray-700 leading-[0.3]">
                       I agree to the{" "}
-                      <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
+                      <a href="#" 
+                       className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-medium hover:from-[#0052cc] hover:to-[#004bb5] transition-all">
                         Terms
                       </a>{" "}
                       and{" "}
-                      <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
+                      <a href="#" 
+                       className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-medium hover:from-[#0052cc] hover:to-[#004bb5] transition-all">
                         Privacy Policy
                       </a>
                     </Typography>
@@ -270,8 +272,10 @@ const Register = () => {
                   type="submit"
                   size="lg"
                   fullWidth
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
+className={`text-white font-medium shadow-md transition-all 
+              bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
+              hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg`}
+>                                
                   {activeTab === "signup" ? "Create Account" : "Sign In"}
                 </Button>
 
@@ -308,8 +312,9 @@ const Register = () => {
                     {activeTab === "signup" ? "Already have an account?" : "Don't have an account?"}{" "}
                     <Link
                       to={activeTab === "signup" ? "/login" : "/register"}
-                      className="text-blue-600 hover:text-blue-800 font-semibold"
-                    >
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
+
+                    
                       {activeTab === "signup" ? "Sign In" : "Sign Up"}
                     </Link>
                   </Typography>

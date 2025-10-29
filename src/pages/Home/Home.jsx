@@ -25,7 +25,7 @@ const Home = () => {
     <div>
       <div className="overflow-hidden">
         <Carousel
-          className="rounded-xl h-[70vh] md:h-[80vh] lg:h-[90vh] "
+          className=" h-[70vh] md:h-[80vh] lg:h-[90vh] "
           autoplay
           autoplayDelay={4000}
           loop
@@ -246,6 +246,7 @@ const Home = () => {
             any occasion.
           </p>
         </header>
+<<<<<<< HEAD
         <div className="cards p-12 flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
           <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
             <CardHeader floated={false} color="blue-gray">
@@ -262,6 +263,39 @@ const Home = () => {
             </CardHeader>
             <CardBody>
               <div className="mb-3 flex items-center justify-between">
+=======
+        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
+
+          
+            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
+              <CardHeader floated={false} color="blue-gray">
+                <img src="./Homecard-1.jpg" alt="ui/ux review check" />
+                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
+                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
+                  <Chip
+                    value="Available"
+                    color="green"
+                    size="sm"
+                    className="absolute bottom-3 left-3 font-semibold"
+                  />
+                </div>
+              </CardHeader>
+              <CardBody>
+                <div className="mb-3 flex items-center justify-between">
+                  <Typography
+                    variant="h5"
+                    color="blue-gray"
+                    className="font-bold"
+                  >
+                    BMW 5 Series
+                  </Typography>
+                  <div>
+                    <span className="text-[#06f]">$89</span>/day
+                  </div>
+                </div>
+                <Typography color="gray">Luxury Sedan</Typography>
+              
+>>>>>>> 006b2f4a272fd735a5401f458ac50e27c03b6198
                 <Typography
                   variant="h5"
                   color="blue-gray"
@@ -517,7 +551,7 @@ const Home = () => {
           <Button
             variant="outlined"
             className="text-[#06f]"
-          >{`View All Vehicles >`}</Button>
+          >{`View All Vehicles `}</Button>
         </Link>
       </section>
       <div className="mt-22">

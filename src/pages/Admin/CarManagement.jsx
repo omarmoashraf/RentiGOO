@@ -1,14 +1,15 @@
 import { useState } from "react";
-import CarCard from "./components/carCard/CarCard";
-import FilterSidebar from "./components/FilterSidebar/FilterSidebar";
-import CarsHeader from "./components/CarsHeader/CarsHeader";
+import { useNavigate } from "react-router-dom";
+import { Button, Select, Option } from "@material-tailwind/react";
+import { ArrowLeft, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
+import AdminCarCard from "./AdminCarCard";
 
-const Cars = () => {
+function CarManagement() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-  const [priceRange, setPriceRange] = useState("all");
-  const [sortBy, setSortBy] = useState("default");
 
   const allCars = [
     {
@@ -133,99 +134,88 @@ const Cars = () => {
     },
   ];
 
-  const categories = [
-    { id: "all", label: "All Categories", count: 8 },
-    { id: "luxury", label: "Luxury", count: 2 },
-    { id: "suv", label: "SUV", count: 2 },
-    { id: "electric", label: "Electric", count: 2 },
-    { id: "sports", label: "Sports", count: 1 },
-    { id: "convertible", label: "Convertible", count: 1 },
-  ];
-
   const filteredCars = allCars.filter((car) => {
     const matchesSearch =
       car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       car.type.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesCategory =
-      selectedCategory === "all" || car.category === selectedCategory;
+    const matchesStatus =
+      selectedCategory === "all" ||
+      (selectedCategory === "available" && car.available) ||
+      (selectedCategory === "rented" && !car.available);
 
-    const matchesAvailability = !showAvailableOnly || car.available;
-
-    let matchesPrice = true;
-    switch (priceRange) {
-      case "under-100":
-        matchesPrice = car.price < 100;
-        break;
-      case "100-150":
-        matchesPrice = car.price >= 100 && car.price <= 150;
-        break;
-      case "over-150":
-        matchesPrice = car.price > 150;
-        break;
-      default:
-        matchesPrice = true;
-    }
-
-    return (
-      matchesSearch && matchesCategory && matchesAvailability && matchesPrice
-    );
-  });
-
-  const sortedCars = [...filteredCars].sort((a, b) => {
-    if (sortBy === "priceAsc") return a.price - b.price;
-    if (sortBy === "priceDesc") return b.price - a.price;
-    if (sortBy === "name") return a.name.localeCompare(b.name);
-    if (sortBy === "rating") return b.rating - a.rating;
-    return 0;
+    return matchesSearch && matchesStatus;
   });
 
   return (
-    <div className="flex flex-col gap-10">
-      <section className="px-4 sm:px-6 md:px-8 py-12 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Our Premium Fleet
+    <div className="p-6 space-y-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 px-3">
+        {/* Left section */}
+        <div className="flex gap-2 items-center">
+          <Button
+            variant="text"
+            onClick={() => navigate("/admindashboard")}
+            className="flex items-center gap-2 text-gray-700"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </Button>
+          <div>
+            <h1 className="text-3xl font-semibold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
+              Car Management
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-2">
-              Discover our extensive collection of premium vehicles, from luxury
-              sedans to eco-friendly electric cars.
-            </p>
+            <p className="text-gray-700">Manage your fleet of vehicles</p>
           </div>
         </div>
-      </section>
 
-      <div className="flex flex-col lg:flex-row gap-8 px-6">
-        <FilterSidebar
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-          showAvailableOnly={showAvailableOnly}
-          setShowAvailableOnly={setShowAvailableOnly}
-        />
+        {/* Right section */}
+        <Link to={`/addnewcar`}>
+          <Button className="flex items-center gap-4 bg-gradient-to-r from-[#0066ff] to-[#0052cc] text-white font-medium px-4 py-2 rounded-xl shadow-md hover:opacity-90 transition-all duration-200">
+            <Plus className="w-4 h-4" />
+            Add New Car
+          </Button>
+        </Link>
+      </div>
 
-        <div className="flex-1 space-y-6">
-          <CarsHeader
-            totalCars={allCars.length}
-            filteredCars={sortedCars.length}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-          />
+      {/* Search bar */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          {/* Search Input */}
+          <div className="relative flex-1 w-full">
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search cars..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-3 py-2 w-full text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
 
-          <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedCars.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
+          {/* Status Filter Dropdown */}
+          <div className="w-full sm:w-48">
+            <Select
+              value={selectedCategory}
+              onChange={(value) => setSelectedCategory(value)}
+              className="text-sm rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500"
+              labelProps={{ className: "before:border-0 after:border-0" }}
+              containerProps={{ className: "shadow-none" }}
+            >
+              <Option value="all">All Status</Option>
+              <Option value="available">Available</Option>
+              <Option value="rented">Rented</Option>
+            </Select>
           </div>
         </div>
       </div>
+
+      {/* Cars Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredCars.map((car) => (
+          <AdminCarCard key={car.id} car={car} />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
-export default Cars;
+export default CarManagement;
