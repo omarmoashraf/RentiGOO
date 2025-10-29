@@ -14,7 +14,10 @@ import PaymentDetails from "./pages/paymentdetails/PaymentDetails";
 import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Pricing from "./pages/pricing/Pricing";
 import Wallet from "./pages/wallet/Wallet";
+
 import { Route, Routes, useLocation } from "react-router-dom";
+import { Scroll } from "lucide-react";
+import ScrollToTop from "./components/Scroll up/Scroll";
 
 function App() {
   const location = useLocation();
@@ -27,6 +30,7 @@ function App() {
 
       <main className={`${!hideLayout ? "pt-24" : ""} bg-light-background dark:bg-dark-background`}>
         {/* this for appear on top pages and disappear in login and register */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -45,7 +49,7 @@ function App() {
         </Routes>
       </main>
 
-      {!hideLayout && <Footer />}
+       <Footer />
     </div>
   );
 }

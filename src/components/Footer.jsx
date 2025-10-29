@@ -79,12 +79,12 @@ const Footer = () => {
           </div>
 
           {/* --- Links + Contact --- */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-16 text-center sm:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center text-center md:justify-items-start">
             {LINKS.map(({ title, items }, index) => (
               <ul key={index}>
                 <Typography
                   variant="small"
-                  className="mb-3 font-semibold text-lg sm:text-xl text-black dark:text-white"
+                  className="mb-3 font-semibold text-lg sm:text-xl text-light-primary_text dark:text-dark-header_text"
                 >
                   {title}
                 </Typography>
@@ -94,7 +94,9 @@ const Footer = () => {
                       as={Link}
                       to={to}
                       color="gray"
-                      className="py-1.5 block text-sm sm:text-base font-normal transition-colors hover:text-blue-500"
+                      className="py-1.5 block text-sm sm:text-base font-normal 
+                       transition-colors 
+                         text-light-primary_text dark:text-dark-secondary_text  hover:!text-blue-500"
                     >
                       {label}
                     </Typography>
@@ -118,7 +120,9 @@ const Footer = () => {
                     <FaPhoneAlt />
                   </div>
                   <div>
-                    <p className="text-sm">+1 (555) 123-4567</p>
+                    <p className="text-sm text-light-primary_text dark:text-dark-secondary_text  ">
+                      +1 (555) 123-4567
+                    </p>
                     <p className="text-xs text-gray-500">24/7 Support</p>
                   </div>
                 </li>
@@ -128,8 +132,10 @@ const Footer = () => {
                     <FaEnvelope />
                   </div>
                   <div className="">
-                    <p className="text-sm font-medium max">hello@rentigo.com</p>
-                    
+                    <p className="text-sm font-medium max text-light-primary_text dark:text-dark-secondary_text ">
+                      hello@rentigo.com
+                    </p>
+
                     <p className="text-xs text-gray-500">General Inquiries</p>
                   </div>
                 </li>
@@ -139,7 +145,9 @@ const Footer = () => {
                     <FaMapMarkerAlt />
                   </div>
                   <div>
-                    <p className="text-sm">123 Main Street</p>
+                    <p className="text-sm text-light-primary_text dark:text-dark-secondary_text ">
+                      123 Main Street
+                    </p>
                     <p className="text-xs text-gray-500">New York, NY 10001</p>
                   </div>
                 </li>
