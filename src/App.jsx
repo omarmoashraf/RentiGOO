@@ -55,7 +55,7 @@ function App() {
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/carmanagement" element={<CarManagement />} />
           <Route path="/editcar" element={<EditCar />} />
-          <Route path="/viewcardetails" element={<ViewCarDetails />} />
+          <Route path="carmanagement/:carID" element={<ViewCarDetails />} />
           <Route path="/bookingdetails" element={<BookingDetails />} />
 
           <Route path="*" element={<NotFound />} />
