@@ -181,7 +181,7 @@ const Cars = () => {
   });
 
   return (
-    <div className="flex flex-col gap-10 pt-20 lg:pt-24">
+    <div className="flex flex-col gap-10">
       <section className="px-4 sm:px-6 md:px-8 py-12 bg-gray-50">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
@@ -217,7 +217,7 @@ const Cars = () => {
             setSortBy={setSortBy}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedCars.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}
