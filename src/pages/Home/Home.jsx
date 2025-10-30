@@ -161,24 +161,23 @@ const Home = () => {
         </Carousel>
       </div>
       <div className="flex flex-col items-center px-4">
-        <form className="mt-8 w-full max-w-5xl bg-light-background dark:bg-dark-background shadow-lg rounded-2xl p-6 md:p-8">
+        <form className="mt-8 w-full max-w-5xl bg-white shadow-lg rounded-2xl p-6 md:p-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Pickup Location */}
             <div className="flex flex-col w-full">
               <Typography
                 variant="small"
-                color=""
-                className="flex items-center gap-1 mb-1 text-light-primary_text dark:text-light-background"
+                color="blue-gray"
+                className="flex items-center gap-1 mb-1"
               >
                 <CiLocationOn className="text-[#06f] text-xl" />
                 Pickup Location
               </Typography>
               <Input
-                variant="small"
                 type="text"
                 size="md"
                 placeholder="Enter your address"
-                className="border focus:border-none focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md p-2 text-black"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
               />
             </div>
 
@@ -187,7 +186,7 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="flex items-center gap-1 mb-1 text-light-primary_text dark:text-light-background"
+                className="flex items-center gap-1 mb-1"
               >
                 <MdOutlineDateRange className="text-[#06f] text-xl" />
                 Pick Up Date
@@ -196,7 +195,10 @@ const Home = () => {
                 type="date"
                 size="md"
                 placeholder="dd/mm/yy"
-                className="border focus:border-none focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md p-2 text-black"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
               />
             </div>
 
@@ -205,7 +207,7 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="flex items-center gap-1 mb-1 text-light-primary_text dark:text-light-background"
+                className="flex items-center gap-1 mb-1"
               >
                 <MdOutlineDateRange className="text-[#06f] text-xl" />
                 Return Date
@@ -214,7 +216,7 @@ const Home = () => {
                 type="date"
                 size="md"
                 placeholder="dd/mm/yy"
-                className="border focus:border-none focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md p-2 text-black"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
                 }}
@@ -246,8 +248,7 @@ const Home = () => {
             any occasion.
           </p>
         </header>
-<<<<<<< HEAD
-        <div className="cards p-12 flex flex-col items-center md:grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
           <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
             <CardHeader floated={false} color="blue-gray">
               <img src="./Homecard-1.jpg" alt="ui/ux review check" />
@@ -263,39 +264,6 @@ const Home = () => {
             </CardHeader>
             <CardBody>
               <div className="mb-3 flex items-center justify-between">
-=======
-        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
-
-          
-            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
-              <CardHeader floated={false} color="blue-gray">
-                <img src="./Homecard-1.jpg" alt="ui/ux review check" />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
-                  <Chip
-                    value="Available"
-                    color="green"
-                    size="sm"
-                    className="absolute bottom-3 left-3 font-semibold"
-                  />
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="mb-3 flex items-center justify-between">
-                  <Typography
-                    variant="h5"
-                    color="blue-gray"
-                    className="font-bold"
-                  >
-                    BMW 5 Series
-                  </Typography>
-                  <div>
-                    <span className="text-[#06f]">$89</span>/day
-                  </div>
-                </div>
-                <Typography color="gray">Luxury Sedan</Typography>
-              
->>>>>>> 006b2f4a272fd735a5401f458ac50e27c03b6198
                 <Typography
                   variant="h5"
                   color="blue-gray"
