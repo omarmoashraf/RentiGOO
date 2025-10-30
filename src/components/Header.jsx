@@ -9,13 +9,24 @@ import {
   FaHeart,
   FaWallet,
 } from "react-icons/fa";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar
+} from "@material-tailwind/react";
 import rentigoLogo from "../assets/rentigo-logo.png";
 import { useNavigate } from "react-router-dom";
 
 import usetheme from "../HOOKS/usetheme";
+import { useLogged } from "../HOOKS/UseLogged";
+import AvatarWithUserDropdown from "./UserDropdownList";
+
 
 
 const Header = ({ currentPage, onNavigate}) => {
+  const { isLogged, user, logout } = useLogged();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -135,11 +146,17 @@ const Header = ({ currentPage, onNavigate}) => {
               <span className="font-semibold">Wallet</span>
             </Button>
 
-            <Button
-              onClick={() => navigate("/login")}
-            className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"            >
-              Sign In
-            </Button>
+            {isLogged ? (
+  <AvatarWithUserDropdown />
+) : (
+  <Button
+    onClick={() => navigate("/login")}
+    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+  >
+    Sign In
+  </Button>
+)}
+
           </div>
 
           {/* Mobile Menu Button */}

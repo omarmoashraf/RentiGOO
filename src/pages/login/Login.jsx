@@ -22,22 +22,51 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
+import { useLogged } from "../../HOOKS/UseLogged";
+
 
 const Login = () => {
+  const { login } = useLogged();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    
-    e.preventDefault();
-    
-    // Handle login logic here
-    console.log("Logging in user:", { email, password });
-    // After successful login, redirect to dashboard
-    // navigate('/dashboard');
-  };
+  const [errors, setErrors] = useState({});
+
+const validate = () => {
+  const newErrors = {};
+  const trimmedEmail = email.trim();
+  const trimmedPassword = password.trim();
+
+  if (!trimmedEmail) newErrors.email = "Email is required";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
+    newErrors.email = "Invalid email format";
+
+  if (!trimmedPassword) newErrors.password = "Password is required";
+  else if (trimmedPassword.length < 6)
+    newErrors.password = "Password must be at least 6 characters";
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  console.log("Logging in user:", { email, password });
+
+  // Simulate successful login
+  login({ email }); // set user in context
+
+  navigate("/"); // redirect to home or wherever
+};
+
+
+
 
 
 
@@ -169,6 +198,7 @@ const Login = () => {
                   icon={<FaEnvelope className="w-4 h-4" />}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  errors={errors.email}
                 />
 
                 <InputField
@@ -178,6 +208,7 @@ const Login = () => {
                   icon={<FaLock className="w-4 h-4" />}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  errors={errors.password}
                 />
 
                 {/* Remember Me & Forgot Password */}
@@ -200,15 +231,18 @@ const Login = () => {
                 </div>
 
                 <Button
-                  type="submit"
-                  size="lg"
-                  fullWidth
- className={`text-white font-medium shadow-md transition-all 
-              bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
-              hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg`}
->                
-                  Sign In
-                </Button>
+  type="submit"
+  size="lg"
+  fullWidth
+  disabled={!email || !password}
+  className={`text-white font-medium shadow-md transition-all 
+    ${!email || !password 
+      ? "bg-gray-400 cursor-not-allowed" 
+      : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
+    }`}
+>
+  Sign In
+</Button>
 
                 {/* Divider */}
                 <div className="relative my-6">
@@ -259,7 +293,7 @@ const Login = () => {
 
 /* ------------ SUBCOMPONENTS ------------ */
 
-const InputField = ({ label, icon, ...props }) => (
+const InputField = ({ label, icon, errors, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
       {label}
@@ -267,7 +301,10 @@ const InputField = ({ label, icon, ...props }) => (
     <div className="relative">
       <Input
         {...props}
-        className="pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg"
+        error={!!errors}
+        className={`pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg ${
+          errors ? "!border-red-500 focus:!border-red-500" : ""
+        }`}
         labelProps={{
           className: "before:content-none after:content-none",
         }}
@@ -277,8 +314,14 @@ const InputField = ({ label, icon, ...props }) => (
         {icon}
       </div>
     </div>
+    {errors && (
+      <Typography variant="small" color="red" className="text-sm text-red-500">
+        {errors}
+      </Typography>
+    )}
   </div>
 );
+
 
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {
