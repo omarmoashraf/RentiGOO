@@ -36,6 +36,8 @@ const Register = () => {
     confirmPassword: "",
     agreeTerms: false,
   });
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
 
   const handleChange = (field, value) => {
@@ -45,18 +47,56 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    if (activeTab === "signup") {
-      console.log("Registering user:", formData);
-      // After successful registration, you might want to redirect to login
-      // navigate('/login');
-    } else {
-      console.log("Logging in user:", { email: formData.email, password: formData.password });
-      // After successful login, redirect to dashboard
-      // navigate('/dashboard');
+  const validate = () => {
+  let newErrors = {};
+
+  if (activeTab === "signup") {
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.telephone.trim()) newErrors.telephone = "Phone number is required";
+  }
+
+  if (!formData.email.trim()) {
+    newErrors.email = "Email is required";
+  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    newErrors.email = "Invalid email address";
+  }
+
+  if (!formData.password) {
+    newErrors.password = "Password is required";
+  } else if (formData.password.length < 6) {
+    newErrors.password = "Password must be at least 6 characters";
+  }
+
+  if (activeTab === "signup") {
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
+
+    if (!formData.agreeTerms) {
+      newErrors.agreeTerms = "You must agree to the terms";
+    }
+  }
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0;
+};
+
+
+  const handleSubmit = (e) => {
+     e.preventDefault();
+
+  if (!validate()) return;
+
+  if (activeTab === "signup") {
+    console.log("Registering user:", formData);
+    // navigate('/login');
+  } else {
+    console.log("Logging in user:", { email: formData.email, password: formData.password });
+    // navigate('/dashboard');
+  }
   };
 
   const features = [
@@ -192,6 +232,7 @@ const Register = () => {
                       icon={<FaUser className="w-4 h-4" />}
                       value={formData.firstName}
                       onChange={(e) => handleChange("firstName", e.target.value)}
+                      error={errors.firstName}
                     />
                     <InputField
                       label="Last Name"
@@ -199,6 +240,7 @@ const Register = () => {
                       icon={<FaUser className="w-4 h-4" />}
                       value={formData.lastName}
                       onChange={(e) => handleChange("lastName", e.target.value)}
+                      error={errors.lastName}
                     />
                   </div>
                 )}
@@ -210,6 +252,7 @@ const Register = () => {
                   icon={<FaEnvelope className="w-4 h-4" />}
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
+                  error={errors.email}
                 />
 
                 {activeTab === "signup" && (
@@ -220,6 +263,7 @@ const Register = () => {
                     icon={<FaPhone className="w-4 h-4 rotate-90" />}
                     value={formData.telephone}
                     onChange={(e) => handleChange("telephone", e.target.value)}
+                    error={errors.telephone}
                   />
                 )}
 
@@ -230,6 +274,8 @@ const Register = () => {
                   icon={<FaLock className="w-4 h-4" />}
                   value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
+                   error={errors.password}
+
                 />
 
                 {activeTab === "signup" && (
@@ -240,6 +286,7 @@ const Register = () => {
                     icon={<FaLock className="w-4 h-4" />}
                     value={formData.confirmPassword}
                     onChange={(e) => handleChange("confirmPassword", e.target.value)}
+                    error={errors.confirmPassword}
                   />
                 )}
 
@@ -266,7 +313,16 @@ const Register = () => {
                       </a>
                     </Typography>
                   </div>
+                  
+                  
                 )}
+                {errors.agreeTerms && (
+  <Typography variant="small" className="text-red-500 text-xs mt-1 ml-2">
+    {errors.agreeTerms}
+  </Typography>
+)}
+
+
 
                 <Button
                   type="submit"
@@ -330,7 +386,7 @@ className={`text-white font-medium shadow-md transition-all
 
 /* ------------ SUBCOMPONENTS ------------ */
 
-const InputField = ({ label, icon, ...props }) => (
+const InputField = ({ label, icon, error, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
       {label}
@@ -338,6 +394,7 @@ const InputField = ({ label, icon, ...props }) => (
     <div className="relative">
       <Input
         {...props}
+        error={!!error}
         className="pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg"
         labelProps={{
           className: "before:content-none after:content-none",
@@ -348,8 +405,14 @@ const InputField = ({ label, icon, ...props }) => (
         {icon}
       </div>
     </div>
+    {error && (
+      <Typography variant="small" className="text-red-500 text-xs mt-1">
+        {error}
+      </Typography>
+    )}
   </div>
 );
+
 
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {
