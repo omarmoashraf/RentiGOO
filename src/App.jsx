@@ -17,6 +17,8 @@ import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Pricing from "./pages/pricing/Pricing";
 import Wallet from "./pages/wallet/Wallet";
 import { Route, Routes, useLocation } from "react-router-dom";
+import { Scroll } from "lucide-react";
+import ScrollToTop from "./components/Scroll up/Scroll";
 import AddNewCar from "./pages/Admin/AddNewCar";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CarManagement from "./pages/Admin/CarManagement";
@@ -38,8 +40,14 @@ const hideLayout =
   return (
     <div>
       {!hideLayout && <Header />}
-      
-      <main className={`${!hideLayout ? "pt-20" : ""} bg-light-background dark:bg-dark-background`}>
+
+      <main
+        className={`${
+          !hideLayout ? "pt-20" : ""
+        } bg-light-background dark:bg-dark-background`}
+      >
+        {/* this for appear on top pages and disappear in login and register */}
+        <ScrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
@@ -69,8 +77,7 @@ const hideLayout =
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
-      {!hideLayout && <Footer />}
+      {<Footer />}
     </div>
   );
 };
