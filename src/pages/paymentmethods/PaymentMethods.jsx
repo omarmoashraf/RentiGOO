@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Booking from "./bookingSummary/Booking";
 import Payment from "./paymentSummary/Payment";
 import Customer from "./customerInformation/Customer";
@@ -44,8 +45,7 @@ const PaymentMethods = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-20">
-      {/* الجزء العلوي full width */}
+    <div className="bg-gray-50 min-h-screen pt-20 w-full max-w-full">
       <div className="w-full flex flex-col items-center text-center mb-4">
         <FaCheckCircle className="text-green-500 text-5xl mb-4" />
         <h2 className="text-2xl font-bold text-gray-800 mb-1">
@@ -57,21 +57,21 @@ const PaymentMethods = () => {
         </p>
       </div>
 
-      {/* الجزء الرئيسي */}
-      <div className="flex flex-col lg:flex-row gap-2 sm:gap-4 md:gap-8 p-4 sm:p-6 md:p-8 w-full max-w-full">
-        {/* العمود الرئيسي */}
-        <div className="flex-1 flex flex-col gap-6 w-full max-w-full">
+      <div className="flex flex-col lg:flex-row gap-8 p-4 sm:p-6 md:p-8 w-full">
+        <div className="flex-1 flex flex-col gap-6">
           <Booking bookingData={bookingData} />
           <Customer bookingData={bookingData} />
           <Important />
 
           <div className="flex flex-wrap gap-4 mt-4 justify-center lg:justify-start">
-            <Button
-              color="blue"
-              className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-500"
-            >
-              Back to Home
-            </Button>
+            <Link to="/">
+              <Button
+                color="blue"
+                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-blue-600 to-cyan-500"
+              >
+                Back to Home
+              </Button>
+            </Link>
 
             <Button
               variant="outlined"
@@ -91,8 +91,7 @@ const PaymentMethods = () => {
           </div>
         </div>
 
-        {/* sidebar Payment Summary */}
-        <div className="w-full lg:w-[30%] max-w-full h-fit sticky top-10 self-start lg:pl-4">
+        <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
           <Payment bookingData={bookingData} />
         </div>
       </div>
