@@ -20,13 +20,15 @@ import rentigoLogo from "../assets/rentigo-logo.png";
 import { useNavigate } from "react-router-dom";
 
 import usetheme from "../HOOKS/usetheme";
+import { useAuth } from "../context/AuthContext";
 import { useLogged } from "../HOOKS/UseLogged";
 import AvatarWithUserDropdown from "./UserDropdownList";
 
 
 
 const Header = ({ currentPage, onNavigate}) => {
-  const { isLogged, user, logout } = useLogged();
+  const { user, logout } = useAuth();
+const isLogged = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();

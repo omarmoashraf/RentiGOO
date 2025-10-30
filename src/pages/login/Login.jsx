@@ -18,57 +18,78 @@ import {
   FaCar,
   FaGoogle,
   FaFacebook,
-  FaApple
+  FaApple,
+  FaUserShield
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
 import { useLogged } from "../../HOOKS/UseLogged";
-
+import { useAuth } from "../../context/AuthContext"; // Add this import
 
 const Login = () => {
-  const { login } = useLogged();
+  const {login : loggedIn} = useLogged();
+  const { login: contextLogin } = useAuth(); // Use auth context instead of useLogged
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [showAdminDemo, setShowAdminDemo] = useState(false); // Toggle for admin demo
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
 
-const validate = () => {
-  const newErrors = {};
-  const trimmedEmail = email.trim();
-  const trimmedPassword = password.trim();
+  const validate = () => {
+    const newErrors = {};
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
 
-  if (!trimmedEmail) newErrors.email = "Email is required";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
-    newErrors.email = "Invalid email format";
+    if (!trimmedEmail) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
+      newErrors.email = "Invalid email format";
 
-  if (!trimmedPassword) newErrors.password = "Password is required";
-  else if (trimmedPassword.length < 6)
-    newErrors.password = "Password must be at least 6 characters";
+    if (!trimmedPassword) newErrors.password = "Password is required";
+    else if (trimmedPassword.length < 6)
+      newErrors.password = "Password must be at least 6 characters";
 
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0;
-};
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+    if (!validate()) return;
 
-  if (!validate()) return;
+    console.log("Logging in user:", { email, password });
 
-  console.log("Logging in user:", { email, password });
+    // Check for admin credentials
+    if (email === "admin@rentigo.com" && password === "admin123") {
+      const adminUser = {
+        id: 1,
+        name: "Admin User",
+        email: "admin@rentigo.com",
+        role: "admin"
+      };
+      contextLogin(adminUser);
+      navigate("/admindashboard");
+      return;
+    }
 
-  // Simulate successful login
-  login({ email }); // set user in context
+    // Regular user login
+    const regularUser = {
+      // id: Date.now(),
+      // name: email.split('@')[0], // Simple name from email
+      // email: email,
+      // role: "user"
+      email: email,
+      password: password,
+      role: "user"
+    };
+    
+    contextLogin(regularUser);
+    navigate("/");
+  };
 
-  navigate("/"); // redirect to home or wherever
-};
-
-
-
-
-
+  
 
   const features = [
     {
@@ -148,6 +169,9 @@ const handleSubmit = (e) => {
               </div>
             ))}
           </div>
+
+          
+          
         </div>
 
         {/* ---------- RIGHT SECTION ---------- */}
@@ -221,28 +245,29 @@ const handleSubmit = (e) => {
                     }
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                     color="blue"
+                    color="blue"
                   />
                   <Link 
                     to="/forgot-password"
-                   className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
+                    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
+                  >
                     Forgot password?
                   </Link>
                 </div>
 
                 <Button
-  type="submit"
-  size="lg"
-  fullWidth
-  disabled={!email || !password}
-  className={`text-white font-medium shadow-md transition-all 
-    ${!email || !password 
-      ? "bg-gray-400 cursor-not-allowed" 
-      : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
-    }`}
->
-  Sign In
-</Button>
+                  type="submit"
+                  size="lg"
+                  fullWidth
+                  disabled={!email || !password}
+                  className={`text-white font-medium shadow-md transition-all 
+                    ${!email || !password 
+                      ? "bg-gray-400 cursor-not-allowed" 
+                      : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
+                    }`}
+                >
+                  Sign In
+                </Button>
 
                 {/* Divider */}
                 <div className="relative my-6">
@@ -277,7 +302,8 @@ const handleSubmit = (e) => {
                     Don't have an account?{" "}
                     <Link
                       to="/register"
- className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                    >
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
+                    >
                       Sign Up
                     </Link>
                   </Typography>
@@ -321,7 +347,6 @@ const InputField = ({ label, icon, errors, ...props }) => (
     )}
   </div>
 );
-
 
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {

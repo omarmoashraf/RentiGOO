@@ -1,5 +1,7 @@
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import About from "./pages/about/About";
 import Contact from "./pages/contact/Contact";
@@ -22,49 +24,62 @@ import EditCar from "./pages/Admin/EditCar";
 import ViewCarDetails from "./pages/Admin/ViewCarDetails";
 import BookingDetails from "./pages/Admin/BookingDetails";
 
-function App() {
+const AppContent = () => {
   const location = useLocation();
-  const hideLayout =
-    location.pathname === "/login" || location.pathname === "/register";
+const hideLayout =
+  location.pathname === "/login" ||
+  location.pathname === "/register" ||
+  location.pathname === "/carmanagement" ||
+  location.pathname === "/booking" ||
+  location.pathname === "/addnewcar" ||
+  location.pathname === "/admindashboard";
+
 
   return (
     <div>
       {!hideLayout && <Header />}
-
-      <main
-        className={`${
-          !hideLayout ? "pt-20" : ""
-        } bg-light-background dark:bg-dark-background`}
-      >
-        {/* this for appear on top pages and disappear in login and register */}
-        
+      
+      <main className={`${!hideLayout ? "pt-20" : ""} bg-light-background dark:bg-dark-background`}>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cars" element={<Cars />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/cars/:carID" element={<CarDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/booking" element={<Booking />} />
-          <Route path="/paymentdetails" element={<PaymentDetails />} />
-          <Route path="/paymentmethods" element={<PaymentMethods />} />
-          <Route path="/cars/:carID" element={<CarDetails />} />
-          <Route path="/addnewcar" element={<AddNewCar />} />
-          <Route path="/admindashboard" element={<AdminDashboard />} />
-          <Route path="/carmanagement" element={<CarManagement />} />
-          <Route path="/editcar" element={<EditCar />} />
-          <Route path="carmanagement/:carID" element={<ViewCarDetails />} />
-          <Route path="/bookingdetails" element={<BookingDetails />} />
+
+          {/* Protected User Routes */}
+          <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
+          <Route path="/favourites" element={<ProtectedRoute><Favourites /></ProtectedRoute>} />
+          <Route path="/booking" element={<ProtectedRoute><Booking /></ProtectedRoute>} />
+          <Route path="/paymentdetails" element={<ProtectedRoute><PaymentDetails /></ProtectedRoute>} />
+          <Route path="/paymentmethods" element={<ProtectedRoute><PaymentMethods /></ProtectedRoute>} />
+
+          {/* Protected Admin Routes */}
+          <Route path="/admindashboard" element={<ProtectedRoute adminOnly={true}><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/addnewcar" element={<ProtectedRoute adminOnly={true}><AddNewCar /></ProtectedRoute>} />
+          <Route path="/carmanagement" element={<ProtectedRoute adminOnly={true}><CarManagement /></ProtectedRoute>} />
+          <Route path="/editcar" element={<ProtectedRoute adminOnly={true}><EditCar /></ProtectedRoute>} />
+          <Route path="/carmanagement/:carID" element={<ProtectedRoute adminOnly={true}><ViewCarDetails /></ProtectedRoute>} />
+          <Route path="/bookingdetails" element={<ProtectedRoute adminOnly={true}><BookingDetails /></ProtectedRoute>} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      {<Footer />}
+      {!hideLayout && <Footer />}
     </div>
+  );
+};
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
