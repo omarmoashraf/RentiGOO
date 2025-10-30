@@ -21,22 +21,22 @@ const About = () => {
     <div className="main">
       <div className="  dark:bg-dark-background text-dark-gray p-16 top mt-4">
         <div className="">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 dark:text-dark-text text-light-text">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 dark:text-dark-header_text text-light-text ">
             Driving Dreams
           </h1>
-          <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center">
+          <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed text-center dark:text-dark-secondary_text  text-light-text ">
             Born from a passion for exceptional automotive experiences, Rentigo
             has evolved into a trusted leader in premium car rentals, serving
             customers across the nation.
           </p>
         </div>
       </div>
-      <div className="text-white mt-7 p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div className=" mt-7 p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <section className="left">
-          <h2 className="font-bold dark:text-dark-text text-light-text text-3xl md:text-4xl mb-5">
+          <h2 className="font-bold dark:text-dark-header_text text-light-primary_text text-3xl md:text-4xl mb-5">
             Our Journey
           </h2>
-          <p className="text-gray-600 leading-loose">
+          <p className="text-gray-600 leading-loose dark:text-dark-secondary_text">
             Founded in 2024, RentiGO started with one goal — to make car rentals
             smarter, faster, and more transparent. Today, we serve thousands of
             customers across Egypt, offering a modern fleet, flexible plans, and
@@ -44,7 +44,9 @@ const About = () => {
             toward a smarter, customer-focused future in mobility.
           </p>
           <Typography as={Link} to="/contact" className="mt-6">
-            <Button className="bg-blue-600 mb-4">Get Touch</Button>
+            <Button className="bg-light-Buttons dark:bg-dark-Buttons mb-4">
+              Get Touch
+            </Button>
           </Typography>
         </section>
         <section className="right rounded-3xl overflow-hidden shadow-lg">
@@ -56,10 +58,16 @@ const About = () => {
         </section>
       </div>
       <div className="cards1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7">
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center">
-              <IoCarSportSharp className="text-4xl text-center" />
+              <IoCarSportSharp className="text-4xl text-center dark:text-dark-secondary_text" />
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
@@ -73,16 +81,22 @@ const About = () => {
             <Typography
               variant="small"
               color="gray"
-              className="font-normal opacity-75"
+              className="font-normal opacity-75 dark:text-dark-secondary_text"
             >
               Premium Vehicles
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center">
-              <IoPersonCircle className="text-4xl text-center" />
+              <IoPersonCircle className="text-4xl text-center dark:text-dark-secondary_text" />
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
@@ -96,16 +110,22 @@ const About = () => {
             <Typography
               variant="small"
               color="gray"
-              className="font-normal opacity-75"
+              className="font-normal opacity-75 dark:text-dark-secondary_text"
             >
               Happy Customers
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center">
-              <MdLocationOn className="text-4xl text-center" />
+              <MdLocationOn className="text-4xl text-center dark:text-dark-secondary_text" />
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
@@ -119,16 +139,22 @@ const About = () => {
             <Typography
               variant="small"
               color="gray"
-              className="font-normal opacity-75 "
+              className="font-normal opacity-75 dark:text-dark-secondary_text "
             >
               City Locations
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center ">
-              <FaMedal className="text-4xl text-center" />
+              <FaMedal className="text-4xl text-center dark:text-dark-secondary_text" />
             </div>
 
             <div className="mb-2 flex items-center justify-center text-center">
@@ -142,25 +168,30 @@ const About = () => {
             <Typography
               variant="small"
               color="gray"
-              className="font-normal opacity-75"
+              className="font-normal opacity-75 dark:text-dark-secondary_text "
             >
               Customer Rating
             </Typography>
           </CardBody>
         </Card>
       </div>
-      <div className="cards2 lg:flex justify-center grid grid-cols-1 gap-4 p-4 justify-items-center  md:grid-cols-2   lg:gap-80 ">
-        <Card className="mt-6 w-70 md:w-96 ">
+      <div className="cards2 lg:flex justify-center grid grid-cols-1 gap-4 p-4 justify-items-center  md:grid-cols-2   lg:gap-80  ">
+        <Card
+          className="mt-6 w-70 md:w-96  bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <FiTarget className="text-5xl text-[#06f]" />
             <Typography
               variant="h5"
               color="blue-gray"
-              className="mb-2 text-2xl font-bold"
+              className="mb-2 text-2xl font-bold text-light-primary_text dark:text-dark-header_text"
             >
               Our Mission
             </Typography>
-            <Typography>
+            <Typography className="dark:text-dark-secondary_text ">
               To revolutionize the car rental experience by providing premium
               vehicles, exceptional service, and innovative solutions that
               exceed customer expectations. We're committed to making every
@@ -168,17 +199,22 @@ const About = () => {
             </Typography>
           </CardBody>
         </Card>
-        <Card className="mt-6 w-70 md:w-96">
+        <Card
+          className="mt-6 w-70 md:w-96 bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <FaEye className="text-5xl text-[#06f]" />
             <Typography
               variant="h5"
               color="blue-gray"
-              className="mb-2 text-2xl font-bold"
+              className="mb-2 text-2xl font-bold text-light-primary_text dark:text-dark-header_text"
             >
               Our Vision
             </Typography>
-            <Typography>
+            <Typography className="dark:text-dark-secondary_text ">
               To become the global leader in premium car rentals, known for our
               commitment to sustainability, innovation, and customer
               satisfaction. We envision a future where renting a car is as
@@ -188,7 +224,7 @@ const About = () => {
         </Card>
       </div>
       <div className="">
-        <h1 className="font-bold text-3xl text-black text-center mt-3 mb-3 ">
+        <h1 className="font-bold text-3xl  text-center mt-3 mb-3 text-light-primary_text dark:text-dark-header_text">
           Our Value
         </h1>
         <p className="text-center text-lg text-gray-600">
@@ -197,84 +233,120 @@ const About = () => {
         </p>
       </div>
       <div className="cards3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7">
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center mb-4 ">
               <FiTarget className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Excellence
               </Typography>
             </div>
             <Typography
               variant="small"
               color="gray"
-              className="text-center opacity-75"
+              className="text-center opacity-75 dark:text-dark-secondary_text"
             >
               We strive for perfection in every aspect of our service, from
               vehicle quality to customer support.
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center mb-4 ">
               <MdPeople className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Customer First
               </Typography>
             </div>
             <Typography
               variant="small"
               color="gray"
-              className="text-center opacity-75"
+              className="text-center opacity-75 dark:text-dark-secondary_text"
             >
               Our customers are at the heart of everything we do. Your
               satisfaction is our success.
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center mb-4 ">
               <FaEye className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Transparency
               </Typography>
             </div>
             <Typography
               variant="small"
               color="gray"
-              className="text-center opacity-75"
+              className="text-center opacity-75 dark:text-dark-secondary_text"
             >
               Clear pricing, honest communication, and no hidden fees. What you
               see is what you get.
             </Typography>
           </CardBody>
         </Card>
-        <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105 ">
+        <Card
+          className="w-full text-center h-full object-cover
+             bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+        >
           <CardBody>
             <div className="flex justify-center mb-4 ">
               <BiSolidMedal className="text-5xl text-[#06f]" />
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text "
+              >
                 Innovation
               </Typography>
             </div>
             <Typography
               variant="small"
               color="gray"
-              className="text-center opacity-75"
+              className="text-center opacity-75 dark:text-dark-secondary_text"
             >
               We continuously evolve our services with cutting-edge technology
               and modern solutions.
