@@ -48,6 +48,7 @@ const noLayoutRoutes = [
   "/carmanagement/:carID",
   "/booking",
   "/BookingDetails",
+  "/ViewCarDetails",
 ];
 
 const hideLayout = noLayoutRoutes.some((path) =>
