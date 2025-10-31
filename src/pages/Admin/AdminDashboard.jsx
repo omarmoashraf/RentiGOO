@@ -7,8 +7,6 @@ import { LuCalendar, LuCar, LuUsers, LuTrendingUp } from "react-icons/lu";
 import { FiDollarSign, FiAlertCircle, FiMenu } from "react-icons/fi";
 import { HiOutlineLogout } from "react-icons/hi";
 import { GoXCircle, GoCheckCircle } from "react-icons/go";
-import AdminSidebar from "./components/AdminSidebar";
-import GropLyout from "./GropLyout";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -16,169 +14,152 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans">
-
-
-      <div
-        className={`fixed z-20 md:static w-64 bg-white shadow-lg p-5 rounded-se-3xl flex flex-col justify-between transform transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <div>
-          <h1 className="text-2xl font-bold text-blue-600 mb-2">RentiGO Admin</h1>
-          <p className="text-gray-400 text-sm mb-8">Management Portal</p>
-
-          <nav className="space-y-3">
-            <div
-              className="bg-blue-600 text-white rounded-xl p-3 flex items-center gap-3 cursor-pointer shadow-md"
-              onClick={() => {
-                navigate("/AdminDashboard");
-                setSidebarOpen(false);
-              }}
-            >
-              <MdDashboard size={20} />
-              <div>
-                <p className="font-semibold">Dashboard</p>
-                <p className="text-xs opacity-80">Overview & Analytics</p>
-              </div>
-            </div>
-
-            <div
-              className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
-              onClick={() => {
-                navigate("/CarManagement");
-                setSidebarOpen(false);
-              }}
-            >
-              <FaCar size={20} />
-              <div>
-                <p className="font-semibold">Car Management</p>
-                <p className="text-xs text-gray-400">Manage Fleet</p>
-              </div>
-            </div>
-
-            <div
-              className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
-              onClick={() => {
-                navigate("/BookingDetails");
-                setSidebarOpen(false);
-              }}
-            >
-              <LuCalendar size={20} />
-              <div>
-                <p className="font-semibold">Bookings</p>
-                <p className="text-xs text-gray-400">Rental Management</p>
-              </div>
-            </div>
-          </nav>
-        </div>
-
-        <div
-          className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
-          onClick={() => navigate("/Login")}
-        >
-          <HiOutlineLogout size={20} />
-          <p className="font-semibold">Logout</p>
-        </div>
-      </div>
-
-      {/* Overlay for mobile */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-10 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        ></div>
-      )}
-
+      
       {/* Main Content */}
-      <div className="flex-1 p-6 md:p-8">
+      <div className="flex-1 p-4 md:p-6 lg:p-8 w-full">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <div>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
+          <div className="flex items-center gap-4">
             <button
-              className="md:hidden text-gray-600 mb-3"
+              className="md:hidden text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors"
               onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label="Toggle sidebar"
             >
-              <FiMenu size={26} />
+              <FiMenu size={24} />
             </button>
-            <h2 className="text-3xl font-bold text-blue-700">Admin Dashboard</h2>
-            <p className="text-gray-500">
-              Welcome back! Here's what's happening with RentiGO today.
-            </p>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
+                Admin Dashboard
+              </h2>
+              <p className="text-gray-500 text-sm md:text-base mt-1">
+                Welcome back! Here's what's happening with RentiGO today.
+              </p>
+            </div>
           </div>
 
           <button
             onClick={() => navigate("/AddNewCar")}
-            className="px-5 py-3 text-white bg-blue-700 rounded-xl hover:bg-blue-800 transition"
+            className="px-5 py-3 text-white bg-gradient-to-r from-[#0066ff] to-[#0052cc] rounded-xl hover:shadow-lg transition-all duration-200 font-semibold w-full sm:w-auto text-center"
           >
-            Add Product
+            Add New Car
           </button>
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
           {[
-            { title: "Total Revenue", value: "$47,250", icon: <FiDollarSign size={25} />, color: "text-green-500" },
-            { title: "Active Bookings", value: "124", icon: <LuCalendar size={25} />, color: "text-blue-500" },
-            { title: "Fleet Utilization", value: "87%", icon: <LuCar size={25} />, color: "text-blue-500" },
-            { title: "Total Customers", value: "2,847", icon: <LuUsers size={25} />, color: "text-purple-500" },
+            { 
+              title: "Total Revenue", 
+              value: "$47,250", 
+              icon: <FiDollarSign size={24} />, 
+              color: "text-green-500",
+              bgColor: "bg-green-50"
+            },
+            { 
+              title: "Active Bookings", 
+              value: "124", 
+              icon: <LuCalendar size={24} />, 
+              color: "text-blue-500",
+              bgColor: "bg-blue-50"
+            },
+            { 
+              title: "Fleet Utilization", 
+              value: "87%", 
+              icon: <LuCar size={24} />, 
+              color: "text-orange-500",
+              bgColor: "bg-orange-50"
+            },
+            { 
+              title: "Total Customers", 
+              value: "2,847", 
+              icon: <LuUsers size={24} />, 
+              color: "text-purple-500",
+              bgColor: "bg-purple-50"
+            },
           ].map((item, i) => (
             <div
               key={i}
-              className="flex justify-between items-center bg-white p-5 rounded-2xl shadow-sm hover:scale-105 transition"
+              className="flex justify-between items-center bg-white p-4 md:p-5 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100"
             >
-              <div>
-                <p className="text-gray-500 text-sm">{item.title}</p>
-                <h3 className="text-2xl font-bold mt-2">{item.value}</h3>
-                <div className={`flex gap-2 ${item.color}`}>
-                  <LuTrendingUp />
-                  <p className="text-xs mt-1">+12%</p>
+              <div className="flex-1">
+                <p className="text-gray-500 text-xs md:text-sm">{item.title}</p>
+                <h3 className="text-xl md:text-2xl font-bold mt-1 md:mt-2">{item.value}</h3>
+                <div className={`flex items-center gap-1 ${item.color} mt-1`}>
+                  <LuTrendingUp size={14} />
+                  <p className="text-xs">+12% from last month</p>
                 </div>
               </div>
-              <div className={`p-2 bg-blue-100 rounded-xl ${item.color}`}>{item.icon}</div>
+              <div className={`p-2 md:p-3 rounded-xl ${item.bgColor} ${item.color}`}>
+                {item.icon}
+              </div>
             </div>
           ))}
         </div>
 
         {/* Recent Bookings + Alerts */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Recent Bookings */}
-          <div className="col-span-2 bg-white rounded-2xl p-5 shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="font-bold text-lg">Recent Bookings</h3>
+          <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100">
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+              <h3 className="font-bold text-lg md:text-xl text-gray-800">Recent Bookings</h3>
               <button
-                className="text-blue-600 text-sm font-semibold"
+                className="text-sm font-semibold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent hover:scale-105 transition-transform"
                 onClick={() => navigate("/booking")}
               >
                 View All
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               {[
-                { name: "John Smith", car: "BMW 5 Series", price: "$289", status: "active", color: "green" },
-                { name: "Sarah Johnson", car: "Tesla Model 3", price: "$225", status: "completed", color: "blue" },
-                { name: "Mike Davis", car: "Range Rover Sport", price: "$360", status: "pending", color: "yellow" },
-                { name: "Emily Brown", car: "Porsche 911", price: "$450", status: "active", color: "green" },
-              ].map((b, i) => (
+                { 
+                  name: "John Smith", 
+                  car: "BMW 5 Series", 
+                  price: "$289", 
+                  status: "active", 
+                  statusColor: "bg-green-100 text-green-700" 
+                },
+                { 
+                  name: "Sarah Johnson", 
+                  car: "Tesla Model 3", 
+                  price: "$225", 
+                  status: "completed", 
+                  statusColor: "bg-blue-100 text-blue-700" 
+                },
+                { 
+                  name: "Mike Davis", 
+                  car: "Range Rover Sport", 
+                  price: "$360", 
+                  status: "pending", 
+                  statusColor: "bg-yellow-100 text-yellow-700" 
+                },
+                { 
+                  name: "Emily Brown", 
+                  car: "Porsche 911", 
+                  price: "$450", 
+                  status: "active", 
+                  statusColor: "bg-green-100 text-green-700" 
+                },
+              ].map((booking, index) => (
                 <div
-                  key={i}
-                  className="flex justify-between items-center border-b p-3 rounded-2xl hover:bg-gray-50 transition"
+                  key={index}
+                  className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 p-3 md:p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200"
                 >
-                  <div className="flex gap-4 items-center">
-                    <div className="p-2 bg-blue-100 text-blue-400 rounded-xl">
-                      <LuCar size={25} />
+                  <div className="flex gap-3 md:gap-4 items-center flex-1">
+                    <div className="p-2 bg-blue-50 text-blue-500 rounded-xl">
+                      <LuCar size={20} />
                     </div>
-                    <div>
-                      <p className="font-semibold">{b.name}</p>
-                      <p className="text-sm text-gray-400">{b.car}</p>
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-800">{booking.name}</p>
+                      <p className="text-sm text-gray-500">{booking.car}</p>
                     </div>
                   </div>
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold">{b.price}</p>
+                  <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-normal">
+                    <p className="font-semibold text-gray-800">{booking.price}</p>
                     <span
-                      className={`text-${b.color}-700 bg-${b.color}-100 px-2 rounded-2xl text-xs capitalize`}
+                      className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${booking.statusColor}`}
                     >
-                      {b.status}
+                      {booking.status}
                     </span>
                   </div>
                 </div>
@@ -186,24 +167,96 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          {/* Alerts */}
-          <div className="bg-white rounded-2xl p-5 shadow-sm">
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-              <IoMdNotificationsOutline size={20} /> Alerts
+          {/* Alerts Section */}
+          <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100">
+            <h3 className="font-bold text-lg md:text-xl text-gray-800 mb-4 md:mb-6 flex items-center gap-2">
+              <IoMdNotificationsOutline size={20} className="text-blue-500" /> 
+              Alerts & Notifications
             </h3>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-3 md:space-y-4">
               {[
-                { text: "Vehicle BMW X5 due for maintenance", time: "2 hours ago", icon: <FiAlertCircle size={20} />, color: "yellow" },
-                { text: "New customer registration: Alex Wilson", time: "4 hours ago", icon: <GoXCircle size={20}/>, color: "blue" },
-                { text: "Payment failed for booking #BK005", time: "6 hours ago", icon: <GoCheckCircle size={20}/>, color: "red" },
-              ].map((a, i) => (
-                <div key={i} className="border rounded-xl p-3 flex gap-3 items-start">
-                  <span className={`text-${a.color}-500 mt-1`}>{a.icon}</span>
-                  <div>
-                    <p>{a.text}</p>
-                    <p className="text-gray-400 text-xs">{a.time}</p>
+                { 
+                  text: "Vehicle BMW X5 due for maintenance", 
+                  time: "2 hours ago", 
+                  icon: <FiAlertCircle size={18} />, 
+                  color: "text-yellow-500" 
+                },
+                { 
+                  text: "New customer registration: Alex Wilson", 
+                  time: "4 hours ago", 
+                  icon: <GoCheckCircle size={18} />, 
+                  color: "text-blue-500" 
+                },
+                { 
+                  text: "Payment failed for booking #BK005", 
+                  time: "6 hours ago", 
+                  icon: <GoXCircle size={18} />, 
+                  color: "text-red-500" 
+                },
+                { 
+                  text: "3 new bookings pending approval", 
+                  time: "8 hours ago", 
+                  icon: <LuCalendar size={18} />, 
+                  color: "text-orange-500" 
+                },
+              ].map((alert, index) => (
+                <div 
+                  key={index} 
+                  className="p-3 md:p-4 rounded-xl border border-gray-200 hover:border-blue-200 hover:bg-blue-50 transition-all duration-200"
+                >
+                  <div className="flex gap-3 items-start">
+                    <span className={`mt-0.5 ${alert.color}`}>{alert.icon}</span>
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-800 font-medium">{alert.text}</p>
+                      <p className="text-xs text-gray-400 mt-1">{alert.time}</p>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Metrics Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6 md:mt-8">
+          {/* Performance Metrics */}
+          <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100">
+            <h3 className="font-bold text-lg md:text-xl text-gray-800 mb-4">Performance Metrics</h3>
+            <div className="space-y-4">
+              {[
+                { metric: "Customer Satisfaction", value: "94%", trend: "+2%" },
+                { metric: "Fleet Availability", value: "89%", trend: "+5%" },
+                { metric: "On-time Returns", value: "96%", trend: "+1%" },
+              ].map((item, index) => (
+                <div key={index} className="flex justify-between items-center">
+                  <span className="text-gray-600">{item.metric}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-gray-800">{item.value}</span>
+                    <span className="text-green-500 text-sm">{item.trend}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-100">
+            <h3 className="font-bold text-lg md:text-xl text-gray-800 mb-4">Quick Actions</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { label: "Manage Cars", icon: <FaCar size={18} />, action: () => navigate("/CarManagement") },
+                { label: "View Bookings", icon: <LuCalendar size={18} />, action: () => navigate("/BookingDetails") },
+                { label: "Customers", icon: <FaUsers size={18} />, action: () => navigate("/Customers") },
+                { label: "Reports", icon: <FiDollarSign size={18} />, action: () => navigate("/Reports") },
+              ].map((action, index) => (
+                <button
+                  key={index}
+                  onClick={action.action}
+                  className="p-3 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 flex flex-col items-center gap-2 text-center"
+                >
+                  <span className="text-blue-500">{action.icon}</span>
+                  <span className="text-xs font-medium text-gray-700">{action.label}</span>
+                </button>
               ))}
             </div>
           </div>

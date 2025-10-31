@@ -1,19 +1,14 @@
 import { useNavigate } from "react-router-dom";
-
 import {
   ArrowLeft,
   Download,
   CalendarDays,
   CheckCircle2,
   Clock,
-  Search,
-  ListFilter,
+  CheckCircle,
   Eye,
   MoreHorizontal,
-  Circle,
-  CheckCircle,
 } from "lucide-react";
-import GropLyout from "./GropLyout";
 
 const stats = [
   {
@@ -86,7 +81,7 @@ const StatusBadge = ({ status }) => {
   const statusMap = {
     active: {
       text: "Active",
-      icon: <Circle className="w-2 h-2 mr-1.5 fill-current" />,
+      icon: <CheckCircle2 className="w-3 h-3 mr-1" />,
       className: "bg-green-100 text-green-700",
     },
     completed: {
@@ -104,7 +99,6 @@ const StatusBadge = ({ status }) => {
   const currentStatus = statusMap[status] || statusMap.pending;
 
   return (
-  
     <span
       className={`inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full ${currentStatus.className}`}
     >
@@ -130,27 +124,21 @@ const StatCard = ({ title, value, icon: Icon, color, bgColor }) => {
 
 export default function BookingDetails() {
   const navigate = useNavigate();
-  return (
-    
-    <GropLyout>
-      <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased"> 
-      <div className="max-w-screen-xl mx-auto">
   
-   
-      <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased">
+  return (
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased">
       <div className="max-w-screen-xl mx-auto">
-       
-        
+        {/* Header Section */}
         <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
             <button
-              className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full"
+              className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors"
               onClick={() => navigate("/admindashboard")}
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
                 Booking Management
               </h1>
               <p className="text-gray-600 mt-1">
@@ -179,24 +167,26 @@ export default function BookingDetails() {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 mt-12 p-8 w-full text-center mb-5">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
             {/* Search Bar */}
-            <input
-              type="text"
-              placeholder="Search bookings..."
-              className="w-full sm:w-3/4 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
+            <div className="flex-1 w-full">
+              <input
+                type="text"
+                placeholder="Search bookings..."
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              />
+            </div>
 
-            {/* Availability Filter */}
-            <div className="flex items-center gap-1">
+            {/* Status Filter */}
+            <div className="w-full md:w-48">
               <select
-                id="availability"
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               >
                 <option value="all">All Status</option>
-                <option value="available">Available</option>
-                <option value="unavailable">Unavailable</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
               </select>
             </div>
           </div>
@@ -204,9 +194,11 @@ export default function BookingDetails() {
 
         {/* Recent Bookings Table Section */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <h2 className="text-lg font-semibold text-gray-900 p-6">
-            Recent Bookings
-          </h2>
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Recent Bookings
+            </h2>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[800px]">
               {/* Table Header */}
@@ -238,7 +230,7 @@ export default function BookingDetails() {
               {/* Table Body */}
               <tbody className="divide-y divide-gray-200">
                 {bookings.map((booking) => (
-                  <tr key={booking.id} className="hover:bg-gray-50">
+                  <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {booking.id}
                     </td>
@@ -282,7 +274,7 @@ export default function BookingDetails() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                        <button className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                           <Eye className="w-5 h-5" />
                         </button>
                         <button className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
@@ -298,11 +290,5 @@ export default function BookingDetails() {
         </div>
       </div>
     </div>
-    </div>
-    </div>
-    </GropLyout>
-    
-    
   );
 }
-
