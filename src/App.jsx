@@ -37,14 +37,23 @@ import BookingDetails from "./pages/Admin/BookingDetails";
 const AppContent = () => {
   const location = useLocation();
 
-  // Hide header & footer in specific routes
-  const hideLayout =
-    location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname === "/carmanagement" ||
-    location.pathname === "/booking" ||
-    location.pathname === "/addnewcar" ||
-    location.pathname === "/admindashboard";
+ // Hide header & footer in specific routes
+const noLayoutRoutes = [
+  "/login",
+  "/register",
+  "/admindashboard",
+  "/AddNewCar",
+  "/CarManagement",
+  "/EditCar",
+  "/carmanagement/:carID",
+  "/booking",
+  "/BookingDetails",
+];
+
+const hideLayout = noLayoutRoutes.some((path) =>
+  location.pathname.startsWith(path.replace(":carID", ""))
+);
+
 
   return (
     <div className="min-h-screen flex flex-col">

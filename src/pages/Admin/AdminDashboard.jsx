@@ -58,7 +58,7 @@ const AdminDashboard = () => {
         </div>
 
         <div className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer" 
-         onClick={() => navigate("/Home")}>
+         onClick={() => navigate("/login")}>
          
           <HiOutlineLogout size={20} />
           <p className="font-semibold">Logout</p>
