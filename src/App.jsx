@@ -1,4 +1,4 @@
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -17,6 +17,7 @@ import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Pricing from "./pages/pricing/Pricing";
 import Wallet from "./pages/wallet/Wallet";
 import { Route, Routes, useLocation } from "react-router-dom";
+import ScrollToTop from "./components/Scroll up/Scroll";
 import AddNewCar from "./pages/Admin/AddNewCar";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CarManagement from "./pages/Admin/CarManagement";
@@ -26,20 +27,21 @@ import BookingDetails from "./pages/Admin/BookingDetails";
 
 const AppContent = () => {
   const location = useLocation();
-const hideLayout =
-  location.pathname === "/login" ||
-  location.pathname === "/register" ||
-  location.pathname === "/carmanagement" ||
-  location.pathname === "/booking" ||
-  location.pathname === "/addnewcar" ||
-  location.pathname === "/admindashboard";
 
+  const hideLayout =
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/carmanagement" ||
+    location.pathname === "/booking" ||
+    location.pathname === "/addnewcar" ||
+    location.pathname === "/admindashboard";
 
   return (
     <div>
       {!hideLayout && <Header />}
-      
+
       <main className={`${!hideLayout ? "pt-20" : ""} bg-light-background dark:bg-dark-background`}>
+        <ScrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
@@ -52,19 +54,96 @@ const hideLayout =
           <Route path="/register" element={<Register />} />
 
           {/* Protected User Routes */}
-          <Route path="/wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
-          <Route path="/favourites" element={<ProtectedRoute><Favourites /></ProtectedRoute>} />
-          <Route path="/booking" element={<ProtectedRoute><Booking /></ProtectedRoute>} />
-          <Route path="/paymentdetails" element={<ProtectedRoute><PaymentDetails /></ProtectedRoute>} />
-          <Route path="/paymentmethods" element={<ProtectedRoute><PaymentMethods /></ProtectedRoute>} />
+          <Route
+            path="/wallet"
+            element={
+              <ProtectedRoute>
+                <Wallet />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/favourites"
+            element={
+              <ProtectedRoute>
+                <Favourites />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booking"
+            element={
+              <ProtectedRoute>
+                <Booking />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/paymentdetails"
+            element={
+              <ProtectedRoute>
+                <PaymentDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/paymentmethods"
+            element={
+              <ProtectedRoute>
+                <PaymentMethods />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Protected Admin Routes */}
-          <Route path="/admindashboard" element={<ProtectedRoute adminOnly={true}><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/addnewcar" element={<ProtectedRoute adminOnly={true}><AddNewCar /></ProtectedRoute>} />
-          <Route path="/carmanagement" element={<ProtectedRoute adminOnly={true}><CarManagement /></ProtectedRoute>} />
-          <Route path="/editcar" element={<ProtectedRoute adminOnly={true}><EditCar /></ProtectedRoute>} />
-          <Route path="/carmanagement/:carID" element={<ProtectedRoute adminOnly={true}><ViewCarDetails /></ProtectedRoute>} />
-          <Route path="/bookingdetails" element={<ProtectedRoute adminOnly={true}><BookingDetails /></ProtectedRoute>} />
+          <Route
+            path="/admindashboard"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/addnewcar"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <AddNewCar />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/carmanagement"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <CarManagement />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/editcar"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <EditCar />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/carmanagement/:carID"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <ViewCarDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bookingdetails"
+            element={
+              <ProtectedRoute adminOnly={true}>
+                <BookingDetails />
+              </ProtectedRoute>
+            }
+          />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

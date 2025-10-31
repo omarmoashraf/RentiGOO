@@ -118,7 +118,6 @@ export default function ViewCarDetails() {
         </div>
 
         <CardBody className="p-6">
-          {/* Header: اسم العربية والحالة */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <Typography
@@ -143,7 +142,6 @@ export default function ViewCarDetails() {
             </span>
           </div>
 
-          {/* Specifications */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-gray-800">
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Users size={18} className="text-blue-600" />
@@ -171,7 +169,6 @@ export default function ViewCarDetails() {
             </p>
           </div>
 
-          {/* Description */}
           <div className="mt-8">
             <Typography
               variant="h6"
@@ -188,7 +185,6 @@ export default function ViewCarDetails() {
             </Typography>
           </div>
 
-          {/* Rental History */}
           <div className="mt-10 bg-white shadow-md rounded-2xl p-4 sm:p-6 border border-blue-100 overflow-x-auto">
             <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2 bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
               <History size={22} className="text-blue-700" /> Rental History
