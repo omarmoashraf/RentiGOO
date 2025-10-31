@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { FaCar, FaUsers } from "react-icons/fa";
 import { MdDashboard, MdOutlineCalendarMonth } from "react-icons/md";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { LuCalendar , LuCar , LuUsers } from "react-icons/lu";
-import { FiDollarSign } from "react-icons/fi";
-import {  BsGraphUpArrow } from "react-icons/bs";
+import { LuCalendar , LuCar , LuUsers , LuTrendingUp } from "react-icons/lu";
+import { FiDollarSign , FiAlertCircle } from "react-icons/fi";
 import { HiOutlineLogout } from "react-icons/hi";
+import { GoXCircle , GoCheckCircle } from "react-icons/go";
+
+
 
 const AdminDashboard = () => {
   const navigate = useNavigate(); 
@@ -86,7 +88,7 @@ const AdminDashboard = () => {
               <p className="text-gray-500 text-sm">Total Revenue</p>
             <h3 className="text-2xl font-bold mt-2">$47,250</h3>
             <div className="flex gap-2 text-green-500">
-              <BsGraphUpArrow />
+              <LuTrendingUp />
               <p className=" text-xs mt-1">+12.5%</p>
             </div>
             </div>
@@ -100,7 +102,7 @@ const AdminDashboard = () => {
               <p className="text-gray-500 text-sm">Active Bookings</p>
              <h3 className="text-2xl font-bold mt-2">$124</h3>
              <div className="flex gap-2 text-blue-500">
-              <BsGraphUpArrow />
+              <LuTrendingUp />
               <p className=" text-xs mt-1">+8.2%</p>
              </div>
               </div>
@@ -114,7 +116,7 @@ const AdminDashboard = () => {
               <p className="text-gray-500 text-sm">Fleet Utilization</p>
             <h3 className="text-2xl font-bold mt-2">87%</h3>
             <div className="flex gap-2 text-blue-500">
-              <BsGraphUpArrow />
+              <LuTrendingUp />
               <p className=" text-xs mt-1">+5.1%</p>
              </div>
             
@@ -128,7 +130,7 @@ const AdminDashboard = () => {
               <p className="text-gray-500 text-sm">Total Customers</p>
             <h3 className="text-2xl font-bold mt-2">2,847</h3>
             <div className="flex gap-2  text-deep-purple-400">
-              <BsGraphUpArrow />
+              <LuTrendingUp />
               <p className=" text-xs mt-1">+15.3%</p>
              </div>
             </div>
@@ -138,9 +140,9 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Recent Bookings */}
+          
           <div className="col-span-2 bg-white rounded-2xl p-5 shadow-sm">
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-bold text-lg">Recent Bookings</h3>
@@ -233,7 +235,9 @@ const AdminDashboard = () => {
             </h3>
             <div className="space-y-3 text-sm">
               <div className="border rounded-xl p-3 flex gap-3 items-start">
-                <span className="text-yellow-500 mt-1">⚠</span>
+                <span className="text-yellow-500 mt-1">
+                 <FiAlertCircle />
+                </span>
                 <div>
                   <p>Vehicle BMW X5 due for maintenance</p>
                   <p className="text-gray-400 text-xs">2 hours ago</p>
@@ -241,7 +245,9 @@ const AdminDashboard = () => {
               </div>
 
               <div className="border rounded-xl p-3 flex gap-3 items-start">
-                <span className="text-blue-500 mt-1">🔔</span>
+                <span className="text-blue-500 mt-1">
+                  <GoXCircle />
+                </span>
                 <div>
                   <p>New customer registration: Alex Wilson</p>
                   <p className="text-gray-400 text-xs">4 hours ago</p>
@@ -249,7 +255,9 @@ const AdminDashboard = () => {
               </div>
 
               <div className="border rounded-xl p-3 flex gap-3 items-start">
-                <span className="text-red-500 mt-1">❌</span>
+                <span className="text-red-500 mt-1">
+                  <GoCheckCircle />
+                </span>
                 <div>
                   <p>Payment failed for booking #BK005</p>
                   <p className="text-gray-400 text-xs">6 hours ago</p>
