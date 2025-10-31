@@ -1,40 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCar, FaUsers } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { LuCalendar, LuCar, LuUsers, LuTrendingUp } from "react-icons/lu";
-import { FiDollarSign, FiAlertCircle, FiMenu } from "react-icons/fi";
-import { HiOutlineLogout } from "react-icons/hi";
+import { FiDollarSign, FiAlertCircle } from "react-icons/fi";
 import { GoXCircle, GoCheckCircle } from "react-icons/go";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans">
-      
       {/* Main Content */}
       <div className="flex-1 p-4 md:p-6 lg:p-8 w-full">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 md:mb-8">
-          <div className="flex items-center gap-4">
-            <button
-              className="md:hidden text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              aria-label="Toggle sidebar"
-            >
-              <FiMenu size={24} />
-            </button>
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
-                Admin Dashboard
-              </h2>
-              <p className="text-gray-500 text-sm md:text-base mt-1">
-                Welcome back! Here's what's happening with RentiGO today.
-              </p>
-            </div>
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
+              Admin Dashboard
+            </h2>
+            <p className="text-gray-500 text-sm md:text-base mt-1">
+              Welcome back! Here's what's happening with RentiGO today.
+            </p>
           </div>
 
           <button
