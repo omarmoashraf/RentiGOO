@@ -8,15 +8,86 @@ import { FiDollarSign, FiAlertCircle, FiMenu } from "react-icons/fi";
 import { HiOutlineLogout } from "react-icons/hi";
 import { GoXCircle, GoCheckCircle } from "react-icons/go";
 import AdminSidebar from "./components/AdminSidebar";
+import GropLyout from "./GropLyout";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans">
-    
-     <AdminSidebar />
 
+
+      <div
+        className={`fixed z-20 md:static w-64 bg-white shadow-lg p-5 rounded-se-3xl flex flex-col justify-between transform transition-transform duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
+      >
+        <div>
+          <h1 className="text-2xl font-bold text-blue-600 mb-2">RentiGO Admin</h1>
+          <p className="text-gray-400 text-sm mb-8">Management Portal</p>
+
+          <nav className="space-y-3">
+            <div
+              className="bg-blue-600 text-white rounded-xl p-3 flex items-center gap-3 cursor-pointer shadow-md"
+              onClick={() => {
+                navigate("/AdminDashboard");
+                setSidebarOpen(false);
+              }}
+            >
+              <MdDashboard size={20} />
+              <div>
+                <p className="font-semibold">Dashboard</p>
+                <p className="text-xs opacity-80">Overview & Analytics</p>
+              </div>
+            </div>
+
+            <div
+              className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
+              onClick={() => {
+                navigate("/CarManagement");
+                setSidebarOpen(false);
+              }}
+            >
+              <FaCar size={20} />
+              <div>
+                <p className="font-semibold">Car Management</p>
+                <p className="text-xs text-gray-400">Manage Fleet</p>
+              </div>
+            </div>
+
+            <div
+              className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
+              onClick={() => {
+                navigate("/BookingDetails");
+                setSidebarOpen(false);
+              }}
+            >
+              <LuCalendar size={20} />
+              <div>
+                <p className="font-semibold">Bookings</p>
+                <p className="text-xs text-gray-400">Rental Management</p>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <div
+          className="text-gray-600 hover:bg-gray-100 rounded-xl p-3 flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate("/Login")}
+        >
+          <HiOutlineLogout size={20} />
+          <p className="font-semibold">Logout</p>
+        </div>
+      </div>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-40 z-10 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 p-6 md:p-8">
