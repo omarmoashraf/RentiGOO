@@ -25,8 +25,8 @@ import Booking from "./pages/booking/Booking";
 import PaymentDetails from "./pages/paymentdetails/PaymentDetails";
 import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Wallet from "./pages/wallet/Wallet";
-import { Route, Routes, useLocation } from "react-router-dom";
-import ScrollToTop from "./components/Scroll up/Scroll";
+
+// Pages - Admin Protected
 import AddNewCar from "./pages/Admin/AddNewCar";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CarManagement from "./pages/Admin/CarManagement";
@@ -37,14 +37,23 @@ import BookingDetails from "./pages/Admin/BookingDetails";
 const AppContent = () => {
   const location = useLocation();
 
-  // Hide header & footer in specific routes
-  const hideLayout =
-    location.pathname === "/login" ||
-    location.pathname === "/register" ||
-    location.pathname === "/carmanagement" ||
-    location.pathname === "/booking" ||
-    location.pathname === "/addnewcar" ||
-    location.pathname === "/admindashboard";
+ // Hide header & footer in specific routes
+const noLayoutRoutes = [
+  "/login",
+  "/register",
+  "/admindashboard",
+  "/AddNewCar",
+  "/CarManagement",
+  "/EditCar",
+  "/carmanagement/:carID",
+  "/booking",
+  "/BookingDetails",
+];
+
+const hideLayout = noLayoutRoutes.some((path) =>
+  location.pathname.startsWith(path.replace(":carID", ""))
+);
+
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -71,7 +80,7 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Protected User Routes */}
+          {/* ===== Protected User Routes ===== */}
           <Route
             path="/wallet"
             element={
@@ -113,7 +122,7 @@ const AppContent = () => {
             }
           />
 
-          {/* Protected Admin Routes */}
+          {/* ===== Protected Admin Routes ===== */}
           <Route
             path="/admindashboard"
             element={
