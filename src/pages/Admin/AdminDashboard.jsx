@@ -75,7 +75,7 @@ const AdminDashboard = () => {
         </p>
           </div>
           <div className="px-5 py-3 text-white bg-blue-700 rounded-xl mb-2">
-            <button>
+            <button onClick={() => navigate("/AddNewCar")}>
               Add Product
             </button>
           </div>
