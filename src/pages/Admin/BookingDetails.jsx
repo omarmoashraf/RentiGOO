@@ -13,6 +13,8 @@ import {
   Circle,
   CheckCircle,
 } from "lucide-react";
+import AdminSidebar from "./components/AdminSidebar";
+import GropLyout from "./GropLyout";
 
 const stats = [
   {
@@ -103,6 +105,7 @@ const StatusBadge = ({ status }) => {
   const currentStatus = statusMap[status] || statusMap.pending;
 
   return (
+  
     <span
       className={`inline-flex items-center text-xs font-medium px-2.5 py-0.5 rounded-full ${currentStatus.className}`}
     >
@@ -129,9 +132,11 @@ const StatCard = ({ title, value, icon: Icon, color, bgColor }) => {
 export default function BookingDetails() {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased">
+    
+    <GropLyout>
+      <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased"> 
       <div className="max-w-screen-xl mx-auto">
-        {/* Header Section */}
+        
         <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
             <button
@@ -289,5 +294,9 @@ export default function BookingDetails() {
         </div>
       </div>
     </div>
+    </GropLyout>
+    
+    
   );
 }
+

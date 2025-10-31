@@ -5,6 +5,8 @@ import { ArrowLeft, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import AdminCarCard from "./AdminCarCard";
+import AdminSidebar from "./components/AdminSidebar";
+import GropLyout from "./GropLyout";
 
 function CarManagement() {
   const navigate = useNavigate();
@@ -148,9 +150,15 @@ function CarManagement() {
   });
 
   return (
-    <div className="p-6 space-y-6">
+    
+    <GropLyout>
+      <div className="p-6 space-y-6">
+        
+        
+       
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 px-3">
         {/* Left section */}
+        
         <div className="flex gap-2 items-center">
           <Button
             variant="text"
@@ -215,6 +223,10 @@ function CarManagement() {
         ))}
       </div>
     </div>
+    </GropLyout>
+      
+    
+    
   );
 }
 
