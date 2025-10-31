@@ -1,27 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-
-
-function BrowseButton() {
-  const navigate = useNavigate();
-};
 import {
   Card,
   CardBody,
   Typography,
-  Input,
-  Checkbox,
-  Button,
 } from "@material-tailwind/react";
-import { FaPhoneSquareAlt } from "react-icons/fa";
+import { FaPhoneSquareAlt, FaRegClock, FaCheckCircle, FaCar } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
-import { FaRegClock } from "react-icons/fa";
-import Cars from './../cars/Cars';
 
 const Contact = () => {
-
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
@@ -37,7 +26,6 @@ const Contact = () => {
       setIsSubmitted(true);
       form.reset();
 
-      
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
@@ -45,235 +33,197 @@ const Contact = () => {
       alert("Please fill in all required fields!");
     }
   };
-  const navigate = useNavigate(); 
+
   return (
     <div>
-      
       <div className="header text-center bg-gray-100 mb-10 p-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 mb-4">
           We're Here to Help
         </h1>
-        <p className="text-gray-600 text-2xl p-100 ">
-      <span>Have questions about our services? Need help with a booking? Our friendly team</span>
-      <span className="block mt-4">is available 24/7 to assist you with all your car rental needs.</span>
-      </p>
+        <p className="text-gray-600 text-2xl">
+          <span>Have questions about our services? Need help with a booking?</span>
+          <span className="block mt-4">
+            Our friendly team is available 24/7 to assist you with all your car rental needs.
+          </span>
+        </p>
       </div>
-
 
       
       <div className="cards1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7">
-  {[
-    {
-      icon: <FaPhoneSquareAlt className="text-5xl pb-2  text-[#06f] " />,
-      title: "24/7 Phone Support",
-      content: [
-        "+1 (555) 123-4567",
-        "+1 (555) 987-6543",
-        "Available round the clock for emergencies and bookings",
-      ],
-    },
-    {
-      icon: <MdEmail className="text-5xl pb-2  text-[#06f]" />,
-      title: "Email Support",
-      content: [
-        "hello@rentigo.com",
-        "support@rentigo.com",
-        "Get detailed responses within 2 hours",
-      ],
-    },
-    {
-      icon: <IoLocationSharp className="text-5xl pb-2  text-[#06f]" />,
-      title: "Main Office",
-      content: [
-        "123 Main Street New York, NY 10001",
-        "Visit us for personalized service and consultations",
-      ],
-    },
-    {
-      icon: <FaRegClock className="text-5xl pb-2  text-[#06f]" />,
-      title: "Business Hours",
-      content: [
-        "Fri–Sun: 8:00 AM – 10:00 PM",
-        "Sun–Thurs: 6:00 AM – 10:00 PM",
-        "Extended hours for your convenience",
-      ],
-    },
-  ].map((card, index) => (
-    <Card
-      key={index}
-      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-    >
-      <CardBody className="text-center">
-        <div className="mb-2 flex flex-col items-center">
-          {card.icon}
-          <Typography color="blue-gray" className="text-xl font-bold">
-            {card.title}
-          </Typography>
-        </div>
+        {[
+          {
+            icon: <FaPhoneSquareAlt className="text-5xl pb-2 text-blue-500" />,
+            title: "24/7 Phone Support",
+            content: [
+              "+1 (555) 123-4567",
+              "+1 (555) 987-6543",
+              "Available round the clock for emergencies and bookings",
+            ],
+          },
+          {
+            icon: <MdEmail className="text-5xl pb-2 text-blue-500" />,
+            title: "Email Support",
+            content: [
+              "hello@rentigo.com",
+              "support@rentigo.com",
+              "Get detailed responses within 2 hours",
+            ],
+          },
+          {
+            icon: <IoLocationSharp className="text-5xl pb-2 text-blue-500" />,
+            title: "Main Office",
+            content: [
+              "123 Main Street, New York, NY 10001",
+              "Visit us for personalized service and consultations",
+            ],
+          },
+          {
+            icon: <FaRegClock className="text-5xl pb-2 text-blue-500" />,
+            title: "Business Hours",
+            content: [
+              "Fri–Sun: 8:00 AM – 10:00 PM",
+              "Sun–Thurs: 6:00 AM – 10:00 PM",
+              "Extended hours for your convenience",
+            ],
+          },
+        ].map((card, index) => (
+          <Card
+            key={index}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          >
+            <CardBody className="text-center">
+              <div className="mb-2 flex flex-col items-center">
+                {card.icon}
+                <Typography color="blue-gray" className="text-xl font-bold">
+                  {card.title}
+                </Typography>
+              </div>
+              <Typography variant="small" color="gray" className="font-normal opacity-75">
+                {card.content.map((line, i) => (
+                  <p
+                    key={i}
+                    className={`${
+                      i === card.content.length - 1
+                        ? "text-black font-medium"
+                        : "text-blue-500"
+                    }`}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </Typography>
+            </CardBody>
+          </Card>
+        ))}
+      </div>
 
-        <Typography variant="small" color="gray" className="font-normal opacity-75">
-          {card.content.map((line, i) => (
-            <p
-              key={i}
-              className={`
-                ${i === card.content.length - 1 ? "text-black font-medium" : "text-[#06f]"}
-              `}
-            >
-              {line}
-            </p>
-          ))}
-        </Typography>
-      </CardBody>
-    </Card>
-  ))}
-</div>
-
-
-
-
-     <section className="relative px-4 py-16 lg:py-24 bg-muted/30">
-      <div className="relative container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
-
-          <div>
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Send us a Message
-                </h2>
-                <p className="text-foreground-secondary">
+      {/* Contact Form Section */}
+      <section className="relative px-4 py-16 lg:py-24 bg-muted/30">
+        <div className="relative container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Send us a Message</h2>
+                <p className="text-gray-600">
                   Fill out the form below and we'll get back to you within 2 hours during business hours.
                 </p>
-              </div>
 
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 border-border/50">
-                {isSubmitted ? (
-                  <div className="text-center bg-green-100  py-20">
-                    <h3 className="text-2xl font-semibold text-green-500 mb-4">
-                      <FaCheckCircle className="text-3xl text-green-500 drop-shadow-lg" />
+                <div className="rounded-lg border bg-white text-card-foreground shadow-sm p-6">
+                  {isSubmitted ? (
+                    <div className="text-center bg-green-100 py-20">
+                      <h3 className="text-2xl font-semibold text-green-500 mb-4 flex justify-center items-center gap-2">
+                        <FaCheckCircle size={40} className="text-3xl text-green-500" />
                         Message Sent!
-                    </h3>
-                    <p className="text-green-300">
-                  Thank you for contacting us. We'll respond within 2 hours.
-                    </p>
-                  </div>
-                ) : (
-                  <form className="space-y-6" onSubmit={handleSubmit}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      </h3>
+                      <p className="text-green-600">
+                        Thank you for contacting us. We'll respond within 2 hours.
+                      </p>
+                    </div>
+                  ) : (
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label htmlFor="name" className="text-sm font-medium">
+                            Full Name *
+                          </label>
+                          <input
+                            id="name"
+                            name="name"
+                            placeholder="Your full name"
+                            required
+                            className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label htmlFor="phone" className="text-sm font-medium">
+                            Phone Number *
+                          </label>
+                          <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            placeholder="(555) 123-4567"
+                            className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
+                          />
+                        </div>
+                      </div>
+
                       <div className="space-y-2">
-                        <label
-                          htmlFor="name"
-                          className="text-sm font-medium"
-                        >
-                          Full Name *
+                        <label htmlFor="email" className="text-sm font-medium">
+                          Email Address *
                         </label>
                         <input
-                          id="name"
-                          name="name"
-                          placeholder="Your full name"
+                          id="email"
+                          name="email"
+                          type="email"
                           required
-                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm transition-colors bg-input-background border-border/50 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          placeholder="your.email@example.com"
+                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <label
-                          htmlFor="phone"
-                          className="text-sm font-medium"
-                        >
-                          Phone Number *
+                        <label htmlFor="subject" className="text-sm font-medium">
+                          Subject *
                         </label>
                         <input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          placeholder="(555) 123-4567"
-                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm transition-colors bg-input-background border-border/50 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          id="subject"
+                          name="subject"
+                          required
+                          placeholder="How can we help you?"
+                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
                         />
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium"
-                      >
-                        Email Address *
-                      </label>
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="your.email@example.com"
-                        className="flex h-9 w-full rounded-md border px-3 py-1 text-sm transition-colors bg-input-background border-border/50 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      />
-                    </div>
+                      <div className="space-y-2">
+                        <label htmlFor="message" className="text-sm font-medium">
+                          Message *
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          required
+                          rows="6"
+                          placeholder="Tell us more about your inquiry..."
+                          className="flex w-full rounded-md border px-3 py-2 text-base border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 resize-none"
+                        ></textarea>
+                      </div>
 
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="subject"
-                        className="text-sm font-medium"
+                      <button
+                        type="submit"
+                        className="inline-flex items-center justify-center gap-2 font-medium h-11 px-6 w-full rounded-lg bg-blue-500 text-white hover:shadow-lg hover:shadow-blue-300 transition-all duration-300"
                       >
-                        Subject *
-                      </label>
-                      <input
-                        id="subject"
-                        name="subject"
-                        required
-                        placeholder="How can we help you?"
-                        className="flex h-9 w-full rounded-md border px-3 py-1 text-sm transition-colors bg-input-background border-border/50 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="message"
-                        className="text-sm font-medium"
-                      >
-                        Message *
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        required
-                        rows="6"
-                        placeholder="Tell us more about your inquiry..."
-                        className="flex min-h-16 w-full rounded-md border px-3 py-2 text-base transition-[color,box-shadow] bg-input-background border-border/50 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-none"
-                      ></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center gap-2 font-medium h-11 px-6 w-full rounded-lg bg-blue-400 text-white hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-4 h-4"
-                      >
-                        <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
-                        <path d="m21.854 2.147-10.94 10.939"></path>
-                      </svg>
-                      Send Message 
-                    </button>
-                  </form>
-                )}
+                        Send Message
+                      </button>
+                    </form>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          
-
-          <div className="space-y-6">
+            {/* Locations */}
+            <div className="space-y-6">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Locations</h2>
               <p className="text-foreground-secondary">
@@ -283,7 +233,7 @@ const Contact = () => {
 
             
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border/50">
-              <div className="h-64 bg-blue-300 flex items-center justify-center">
+              <div className="h-52 bg-blue-300 flex items-center justify-center">
                 <div className="text-center space-y-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mx-auto">
                     <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
@@ -345,14 +295,11 @@ const Contact = () => {
               </div>
             ))}
           </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-
-
-
-    <section className="px-4 py-16 lg:py-24">
+      <section className="px-4 py-16 lg:py-24">
       <div className="container mx-auto max-w-4xl">
         
         <div className="text-center space-y-4 mb-12">
@@ -496,44 +443,25 @@ const Contact = () => {
       </div>
     </section>
 
-    
-        
-        <section className="px-4 py-16 lg:py-24 bg-blue-500 text-white text-center">
+      <section className="px-4 py-16 lg:py-24 bg-blue-500 text-white text-center">
         <div className="container mx-auto space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Still Have Questions?
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Still Have Questions?</h2>
           <p className="text-lg max-w-2xl mx-auto text-white/90">
-            Our customer service team is standing by to help you with any
-            questions or concerns. Don’t hesitate to reach out!
+            Our customer service team is standing by to help you with any questions or concerns.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/30 aria-invalid:border-destructive select-none active:bg-secondary/70 shadow-sm h-11 px-6 text-base rounded-lg bg-white text-blue-400 hover:bg-white/90"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone mr-2 w-4 h-4" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>Call Now: (555) 123-4567</button>
-           <button
-      data-slot="button"
-      className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background aria-invalid:ring-destructive/30 aria-invalid:border-destructive select-none border bg-background hover:text-accent-foreground active:bg-muted shadow-sm h-11 px-6 text-base rounded-lg border-white bg-white text-white hover:bg-blue-500 hover:text-black"
-      onClick={() => navigate("/Cars")} 
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="lucide lucide-car mr-2 w-4 h-4"
-        aria-hidden="true"
-      >
-        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
-        <circle cx="7" cy="17" r="2"></circle>
-        <path d="M9 17h6"></path>
-        <circle cx="17" cy="17" r="2"></circle>
-      </svg>
-      Browse Our Fleet
-    </button>
+            <button className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-white text-blue-500 hover:bg-gray-100 transition-all">
+              <FaPhoneSquareAlt className="w-5 h-5" />
+              Call Now: (555) 123-4567
+            </button>
+
+            <button
+              onClick={() => navigate("/cars")}
+              className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-white text-blue-500 hover:bg-gray-100 transition-all"
+            >
+              <FaCar className="w-5 h-5" />
+              Browse Our Fleet
+            </button>
           </div>
         </div>
       </section>
