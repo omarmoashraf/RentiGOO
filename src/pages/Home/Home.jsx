@@ -156,7 +156,16 @@ const Home = () => {
                   </Button>
                 </Link>
               </div>
+
               
+
+              <Link
+  to="/profile"
+  className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold"
+>
+  View Profile
+</Link>
+
 
             </div>
           </div>
