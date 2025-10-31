@@ -13,7 +13,6 @@ import {
   Circle,
   CheckCircle,
 } from "lucide-react";
-import AdminSidebar from "./components/AdminSidebar";
 import GropLyout from "./GropLyout";
 
 const stats = [
@@ -136,6 +135,11 @@ export default function BookingDetails() {
     <GropLyout>
       <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased"> 
       <div className="max-w-screen-xl mx-auto">
+  
+   
+      <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased">
+      <div className="max-w-screen-xl mx-auto">
+       
         
         <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
@@ -293,6 +297,8 @@ export default function BookingDetails() {
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
     </GropLyout>
     
