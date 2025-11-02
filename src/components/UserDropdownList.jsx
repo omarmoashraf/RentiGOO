@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -27,13 +28,25 @@ const profileMenuItems = [
 
 export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-const { logout, user } = useAuth();
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
 
   const handleItemClick = (label) => {
     if (label === "Sign Out") {
       logout();
+    } else if (label === "My Profile") {
+      navigate("/UserProfile"); // Navigate to UserProfile page
+    }
+    else if (label === "Edit Profile") {
+      navigate("/EditUserProfile"); // Navigate to EditUserProfile page
+    }
+    else if (label === "Inbox") {
+      navigate("/Inbox"); // Navigate to Inbox page
+    }
+    else if (label === "Help") {
+      navigate("/Help"); // Navigate to Help page
     }
     closeMenu();
   };
