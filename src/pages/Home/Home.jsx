@@ -156,6 +156,12 @@ const Home = () => {
                   </Button>
                 </Link>
               </div>
+
+              
+
+
+
+
             </div>
           </div>
         </Carousel>

@@ -149,12 +149,13 @@ function CarManagement() {
 
   return (
     <div className="p-6 space-y-6">
+      {/* Header Section */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 px-3">
         {/* Left section */}
         <div className="flex gap-2 items-center">
           <Button
             variant="text"
-            onClick={() => navigate("/admindashboard")}
+            onClick={() => navigate("/AdminDashboard")}
             className="flex items-center gap-2 text-gray-700"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -168,7 +169,7 @@ function CarManagement() {
         </div>
 
         {/* Right section */}
-        <Link to={`/addnewcar`}>
+        <Link to={`/AddNewCar`}>
           <Button className="flex items-center gap-4 bg-gradient-to-r from-[#0066ff] to-[#0052cc] text-white font-medium px-4 py-2 rounded-xl shadow-md hover:opacity-90 transition-all duration-200">
             <Plus className="w-4 h-4" />
             Add New Car

@@ -233,7 +233,7 @@ const About = () => {
         </p>
       </div>
       <div className="cards3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7">
-          <Card
+        <Card
           className="w-full text-center h-full object-cover
              bg-light-background dark:bg-dark-background
              border border-gray-300 dark:border-gray-300
@@ -246,7 +246,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium dark:text-dark-header_text">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Excellence
               </Typography>
             </div>
@@ -260,7 +263,7 @@ const About = () => {
             </Typography>
           </CardBody>
         </Card>
-           <Card
+        <Card
           className="w-full text-center h-full object-cover
              bg-light-background dark:bg-dark-background
              border border-gray-300 dark:border-gray-300
@@ -273,7 +276,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium dark:text-dark-header_text">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Customer First
               </Typography>
             </div>
@@ -287,7 +293,7 @@ const About = () => {
             </Typography>
           </CardBody>
         </Card>
-   <Card
+        <Card
           className="w-full text-center h-full object-cover
              bg-light-background dark:bg-dark-background
              border border-gray-300 dark:border-gray-300
@@ -300,7 +306,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium dark:text-dark-header_text">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text"
+              >
                 Transparency
               </Typography>
             </div>
@@ -327,7 +336,10 @@ const About = () => {
             </div>
 
             <div className="mb-2 flex items-center justify-center">
-              <Typography color="blue-gray" className="font-medium dark:text-dark-header_text ">
+              <Typography
+                color="blue-gray"
+                className="font-medium dark:text-dark-header_text "
+              >
                 Innovation
               </Typography>
             </div>

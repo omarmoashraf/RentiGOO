@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import { Button, Typography, IconButton } from "@material-tailwind/react";
 import {
   FaBars,
@@ -8,12 +9,26 @@ import {
   FaHeart,
   FaWallet,
 } from "react-icons/fa";
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
+} from "@material-tailwind/react";
 import rentigoLogo from "../assets/rentigo-logo.png";
 import { useNavigate } from "react-router-dom";
 
 import usetheme from "../HOOKS/usetheme";
+import { useAuth } from "../context/AuthContext";
+import { useLogged } from "../HOOKS/UseLogged";
+import AvatarWithUserDropdown from "./UserDropdownList";
 
-const Header = ({ currentPage, onNavigate }) => {
+
+
+const Header = ({ currentPage, onNavigate}) => {
+  const { user, logout } = useAuth();
+const isLogged = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -45,13 +60,13 @@ const Header = ({ currentPage, onNavigate }) => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 w-full border-b transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 z-50 w-full h-20 border-b transition-all duration-500 ease-in-out ${
         isScrolled
           ? "bg-white/40 backdrop-blur-lg shadow-md border-gray-200"
           : "bg-transparent backdrop-blur-0 border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7.5xl mx-auto px-2  sm:px-2 lg:px-2 ">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <div
@@ -139,16 +154,20 @@ const Header = ({ currentPage, onNavigate }) => {
               </span>
             </Button>
 
-            <Button
-              onClick={() => navigate("/login")}
-              className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
-            >
-              Sign In
-            </Button>
+            {isLogged ? (
+              <AvatarWithUserDropdown />
+            ) : (
+              <Button
+                onClick={() => navigate("/login")}
+                className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+              >
+                Sign In
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex lg:hidden items-center space-x-2 ">
+          <div className="flex lg:hidden items-center space-x-2">
             <IconButton
               variant="text"
               onClick={mode}
@@ -188,7 +207,7 @@ const Header = ({ currentPage, onNavigate }) => {
                   key={item.id}
                   onClick={() => {
                     navigate(item.path);
-                    setIsMobileMenuOpen(false); 
+                    setIsMobileMenuOpen(false);
                   }}
                   className={`flex items-center px-4 py-3 text-left rounded-xl transition-all duration-200 
         ${

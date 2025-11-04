@@ -9,34 +9,62 @@ import {
   TabsHeader,
   Tab,
 } from "@material-tailwind/react";
-import { 
-  FaEnvelope, 
-  FaLock, 
+import {
+  FaEnvelope,
+  FaLock,
   FaCheck,
   FaShieldAlt,
   FaHeadset,
   FaCar,
   FaGoogle,
   FaFacebook,
-  FaApple
+  FaApple,
+  FaUserShield
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
+import { useLogged } from "../../HOOKS/UseLogged";
+import useTheme from "./../../HOOKS/usetheme";
 
 const Login = () => {
+  const { login } = useLogged();
+  const { theme } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [showAdminDemo, setShowAdminDemo] = useState(false);
   const navigate = useNavigate();
 
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
+      newErrors.email = "Invalid email format";
+
+    if (!trimmedPassword) newErrors.password = "Password is required";
+    else if (trimmedPassword.length < 6)
+      newErrors.password = "Password must be at least 6 characters";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
-    
     e.preventDefault();
-    
-    // Handle login logic here
+
+    if (!validate()) return;
+
     console.log("Logging in user:", { email, password });
-    // After successful login, redirect to dashboard
-    // navigate('/dashboard');
+
+    // Simulate successful login
+    login({ email });
+
+    navigate("/");
   };
 
   const features = [
@@ -63,7 +91,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-light-background dark:bg-dark-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* ---------- LEFT SECTION ---------- */}
         <div className="text-center lg:text-left space-y-8">
@@ -77,7 +105,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <Typography variant="h4" className="font-bold text-gray-900">
+              <Typography variant="h4" className="font-bold text-light-primary_text dark:text-dark-header_text">
                 RentiGO
               </Typography>
               <Typography className="text-gray-600 text-sm font-medium">
@@ -88,11 +116,13 @@ const Login = () => {
 
           {/* Headline */}
           <div className="space-y-4">
-            <Typography variant="h1" className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <Typography variant="h1" className="text-4xl lg:text-5xl font-bold text-light-primary_text dark:text-dark-header_text leading-tight">
               Welcome Back to
-              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">Your Drive</span>
+              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">
+                Your Drive
+              </span>
             </Typography>
-            <Typography className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
+            <Typography className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0 dark:text-dark-secondary_text">
               Sign in to access your premium car rental account and continue your journey with seamless booking and exceptional service.
             </Typography>
           </div>
@@ -107,7 +137,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="text-left">
-                  <Typography variant="h6" className="font-semibold text-gray-900 mb-1">
+                  <Typography variant="h6" className="font-semibold text-light-primary_text dark:text-dark-secondary_text mb-1">
                     {feature.title}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
@@ -121,7 +151,7 @@ const Login = () => {
 
         {/* ---------- RIGHT SECTION ---------- */}
         <div className="flex justify-center">
-          <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-white">
+          <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-light-background dark:bg-dark-background">
             {/* Tabs */}
             <div className="px-8 pt-8">
               <Tabs value="signin" className="overflow-visible">
@@ -151,7 +181,7 @@ const Login = () => {
             <div className="p-8">
               {/* Title */}
               <div className="text-center mb-8">
-                <Typography variant="h3" className="font-bold text-gray-900 mb-2">
+                <Typography variant="h3" className="font-bold text-light-primary_text dark:text-dark-header_text mb-2">
                   Welcome Back
                 </Typography>
                 <Typography className="text-gray-600">
@@ -167,6 +197,7 @@ const Login = () => {
                   icon={<FaEnvelope className="w-4 h-4" />}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  errors={errors.email}
                 />
 
                 <InputField
@@ -176,6 +207,7 @@ const Login = () => {
                   icon={<FaLock className="w-4 h-4" />}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  errors={errors.password}
                 />
 
                 {/* Remember Me & Forgot Password */}
@@ -188,11 +220,12 @@ const Login = () => {
                     }
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                     color="blue"
+                    color="blue"
                   />
                   <Link 
                     to="/forgot-password"
-                   className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                  >
+                    className="bg-gradient-to-r from-[#0072ff] to-[#0072ff] dark:from-[#00c6ff] dark:to-[#00c6ff] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0066e6] hover:to-[#0066e6] dark:hover:from-[#00b8e6] dark:hover:to-[#00b8e6] transition-all"
+                  >
                     Forgot password?
                   </Link>
                 </div>
@@ -201,10 +234,13 @@ const Login = () => {
                   type="submit"
                   size="lg"
                   fullWidth
- className={`text-white font-medium shadow-md transition-all 
-              bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
-              hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg`}
->                
+                  disabled={!email || !password}
+                  className={`text-white font-medium shadow-md transition-all 
+                    ${!email || !password 
+                      ? "bg-gray-400 cursor-not-allowed" 
+                      : "bg-gradient-to-r from-[#0072ff] to-[#0072ff] dark:from-[#00c6ff] dark:to-[#00c6ff] hover:from-[#0066e6] hover:to-[#0066e6] dark:hover:from-[#00b8e6] dark:hover:to-[#00b8e6] hover:shadow-lg"
+                    }`}
+                >
                   Sign In
                 </Button>
 
@@ -214,7 +250,7 @@ const Login = () => {
                     <div className="w-full border-t border-gray-200" />
                   </div>
                   <div className="relative flex justify-center">
-                    <Typography variant="small" className="bg-white px-4 text-gray-500 font-medium">
+                    <Typography variant="small" className="bg-light-background dark:bg-dark-background px-4 text-light-secondary_text dark:text-dark-secondary_text font-medium">
                       OR CONTINUE WITH
                     </Typography>
                   </div>
@@ -241,7 +277,8 @@ const Login = () => {
                     Don't have an account?{" "}
                     <Link
                       to="/register"
- className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"                    >
+                      className="bg-gradient-to-r from-[#0072ff] to-[#0072ff] dark:from-[#00c6ff] dark:to-[#00c6ff] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0066e6] hover:to-[#0066e6] dark:hover:from-[#00b8e6] dark:hover:to-[#00b8e6] transition-all"
+                    >
                       Sign Up
                     </Link>
                   </Typography>
@@ -257,7 +294,7 @@ const Login = () => {
 
 /* ------------ SUBCOMPONENTS ------------ */
 
-const InputField = ({ label, icon, ...props }) => (
+const InputField = ({ label, icon, errors, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
       {label}
@@ -265,7 +302,10 @@ const InputField = ({ label, icon, ...props }) => (
     <div className="relative">
       <Input
         {...props}
-        className="pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg"
+        error={!!errors}
+        className={`pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg ${
+          errors ? "!border-red-500 focus:!border-red-500" : ""
+        }`}
         labelProps={{
           className: "before:content-none after:content-none",
         }}
@@ -275,6 +315,11 @@ const InputField = ({ label, icon, ...props }) => (
         {icon}
       </div>
     </div>
+    {errors && (
+      <Typography variant="small" color="red" className="text-sm text-red-500">
+        {errors}
+      </Typography>
+    )}
   </div>
 );
 

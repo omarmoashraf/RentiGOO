@@ -1,7 +1,7 @@
-import React from "react";
+const EditCar = () => {
+  return (
+    <div>Edit Car Page</div>
+  );
+};
 
-function EditCar() {
-  return <div>EditCar</div>;
-}
-
-export default EditCar;
+export default EditCar; 

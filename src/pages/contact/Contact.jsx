@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  Typography,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { FaPhoneSquareAlt, FaRegClock, FaCheckCircle, FaCar } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
@@ -48,7 +44,7 @@ const Contact = () => {
         </p>
       </div>
 
-      
+      {/* Support Cards */}
       <div className="cards1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7">
         {[
           {
@@ -87,27 +83,24 @@ const Contact = () => {
             ],
           },
         ].map((card, index) => (
-             <Card key={index}
-          className="w-full text-center h-full object-cover
-             bg-light-background dark:bg-dark-background
-             border border-gray-300 dark:border-gray-300
-             rounded-2xl shadow-md
-             transition-transform duration-500 hover:scale-105"
-        >
+          <Card
+            key={index}
+            className="w-full text-center h-full object-cover bg-light-background dark:bg-dark-background border border-gray-300 dark:border-gray-300 rounded-2xl shadow-md transition-transform duration-500 hover:scale-105"
+          >
             <CardBody className="text-center">
               <div className="mb-2 flex flex-col items-center">
                 {card.icon}
-                <Typography color="" className="text-xl font-bold text-light-primary_text dark:text-dark-header_text">
+                <Typography className="text-xl font-bold text-light-primary_text dark:text-dark-header_text">
                   {card.title}
                 </Typography>
               </div>
-              <Typography variant="small" color="gray" className="font-normal opacity-75">
+              <Typography variant="small" className="font-normal opacity-75">
                 {card.content.map((line, i) => (
                   <p
                     key={i}
                     className={`${
                       i === card.content.length - 1
-                        ? "text-light-secondary_text dark:text-dark-secondary_text font-medium"
+                        ? "text-gray-600 font-medium"
                         : "text-blue-500"
                     }`}
                   >
@@ -121,12 +114,14 @@ const Contact = () => {
       </div>
 
       {/* Contact Form Section */}
-      <section className="relative px-4 py-16 lg:py-24 bg-muted/30 ">
+      <section className="relative px-4 py-16 lg:py-24 bg-muted/30">
         <div className="relative container mx-auto bg-light-background dark:bg-dark-background">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <div className="space-y-6 ">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-light-primary_text dark:text-dark-header_text">Send us a Message</h2>
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-light-primary_text dark:text-dark-header_text">
+                  Send us a Message
+                </h2>
                 <p className="text-gray-600">
                   Fill out the form below and we'll get back to you within 2 hours during business hours.
                 </p>
@@ -143,8 +138,8 @@ const Contact = () => {
                       </p>
                     </div>
                   ) : (
-                    <form className="space-y-6 bg-light-background dark:bg-dark-background" onSubmit={handleSubmit}>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label htmlFor="name" className="text-sm font-medium dark:text-dark-nav_icons">
                             Full Name *
@@ -154,12 +149,12 @@ const Contact = () => {
                             name="name"
                             placeholder="Your full name"
                             required
-                            className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 bg-light-background dark:bg-dark-background"
+                            className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-blue-400"
                           />
                         </div>
 
                         <div className="space-y-2">
-                          <label htmlFor="phone" className="text-sm font-medium dark:text-dark-nav_icons ">
+                          <label htmlFor="phone" className="text-sm font-medium dark:text-dark-nav_icons">
                             Phone Number *
                           </label>
                           <input
@@ -167,7 +162,7 @@ const Contact = () => {
                             name="phone"
                             type="tel"
                             placeholder="(555) 123-4567"
-                            className="flex h-9 w-full bg-light-background dark:bg-dark-background rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
+                            className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-blue-400"
                           />
                         </div>
                       </div>
@@ -182,7 +177,7 @@ const Contact = () => {
                           type="email"
                           required
                           placeholder="your.email@example.com"
-                          className="flex h-9 w-full bg-light-background dark:bg-dark-background rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
+                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-blue-400"
                         />
                       </div>
 
@@ -195,7 +190,7 @@ const Contact = () => {
                           name="subject"
                           required
                           placeholder="How can we help you?"
-                          className="flex h-9 w-full bg-light-background dark:bg-dark-background rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400"
+                          className="flex h-9 w-full rounded-md border px-3 py-1 text-sm border-gray-300 placeholder:text-gray-400 bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-blue-400"
                         />
                       </div>
 
@@ -209,7 +204,7 @@ const Contact = () => {
                           required
                           rows="6"
                           placeholder="Tell us more about your inquiry..."
-                          className="flex w-full bg-light-background dark:bg-dark-background rounded-md border px-3 py-2 text-base border-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 resize-none"
+                          className="flex w-full rounded-md border px-3 py-2 text-base border-gray-300 placeholder:text-gray-400 bg-light-background dark:bg-dark-background focus:ring-2 focus:ring-blue-400 resize-none"
                         ></textarea>
                       </div>
 
@@ -227,225 +222,123 @@ const Contact = () => {
 
             {/* Locations */}
             <div className="space-y-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-light-primary_text dark:text-dark-header_text">Our Locations</h2>
-              <p className="  text-gray-600">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-light-primary_text dark:text-dark-header_text">
+                Our Locations
+              </h2>
+              <p className="text-gray-600">
                 Visit any of our convenient locations for personalized service and support.
               </p>
-            </div>
 
-            
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border/50">
-              <div className="h-52 bg-blue-300 flex items-center justify-center">
-                <div className="text-center space-y-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mx-auto">
-                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  <p className="text-foreground-secondary">Interactive Map</p>
-                  <p className="text-sm text-foreground-secondary">Find our locations near you</p>
+              <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border/50">
+                <div className="h-52 bg-blue-300 flex items-center justify-center">
+                  <div className="text-center space-y-2">
+                    <IoLocationSharp className="mx-auto text-5xl text-white" />
+                    <p className="text-white font-semibold">Interactive Map</p>
+                    <p className="text-sm text-white/80">Find our locations near you</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-           
-            {[
-              {
-                city: "New York",
-                img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80",
-                address: "123 Main Street, NY 10001",
-                phone: "+1 (555) 123-4567",
-                hours: "6:00 AM - 10:00 PM",
-              },
-              {
-                city: "Los Angeles",
-                img: "https://images.unsplash.com/photo-1444927714506-8492d94b5ba0?w=400&q=80",
-                address: "456 Sunset Blvd, CA 90028",
-                phone: "+1 (555) 234-5678",
-                hours: "7:00 AM - 9:00 PM",
-              },
-              {
-                city: "Chicago",
-                img: "https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?w=400&q=80",
-                address: "789 Michigan Ave, IL 60611",
-                phone: "+1 (555) 345-6789",
-                hours: "6:30 AM - 9:30 PM",
-              },
-            ].map((loc, index) => (
-              <div
-                key={index}
-                className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 hover:shadow-lg transition-all duration-300 border-border/50"
-              >
-                <div className="flex items-center gap-4">
-                  <img
-                    alt={loc.city}
-                    src={loc.img}
-                    className="w-16 h-16 object-cover rounded-lg text-light-secondary_text"
-                  />
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg text-light-secondary_text">{loc.city}</h3>
-                    <p className="text-foreground-secondary text-sm text-light-secondary_text">{loc.address}</p>
-                    <div className="flex gap-4 mt-2 text-sm">
-                      <div className="flex items-center gap-1 text-light-secondary">
+              {[
+                {
+                  city: "New York",
+                  img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80",
+                  address: "123 Main Street, NY 10001",
+                  phone: "+1 (555) 123-4567",
+                  hours: "6:00 AM - 10:00 PM",
+                },
+                {
+                  city: "Los Angeles",
+                  img: "https://images.unsplash.com/photo-1444927714506-8492d94b5ba0?w=400&q=80",
+                  address: "456 Sunset Blvd, CA 90028",
+                  phone: "+1 (555) 234-5678",
+                  hours: "7:00 AM - 9:00 PM",
+                },
+                {
+                  city: "Chicago",
+                  img: "https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?w=400&q=80",
+                  address: "789 Michigan Ave, IL 60611",
+                  phone: "+1 (555) 345-6789",
+                  hours: "6:30 AM - 9:30 PM",
+                },
+              ].map((loc, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 hover:shadow-lg transition-all duration-300 border-border/50"
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      alt={loc.city}
+                      src={loc.img}
+                      className="w-16 h-16 object-cover rounded-lg"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-lg text-light-secondary_text dark:text-dark-header_text">
+                        {loc.city}
+                      </h3>
+                      <p className="text-sm text-light-secondary_text dark:text-dark-secondary_text">
+                        {loc.address}
+                      </p>
+                      <div className="flex gap-4 mt-2 text-sm text-light-secondary_text dark:text-dark-secondary_text">
                         <span>{loc.phone}</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-light-secondary">
                         <span>{loc.hours}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      {/* FAQ Section */}
       <section className="px-4 py-16 lg:py-24">
-      <div className="container mx-auto max-w-4xl">
-        
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-gray-600">
-            Quick answers to common questions about our car rental services.
-          </p>
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-gray-600">
+              Quick answers to common questions about our car rental services.
+            </p>
+          </div>
+
+          {[
+            {
+              q: "How do I make a reservation?",
+              a: "You can book online through our website, call our 24/7 hotline, or visit any of our locations. Online booking offers the best rates and instant confirmation.",
+            },
+            {
+              q: "What documents do I need to rent a car?",
+              a: "You need a valid driver's license, a major credit card, and must be at least 21 years old. International customers need a valid passport and international driving permit.",
+            },
+            {
+              q: "Can I modify or cancel my reservation?",
+              a: "Yes! You can modify or cancel your reservation online or by calling us. Cancellation policies vary by plan — check your booking confirmation for specific terms.",
+            },
+            {
+              q: "What happens if I return the car late?",
+              a: "We offer a 30-minute grace period. After that, you'll be charged for an additional day. Contact us if you need to extend your rental period.",
+            },
+          ].map((faq, i) => (
+            <div
+              key={i}
+              className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50 mb-4"
+            >
+              <h3 className="font-semibold text-lg flex items-center gap-2 text-light-primary_text dark:text-dark-header_text">
+                <FaRegClock className="text-blue-400" />
+                {faq.q}
+              </h3>
+              <p className="text-dark-secondary_text leading-relaxed mt-2">
+                {faq.a}
+              </p>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <div className="space-y-6">
-          
-          <div
-            data-slot="card"
-            className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
-          >
-            <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-              <h3 className="font-semibold  text-lg flex items-center gap-2 text-light-primary_text dark:text-dark-header_text">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-message-circle w-5 h-5 text-blue-400"
-                  aria-hidden="true"
-                >
-                  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"  ></path>
-                </svg>
-                How do I make a reservation?
-              </h3>
-              <p className="text-dark-secondary_text leading-relaxed">
-                You can book online through our website, call our 24/7 hotline,
-                or visit any of our locations. Online booking offers the best
-                rates and instant confirmation.
-              </p>
-            </div>
-          </div>
-
-          
-          <div
-            data-slot="card"
-            className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
-          >
-            <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-              <h3 className="font-semibold text-lg flex items-center gap-2 text-light-primary_text dark:text-dark-header_text">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-message-circle w-5 h-5 text-blue-400"
-                  aria-hidden="true"
-                >
-                  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path>
-                </svg>
-                What documents do I need to rent a car?
-              </h3>
-              <p className="text-dark-secondary_text leading-relaxed">
-                You need a valid driver's license, a major credit card, and must
-                be at least 21 years old. International customers need a valid
-                passport and international driving permit.
-              </p>
-            </div>
-          </div>
-
-          
-          <div
-            data-slot="card"
-            className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
-          >
-            <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-              <h3 className="font-semibold text-lg flex items-center gap-2 text-light-primary_text dark:text-dark-header_text">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-message-circle w-5 h-5 text-blue-400"
-                  aria-hidden="true"
-                >
-                  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path>
-                </svg>
-                Can I modify or cancel my reservation?
-              </h3>
-              <p className="text-dark-secondary_text leading-relaxed">
-                Yes! You can modify or cancel your reservation online or by
-                calling us. Cancellation policies vary by plan — check your
-                booking confirmation for specific terms.
-              </p>
-            </div>
-          </div>
-
-         
-          <div
-            data-slot="card"
-            className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
-          >
-            <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-              <h3 className="font-semibold text-lg flex items-center gap-2 text-light-primary_text dark:text-dark-header_text">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-message-circle w-5 h-5 text-blue-400"
-                  aria-hidden="true"
-                >
-                  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path>
-                </svg>
-                What happens if I return the car late?
-              </h3>
-              <p className="text-dark-secondary_text leading-relaxed">
-                We offer a 30-minute grace period. After that, you'll be charged
-                for an additional day. Contact us if you need to extend your
-                rental period.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+      {/* Final CTA Section */}
       <section className="px-4 py-16 lg:py-24 bg-blue-500 text-white text-center">
         <div className="container mx-auto space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold">Still Have Questions?</h2>

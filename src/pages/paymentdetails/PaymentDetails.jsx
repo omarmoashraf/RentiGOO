@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import Method from "./paymentMethod/Method";
 import Billing from "./billingAddress/Billing";
@@ -20,14 +21,15 @@ const PaymentDetails = () => {
             </h1>
             <p className="text-gray-500">Secure payment processing</p>
           </div>
-
-          <Button
-            color="blue"
-            variant="outlined"
-            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold "
-          >
-            <FaArrowLeft /> Back to Booking
-          </Button>
+          <Link to="/booking">
+            <Button
+              color="blue"
+              variant="outlined"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold "
+            >
+              <FaArrowLeft /> Back to Booking
+            </Button>
+          </Link>
         </div>
 
         <Method method={method} setMethod={setMethod} />
