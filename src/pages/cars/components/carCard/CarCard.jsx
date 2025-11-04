@@ -29,7 +29,7 @@ function CarCard({
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative">
+    <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative bg-light-background dark:bg-dark-background">
       {/* ----------- Image Section ----------- */}
       <div className="relative">
         {/* Top left type tag */}
@@ -89,7 +89,7 @@ function CarCard({
       <CardBody className="p-4">
         {/* Car name & price */}
         <div className="flex justify-between items-start mb-2">
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" className="text-light-primary_text dark:text-dark-header_text">
             {name}
           </Typography>
           <div className="text-right">

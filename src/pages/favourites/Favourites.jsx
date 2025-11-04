@@ -83,99 +83,99 @@ export default function Favourites() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-gray-50 pt-8">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-light-background dark:bg-dark-background pt-8">
       <div className="p-4 w-3/4 text-center">
         <h1
-          className="text-2xl font-bold mb-2 text-4xl"
-          style={{ color: "#0f2027" }}
+          className="text-2xl font-bold mb-2 text-4xl text-light-primary_text dark:text-dark-header_text"
+          
         >
           My Favorites
         </h1>
-        <p style={{ color: "#0f2027" }}>
+        <p className="text-dark-secondary_text">
           Keep track of your favorite vehicles and book them when you're ready
         </p>
       </div>
 
-      <div className="min-h-screen bg-[#f9f9f9] flex flex-col items-center p-6">
+      <div className="min-h-screen  flex flex-col items-center p-6">
         {/* Stats Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl justify-items-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
           >
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 shadow-lg mb-4">
               <CiHeart className="h-8 w-8 text-blue-500" />
             </div>
-            <h2 className="text-3xl font-bold" style={{ color: "#0f2027" }}>
+            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               6
             </h2>
-            <p className="text-sm font-medium" style={{ color: "#0f2027" }}>
+            <p className="text-sm font-medium text-light-secondary_text">
               Total Favorites
             </p>
           </motion.div>
 
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
           >
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 shadow-lg mb-4">
               <IoCarSportOutline className="h-8 w-8 text-green-500" />
             </div>
-            <h2 className="text-3xl font-bold" style={{ color: "#0f2027" }}>
+            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               5
             </h2>
-            <p className="text-sm font-medium" style={{ color: "#0f2027" }}>
+            <p className="text-sm font-medium text-light-secondary_text" >
               Available Now
             </p>
           </motion.div>
 
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            className="rounded-2xl shadow-md  bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
           >
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 shadow-lg mb-4">
               <CiStar className="h-8 w-8 text-blue-500" />
             </div>
-            <h2 className="text-3xl font-bold" style={{ color: "#0f2027" }}>
+            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               4.8
             </h2>
-            <p className="text-sm font-medium" style={{ color: "#0f2027" }}>
+            <p className="text-sm font-medium text-light-secondary_text" >
               Avg. Rating
             </p>
           </motion.div>
 
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
           >
             <div className="flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 shadow-lg mb-4">
               <AiOutlineCalendar className="h-8 w-8 text-orange-500" />
             </div>
 
-            <h2 className="text-3xl font-bold" style={{ color: "#0f2027" }}>
+            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               $98
             </h2>
-            <p className="text-sm font-medium" style={{ color: "#0f2027" }}>
+            <p className="text-sm font-medium text-light-secondary_text">
               Avg. Price/Day
             </p>
           </motion.div>
         </div>
-        <div className="bg-white shadow-md rounded-2xl mt-12 p-8 w-4/5 border border-[#cccccc] text-center mb-5">
+        <div className="bg-white dark:bg-dark-background shadow-md rounded-2xl mt-12 p-8 w-4/5 border border-[#cccccc] text-center mb-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
             {/* Search Bar */}
             <input
               type="text"
               placeholder="Search cars..."
-              className="w-full sm:w-1/2 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full sm:w-1/2 border dark:bg-dark-background text-dark-header_text border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
 
             {/* Availability Filter */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 ">
               <select
                 id="availability"
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="border border-gray-300 bg-light-background dark:bg-dark-background rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-light-secondary_text"
               >
-                <option value="all">All Cars</option>
+                <option value="all" className="">All Cars</option>
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
               </select>
@@ -185,7 +185,7 @@ export default function Favourites() {
             <div className="flex items-center gap-1">
               <select
                 id="recent"
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="border border-gray-300 dark:bg-dark-background text-dark-header_text text-light-secondary_text rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 <option value="recent">Recently Viewed</option>
                 <option value="none">No Filter</option>
@@ -197,7 +197,7 @@ export default function Favourites() {
         </div>
         <div>
           {/* Car Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center bg-light-background dark:bg-dark-background">
             {cars.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}
