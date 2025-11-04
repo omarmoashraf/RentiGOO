@@ -9,9 +9,9 @@ import {
   TabsHeader,
   Tab,
 } from "@material-tailwind/react";
-import { 
-  FaEnvelope, 
-  FaLock, 
+import {
+  FaEnvelope,
+  FaLock,
   FaCheck,
   FaShieldAlt,
   FaHeadset,
@@ -19,15 +19,17 @@ import {
   FaGoogle,
   FaFacebook,
   FaApple,
-  FaUserShield
+  FaUserShield,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
 import { useLogged } from "../../HOOKS/UseLogged";
 import { useAuth } from "../../context/AuthContext"; // Add this import
+import useTheme from './../../HOOKS/usetheme';
 
 const Login = () => {
-  const {login : loggedIn} = useLogged();
+  const { theme } = useTheme();
+  const { login: loggedIn } = useLogged();
   const { login: contextLogin } = useAuth(); // Use auth context instead of useLogged
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +56,6 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -68,7 +69,7 @@ const Login = () => {
         id: 1,
         name: "Admin User",
         email: "admin@rentigo.com",
-        role: "admin"
+        role: "admin",
       };
       contextLogin(adminUser);
       navigate("/admindashboard");
@@ -83,41 +84,39 @@ const Login = () => {
       // role: "user"
       email: email,
       password: password,
-      role: "user"
+      role: "user",
     };
-    
+
     contextLogin(regularUser);
     navigate("/");
   };
-
-  
-
 
   const features = [
     {
       icon: <FaShieldAlt className="w-5 h-5" />,
       title: "Secure Platform",
-      description: "Bank-level encryption to protect your data and transactions"
+      description:
+        "Bank-level encryption to protect your data and transactions",
     },
     {
       icon: <FaCar className="w-5 h-5" />,
       title: "Premium Fleet",
-      description: "Access to luxury vehicles and the latest car models"
+      description: "Access to luxury vehicles and the latest car models",
     },
     {
       icon: <FaHeadset className="w-5 h-5" />,
       title: "24/7 Support",
-      description: "Round-the-clock customer service for all your needs"
+      description: "Round-the-clock customer service for all your needs",
     },
     {
       icon: <FaCheck className="w-5 h-5" />,
       title: "Easy Booking",
-      description: "Seamless reservation process with instant confirmation"
-    }
+      description: "Seamless reservation process with instant confirmation",
+    },
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-light-background dark:bg-dark-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* ---------- LEFT SECTION ---------- */}
         <div className="text-center lg:text-left space-y-8">
@@ -131,7 +130,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <Typography variant="h4" className="font-bold text-gray-900">
+              <Typography variant="h4" className="font-bold text-light-primary_text dark:text-dark-header_text">
                 RentiGO
               </Typography>
               <Typography className="text-gray-600 text-sm font-medium">
@@ -142,26 +141,36 @@ const Login = () => {
 
           {/* Headline */}
           <div className="space-y-4">
-            <Typography variant="h1" className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <Typography
+              variant="h1"
+              className="text-4xl lg:text-5xl font-bold text-light-primary_text dark:text-dark-header_text leading-tight"
+            >
               Welcome Back to
-              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">Your Drive</span>
+              <span className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent block font-extrabold">
+                Your Drive
+              </span>
             </Typography>
             <Typography className="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0">
-              Sign in to access your premium car rental account and continue your journey with seamless booking and exceptional service.
+              Sign in to access your premium car rental account and continue
+              your journey with seamless booking and exceptional service.
             </Typography>
           </div>
 
           {/* Features Grid */}
           <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors">
+              <div
+                key={index}
+                className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors"
+              >
                 <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <div className="text-blue-600">
-                    {feature.icon}
-                  </div>
+                  <div className="text-blue-600">{feature.icon}</div>
                 </div>
                 <div className="text-left">
-                  <Typography variant="h6" className="font-semibold text-gray-900 mb-1">
+                  <Typography
+                    variant="h6"
+                    className="font-semibold text-dark-secondary_text mb-1"
+                  >
                     {feature.title}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
@@ -171,30 +180,32 @@ const Login = () => {
               </div>
             ))}
           </div>
-
-          
-          
         </div>
 
         {/* ---------- RIGHT SECTION ---------- */}
         <div className="flex justify-center">
-          <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-white">
+          <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-white dark:bg-dark-background">
             {/* Tabs */}
             <div className="px-8 pt-8">
               <Tabs value="signin" className="overflow-visible">
-                <TabsHeader className="bg-gray-100 p-1 rounded-lg" indicatorProps={{ className: "bg-white shadow-sm rounded-md" }}>
-                  <Tab 
-                    value="signin" 
-                    onClick={() => navigate('/login')}
+                <TabsHeader
+                  className="bg-gray-100 p-1 rounded-lg"
+                  indicatorProps={{
+                    className: "bg-white shadow-sm rounded-md",
+                  }}
+                >
+                  <Tab
+                    value="signin"
+                    onClick={() => navigate("/login")}
                     className="py-3"
                   >
                     <Typography className="font-semibold text-sm">
                       Sign In
                     </Typography>
                   </Tab>
-                  <Tab 
-                    value="signup" 
-                    onClick={() => navigate('/register')}
+                  <Tab
+                    value="signup"
+                    onClick={() => navigate("/register")}
                     className="py-3"
                   >
                     <Typography className="font-semibold text-sm">
@@ -208,7 +219,10 @@ const Login = () => {
             <div className="p-8">
               {/* Title */}
               <div className="text-center mb-8">
-                <Typography variant="h3" className="font-bold text-gray-900 mb-2">
+                <Typography
+                  variant="h3"
+                  className="font-bold text-light-primary_text dark:text-dark-header_text mb-2"
+                >
                   Welcome Back
                 </Typography>
                 <Typography className="text-gray-600">
@@ -225,6 +239,7 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   errors={errors.email}
+                  
                 />
 
                 <InputField
@@ -249,7 +264,7 @@ const Login = () => {
                     onChange={(e) => setRememberMe(e.target.checked)}
                     color="blue"
                   />
-                  <Link 
+                  <Link
                     to="/forgot-password"
                     className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
                   >
@@ -263,9 +278,10 @@ const Login = () => {
                   fullWidth
                   disabled={!email || !password}
                   className={`text-white font-medium shadow-md transition-all 
-                    ${!email || !password 
-                      ? "bg-gray-400 cursor-not-allowed" 
-                      : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
+                    ${
+                      !email || !password
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
                     }`}
                 >
                   Sign In
@@ -277,7 +293,10 @@ const Login = () => {
                     <div className="w-full border-t border-gray-200" />
                   </div>
                   <div className="relative flex justify-center">
-                    <Typography variant="small" className="bg-white px-4 text-gray-500 font-medium">
+                    <Typography
+                      variant="small"
+                      className="bg-light-background dark:bg-dark-background px-4  font-medium"
+                    >
                       OR CONTINUE WITH
                     </Typography>
                   </div>
@@ -353,8 +372,8 @@ const InputField = ({ label, icon, errors, ...props }) => (
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {
     google: "hover:bg-red-50 border-gray-300",
-    facebook: "hover:bg-blue-50 border-gray-300", 
-    apple: "hover:bg-gray-100 border-gray-300"
+    facebook: "hover:bg-blue-50 border-gray-300",
+    apple: "hover:bg-gray-100 border-gray-300",
   };
 
   return (
@@ -364,9 +383,7 @@ const SocialButton = ({ icon, brand }) => {
       fullWidth
       className={`flex items-center justify-center p-3 rounded-lg border transition-colors ${brandColors[brand]}`}
     >
-      <span className="text-gray-600">
-        {icon}
-      </span>
+      <span className="text-gray-600">{icon}</span>
     </Button>
   );
 };
