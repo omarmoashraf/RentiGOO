@@ -50,14 +50,14 @@ export default function CarDetails() {
   const images = Array(3).fill(car.image);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
+    <div className="min-h-screen p-6 bg-light-background dark:bg-dark-background">
       <div className="max-w-7xl mx-auto">
         {/* Back button */}
         <div className="mb-6">
           <Button
             variant="text"
             onClick={() => navigate("/cars")}
-            className="flex items-center gap-2 text-gray-700"
+            className="flex items-center gap-2 text-gray-700 dark:text-dark-secondary_text"
           >
             <ArrowLeft className="w-4 h-4" /> Back to fleet
           </Button>
@@ -171,23 +171,32 @@ export default function CarDetails() {
 
             {/* Top info: Name, Rating, Location, Description */}
             <div>
-              <Typography variant="h2" className="font-bold text-gray-900 mb-2">
+              <Typography
+                variant="h2"
+                className="font-bold text-gray-900 dark:text-dark-header_text mb-2"
+              >
                 {car.name}
               </Typography>
 
               <div className="flex items-center gap-4 text-gray-800 mb-3">
                 <div className="flex items-center gap-1">
                   <Star className="w-5 h-5 text-yellow-400" />
-                  <span className="font-semibold">{car.rating}</span>
-                  <span className="text-sm">({car.reviews} reviews)</span>
+                  <span className="font-semibold  dark:text-dark-secondary_text">
+                    {car.rating}
+                  </span>
+                  <span className="text-sm dark:text-dark-secondary_text">
+                    ({car.reviews} reviews)
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <MapPin className="w-4 h-4" />
-                  <span className="text-sm">{car.location || "N/A"}</span>
+                  <MapPin className="w-4 h-4 dark:text-dark-secondary_text" />
+                  <span className="text-sm dark:text-dark-secondary_text">
+                    {car.location || "N/A"}
+                  </span>
                 </div>
               </div>
 
-              <p className="text-gray-900 leading-relaxed">
+              <p className="text-gray-900 leading-relaxed dark:text-dark-secondary_text">
                 {car.description ||
                   `Experience luxury and performance with the  ${car.name}. This premium sedan combines cutting-edge technology with exceptional comfort, making it perfect for business trips, special occasions, or when you simply want to travel in style.`}
               </p>
@@ -271,7 +280,7 @@ export default function CarDetails() {
         <div className="mt-10">
           <Typography
             variant="h5"
-            className="font-semibold mb-4 text-gray-900 text-3xl"
+            className="font-semibold mb-4 text-gray-900 dark:text-dark-header_text text-3xl"
           >
             Vehicle Specifications
           </Typography>
@@ -290,15 +299,18 @@ export default function CarDetails() {
               return (
                 <Card
                   key={idx}
-                  className="p-6 text-center rounded-lg border border-gray-200 hover:shadow-2xl transition-shadow duration-300"
+                  className="p-6 text-center rounded-lg border  bg-light-background dark:bg-dark-background
+              border-gray-300 dark:border-gray-300
+              shadow-md
+             transition-transform duration-500 hover:scale-105"
                 >
                   <div className="w-16 h-20 mx-auto flex items-center justify-center mb-3">
                     <Icon className="w-10 h-12 text-blue-500" />
                   </div>
-                  <div className="font-semibold text-gray-900">
+                  <div className="font-semibold text-gray-900 dark:text-dark-secondary_text">
                     {item.value}
                   </div>
-                  <div className="text-sm text-gray-700">{item.label}</div>
+                  <div className="text-sm text-light-secondary_text">{item.label}</div>
                 </Card>
               );
             })}
@@ -307,11 +319,11 @@ export default function CarDetails() {
 
         {/* Detailed Specifications */}
         <div className="mt-10">
-          <Card className="p-6 rounded-lg shadow-sm bg-white">
+          <Card className="p-6 rounded-lg shadow-sm bg-white dark:bg-dark-background">
             <CardBody>
               <Typography
                 variant="h4"
-                className="font-semibold mb-4 text-gray-900"
+                className="font-semibold mb-4 text-gray-900 dark:text-dark-header_text"
               >
                 Detailed Specifications
               </Typography>
@@ -320,21 +332,21 @@ export default function CarDetails() {
                 <div className="space-y-3">
                   <h4 className="font-medium text-gray-500">Basic Info</h4>
                   <div className="space-y-2">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Make</span>
-                      <span className="font-medium">{car.specs.make}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.make}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Model</span>
-                      <span className="font-medium">{car.name}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.name}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Year</span>
-                      <span className="font-medium">{car.year}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.year}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Doors</span>
-                      <span className="font-medium">{car.specs.doors}</span>
+                      <span className="font-medium ">{car.specs.doors}</span>
                     </div>
                   </div>
                 </div>
@@ -343,23 +355,23 @@ export default function CarDetails() {
                 <div className="space-y-3">
                   <h4 className="font-medium text-gray-500">Performance</h4>
                   <div className="space-y-2">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Engine</span>
-                      <span className="font-medium">{car.specs.engine}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.engine}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Transmission</span>
-                      <span className="font-medium">
+                      <span className="font-medium dark:text-dark-header_text">
                         {car.specs.transmission}
                       </span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Fuel Type</span>
-                      <span className="font-medium">{car.specs.fuel}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.fuel}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Fuel Economy</span>
-                      <span className="font-medium">{car.specs.mileage}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.mileage}</span>
                     </div>
                   </div>
                 </div>
@@ -368,13 +380,13 @@ export default function CarDetails() {
                 <div className="space-y-3">
                   <h4 className="font-medium text-gray-500">Capacity</h4>
                   <div className="space-y-2">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Passengers</span>
-                      <span className="font-medium">{car.specs.seats}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.seats}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between dark:text-dark-header_text">
                       <span>Luggage</span>
-                      <span className="font-medium">{car.specs.luggage}</span>
+                      <span className="font-medium dark:text-dark-header_text">{car.specs.luggage}</span>
                     </div>
                   </div>
                 </div>
@@ -386,11 +398,11 @@ export default function CarDetails() {
         {/* Features & Included */}
         <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Features */}
-          <Card className="p-6 rounded-lg shadow-sm bg-white">
+          <Card className="p-6 rounded-lg shadow-sm bg-white dark:bg-dark-background">
             <CardBody>
               <Typography
                 variant="h6"
-                className="font-semibold text-xl mb-4 text-gray-900"
+                className="font-semibold text-xl mb-4 text-gray-900 dark:text-dark-header_text"
               >
                 Features & Amenities
               </Typography>
@@ -398,7 +410,7 @@ export default function CarDetails() {
                 {car.features.map((f, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span>{f}</span>
+                    <span className="dark:text-dark-secondary_text">{f}</span>
                   </div>
                 ))}
               </div>
@@ -406,11 +418,11 @@ export default function CarDetails() {
           </Card>
 
           {/* Included */}
-          <Card className="p-6 rounded-lg shadow-sm bg-white">
+          <Card className="p-6 rounded-lg shadow-sm bg-white dark:bg-dark-background">
             <CardBody>
               <Typography
                 variant="h6"
-                className="font-semibold text-xl mb-4 text-gray-900"
+                className="font-semibold text-xl mb-4 text-gray-900 dark:text-dark-header_text"
               >
                 What's Included
               </Typography>
@@ -424,7 +436,7 @@ export default function CarDetails() {
                 ).map((inc, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-500" />
-                    <span>{inc}</span>
+                    <span className="dark:text-dark-secondary_text">{inc}</span>
                   </div>
                 ))}
               </div>
