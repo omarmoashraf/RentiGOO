@@ -23,17 +23,17 @@ const FilterSidebar = ({
   setShowAvailableOnly,
 }) => {
   return (
-    <div className="w-full  lg:w-1/6">
-      <Card className="p-2 shadow-md">
+    <div className="w-full  lg:w-1/6 ">
+      <Card className="p-2 shadow-md bg-light-background dark:bg-dark-background">
         <CardBody className="p-2 space-y-2">
           {/* Header with text and icon */}
           <div className="flex items-center space-x-2">
-            <FiFilter className="text-lg text-gray-700" />
-            <span className="text-lg font-semibold text-gray-800">Filters</span>
+            <FiFilter className="text-lg text-light-primary_text dark:text-dark-header_text" />
+            <span className="text-lg font-semibold text-light-primary_text dark:text-dark-header_text">Filters</span>
           </div>
           {/* Search */}
           <div className="space-y-1">
-            <label className="text-sm font-semibold text-gray-900">
+            <label className="text-sm font-semibold dark:text-dark-secondary_text">
               Search
             </label>
             <div className="relative">
@@ -43,14 +43,14 @@ const FilterSidebar = ({
                 placeholder="Search cars..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-8 w-full h-8 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                className="pl-8 w-full h-8 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-dark-background dark:text-dark-header_text"
               />
             </div>
           </div>
 
           {/* Categories */}
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-900">
+            <label className="text-sm font-semibold dark:text-dark-secondary_text">
               Category
             </label>
             <div className="space-y-2">
@@ -61,7 +61,7 @@ const FilterSidebar = ({
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors duration-200 ${
                     selectedCategory === category.id
                       ? " bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
+                      : "hover:bg-gray-100 text-gray-700 dark:text-dark-secondary_text"
                   }`}
                 >
                   <div className="flex justify-between items-center">
@@ -79,14 +79,14 @@ const FilterSidebar = ({
 
           {/* Price Range */}
           <div className="space-y-2 w-full">
-            <label className="text-sm font-semibold text-gray-900">
+            <label className="text-sm font-semibold text-gray-900 dark:text-dark-header_text">
               Price Range
             </label>
             <div className="w-full relative">
               <Select
                 value={priceRange}
                 onChange={(value) => setPriceRange(value)}
-                className="h-8 text-sm rounded-full border border-gray-300 font-medium text-gray-900 w-full"
+                className="h-8 text-sm rounded-full border border-gray-300 font-medium text-gray-900 w-full dark:text-dark-secondary_text"
                 containerProps={{ className: "w-full !min-w-0" }}
                 labelProps={{ className: "before:border-0 after:border-0" }}
               >
@@ -108,7 +108,7 @@ const FilterSidebar = ({
             />
             <label
               htmlFor="available"
-              className="text-sm font-medium text-gray-900"
+              className="text-sm font-medium text-gray-900 dark:text-dark-secondary_text"
             >
               Show available only
             </label>
