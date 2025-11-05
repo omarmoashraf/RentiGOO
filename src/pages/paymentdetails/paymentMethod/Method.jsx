@@ -23,13 +23,15 @@ const Method = ({ method, setMethod }) => {
         color="blue-gray"
         className="mb-4 flex items-center gap-2"
       >
-        <span className="border-l-4 border-blue-500 pl-2">Payment Method</span>
+        <span className="border-l-4 border-blue-500 pl-2 text-light-primary_text dark:text-dark-secondary_text">
+          Payment Method
+        </span>
       </Typography>
 
       <div className="flex gap-4 flex-wrap">
         <Card
           onClick={() => setMethod("card")}
-          className={`cursor-pointer border-2 ${
+          className={`cursor-pointer border-2 bg-light-background dark:bg-dark-background ${
             method === "card" ? "border-blue-500" : "border-gray-300"
           } transition-all w-full md:w-[45%]`}
         >
@@ -40,8 +42,17 @@ const Method = ({ method, setMethod }) => {
               }`}
             />
             <div className="flex-1">
-              <Typography variant="h6">Credit/Debit Card</Typography>
-              <Typography variant="small" color="gray">
+              <Typography
+                variant="h6"
+                className="text-light-primary_text dark:text-dark-header_text"
+              >
+                Credit/Debit Card
+              </Typography>
+              <Typography
+                variant="small"
+                color="gray"
+                className="text-light-secondary_text dark:text-dark-secondary_text"
+              >
                 Visa, Mastercard, American Express
               </Typography>
             </div>
@@ -56,7 +67,7 @@ const Method = ({ method, setMethod }) => {
 
         <Card
           onClick={() => setMethod("paypal")}
-          className={`cursor-pointer border-2 ${
+          className={`cursor-pointer border-2 bg-light-background dark:bg-dark-background ${
             method === "paypal" ? "border-blue-500" : "border-gray-300"
           } transition-all w-full md:w-[45%]`}
         >
@@ -67,8 +78,17 @@ const Method = ({ method, setMethod }) => {
               }`}
             />
             <div className="flex-1">
-              <Typography variant="h6">PayPal</Typography>
-              <Typography variant="small" color="gray">
+              <Typography
+                variant="h6"
+                className="text-light-primary_text dark:text-dark-header_text"
+              >
+                PayPal
+              </Typography>
+              <Typography
+                variant="small"
+                color="gray"
+                className="text-light-secondary_text dark:text-dark-secondary_text"
+              >
                 Pay with your PayPal account
               </Typography>
             </div>
@@ -82,61 +102,79 @@ const Method = ({ method, setMethod }) => {
         </Card>
       </div>
 
-      <div className="mt-6">
+      <div className="mt-6 dark:text-dark-background  ">
         {method === "card" ? (
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white dark:bg-dark-background p-6 rounded-lg shadow-md">
             <Typography variant="h6" className="mb-4 flex items-center gap-2">
-              <FaLock className="text-blue-500" /> Card Information
+              <FaLock className="text-blue-500" />
+              <span className="text-light-primary_text dark:text-dark-header_text">
+                Card Information
+              </span>
             </Typography>
 
             <form className="space-y-4">
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-1">
+                <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-1">
                   Card Number
                 </label>
                 <input
                   type="text"
                   placeholder="1234 5678 9012 3456"
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
+                   bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 text-sm font-medium mb-1">
+                <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-1">
                   Cardholder Name
                 </label>
                 <input
                   type="text"
                   placeholder="John Doe"
-                  className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
+                   bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                  <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-1">
                     Expiry Date
                   </label>
                   <input
                     type="text"
                     placeholder="MM/YY"
-                    className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
+                     bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
+                     focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                   />
                 </div>
+
                 <div>
-                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                  <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-1">
                     CVV
                   </label>
                   <input
                     type="text"
                     placeholder="123"
-                    className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
+                     bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
+                     focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                   />
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between mt-3 gap-2">
-                <Checkbox label="Save this card for future payments" />
+              <div className="flex flex-wrap items-center justify-between mt-3 gap-2 ">
+                <Checkbox
+                  className="dark:text-dark-secondary_text"
+                  label="Save this card for future payments"
+                  labelProps={{
+                    className: "dark:text-dark-secondary_text",
+                  }}
+                />
                 <div className="flex items-center gap-2 text-3xl">
                   <FaCcVisa className="text-blue-600" />
                   <FaCcMastercard className="text-orange-500" />

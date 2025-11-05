@@ -23,18 +23,18 @@ const Order = () => {
     rentalCost + orderValues.insurance + taxAmount + orderValues.serviceFee;
 
   return (
-    <Card className="p-6 shadow-md rounded-xl bg-white w-full md:w-[350px]">
-      <Typography variant="h6" className="font-semibold mb-4">
+    <Card className="p-6 shadow-md rounded-xl bg-white dark:bg-dark-background w-full md:w-[350px]">
+      <Typography variant="h6" className="font-semibold mb-4 text-light-primary_text dark:text-dark-header_text">
         Order Summary
       </Typography>
 
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-4 text-light-secondary_text dark:text-dark-secondary_text">
         <img
           src={orderValues.carImage}
           alt={orderValues.carName}
-          className="w-20 h-16 rounded-md object-cover"
+          className="w-20 h-16 rounded-md object-cover "
         />
-        <div>
+        <div className="">
           <Typography variant="h6">{orderValues.carName}</Typography>
           <Typography color="gray" variant="small">
             {orderValues.carType}
@@ -43,20 +43,20 @@ const Order = () => {
       </div>
 
       <div className="space-y-1 mb-4">
-        <div className="flex justify-between">
-          <Typography color="gray">Pickup:</Typography>
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">Pickup:</Typography>
           <Typography className="font-medium">
             {orderValues.pickupDate}
           </Typography>
         </div>
-        <div className="flex justify-between">
-          <Typography color="gray">Return:</Typography>
-          <Typography className="font-medium">
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">Return:</Typography>
+          <Typography className="font-medium ">
             {orderValues.returnDate}
           </Typography>
         </div>
-        <div className="flex justify-between">
-          <Typography color="gray">Duration:</Typography>
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">Duration:</Typography>
           <Typography className="font-medium">
             {orderValues.durationDays} days
           </Typography>
@@ -67,28 +67,28 @@ const Order = () => {
 
       <div className="space-y-1 mb-4">
         <div className="flex justify-between">
-          <Typography color="gray">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">
             ${orderValues.dailyPrice} × {orderValues.durationDays} days
           </Typography>
-          <Typography className="font-medium">
+          <Typography className="font-medium text-light-primary_text dark:text-dark-secondary_text">
             ${rentalCost.toFixed(2)}
           </Typography>
         </div>
-        <div className="flex justify-between">
-          <Typography color="gray">Insurance</Typography>
-          <Typography className="font-medium">
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">Insurance</Typography>
+          <Typography className="font-medium text-light-primary_text dark:text-dark-secondary_text">
             ${orderValues.insurance.toFixed(2)}
           </Typography>
         </div>
-        <div className="flex justify-between">
-          <Typography color="gray">Tax ({orderValues.taxPercent}%)</Typography>
-          <Typography className="font-medium">
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray"className="text-light-primary_text dark:text-dark-secondary_text">Tax ({orderValues.taxPercent}%)</Typography>
+          <Typography className="font-medium text-light-primary_text dark:text-dark-secondary_text">
             ${taxAmount.toFixed(2)}
           </Typography>
         </div>
-        <div className="flex justify-between">
-          <Typography color="gray">Service Fee</Typography>
-          <Typography className="font-medium">
+        <div className="flex justify-between text-light-primary_text dark:text-dark-secondary_text">
+          <Typography color="gray" className="text-light-primary_text dark:text-dark-secondary_text">Service Fee</Typography>
+          <Typography className="font-medium text-light-primary_text dark:text-dark-secondary_text">
             ${orderValues.serviceFee.toFixed(2)}
           </Typography>
         </div>
@@ -96,7 +96,7 @@ const Order = () => {
 
       <hr className="my-3" />
 
-      <div className="flex justify-between text-lg font-semibold mb-4">
+      <div className="flex justify-between text-lg font-semibold mb-4 text-light-primary_text dark:text-dark-secondary_text">
         <span>Total</span>
         <span className="text-blue-600">${total.toFixed(2)}</span>
       </div>
@@ -104,15 +104,15 @@ const Order = () => {
       <div className="text-sm text-gray-600 space-y-2 mb-4">
         <div className="flex items-center gap-2">
           <FaCheckCircle className="w-5 h-5 text-green-600" />
-          <span>Free cancellation until 24h before pickup</span>
+          <span className="text-light-primary_text dark:text-dark-secondary_text">Free cancellation until 24h before pickup</span>
         </div>
         <div className="flex items-center gap-2">
           <FaCheckCircle className="w-5 h-5 text-green-600" />
-          <span>Comprehensive insurance included</span>
+          <span className="text-light-primary_text dark:text-dark-secondary_text">Comprehensive insurance included</span>
         </div>
         <div className="flex items-center gap-2">
           <FaCheckCircle className="w-5 h-5 text-green-600" />
-          <span>24/7 roadside assistance</span>
+          <span className="text-light-primary_text dark:text-dark-secondary_text">24/7 roadside assistance</span>
         </div>
       </div>
       <Link to="/paymentmethods">

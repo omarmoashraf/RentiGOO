@@ -12,11 +12,11 @@ const PaymentDetails = () => {
   const [sameAddress, setSameAddress] = useState(false);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-8 bg-gray-50 min-h-screen pt-20">
+    <div className="flex flex-col lg:flex-row gap-8 p-8 bg-light-background dark:bg-dark-background min-h-screen pt-20">
       <div className="flex-1 flex flex-col gap-6">
         <div className="flex items-center justify-between  flex-wrap">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-dark-header_text">
               Payment Details
             </h1>
             <p className="text-gray-500">Secure payment processing</p>

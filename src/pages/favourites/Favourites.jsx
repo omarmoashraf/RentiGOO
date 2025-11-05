@@ -86,12 +86,12 @@ export default function Favourites() {
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-light-background dark:bg-dark-background pt-8">
       <div className="p-4 w-3/4 text-center">
         <h1
-          className="text-2xl font-bold mb-2 text-4xl text-light-primary_text dark:text-dark-header_text"
+          className=" font-bold mb-2 text-4xl text-light-primary_text dark:text-dark-header_text"
           
         >
           My Favorites
         </h1>
-        <p className="text-dark-secondary_text">
+        <p className="text-light-primary_text dark:text-dark-secondary_text ">
           Keep track of your favorite vehicles and book them when you're ready
         </p>
       </div>
@@ -109,7 +109,7 @@ export default function Favourites() {
             <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               6
             </h2>
-            <p className="text-sm font-medium text-light-secondary_text">
+            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text">
               Total Favorites
             </p>
           </motion.div>
@@ -124,7 +124,7 @@ export default function Favourites() {
             <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               5
             </h2>
-            <p className="text-sm font-medium text-light-secondary_text" >
+            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text" >
               Available Now
             </p>
           </motion.div>
@@ -139,7 +139,7 @@ export default function Favourites() {
             <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               4.8
             </h2>
-            <p className="text-sm font-medium text-light-secondary_text" >
+            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text" >
               Avg. Rating
             </p>
           </motion.div>
@@ -155,7 +155,7 @@ export default function Favourites() {
             <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
               $98
             </h2>
-            <p className="text-sm font-medium text-light-secondary_text">
+            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text">
               Avg. Price/Day
             </p>
           </motion.div>
@@ -166,14 +166,14 @@ export default function Favourites() {
             <input
               type="text"
               placeholder="Search cars..."
-              className="w-full sm:w-1/2 border dark:bg-dark-background text-dark-header_text border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full sm:w-1/2 border dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
 
             {/* Availability Filter */}
             <div className="flex items-center gap-1 ">
               <select
                 id="availability"
-                className="border border-gray-300 bg-light-background dark:bg-dark-background rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-light-secondary_text"
+                className="border border-gray-300 bg-light-background dark:bg-dark-background rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-light-primary_text dark:text-dark-secondary_text"
               >
                 <option value="all" className="">All Cars</option>
                 <option value="available">Available</option>
@@ -185,7 +185,7 @@ export default function Favourites() {
             <div className="flex items-center gap-1">
               <select
                 id="recent"
-                className="border border-gray-300 dark:bg-dark-background text-dark-header_text text-light-secondary_text rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="border border-gray-300 dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 <option value="recent">Recently Viewed</option>
                 <option value="none">No Filter</option>

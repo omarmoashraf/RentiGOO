@@ -17,7 +17,7 @@ function BookingStepper() {
 
   return (
     <div>
-      <div className="flex justify-center mt-1 px-2">
+      <div className="flex justify-center mt-1 px-2 bg-light-background dark:bg-dark-background">
         <div className="w-full max-w-5xl">
           <div className="w-full">
             {/* Stepper header */}
@@ -31,14 +31,14 @@ function BookingStepper() {
             </Stepper>
 
             {/* Step content */}
-            <div className="mt-10 text-center">
+            <div className="mt-10 text-center bg-light-background dark:bg-dark-background">
               {activeStep === 0 && (
                 <div className="flex flex-col lg:flex-row justify-between w-full gap-6">
-                  <div className="lg:w-3/4 w-full bg-white shadow-md rounded-lg p-6 border border-gray-300">
+                  <div className="lg:w-3/4 w-full  shadow-md rounded-lg p-6 border border-gray-300 bg-light-background dark:bg-dark-background">
                     <Step1Card1 />
                   </div>
 
-                  <div className="lg:w-[35%] w-full bg-white shadow-md rounded-lg p-6 border border-gray-300 flex justify-center lg:justify-start">
+                  <div className="lg:w-[35%] w-full bg-light-background dark:bg-dark-background shadow-md rounded-lg p-6 border border-gray-300 flex justify-center lg:justify-start">
                     <Step1Card2 />
                   </div>
                 </div>
@@ -55,11 +55,11 @@ function BookingStepper() {
       <div className="flex justify-center items-top mt-1">
         <div className="p-2 w-4/5 text-center">
           {/* Navigation buttons */}
-          <div className="mt-10 flex justify-between">
-            <Button onClick={handlePrev} disabled={isFirstStep}>
+          <div className="mt-10 flex justify-between ">
+            <Button onClick={handlePrev} className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text" disabled={isFirstStep}>
               Prev
             </Button>
-            <Button onClick={handleNext} disabled={isLastStep}>
+            <Button onClick={handleNext} className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text" disabled={isLastStep}>
               Next
             </Button>
           </div>

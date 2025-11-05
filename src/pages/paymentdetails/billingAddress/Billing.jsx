@@ -1,9 +1,11 @@
 const Billing = ({ sameAddress, setSameAddress }) => {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border">
+    <div className="bg-white dark:bg-dark-background rounded-xl p-6 shadow-sm border">
       <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
         <i className="bi bi-building text-blue-600"></i>
-        Billing Address
+        <span className="text-light-primary_text dark:text-dark-header_text">
+          Billing Address
+        </span>
       </h2>
 
       <div className="flex items-center gap-2 mb-4">
@@ -12,9 +14,12 @@ const Billing = ({ sameAddress, setSameAddress }) => {
           id="same"
           checked={sameAddress}
           onChange={() => setSameAddress(!sameAddress)}
-          className="w-4 h-4 accent-blue-600 "
+          className="w-4 h-4 accent-blue-600 bg-black dark:bg-black border border-gray-500 rounded"
         />
-        <label htmlFor="same" className="text-gray-700">
+        <label
+          htmlFor="same"
+          className="text-gray-700 dark:text-dark-secondary_text"
+        >
           Billing address same as personal information
         </label>
       </div>
@@ -22,40 +27,50 @@ const Billing = ({ sameAddress, setSameAddress }) => {
       {!sameAddress && (
         <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm text-gray-600">First Name</label>
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
+              First Name
+            </label>
             <input
               type="text"
               placeholder="John"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
             />
           </div>
           <div>
-            <label className="text-sm text-gray-600">Last Name</label>
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
+              Last Name
+            </label>
             <input
               type="text"
               placeholder="Doe"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
             />
           </div>
           <div className="md:col-span-2">
-            <label className="text-sm text-gray-600">Street Address</label>
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
+              Street Address
+            </label>
             <input
               type="text"
               placeholder="123 Main Street"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
             />
           </div>
           <div>
-            <label className="text-sm text-gray-600">City</label>
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
+              City
+            </label>
             <input
               type="text"
               placeholder="New York"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
             />
           </div>
           <div>
-            <label className="text-sm text-gray-600">State</label>
-            <select className="w-full p-3 border rounded-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
+              State
+            </label>
+            <select className="w-full p-3 border rounded-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text">
               <option>Select state</option>
               <option>New York</option>
               <option>California</option>
@@ -63,11 +78,13 @@ const Billing = ({ sameAddress, setSameAddress }) => {
             </select>
           </div>
           <div className="md:col-span-2">
-            <label className="text-sm text-gray-600">ZIP Code</label>
+            <label className="text-sm text-gray-600 dark:text-dark-secondary_text ">
+              ZIP Code
+            </label>
             <input
               type="text"
               placeholder="10001"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
             />
           </div>
         </form>
