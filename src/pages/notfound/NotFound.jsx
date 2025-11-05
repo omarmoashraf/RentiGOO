@@ -1,20 +1,24 @@
 import { Card, CardBody, Button } from "@material-tailwind/react";
 import { FaHome, FaSearch, FaCar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import useTheme from "../../HOOKS/usetheme";
 
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
+  const {theme}=useTheme();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+
+   <div className="min-h-screen dark:bg-dark-background flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+
       <div className="container mx-auto">
         <div className="max-w-2xl mx-auto">
-          <Card className="bg-white/80 backdrop-blur-md shadow-md border border-gray-200">
+          <Card className="bg-white/80 dark:bg-dark-background backdrop-blur-md shadow-md border border-gray-200">
             <CardBody className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16 text-center">
               {/* 404 Icon */}
               <div className="mb-6 sm:mb-8">
                 <div className="relative inline-block">
-                  <div className="text-[80px] xs:text-[100px] sm:text-[120px] md:text-[150px] lg:text-[180px] font-bold text-blue-500/20 select-none">
+                  <div className="text-[80px] xs:text-[100px] sm:text-[120px] md:text-[150px] lg:text-[180px] font-bold text-blue-500/20 select-none dark:text-dark-header_text">
                     404
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -27,7 +31,7 @@ const NotFoundPage = () => {
 
               {/* Message */}
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                <h1 className="text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+                <h1 className="text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-dark-secondary_text">
                   Page Not Found
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 max-w-md mx-auto px-2 xs:px-0">
@@ -36,9 +40,9 @@ const NotFoundPage = () => {
               </div>
 
               {/* Suggestions */}
-              <div className="bg-gray-100 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 max-w-md mx-auto">
-                <h3 className="font-semibold text-gray-800 mb-2 sm:mb-3 text-sm sm:text-base">What you can do:</h3>
-                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-600 text-left">
+              <div className="bg-gray-100 dark:bg-dark-background rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 max-w-md mx-auto">
+                <h3 className="font-semibold text-gray-800 dark:text-dark-secondary_text mb-2 sm:mb-3 text-sm sm:text-base">What you can do:</h3>
+                <div className="space-y-1.5 dark:text-dark-secondary_text sm:space-y-2 text-xs sm:text-sm text-gray-600 text-left">
                   <div className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-1.5 sm:mt-2 flex-shrink-0" />
                     <span>Check the URL for typos or errors</span>
