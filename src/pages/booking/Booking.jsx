@@ -4,7 +4,7 @@ const Booking = () => {
     <div>
       <div className="flex justify-center items-top mt-4">
         <div className="p-1 w-4/5 text-center">
-          <h1 className="text-2xl font-bold mb-1 text-4xl">
+          <h1 className=" font-bold mb-1 text-4xl text-light-primary_text dark:text-dark-header_text">
             Complete Your Booking
           </h1>
           <p className="mb-6 text-gray-600">
