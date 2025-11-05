@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { 
-  Button, 
-  Typography, 
-  Card, 
-  CardBody, 
-  Input, 
+import {
+  Button,
+  Typography,
+  Card,
+  CardBody,
+  Input,
   Textarea,
-  Select, 
+  Select,
   Option,
-  Switch
+  Switch,
 } from "@material-tailwind/react";
+import useTheme from "./../../HOOKS/usetheme";
 import {
   ArrowLeft,
   Upload,
@@ -44,41 +45,56 @@ export default function AddNewCar() {
       hp: "",
     },
     available: true,
-    images: ["", "", ""] // Placeholder for image URLs
+    images: ["", "", ""], // Placeholder for image URLs
   });
 
   const [uploadedImages, setUploadedImages] = useState([
     "/api/placeholder/600/400",
-    "/api/placeholder/600/400", 
-    "/api/placeholder/600/400"
+    "/api/placeholder/600/400",
+    "/api/placeholder/600/400",
   ]);
 
   const carTypes = [
-    "Sedan", "SUV", "Coupe", "Convertible", "Hatchback", 
-    "Sports Car", "Luxury", "Electric", "Hybrid"
+    "Sedan",
+    "SUV",
+    "Coupe",
+    "Convertible",
+    "Hatchback",
+    "Sports Car",
+    "Luxury",
+    "Electric",
+    "Hybrid",
   ];
 
   const fuelTypes = ["Gasoline", "Diesel", "Electric", "Hybrid"];
   const transmissionTypes = ["Automatic", "Manual"];
   const brands = [
-    "Toyota", "Honda", "BMW", "Mercedes-Benz", "Audi", 
-    "Ford", "Chevrolet", "Tesla", "Nissan", "Hyundai"
+    "Toyota",
+    "Honda",
+    "BMW",
+    "Mercedes-Benz",
+    "Audi",
+    "Ford",
+    "Chevrolet",
+    "Tesla",
+    "Nissan",
+    "Hyundai",
   ];
 
   const handleInputChange = (field, value) => {
-    if (field.includes('.')) {
-      const [parent, child] = field.split('.');
-      setFormData(prev => ({
+    if (field.includes(".")) {
+      const [parent, child] = field.split(".");
+      setFormData((prev) => ({
         ...prev,
         [parent]: {
           ...prev[parent],
-          [child]: value
-        }
+          [child]: value,
+        },
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [field]: value
+        [field]: value,
       }));
     }
   };
@@ -91,11 +107,11 @@ export default function AddNewCar() {
         const newImages = [...uploadedImages];
         newImages[index] = e.target.result;
         setUploadedImages(newImages);
-        
+
         // Also update form data
         const newFormImages = [...formData.images];
         newFormImages[index] = e.target.result;
-        setFormData(prev => ({ ...prev, images: newFormImages }));
+        setFormData((prev) => ({ ...prev, images: newFormImages }));
       };
       reader.readAsDataURL(file);
     }
@@ -105,17 +121,19 @@ export default function AddNewCar() {
     e.preventDefault();
     // Here you would typically send the data to your backend
     console.log("New car data:", formData);
-    
+
     // Simulate successful submission
     alert("Car added successfully!");
     navigate("/carmanagement");
   };
-
-  const nextImage = () => setCurrentImageIndex(prev => (prev === 2 ? 0 : prev + 1));
-  const prevImage = () => setCurrentImageIndex(prev => (prev === 0 ? 2 : prev - 1));
+  const { theme } = useTheme();
+  const nextImage = () =>
+    setCurrentImageIndex((prev) => (prev === 2 ? 0 : prev + 1));
+  const prevImage = () =>
+    setCurrentImageIndex((prev) => (prev === 0 ? 2 : prev - 1));
 
   return (
-    <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8 px-3 sm:px-4 lg:px-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-background py-4 sm:py-6 lg:py-8 px-3 sm:px-4 lg:px-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8 max-w-7xl mx-auto">
         <Link to="/carmanagement" className="w-full sm:w-auto">
           <Button
@@ -123,11 +141,11 @@ export default function AddNewCar() {
             size="sm"
             className="flex items-center gap-2 border-blue-700 text-blue-600 hover:text-white hover:bg-gradient-to-r hover:from-[#0066ff] hover:to-[#0052cc] transition-all duration-300 w-full sm:w-auto justify-center"
           >
-            <ArrowLeft size={16} /> 
+            <ArrowLeft size={16} />
             <span className="text-sm sm:text-base">Back to Cars</span>
           </Button>
         </Link>
-        
+
         <Typography
           variant="h3"
           className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-bold text-2xl sm:text-3xl lg:text-4xl text-center sm:text-left w-full sm:w-auto"
@@ -136,43 +154,49 @@ export default function AddNewCar() {
         </Typography>
       </div>
 
-      <Card className="max-w-7xl mx-auto shadow-lg rounded-xl sm:rounded-2xl overflow-hidden border border-blue-100">
+      <Card className="max-w-7xl mx-auto shadow-lg bg-gray-100 dark:bg-dark-background rounded-xl sm:rounded-2xl overflow-hidden border border-blue-100">
         <CardBody className="p-3 sm:p-4 lg:p-6">
           <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
             {/* Image Upload Section */}
-            <div className="bg-gray-100 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+            <div className="bg-gray-100 dark:bg-dark-background rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <Typography
                 variant="h5"
-                className="flex items-center gap-2 text-blue-900 font-bold mb-3 sm:mb-4 text-lg sm:text-xl"
+                className="flex items-center gap-2 text-blue-900 font-bold mb-3 sm:mb-4 text-lg sm:text-xl dark:text-blue-500"
               >
-                <Image size={20} className="w-4 h-4 sm:w-5 sm:h-5" /> 
+                <Image size={20} className="w-4 h-4 sm:w-5 sm:h-5 " />
                 Car Images
               </Typography>
-              
+
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
                 {/* Main Image Preview */}
-                <div className="relative w-full lg:w-3/5">
+                <div className="relative w-full lg:w-3/5 dark:text-dark-secondary_text  ">
                   <img
                     src={uploadedImages[currentImageIndex]}
                     alt="Car preview"
                     className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg sm:rounded-xl border-2 border-blue-200"
                   />
-                  
+
                   <button
                     type="button"
                     onClick={prevImage}
                     className="absolute left-2 sm:left-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow"
                   >
-                    <ChevronLeft size={16} className="sm:w-4 sm:h-4" />
+                    <ChevronLeft
+                      size={16}
+                      className="sm:w-4 sm:h-4 dark:text-light-primary_text"
+                    />
                   </button>
                   <button
                     type="button"
                     onClick={nextImage}
                     className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 sm:p-2 shadow"
                   >
-                    <ChevronRight size={16} className="sm:w-4 sm:h-4" />
+                    <ChevronRight
+                      size={16}
+                      className="sm:w-4 sm:h-4 dark:text-light-primary_text"
+                    />
                   </button>
-                  
+
                   {/* Image Indicators */}
                   <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
                     {[0, 1, 2].map((index) => (
@@ -181,7 +205,9 @@ export default function AddNewCar() {
                         type="button"
                         onClick={() => setCurrentImageIndex(index)}
                         className={`w-2 h-2 rounded-full transition-all ${
-                          currentImageIndex === index ? 'bg-white' : 'bg-white/50'
+                          currentImageIndex === index
+                            ? "bg-white"
+                            : "bg-white/50"
                         }`}
                       />
                     ))}
@@ -199,15 +225,23 @@ export default function AddNewCar() {
                           onChange={(e) => handleImageUpload(e, index)}
                           className="hidden"
                         />
-                        <div className={`w-full h-20 sm:h-24 lg:h-24 border-2 border-dashed rounded-lg flex items-center justify-center transition-all ${
-                          uploadedImages[index].includes('placeholder') 
-                            ? 'border-blue-300 bg-blue-50' 
-                            : 'border-green-300 bg-green-50'
-                        }`}>
-                          {uploadedImages[index].includes('placeholder') ? (
+                        <div
+                          className={`w-full h-20 sm:h-24 lg:h-24 border-2 border-dashed rounded-lg flex items-center justify-center transition-all ${
+                            uploadedImages[index].includes("placeholder")
+                              ? "border-blue-300 bg-blue-50"
+                              : "border-green-300 bg-green-50"
+                          }`}
+                        >
+                          {uploadedImages[index].includes("placeholder") ? (
                             <div className="text-center p-2">
-                              <Upload size={16} className="mx-auto text-blue-500 mb-1" />
-                              <Typography variant="small" className="text-blue-600 text-xs">
+                              <Upload
+                                size={16}
+                                className="mx-auto text-blue-500 mb-1"
+                              />
+                              <Typography
+                                variant="small"
+                                className="text-blue-600 text-xs"
+                              >
                                 Image {index + 1}
                               </Typography>
                             </div>
@@ -227,98 +261,147 @@ export default function AddNewCar() {
             </div>
 
             {/* Basic Information & Pricing Grid */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8 bg-light-background dark:bg-dark-background">
               {/* Basic Information */}
               <div className="space-y-4 sm:space-y-6">
-                <Typography variant="h6" className="flex items-center gap-2 text-blue-900 mb-3 sm:mb-4 text-base sm:text-lg">
-                  <Car size={18} className="w-4 h-4 sm:w-5 sm:h-5" /> 
+                <Typography
+                  variant="h6"
+                  className="flex items-center gap-2 text-blue-900 mb-3 sm:mb-4 text-base sm:text-lg dark:text-blue-500"
+                >
+                  <Car size={18} className="w-4 h-4 sm:w-5 sm:h-5 " />
                   Basic Information
                 </Typography>
-                
+
                 <div className="space-y-3 sm:space-y-4">
                   <Input
                     label="Car Name"
                     value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
                     required
                     icon={<Car size={16} />}
                     size="md"
-                    className="text-sm sm:text-base"
+                    className="text-sm sm:text-base dark:text-dark-header_text dark:bg-dark-background"
+                    labelProps={{
+                      className:
+                        "text-gray-700 peer-focus:!text-blue-600 dark:text-gray-200 dark:peer-focus:!text-blue-400",
+                    }}
                   />
-                  
+
                   <Select
                     label="Brand"
                     value={formData.brand}
-                    onChange={(value) => handleInputChange('brand', value)}
+                    onChange={(value) => handleInputChange("brand", value)}
                     size="md"
+                    labelProps={{
+                      className:
+                        "text-gray-700 peer-focus:!text-blue-600 dark:text-gray-200 dark:peer-focus:!text-blue-400",
+                    }}
                   >
-                    {brands.map(brand => (
-                      <Option key={brand} value={brand} className="text-sm sm:text-base">{brand}</Option>
+                    {brands.map((brand) => (
+                      <Option
+                        key={brand}
+                        value={brand}
+                        className="text-sm sm:text-base"
+                      >
+                        {brand}
+                      </Option>
                     ))}
                   </Select>
-                  
+
                   <Select
                     label="Car Type"
                     value={formData.type}
-                    onChange={(value) => handleInputChange('type', value)}
+                    onChange={(value) => handleInputChange("type", value)}
                     size="md"
+                    labelProps={{
+                      className:
+                        "text-gray-700 peer-focus:!text-blue-600 dark:text-gray-200 dark:peer-focus:!text-blue-400",
+                    }}
                   >
-                    {carTypes.map(type => (
-                      <Option key={type} value={type} className="text-sm sm:text-base">{type}</Option>
+                    {carTypes.map((type) => (
+                      <Option
+                        key={type}
+                        value={type}
+                        className="text-sm sm:text-base"
+                      >
+                        {type}
+                      </Option>
                     ))}
                   </Select>
-                  
+
                   <Input
                     type="number"
                     label="Year"
                     value={formData.year}
-                    onChange={(e) => handleInputChange('year', e.target.value)}
+                    onChange={(e) => handleInputChange("year", e.target.value)}
                     min={1990}
                     max={new Date().getFullYear() + 1}
                     icon={<Calendar size={16} />}
                     size="md"
-                    className="text-sm sm:text-base"
+                    className="text-sm sm:text-base dark:text-dark-secondary_text"
+                    labelProps={{
+                      className:
+                        "text-gray-700 peer-focus:!text-blue-600 dark:text-gray-200 dark:peer-focus:!text-blue-400",
+                    }}
                   />
                 </div>
               </div>
 
               {/* Pricing & Availability */}
               <div className="space-y-4 sm:space-y-6">
-                <Typography variant="h6" className="flex items-center gap-2 text-blue-900 mb-3 sm:mb-4 text-base sm:text-lg">
-                  <DollarSign size={18} className="w-4 h-4 sm:w-5 sm:h-5" /> 
+                <Typography
+                  variant="h6"
+                  className="flex items-center gap-2 text-blue-900 mb-3 sm:mb-4 text-base sm:text-lg dark:text-blue-500"
+                >
+                  <DollarSign size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
                   Pricing & Status
                 </Typography>
-                
+
                 <div className="space-y-3 sm:space-y-4">
                   <Input
                     type="number"
                     label="Price per Day ($)"
                     value={formData.price}
-                    onChange={(e) => handleInputChange('price', e.target.value)}
+                    onChange={(e) => handleInputChange("price", e.target.value)}
                     required
                     icon={<DollarSign size={16} />}
                     size="md"
                     className="text-sm sm:text-base"
+                    labelProps={{
+                      className:
+                        "text-gray-700 peer-focus:!text-blue-600 dark:text-gray-200 dark:peer-focus:!text-blue-400",
+                    }}
                   />
-                  
+
                   <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <Typography className="font-semibold text-sm sm:text-base">Available for Rent</Typography>
+                    <Typography className="font-semibold text-sm sm:text-base">
+                      Available for Rent
+                    </Typography>
                     <Switch
                       checked={formData.available}
-                      onChange={(e) => handleInputChange('available', e.target.checked)}
+                      onChange={(e) =>
+                        handleInputChange("available", e.target.checked)
+                      }
                       color="blue"
                       className="h-4 w-7 sm:h-5 sm:w-9"
                     />
                   </div>
-                  
-                  <div className={`p-3 rounded-lg ${
-                    formData.available ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
-                  }`}>
-                    <Typography variant="small" className={`text-xs sm:text-sm ${
-                      formData.available ? 'text-green-700' : 'text-red-700'
-                    }`}>
-                      {formData.available 
-                        ? "This car will be available for rental immediately after submission." 
+
+                  <div
+                    className={`p-3 rounded-lg ${
+                      formData.available
+                        ? "bg-green-50 border border-green-200"
+                        : "bg-red-50 border border-red-200"
+                    }`}
+                  >
+                    <Typography
+                      variant="small"
+                      className={`text-xs sm:text-sm ${
+                        formData.available ? "text-green-700" : "text-red-700"
+                      }`}
+                    >
+                      {formData.available
+                        ? "This car will be available for rental immediately after submission."
                         : "This car will be marked as unavailable and won't appear in search results."}
                     </Typography>
                   </div>
@@ -328,49 +411,70 @@ export default function AddNewCar() {
 
             {/* Specifications */}
             <div className="bg-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-              <Typography variant="h5" className="flex items-center gap-2 text-blue-900 font-bold mb-3 sm:mb-4 text-lg sm:text-xl">
-                <Gauge size={20} className="w-4 h-4 sm:w-5 sm:h-5" /> 
+              <Typography
+                variant="h5"
+                className="flex items-center gap-2 text-blue-900 font-bold mb-3 sm:mb-4 text-lg sm:text-xl"
+              >
+                <Gauge size={20} className="w-4 h-4 sm:w-5 sm:h-5" />
                 Specifications
               </Typography>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <Input
                   type="number"
                   label="Number of Seats"
                   value={formData.specs.seats}
-                  onChange={(e) => handleInputChange('specs.seats', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("specs.seats", e.target.value)
+                  }
                   icon={<Users size={16} />}
                   size="md"
                   className="text-sm sm:text-base"
                 />
-                
+
                 <Select
                   label="Transmission"
                   value={formData.specs.transmission}
-                  onChange={(value) => handleInputChange('specs.transmission', value)}
+                  onChange={(value) =>
+                    handleInputChange("specs.transmission", value)
+                  }
                   size="md"
                 >
-                  {transmissionTypes.map(trans => (
-                    <Option key={trans} value={trans} className="text-sm sm:text-base">{trans}</Option>
+                  {transmissionTypes.map((trans) => (
+                    <Option
+                      key={trans}
+                      value={trans}
+                      className="text-sm sm:text-base"
+                    >
+                      {trans}
+                    </Option>
                   ))}
                 </Select>
-                
+
                 <Select
                   label="Fuel Type"
                   value={formData.specs.fuel}
-                  onChange={(value) => handleInputChange('specs.fuel', value)}
+                  onChange={(value) => handleInputChange("specs.fuel", value)}
                   size="md"
                 >
-                  {fuelTypes.map(fuel => (
-                    <Option key={fuel} value={fuel} className="text-sm sm:text-base">{fuel}</Option>
+                  {fuelTypes.map((fuel) => (
+                    <Option
+                      key={fuel}
+                      value={fuel}
+                      className="text-sm sm:text-base"
+                    >
+                      {fuel}
+                    </Option>
                   ))}
                 </Select>
-                
+
                 <Input
                   type="number"
                   label="Horsepower"
                   value={formData.specs.hp}
-                  onChange={(e) => handleInputChange('specs.hp', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("specs.hp", e.target.value)
+                  }
                   icon={<Zap size={16} />}
                   size="md"
                   className="text-sm sm:text-base"
@@ -380,15 +484,19 @@ export default function AddNewCar() {
 
             {/* Description */}
             <div className="space-y-3 sm:space-y-4">
-              <Typography variant="h6" className="flex items-center gap-2 text-blue-900 mb-3 text-base sm:text-lg">
-                <Info size={18} className="w-4 h-4 sm:w-5 sm:h-5" /> 
+              <Typography
+                variant="h6"
+                className="flex items-center gap-2 text-blue-900 mb-3 text-base sm:text-lg dark:text-blue-500 "
+              >
+                <Info size={18} className="w-4 h-4 sm:w-5 sm:h-5" />
                 Description
               </Typography>
-              
+
               <Textarea
-                label="Car Description"
                 value={formData.description}
-                onChange={(e) => handleInputChange('description', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("description", e.target.value)
+                }
                 rows={4}
                 placeholder="Describe the car's features, condition, special attributes, and any additional information renters should know..."
                 className="text-sm sm:text-base"
@@ -406,7 +514,7 @@ export default function AddNewCar() {
                   Cancel
                 </Button>
               </Link>
-              
+
               <Button
                 type="submit"
                 size="sm"

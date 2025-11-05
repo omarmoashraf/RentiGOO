@@ -36,7 +36,7 @@ function AdminCarCard({
   },
 }) {
   return (
-    <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative">
+    <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative dark:bg-dark-background">
       {/* ----------- Image Section ----------- */}
       <div className="relative">
         <CardHeader
@@ -56,8 +56,8 @@ function AdminCarCard({
         <span
           className={`absolute top-8 right-8 px-2.5 py-0.5 text-[11px] font-medium rounded-full backdrop-blur-sm ${
             available
-              ? "bg-green-200/50 text-green-800"
-              : "bg-blue-200/50 text-blue-800"
+              ? "bg-green-200/50 text-green-800 dark:bg-green-600 dark:text-dark-nav_icons "
+              : "bg-blue-200/50 text-blue-800 dark:bg-blue-700 dark:text-dark-nav_icons"
           }`}
         >
           {available ? "Available" : "Rented"}
@@ -68,11 +68,11 @@ function AdminCarCard({
       <CardBody className="p-4">
         {/* Car name & price */}
         <div className="flex justify-between items-start mb-2">
-          <Typography variant="h6" color="blue-gray">
+          <Typography variant="h6" color="blue-gray" className="dark:text-dark-header_text">
             {name}
           </Typography>
           <div className="text-right">
-            <Typography variant="small" color="gray" className="line-through">
+            <Typography variant="small" color="gray" className="line-through dark:text-gray-500 " >
               ${originalPrice}
             </Typography>
             <Typography
@@ -88,16 +88,16 @@ function AdminCarCard({
         {/* Rating */}
         <div className="flex items-center gap-1 mb-3">
           <Star size={18} className="text-yellow-500 fill-yellow-500" />
-          <Typography color="blue-gray" className="text-sm font-medium">
+          <Typography color="blue-gray" className="text-sm font-medium dark:text-dark-header_text">
             {rating}
           </Typography>
-          <Typography color="gray" className="text-xs">
+          <Typography color="gray" className="text-xs dark:text-dark-header_text ">
             ({reviews})
           </Typography>
         </div>
 
         {/* Specs */}
-        <div className="flex justify-between text-gray-700 text-sm mb-4">
+        <div className="flex justify-between text-gray-700 text-sm mb-4 dark:text-dark-secondary_text">
           <div className="flex items-center gap-1">
             <Users size={16} /> {specs?.seats} seats
           </div>
@@ -131,7 +131,7 @@ function AdminCarCard({
             <Button
               variant="outlined"
               size="sm"
-              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 py-1"
+              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 py-1 dark:text-dark-secondary_text"
             >
               <Eye className="w-4 h-4" />
               View
@@ -143,7 +143,7 @@ function AdminCarCard({
             <Button
               variant="outlined"
               size="sm"
-              className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 py-1"
+              className="w-full flex items-center justify-center gap-2 border dark:text-dark-secondary_text border-gray-300 text-gray-700 hover:bg-gray-100 py-1"
             >
               <SquarePen className="w-4 h-4" />
               Edit
@@ -155,7 +155,7 @@ function AdminCarCard({
             <Button
               variant="text"
               size="sm"
-              className="w-full flex items-center justify-center border border-gray-300 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 py-1"
+              className="w-full flex items-center justify-center border dark:text-dark-secondary_text border-gray-300 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 py-1"
               aria-label="Delete"
             >
               <Trash2 className="w-4 h-4" />

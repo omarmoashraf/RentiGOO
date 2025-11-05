@@ -15,10 +15,12 @@ import {
   History,
 } from "lucide-react";
 import { allCars } from "../../data/allCars";
+import useTheme from "../../HOOKS/usetheme";
 
 export default function ViewCarDetails() {
   const { carID } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { theme } = useTheme();
 
   const car = allCars.find((c) => String(c.id) === String(carID));
 
@@ -65,8 +67,8 @@ export default function ViewCarDetails() {
   ];
 
   return (
-    <div className="min-h-screen bg-white-50 py-10 px-6">
-      <div className="flex items-center justify-between mb-8 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-white-50 dark:bg-dark-background py-10 px-6">
+      <div className="flex items-center justify-between mb-8 max-w-5xl mx-auto  ">
         <Link to="/CarManagement">
           <Button
             variant="outlined"
@@ -77,8 +79,8 @@ export default function ViewCarDetails() {
         </Link>
       </div>
 
-      <Card className="max-w-5xl mx-auto shadow-lg rounded-2xl overflow-hidden border border-blue-100">
-        <div className="flex gap-6 p-6 bg-gray-200 ">
+      <Card className="max-w-5xl mx-auto shadow-lg rounded-2xl overflow-hidden border dark:bg-dark-background  border-blue-100">
+        <div className="flex gap-6 p-6 bg-gray-200 dark:bg-dark-background  ">
           <div className="relative w-3/5">
             <img
               src={images[currentIndex]}
@@ -126,7 +128,10 @@ export default function ViewCarDetails() {
               >
                 {car.name}
               </Typography>
-              <Typography color="gray" className="text-sm sm:text-base mt-1">
+              <Typography
+                color="gray"
+                className="text-sm sm:text-base mt-1 dark:text-dark-secondary_text"
+              >
                 {car.type}
               </Typography>
             </div>
@@ -134,7 +139,7 @@ export default function ViewCarDetails() {
             <span
               className={`px-3 sm:px-4 py-1 text-xs sm:text-sm rounded-full font-semibold ${
                 car.available
-                  ? "bg-green-100 text-green-600"
+                  ? "bg-green-100 text-green-600 dark:text-dark-header_text dark:bg-green-500"
                   : "bg-red-100 text-red-600"
               }`}
             >
@@ -142,7 +147,7 @@ export default function ViewCarDetails() {
             </span>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-gray-800">
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-gray-800 dark:text-dark-secondary_text">
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Users size={18} className="text-blue-600" />
               <strong>Seats:</strong> {car.specs.seats}
@@ -174,18 +179,21 @@ export default function ViewCarDetails() {
               variant="h6"
               className="text-black font-semibold mb-2 flex items-center gap-2 text-xl sm:text-2xl"
             >
-              <Info size={20} className="text-blue-600" /> Description
+              <Info size={20} className="text-blue-600" />
+              <span className="text-light-primary_text dark:text-dark-header_text">
+                Description
+              </span>
             </Typography>
             <Typography
               color="gray"
-              className="leading-relaxed text-sm sm:text-base"
+              className="leading-relaxed text-sm sm:text-base dark:text-dark-secondary_text"
             >
               {car.description ||
                 `Experience luxury and performance with the ${car.name}. This premium sedan combines cutting-edge technology with exceptional comfort, making it perfect for business trips, special occasions, or when you simply want to travel in style.`}
             </Typography>
           </div>
 
-          <div className="mt-10 bg-white shadow-md rounded-2xl p-4 sm:p-6 border border-blue-100 overflow-x-auto">
+          <div className="mt-10 bg-white dark:bg-dark-background shadow-md rounded-2xl p-4 sm:p-6 border border-blue-100 overflow-x-auto">
             <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2 bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
               <History size={22} className="text-blue-700" /> Rental History
             </h2>
@@ -203,7 +211,7 @@ export default function ViewCarDetails() {
               </thead>
               <tbody>
                 {rentalHistory.map((rental) => (
-                  <tr key={rental.id} className="hover:bg-blue-50">
+                  <tr key={rental.id} className="hover:bg-blue-50 dark:text-dark-Buttons">
                     <td className="p-3 border-b">{rental.id}</td>
                     <td className="p-3 border-b">{rental.renter}</td>
                     <td className="p-3 border-b">{rental.startDate}</td>

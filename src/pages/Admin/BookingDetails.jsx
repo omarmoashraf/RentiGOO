@@ -9,6 +9,7 @@ import {
   Eye,
   MoreHorizontal,
 } from "lucide-react";
+import useTheme from "../../HOOKS/usetheme";
 
 const stats = [
   {
@@ -110,10 +111,14 @@ const StatusBadge = ({ status }) => {
 
 const StatCard = ({ title, value, icon: Icon, color, bgColor }) => {
   return (
-    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+    <div className="bg-white dark:bg-dark-background p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
       <div>
-        <p className="text-sm font-medium text-gray-500">{title}</p>
-        <p className="text-2xl font-semibold text-gray-900 mt-1">{value}</p>
+        <p className="text-sm font-medium text-gray-500 dark:text-dark-header_text">
+          {title}
+        </p>
+        <p className="text-2xl font-semibold text-gray-900 mt-1 dark:text-dark-secondary_text">
+          {value}
+        </p>
       </div>
       <div className={`p-3 rounded-full ${bgColor} ${color}`}>
         <Icon className="w-6 h-6" />
@@ -124,10 +129,11 @@ const StatCard = ({ title, value, icon: Icon, color, bgColor }) => {
 
 export default function BookingDetails() {
   const navigate = useNavigate();
-  
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-8 font-inter antialiased">
-      <div className="max-w-screen-xl mx-auto">
+    <div className="min-h-screen bg-gray-50 dark:bg-dark-background p-4 sm:p-8 font-inter antialiased">
+      <div className="max-w-screen-xl mx-auto ">
         {/* Header Section */}
         <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div className="flex items-center gap-4">
@@ -146,14 +152,14 @@ export default function BookingDetails() {
               </p>
             </div>
           </div>
-          <button className="flex items-center gap-2 bg-white text-gray-700 px-4 py-2 rounded-lg shadow-sm border border-gray-300 hover:bg-gray-50 transition-colors w-full sm:w-auto justify-center">
+          <button className="flex items-center gap-2  px-4 py-2 rounded-lg shadow-sm border border-gray-300 hover:bg-blue-600 transition-colors w-full sm:w-auto justify-center bg-light-Buttons text-black">
             <Download className="w-4 h-4" />
             Export
           </button>
         </header>
 
         {/* Stats Grid Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 ">
           {stats.map((stat) => (
             <StatCard
               key={stat.title}
@@ -167,22 +173,20 @@ export default function BookingDetails() {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div className="bg-white dark:bg-dark-background rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
             {/* Search Bar */}
-            <div className="flex-1 w-full">
+            <div className="flex-1 w-full ">
               <input
                 type="text"
                 placeholder="Search bookings..."
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                className="w-full border border-gray-300 dark:bg-dark-background dark:text-dark-header_text rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               />
             </div>
 
             {/* Status Filter */}
             <div className="w-full md:w-48">
-              <select
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
-              >
+              <select className="w-full border border-gray-300 rounded-lg dark:bg-dark-background dark:text-dark-header_text px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent">
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
                 <option value="completed">Completed</option>
@@ -193,36 +197,36 @@ export default function BookingDetails() {
         </div>
 
         {/* Recent Bookings Table Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="bg-white dark:bg-dark-background dark:text-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="p-6 border-b border-gray-200 dark:text-dark-background">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-dark-header_text">
               Recent Bookings
             </h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[800px]">
               {/* Table Header */}
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 border-b  dark:bg-dark-background   border-gray-200">
                 <tr>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Booking ID
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Customer
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Vehicle
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Duration
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Amount
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Status
                   </th>
-                  <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">
+                  <th className="text-left text-xs font-medium text-gray-900 dark:text-dark-header_text uppercase tracking-wider px-6 py-3">
                     Actions
                   </th>
                 </tr>
@@ -230,20 +234,23 @@ export default function BookingDetails() {
               {/* Table Body */}
               <tbody className="divide-y divide-gray-200">
                 {bookings.map((booking) => (
-                  <tr key={booking.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <tr
+                    key={booking.id}
+                    className="hover:bg-gray-50 transition-colors "
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-dark-Buttons">
                       {booking.id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-gray-900 dark:text-dark-secondary_text">
                         {booking.customer.name}
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-gray-500 dark:text-dark-secondary_text">
                         {booking.customer.email}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 dark:text-dark-secondary_text">
                         <img
                           src={booking.vehicle.image}
                           alt={booking.vehicle.name}
@@ -253,20 +260,20 @@ export default function BookingDetails() {
                               "https://placehold.co/120x80/eee/ccc?text=Error";
                           }}
                         />
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-gray-900 dark:text-dark-secondary_text">
                           {booking.vehicle.name}
                         </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-gray-900 dark:text-dark-secondary_text">
                         {booking.duration.days}
                       </div>
                       <div className="text-sm text-gray-500">
                         {booking.duration.range}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-dark-secondary_text">
                       {booking.amount}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
