@@ -5,6 +5,7 @@ import { ArrowLeft, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import AdminCarCard from "./AdminCarCard";
+import useTheme from "../../HOOKS/usetheme";
 
 function CarManagement() {
   const navigate = useNavigate();
@@ -146,9 +147,10 @@ function CarManagement() {
 
     return matchesSearch && matchesStatus;
   });
+  const {theme}=useTheme();
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-light-background dark:bg-dark-background">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 px-3">
         {/* Left section */}
@@ -158,13 +160,13 @@ function CarManagement() {
             onClick={() => navigate("/AdminDashboard")}
             className="flex items-center gap-2 text-gray-700"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 dark:text-dark-header_text" />
           </Button>
           <div>
             <h1 className="text-3xl font-semibold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
               Car Management
             </h1>
-            <p className="text-gray-700">Manage your fleet of vehicles</p>
+            <p className="text-gray-700 dark:text-dark-secondary_text">Manage your fleet of vehicles</p>
           </div>
         </div>
 
@@ -178,17 +180,17 @@ function CarManagement() {
       </div>
 
       {/* Search bar */}
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-4">
+      <div className="bg-white dark:bg-dark-background border border-gray-200 rounded-2xl shadow-sm p-4">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           {/* Search Input */}
-          <div className="relative flex-1 w-full">
+          <div className="relative flex-1 w-full ">
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
               placeholder="Search cars..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-3 py-2 w-full text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-10 pr-3 py-2 w-full text-sm rounded-xl border bg-white dark:bg-dark-background border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
 
@@ -197,9 +199,10 @@ function CarManagement() {
             <Select
               value={selectedCategory}
               onChange={(value) => setSelectedCategory(value)}
-              className="text-sm rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500"
+              className="text-sm rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 dark:text-dark-secondary_text "
               labelProps={{ className: "before:border-0 after:border-0" }}
               containerProps={{ className: "shadow-none" }}
+              menuProps={{className:"bg-white dark:bg-dark-background border "}}
             >
               <Option value="all">All Status</Option>
               <Option value="available">Available</Option>
@@ -210,7 +213,7 @@ function CarManagement() {
       </div>
 
       {/* Cars Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {filteredCars.map((car) => (
           <AdminCarCard key={car.id} car={car} />
         ))}

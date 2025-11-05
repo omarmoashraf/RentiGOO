@@ -90,7 +90,7 @@ const AdminSidebar = () => {
 
       {/* 🔹 Sidebar */}
       <div
-        className={`sidebar fixed md:relative top-0 left-0 h-screen w-full sm:w-80 md:w-72 bg-white shadow-xl md:shadow-lg p-4 sm:p-6 md:p-5 flex flex-col transform transition-all duration-300 z-40
+        className={`sidebar fixed md:relative top-0 left-0 h-screen w-full sm:w-80 md:w-72 bg-white dark:bg-dark-background shadow-xl md:shadow-lg p-4 sm:p-6 md:p-5 flex flex-col transform transition-all duration-300 z-40
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
           md:translate-x-0 md:rounded-se-3xl overflow-y-auto`}
       >
@@ -100,7 +100,7 @@ const AdminSidebar = () => {
             <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
               RentiGO Admin
             </h1>
-            <p className="text-gray-500 text-xs sm:text-sm mt-1 font-medium">
+            <p className="text-gray-500 text-xs sm:text-sm mt-1 font-medium dark:text-dark-header_text">
               Management Portal
             </p>
           </div>
@@ -152,16 +152,16 @@ const AdminSidebar = () => {
         </div>
 
         {/* Logout Section - Sticky at bottom */}
-        <div className="sticky bottom-0 bg-white pt-4 border-t border-gray-100">
+        <div className="sticky bottom-0 bg-white dark:bg-dark-background pt-4 border-t border-gray-100">
           <div
-            className="text-gray-600 hover:bg-red-50 rounded-xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 border border-transparent hover:border-red-100 hover:text-red-600"
+            className="text-gray-600 hover:bg-red-50 dark:hover:bg-red-500 rounded-xl p-3 flex items-center gap-3 cursor-pointer transition-all duration-200 border border-transparent hover:border-red-500 hover:text-red-700"
             onClick={handleLogout}
             role="button"
             tabIndex={0}
             onKeyPress={(e) => e.key === 'Enter' && handleLogout()}
           >
-            <HiOutlineLogout size={20} />
-            <p className="font-semibold text-sm sm:text-base">Logout</p>
+            <HiOutlineLogout size={20} className="dark:text-dark-header_text" />
+            <p className="font-semibold text-sm sm:text-base dark:text-dark-header_text">Logout</p>
           </div>
         </div>
       </div>
