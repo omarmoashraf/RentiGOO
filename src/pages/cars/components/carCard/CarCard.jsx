@@ -109,7 +109,7 @@ function CarCard({
         {/* Rating */}
         <div className="flex items-center gap-1 mb-3">
           <Star size={18} className="text-yellow-500 fill-yellow-500" />
-          <Typography color="blue-gray" className="text-sm font-medium">
+          <Typography color="blue-gray" className="text-sm font-medium dark:text-dark-secondary_text">
             {rating}
           </Typography>
           <Typography color="gray" className="text-xs">
@@ -118,7 +118,7 @@ function CarCard({
         </div>
 
         {/* Specs */}
-        <div className="flex justify-between text-gray-700 text-sm mb-4">
+        <div className="flex justify-between text-gray-700 dark:text-dark-secondary_text text-sm mb-4">
           <div className="flex items-center gap-1">
             <Users size={16} /> {specs?.seats} seats
           </div>

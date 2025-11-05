@@ -182,10 +182,10 @@ const Cars = () => {
 
   return (
     <div className="flex flex-col gap-10">
-      <section className="px-4 sm:px-6 md:px-8 py-12 bg-gray-50">
+      <section className="px-4 sm:px-6 md:px-8 py-12 bg-light-background dark:bg-dark-background">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-light-primary_text dark:text-dark-header_text">
               Our Premium Fleet
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed px-2">
@@ -196,7 +196,7 @@ const Cars = () => {
         </div>
       </section>
 
-      <div className="flex flex-col lg:flex-row gap-8 px-6">
+      <div className="flex flex-col lg:flex-row gap-8 px-6 ">
         <FilterSidebar
           categories={categories}
           selectedCategory={selectedCategory}
@@ -209,7 +209,7 @@ const Cars = () => {
           setShowAvailableOnly={setShowAvailableOnly}
         />
 
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-6 ">
           <CarsHeader
             totalCars={allCars.length}
             filteredCars={sortedCars.length}
