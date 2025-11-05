@@ -26,8 +26,23 @@ function BookingStepper() {
               isLastStep={(value) => setIsLastStep(value)}
               isFirstStep={(value) => setIsFirstStep(value)}
             >
-              <Step onClick={() => setActiveStep(0)}>1</Step>
-              <Step onClick={() => setActiveStep(1)}>2</Step>
+              <Step
+                className="text-light-primary_text dark:text-light-primary_text dark:bg-light-background"
+                onClick={() => setActiveStep(0)}
+              >
+                1
+              </Step>
+              <Step
+                onClick={() => setActiveStep(1)}
+                className={`cursor-pointer transition-colors duration-300 
+                 ${
+                 activeStep === 1
+                 ? "text-light-primary_text dark:text-light-primary_text dark:bg-light-background"
+                 : "text-light-primary_text dark:text-dark-header_text dark:bg-dark-background"
+                }`}
+              >
+                2
+              </Step>
             </Stepper>
 
             {/* Step content */}
@@ -56,10 +71,18 @@ function BookingStepper() {
         <div className="p-2 w-4/5 text-center">
           {/* Navigation buttons */}
           <div className="mt-10 flex justify-between ">
-            <Button onClick={handlePrev} className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text" disabled={isFirstStep}>
+            <Button
+              onClick={handlePrev}
+              className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text"
+              disabled={isFirstStep}
+            >
               Prev
             </Button>
-            <Button onClick={handleNext} className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text" disabled={isLastStep}>
+            <Button
+              onClick={handleNext}
+              className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text"
+              disabled={isLastStep}
+            >
               Next
             </Button>
           </div>
