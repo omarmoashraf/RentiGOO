@@ -17,6 +17,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useAuth } from "../context/AuthContext";
+import useTheme from "../HOOKS/usetheme";
 
 const profileMenuItems = [
   { label: "My Profile", icon: UserCircleIcon },
@@ -30,6 +31,7 @@ export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
+  const {theme}=useTheme();
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -67,7 +69,7 @@ export function AvatarWithUserDropdown() {
         </Button>
       </MenuHandler>
 
-      <MenuList className="p-1">
+      <MenuList className="p-1 bg-light-background dark:bg-dark-background">
         {profileMenuItems.map(({ label, icon }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
