@@ -7,7 +7,7 @@ const Wallet = () => {
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-gray-50 pt-8">
       {/* Wallet Info Section */}
       <div className="p-4 w-1/2 text-center">
-        <h1 className="text-2xl font-bold mb-2 text-4xl">My Wallet</h1>
+        <h1 className=" font-bold mb-2 text-4xl">My Wallet</h1>
         <p>
           Manage your balance, view transactions, and track your loyalty rewards
         </p>

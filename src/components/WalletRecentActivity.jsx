@@ -41,12 +41,12 @@ const customers = [
 ];
 function WalletRecentActivity() {
   return (
-    <Card className="w-full">
+    <Card className="w-full dark:bg-dark-background">
       <CardBody>
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <BiMoneyWithdraw />
-            <Typography variant="h5" color="blue-gray" className="">
+            <BiMoneyWithdraw className="dark:text-dark-header_text" />
+            <Typography variant="h5" color="blue-gray" className="dark:text-dark-header_text">
               Recent Activity
             </Typography>
           </div>
@@ -69,15 +69,15 @@ function WalletRecentActivity() {
               <div className="flex items-center gap-x-3">
                 <Avatar size="sm" src={image} alt={name} />
                 <div>
-                  <Typography color="blue-gray" variant="h6">
+                  <Typography color="blue-gray" variant="h6" className="dark:text-dark-header_text">
                     {name}
                   </Typography>
-                  <Typography variant="small" color="gray">
+                  <Typography variant="small" color="gray" className="dark:text-dark-secondary_text">
                     {email}
                   </Typography>
                 </div>
               </div>
-              <Typography color="blue-gray" variant="h6">
+              <Typography color="blue-gray" variant="h6" className="dark:text-dark-Buttons">
                 ${price}
               </Typography>
             </div>

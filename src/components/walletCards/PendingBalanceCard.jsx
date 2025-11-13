@@ -11,7 +11,12 @@ import {
 } from "@material-tailwind/react";
 function PendingBalanceCard() {
   return (
-    <Card className="mt-6 w-96 p-4 shadow-md">
+        <Card
+          className="mt-6 w-96 p-4 shadow-md    bg-light-background dark:bg-dark-background
+                 border border-gray-300 dark:border-gray-300
+                 rounded-2xl 
+                 transition-transform duration-500 hover:scale-105"
+        >
       <CardBody className="flex justify-between items-start">
         {/* Left side */}
         <div className="flex flex-col justify-between h-full">
@@ -19,13 +24,13 @@ function PendingBalanceCard() {
             <FaRegClock className="h-8 w-8 text-orange-500" />
           </div>
           <div>
-            <Typography variant="h6" color="gray" className="mb-1">
+            <Typography variant="h6" color="gray" className="mb-1 dark:text-dark-secondary_text">
               Pending Balance
             </Typography>
             <Typography
               variant="h5"
               color="black"
-              className="font-bold text-4xl"
+              className="font-bold text-4xl dark:text-dark-header_text"
             >
               $200
             </Typography>
