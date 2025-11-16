@@ -69,7 +69,7 @@ function WalletMiniNavBar() {
               key={value}
               value={value}
               onClick={() => setActiveTab(value)}
-              className={activeTab === value ? "text-gray-900" : ""}
+              className={activeTab === value ? "text-gray-900 dark:text-dark-Buttons" : "dark:text-dark-secondary_text"}
             >
               {label}
             </Tab>

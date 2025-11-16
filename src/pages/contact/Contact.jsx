@@ -344,10 +344,10 @@ const Contact = () => {
       <section className="px-4 py-16 lg:py-24">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-dark-header_text">
+            <h2 className="text-3xl md:text-4xl font-bold dark:text-dark-header_text">
               Frequently Asked Questions
             </h2>
-            <p className="text-dark-secondary_text">
+            <p className="dark:text-dark-secondary_text">
               Quick answers to common questions about our car rental services.
             </p>
           </div>
@@ -358,7 +358,7 @@ const Contact = () => {
               className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
             >
               <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-                <h3 className="font-semibold  text-lg flex items-center gap-2 text-dark-header_text">
+                <h3 className="font-semibold  text-lg flex items-center gap-2 dark:text-dark-header_text">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -376,7 +376,7 @@ const Contact = () => {
                   </svg>
                   How do I make a reservation?
                 </h3>
-                <p className="text-dark-secondary_text leading-relaxed">
+                <p className="dark:text-dark-secondary_text leading-relaxed">
                   You can book online through our website, call our 24/7
                   hotline, or visit any of our locations. Online booking offers
                   the best rates and instant confirmation.
@@ -389,7 +389,7 @@ const Contact = () => {
               className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
             >
               <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-                <h3 className="font-semibold text-lg flex items-center gap-2 text-dark-header_text">
+                <h3 className="font-semibold text-lg flex items-center gap-2 dark:text-dark-header_text">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -407,7 +407,7 @@ const Contact = () => {
                   </svg>
                   What documents do I need to rent a car?
                 </h3>
-                <p className="text-dark-secondary_text leading-relaxed">
+                <p className="dark:text-dark-secondary_text leading-relaxed">
                   You need a valid driver's license, a major credit card, and
                   must be at least 21 years old. International customers need a
                   valid passport and international driving permit.
@@ -420,7 +420,7 @@ const Contact = () => {
               className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
             >
               <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-                <h3 className="font-semibold text-lg flex items-center gap-2 text-dark-header_text">
+                <h3 className="font-semibold text-lg flex items-center gap-2 dark:text-dark-header_text">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -438,7 +438,7 @@ const Contact = () => {
                   </svg>
                   Can I modify or cancel my reservation?
                 </h3>
-                <p className="text-dark-secondary_text leading-relaxed">
+                <p className="dark:text-dark-secondary_text leading-relaxed">
                   Yes! You can modify or cancel your reservation online or by
                   calling us. Cancellation policies vary by plan — check your
                   booking confirmation for specific terms.
@@ -451,7 +451,7 @@ const Contact = () => {
               className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-border/50"
             >
               <div data-slot="card-content" className="p-6 pt-0 space-y-3">
-                <h3 className="font-semibold text-lg flex items-center gap-2 text-dark-header_text">
+                <h3 className="font-semibold text-lg flex items-center gap-2 dark:text-dark-header_text">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -469,7 +469,7 @@ const Contact = () => {
                   </svg>
                   What happens if I return the car late?
                 </h3>
-                <p className="text-dark-secondary_text leading-relaxed">
+                <p className="dark:text-dark-secondary_text leading-relaxed">
                   We offer a 30-minute grace period. After that, you'll be
                   charged for an additional day. Contact us if you need to
                   extend your rental period.

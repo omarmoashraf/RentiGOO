@@ -73,25 +73,48 @@ const TABLE_ROWS = [
 
 export function TransactionCard() {
   return (
-    <Card className="h-full w-full">
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+    <Card className="h-full w-full dark:bg-dark-background">
+      <CardHeader
+        floated={false}
+        shadow={false}
+        className="rounded-none dark:bg-dark-background"
+      >
+        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center dark:bg-dark-background">
           <div>
-            <Typography variant="h5" color="blue-gray">
+            <Typography
+              variant="h5"
+              color="blue-gray"
+              className="dark:text-dark-header_text"
+            >
               Recent Transactions
             </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
+            <Typography
+              color="gray"
+              className="mt-1 font-normal dark:text-dark-secondary_text"
+            >
               These are details about the last transactions
             </Typography>
           </div>
           <div className="flex w-full shrink-0 gap-2 md:w-max">
-            <div className="w-full md:w-72">
+            <div className="w-full md:w-72 dark:text-dark-header_text">
               <Input
                 label="Search"
-                icon={<FaMagnifyingGlass className="h-5 w-5" />}
+                icon={
+                  <FaMagnifyingGlass className="h-5 w-5 dark:text-dark-header_text" />
+                }
+                className="text-black dark:text-dark-header_text placeholder:dark:text-dark-header_text"
+                labelProps={{
+                  className: "dark:text-dark-header_text text-black",
+                }}
+                containerProps={{
+                  className: "dark:text-dark-header_text",
+                }}
               />
             </div>
-            <Button className="flex items-center gap-3" size="sm">
+            <Button
+              className="flex items-center gap-3 dark:bg-dark-Buttons bg-light-Buttons"
+              size="sm"
+            >
               <HiMiniArrowDownTray strokeWidth={2} className="h-4 w-4" />{" "}
               Download
             </Button>
@@ -105,12 +128,12 @@ export function TransactionCard() {
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4  dark:bg-dark-background"
                 >
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal leading-none opacity-70"
+                    className="font-normal leading-none opacity-70 dark:text-dark-header_text"
                   >
                     {head}
                   </Typography>
@@ -151,7 +174,7 @@ export function TransactionCard() {
                         <Typography
                           variant="small"
                           color="blue-gray"
-                          className="font-bold"
+                          className="font-bold dark:text-dark-header_text"
                         >
                           {name}
                         </Typography>
@@ -161,7 +184,7 @@ export function TransactionCard() {
                       <Typography
                         variant="small"
                         color="blue-gray"
-                        className="font-normal"
+                        className="font-normal dark:text-dark-header_text"
                       >
                         {amount}
                       </Typography>
@@ -170,7 +193,7 @@ export function TransactionCard() {
                       <Typography
                         variant="small"
                         color="blue-gray"
-                        className="font-normal"
+                        className="font-normal dark:text-dark-header_text"
                       >
                         {date}
                       </Typography>
@@ -183,7 +206,7 @@ export function TransactionCard() {
                           value={status}
                           color={
                             status === "paid"
-                              ? "green"
+                              ? "light-green"
                               : status === "pending"
                               ? "amber"
                               : "red"
@@ -210,14 +233,14 @@ export function TransactionCard() {
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal capitalize"
+                            className="font-normal capitalize dark:text-dark-header_text"
                           >
                             {account.split("-").join(" ")} {accountNumber}
                           </Typography>
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal opacity-70"
+                            className="font-normal opacity-70 dark:text-dark-header_text"
                           >
                             {expiry}
                           </Typography>
@@ -227,7 +250,7 @@ export function TransactionCard() {
                     <td className={classes}>
                       <Tooltip content="Edit User">
                         <IconButton variant="text">
-                          <IoPencil className="h-4 w-4" />
+                          <IoPencil className="h-4 w-4 dark:text-dark-header_text" />
                         </IconButton>
                       </Tooltip>
                     </td>
@@ -239,33 +262,33 @@ export function TransactionCard() {
         </table>
       </CardBody>
       <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" size="sm">
+        <Button variant="outlined" size="sm" className="dark:bg-dark-Buttons">
           Previous
         </Button>
-        <div className="flex items-center gap-2">
-          <IconButton variant="outlined" size="sm">
+        <div className="flex items-center gap-2 dark:text-dark-header_text">
+          <IconButton variant="outlined" size="sm" className="dark:text-dark-header_text ">
             1
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm" className="dark:text-dark-header_text">
             2
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm" className="dark:text-dark-header_text" >
             3
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm"  className="dark:text-dark-header_text">
             ...
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm"  className="dark:text-dark-header_text">
             8
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm"  className="dark:text-dark-header_text">
             9
           </IconButton>
-          <IconButton variant="text" size="sm">
+          <IconButton variant="text" size="sm"  className="dark:text-dark-header_text">
             10
           </IconButton>
         </div>
-        <Button variant="outlined" size="sm">
+        <Button variant="outlined" size="sm" className="dark:bg-dark-Buttons">
           Next
         </Button>
       </CardFooter>
