@@ -156,25 +156,19 @@ const Home = () => {
                   </Button>
                 </Link>
               </div>
-
-              
-
-
-
-
             </div>
           </div>
         </Carousel>
       </div>
       <div className="flex flex-col items-center px-4">
-        <form className="mt-8 w-full max-w-5xl bg-white shadow-lg rounded-2xl p-6 md:p-8">
+        <form className="mt-8 w-full max-w-5xl  bg-white shadow-lg rounded-2xl p-6 md:p-8 dark:bg-dark-background ">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Pickup Location */}
             <div className="flex flex-col w-full">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="flex items-center gap-1 mb-1"
+                className="flex items-center gap-1 mb-1 dark:text-dark-header_text"
               >
                 <CiLocationOn className="text-[#06f] text-xl" />
                 Pickup Location
@@ -183,7 +177,7 @@ const Home = () => {
                 type="text"
                 size="md"
                 placeholder="Enter your address"
-                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900 dark:text-dark-header_text"
               />
             </div>
 
@@ -192,7 +186,7 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="flex items-center gap-1 mb-1"
+                className="flex items-center gap-1 mb-1 dark:text-dark-header_text"
               >
                 <MdOutlineDateRange className="text-[#06f] text-xl" />
                 Pick Up Date
@@ -201,9 +195,9 @@ const Home = () => {
                 type="date"
                 size="md"
                 placeholder="dd/mm/yy"
-                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900 dark:text-dark-header_text"
                 labelProps={{
-                  className: "before:content-none after:content-none",
+                  className: "before:content-none after:content-none ",
                 }}
               />
             </div>
@@ -213,7 +207,7 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="flex items-center gap-1 mb-1"
+                className="flex items-center gap-1 mb-1 dark:text-dark-header_text"
               >
                 <MdOutlineDateRange className="text-[#06f] text-xl" />
                 Return Date
@@ -222,7 +216,7 @@ const Home = () => {
                 type="date"
                 size="md"
                 placeholder="dd/mm/yy"
-                className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                className="!border-t-blue-gray-200 focus:!border-t-gray-900 dark:text-dark-header_text"
                 labelProps={{
                   className: "before:content-none after:content-none",
                 }}
@@ -234,7 +228,7 @@ const Home = () => {
               <Link to="./cars" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-[#06f] text-white w-full sm:w-auto"
+                  className="bg-[#06f] text-white w-full sm:w-auto dark:bg-dark-Buttons"
                 >
                   Search
                 </Button>
@@ -246,302 +240,373 @@ const Home = () => {
 
       <div className="featured_cars">
         <header className="text-center m-11">
-          <h1 className="font-bold text-xl md:text-4xl  mt-20 mb-5 ">
+          <h1 className="font-bold text-xl md:text-4xl  mt-20 mb-5  dark:text-dark-header_text">
             Featured Cars
           </h1>
-          <p>
+          <p className="dark:text-dark-secondary_text">
             Discover our handpicked selection of premium vehicles, perfect for
             any occasion.
           </p>
         </header>
-        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
+        <div
+          className="cards 
+  grid 
+  grid-cols-1 
+  sm:grid-cols-2 
+  lg:grid-cols-3 
+  xl:grid-cols-4 
+  gap-8 
+  p-6 
+  place-items-center"
+        >
+          {/* CARD 1 */}
+          <Card
+            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
+    border border-gray-300 dark:border-gray-300
+    rounded-2xl shadow-md
+    transition-transform duration-500 hover:scale-105"
+          >
+            <CardHeader floated={false} color="blue-gray" className="relative">
+              <img
+                src="./Homecard-1.jpg"
+                alt="BMW 5 Series"
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+              <Chip
+                value="Available"
+                color="green"
+                size="sm"
+                className="absolute top-3 right-3 font-semibold"
+              />
+            </CardHeader>
 
-          
-            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
-              <CardHeader floated={false} color="blue-gray">
-                <img src="./Homecard-1.jpg" alt="ui/ux review check" />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
-                  <Chip
-                    value="Available"
-                    color="green"
-                    size="sm"
-                    className="absolute bottom-3 left-3 font-semibold"
-                  />
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="mb-3 flex items-center justify-between">
-                  <Typography
-                    variant="h5"
-                    color="blue-gray"
-                    className="font-bold"
-                  >
-                    BMW 5 Series
-                  </Typography>
-                  <div>
-                    <span className="text-[#06f]">$89</span>/day
-                  </div>
-                </div>
-                <Typography color="gray">Luxury Sedan</Typography>
-              
+            <CardBody>
+              <div className="mb-3 flex items-center justify-between">
                 <Typography
+                  variant="h5"
                   color="blue-gray"
-                  className="flex items-center mt-4 font-normal"
+                  className="font-bold dark:text-dark-header_text"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-400"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  5.0 (89 reviews)
+                  BMW 5 Series
                 </Typography>
-                <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip
-                    variant="ghost"
-                    value="Auto"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="5 Seats"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="Premium"
-                    className="text-gray-700"
-                  />
-                </section>
-                <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <Link to="./cars/1">
-                    <Button color="blue">Book</Button>
-                  </Link>
-                </section>
-              </CardBody>
-            </Card>
-          
+                <div>
+                  <span className="text-[#06f]">$89</span>/day
+                </div>
+              </div>
 
-          
-            <Card className="w-full md:max-w-[30rem] shadow-lg transition-transform duration-500 hover:scale-105 ">
-              <CardHeader floated={false} color="blue-gray">
-                <img src="./Homecard-5.jpg" alt="ui/ux review check" />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-28 left-32 md:bottom-40 md:left-48">
-                  <Chip
-                    value="Available"
-                    color="green"
-                    size="sm"
-                    className="absolute bottom-3 left-3 font-semibold"
-                  />
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="mb-3 flex items-center justify-between">
-                  <Typography
-                    variant="h5"
-                    color="blue-gray"
-                    className="font-bold"
-                  >
-                    Tesla Model 3
-                  </Typography>
-                  <div>
-                    <span className="text-[#06f]">$75</span>/day
-                  </div>
-                </div>
-                <Typography color="gray ">Electric Sedan</Typography>
-                <Typography color="blue-gray" className="flex items-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-400"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  4.8 (89 reviews)
-                </Typography>
-                <section className="grid grid-cols-3 gap-2 mt-5 text-center ">
-                  <Chip
-                    variant="ghost"
-                    value="Electric"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="5 Seats"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="Eco Friendly"
-                    className="w-[9em] text-gray-700"
-                  />
-                </section>
-                <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <Link to="./cars/2">
-                    <Button color="blue">Book</Button>
-                  </Link>
-                </section>
-              </CardBody>
-            </Card>
-          
+              <Typography
+                color="gray"
+                className="dark:text-dark-secondary_text"
+              >
+                Luxury Sedan
+              </Typography>
 
-          
-            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
-              <CardHeader floated={false} color="blue-gray">
-                <img src="./Homecard-3.jpg" alt="ui/ux review check" />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-28 left-32 md:bottom-36 md:left-48">
-                  <Chip
-                    value="Available"
-                    color="green"
-                    size="sm"
-                    className="absolute bottom-3 left-3 font-semibold"
+              <Typography
+                color="blue-gray"
+                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="-mt-0.5 h-5 w-5 text-yellow-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c..."
+                    clipRule="evenodd"
                   />
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="mb-3 flex items-center justify-between">
-                  <Typography
-                    variant="h5"
-                    color="blue-gray"
-                    className="font-bold"
-                  >
-                    Range Rover
-                  </Typography>
-                  <section>
-                    <span className="text-[#06f]">$120</span>/day
-                  </section>
-                </div>
-                <Typography color="gray ">Luxury Sedan</Typography>
+                </svg>
+                5.0 (89 reviews)
+              </Typography>
+
+              <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
+                <Chip
+                  variant="ghost"
+                  value="Auto"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="5 Seats"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="Premium"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+              </section>
+
+              <section className="price text-2xl mt-6 grid grid-cols-3">
+                <Link to="./cars/1">
+                  <Button color="blue">Book</Button>
+                </Link>
+              </section>
+            </CardBody>
+          </Card>
+
+          {/* CARD 2 */}
+          <Card
+            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
+    border border-gray-300 dark:border-gray-300
+    rounded-2xl shadow-md
+    transition-transform duration-500 hover:scale-105"
+          >
+            <CardHeader floated={false} color="blue-gray" className="relative">
+              <img
+                src="./Homecard-5.jpg"
+                alt="Tesla Model 3"
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+              <Chip
+                value="Available"
+                color="green"
+                size="sm"
+                className="absolute top-3 right-3 font-semibold"
+              />
+            </CardHeader>
+
+            <CardBody>
+              <div className="mb-3 flex items-center justify-between">
                 <Typography
+                  variant="h5"
                   color="blue-gray"
-                  className="flex items-center mt-4"
+                  className="font-bold dark:text-dark-header_text"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-400"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  4.0 (127 reviews)
+                  Tesla Model 3
                 </Typography>
-                <section className="grid grid-cols-3 gap-3 mt-5 text-center  ">
-                  <Chip
-                    variant="ghost"
-                    value="Auto"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="5 Seats"
-                    className="text-gray-700"
-                  />
-                  <Chip
-                    variant="ghost"
-                    value="Premium"
-                    className="text-gray-700"
-                  />
-                </section>
-                <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <Link to="./cars/3">
-                    <Button color="blue">Book</Button>
-                  </Link>
-                </section>
-              </CardBody>
-            </Card>
-          
+                <div>
+                  <span className="text-[#06f]">$75</span>/day
+                </div>
+              </div>
 
-          
-            <Card className="w-full max-w-[20rem] shadow-lg transition-transform duration-500 hover:scale-105">
-              <CardHeader floated={false} color="blue-gray">
-                <img src="./Homecard-4.jpg" alt="ui/ux review check" />
-                <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
-                <div className="relative bottom-28 left-32 md:bottom-36 md:left-40">
-                  <Chip
-                    value="Not Available"
-                    color="#red"
-                    size="xsm"
-                    className="absolute bottom-3 left-3 font-semibold bg-gray-600"
-                  />
-                </div>
-              </CardHeader>
-              <CardBody>
-                <div className="mb-3 flex  items-center justify-between">
-                  <Typography
-                    variant="h5"
-                    color="blue-gray"
-                    className=" font-bold"
-                  >
-                    Porsche 911
-                  </Typography>
-                  <section>
-                    {" "}
-                    <span className="text-[#06f]">$200</span>/day
-                  </section>
-                </div>
-                <Typography color="gray">Luxury Sedan</Typography>
-                <Typography
-                  color="blue-gray"
-                  className="flex items-center mt-4 font-normal"
+              <Typography
+                color="gray"
+                className="dark:text-dark-secondary_text"
+              >
+                Electric Sedan
+              </Typography>
+
+              <Typography
+                color="blue-gray"
+                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="-mt-0.5 h-5 w-5 text-yellow-400"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="-mt-0.5 h-5 w-5 text-yellow-400"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  5.0 (89 reviews)
+                  <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c..."
+                    clipRule="evenodd"
+                  />
+                </svg>
+                4.8 (89 reviews)
+              </Typography>
+
+              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
+                <Chip
+                  variant="ghost"
+                  value="Electric"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="5 Seats"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="Economy"
+                  className="text-gray-700 w-50 dark:bg-dark-header_text"
+                />
+              </section>
+
+              <section className="price text-2xl mt-6 grid grid-cols-3">
+                <Link to="./cars/2">
+                  <Button color="blue">Book</Button>
+                </Link>
+              </section>
+            </CardBody>
+          </Card>
+
+          {/* CARD 3 */}
+          <Card
+            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
+    border border-gray-300 dark:border-gray-300
+    rounded-2xl shadow-md
+    transition-transform duration-500 hover:scale-105"
+          >
+            <CardHeader floated={false} color="blue-gray" className="relative">
+              <img
+                src="./Homecard-3.jpg"
+                alt="Range Rover"
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+              <Chip
+                value="Available"
+                color="green"
+                size="sm"
+                className="absolute top-3 right-3 font-semibold"
+              />
+            </CardHeader>
+
+            <CardBody>
+              <div className="mb-3 flex items-center justify-between">
+                <Typography
+                  variant="h5"
+                  color="blue-gray"
+                  className="font-bold dark:text-dark-header_text"
+                >
+                  Range Rover
                 </Typography>
-                <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                  <Chip
-                    variant="ghost"
-                    value="Auto"
-                    className="text-gray-700"
+                <div>
+                  <span className="text-[#06f]">$120</span>/day
+                </div>
+              </div>
+
+              <Typography
+                color="gray"
+                className="dark:text-dark-secondary_text"
+              >
+                Luxury Sedan
+              </Typography>
+
+              <Typography
+                color="blue-gray"
+                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="-mt-0.5 h-5 w-5 text-yellow-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c..."
+                    clipRule="evenodd"
                   />
-                  <Chip
-                    variant="ghost"
-                    value="2 Seats"
-                    className="text-gray-700"
+                </svg>
+                4.9 (156 reviews)
+              </Typography>
+
+              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
+                <Chip
+                  variant="ghost"
+                  value="4WD"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="7 Seats"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="Premium"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+              </section>
+
+              <section className="price text-2xl mt-6 grid grid-cols-3">
+                <Link to="./cars/3">
+                  <Button color="blue">Book</Button>
+                </Link>
+              </section>
+            </CardBody>
+          </Card>
+
+          {/* CARD 4 */}
+          <Card
+            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
+    border border-gray-300 dark:border-gray-300
+    rounded-2xl shadow-md
+    transition-transform duration-500 hover:scale-105"
+          >
+            <CardHeader floated={false} color="blue-gray" className="relative">
+              <img
+                src="./Homecard-4.jpg"
+                alt="Porsche 911"
+                className="w-full h-48 object-cover"
+              />
+              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+              <Chip
+                value="BOOKED"
+                color="red"
+                size="sm"
+                className="absolute top-3 right-3 font-semibold text-white"
+              />
+            </CardHeader>
+
+            <CardBody>
+              <div className="mb-3 flex items-center justify-between">
+                <Typography
+                  variant="h5"
+                  color="blue-gray"
+                  className="font-bold dark:text-dark-header_text"
+                >
+                  Porsche 911
+                </Typography>
+                <div>
+                  <span className="text-[#06f]">$200</span>/day
+                </div>
+              </div>
+
+              <Typography
+                color="gray"
+                className="dark:text-dark-secondary_text"
+              >
+                Luxury Sedan
+              </Typography>
+
+              <Typography
+                color="blue-gray"
+                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  className="-mt-0.5 h-5 w-5 text-yellow-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.788 3.21c..."
+                    clipRule="evenodd"
                   />
-                  <Chip
-                    variant="ghost"
-                    value="Sports"
-                    className="text-gray-700"
-                  />
-                </section>
-                <section className="price text-2xl mt-6 grid grid-cols-3">
-                  <Button color="blue" disabled>
-                    Book
-                  </Button>
-                </section>
-              </CardBody>
-            </Card>
-          
+                </svg>
+                5.0 (89 reviews)
+              </Typography>
+
+              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
+                <Chip
+                  variant="ghost"
+                  value="Manual"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="2 Seats"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+                <Chip
+                  variant="ghost"
+                  value="Sport"
+                  className="text-gray-700 dark:bg-dark-header_text"
+                />
+              </section>
+
+              <section className="price text-2xl mt-6 grid grid-cols-3">
+                <Button color="blue" disabled>
+                  Book
+                </Button>
+              </section>
+            </CardBody>
+          </Card>
         </div>
       </div>
       <section className="flex justify-center m-8">
@@ -554,86 +619,118 @@ const Home = () => {
       </section>
       <div className="mt-22">
         <header>
-          <h1 className="font-bold text-3xl text-black text-center">
+          <h1 className="font-bold text-3xl text-black text-center dark:text-dark-header_text">
             Why Choose Rentigo?
           </h1>
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 dark:text-dark-secondary_text">
             Experience the difference with our commitment to excellence and
             customer satisfaction.
           </p>
         </header>
         <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-7 ">
-          <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50 text-center w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex justify-center">
                 <MdOutlineSecurity className="text-[#06f] text-3xl text-center" />
               </div>
               <div className="flex justify-center">
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   24/7 Support
                 </Typography>
               </div>
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 Round-the-clock customer service and roadside assistance
               </Typography>
             </CardBody>
           </Card>
-          <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50 text-center w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex justify-center">
                 <GoClock className="text-[#06f] text-3xl text-center" />
               </div>
               <div className="flex justify-center">
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Fully Insured
                 </Typography>
               </div>
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 All vehicles covered with comprehensive insurance
               </Typography>
             </CardBody>
           </Card>
-          <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50 text-center w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex justify-center">
                 <FaShuttleVan className="text-[#06f] text-3xl text-center" />
               </div>
               <div className="flex justify-center">
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Premium Fleet
                 </Typography>
               </div>
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 Latest models from top brands, regularly maintained
               </Typography>
             </CardBody>
           </Card>
-          <Card className="w-50 text-center w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50 text-center w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex justify-center">
-                <FaStar className="text-[#06f] text-3xl text-center" />
+                <FaStar className="text-[#06f] text-3xl text-center " />
               </div>
               <div className="flex justify-center">
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Top Rated
                 </Typography>
               </div>
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 4.9/5 stars from over 10,000+ satisfied customers
               </Typography>
@@ -644,16 +741,21 @@ const Home = () => {
       <div className="mt-24">
         <header>
           {" "}
-          <h1 className="font-bold text-3xl text-black text-center">
+          <h1 className="font-bold text-3xl text-black text-center dark:text-dark-header_text">
             What Our Customers Say
           </h1>
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 dark:text-dark-secondary_text">
             Don't just take our word for it. Here's what our satisfied customers
             have to say.
           </p>
         </header>
         <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-7 ">
-          <Card className="w-50  w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50  w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex mb-5 ">
                 <MdStarRate className="text-yellow-500 text-xl text-center" />
@@ -666,20 +768,28 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 "Amazing service! The BMW was in perfect condition and the
                 booking process was seamless."
               </Typography>
               <div className="flex justify-start mt-8 gap-5">
                 <TbCircleLetterS className="text-3xl text-[#06f]" />
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Sarah Johnson
                 </Typography>
               </div>
             </CardBody>
           </Card>
-          <Card className="w-50  w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50  w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex mb-5 ">
                 <MdStarRate className="text-yellow-500 text-xl text-center" />
@@ -692,20 +802,28 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 "Best car rental experience ever. Clean cars, fair prices, and
                 excellent customer support."
               </Typography>
               <div className="flex justify-start mt-8 gap-5">
                 <TbCircleLetterM className="text-3xl text-[#06f]" />
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Michael Chen
                 </Typography>
               </div>
             </CardBody>
           </Card>
-          <Card className="w-50  w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+          <Card
+            className="w-50  w-full h-full bg-light-background dark:bg-dark-background
+             border border-gray-300 dark:border-gray-300
+             rounded-2xl shadow-md
+             transition-transform duration-500 hover:scale-105"
+          >
             <CardBody>
               <div className="flex mb-5 ">
                 <MdStarRate className="text-yellow-500 text-xl text-center" />
@@ -718,14 +836,17 @@ const Home = () => {
               <Typography
                 variant="small"
                 color="gray"
-                className="font-normal opacity-75"
+                className="font-normal opacity-75 dark:text-dark-secondary_text"
               >
                 "Highly recommend Rentigo! Professional service and a great
                 selection of vehicles."
               </Typography>
               <div className="flex justify-start mt-8 gap-5">
                 <TbCircleLetterE className="text-3xl text-[#06f]" />
-                <Typography color="blue-gray" className="text-2xl font-bond">
+                <Typography
+                  color="blue-gray"
+                  className="text-2xl font-bond dark:text-dark-header_text"
+                >
                   Emma Davis
                 </Typography>
               </div>
