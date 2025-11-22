@@ -34,8 +34,10 @@ import AddNewCar from "./pages/Admin/AddNewCar";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CarManagement from "./pages/Admin/CarManagement";
 import EditCar from "./pages/Admin/EditCar";
+import UserManagement from "./pages/Admin/UserManagement";
 import ViewCarDetails from "./pages/Admin/ViewCarDetails";
 import BookingDetails from "./pages/Admin/BookingDetails";
+import { User } from "lucide-react";
 
 function App() {
   return (
@@ -106,6 +108,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+  path="/User"
+  element={
+    <ProtectedRoute adminOnly={true}>
+      <AdminLayout><UserManagement /></AdminLayout>
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/AddNewCar"
           element={

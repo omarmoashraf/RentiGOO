@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { FaCar } from "react-icons/fa";
+import {LuUsers} from "react-icons/lu"
+
 import { LuCalendar } from "react-icons/lu";
 import { HiOutlineLogout, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
+import Customer from './../../paymentmethods/customerInformation/Customer';
+import CarManagement from './../CarManagement';
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
@@ -146,6 +150,19 @@ const AdminSidebar = () => {
               <div className="flex-1">
                 <p className="font-semibold text-sm sm:text-base">Bookings</p>
                 <p className="text-xs text-gray-500 mt-0.5">Rental Management</p>
+              </div>
+            </div>
+            <div
+              className={getNavItemClasses("/UserManagnment")}
+              onClick={() => handleNavigation("/User")}
+              role="button"
+              tabIndex={0}
+              onKeyPress={(e) => e.key === 'Enter' && handleNavigation("/UserManagnment")}
+            >
+              <LuUsers size={18} className={currentPath === "/bookingdetails" ? "text-white" : "text-gray-600"} />
+              <div className="flex-1">
+                <p className="font-semibold text-sm sm:text-base">Users</p>
+                <p className="text-xs text-gray-500 mt-0.5">Customer Management</p>
               </div>
             </div>
           </nav>
