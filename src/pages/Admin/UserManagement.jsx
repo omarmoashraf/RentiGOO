@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { BiFilterAlt } from "react-icons/bi";
+import { GoChevronDown, GoChevronUp } from "react-icons/go";
+
 import {
   User as UserIcon,
   Search,
@@ -156,8 +159,8 @@ const UserManagement = () => {
       </div>
 
       {/* Search & Status */}
-      <div className="flex gap-2 mb-4">
-        <div className="flex items-center border rounded-lg bg-white p-2 w-4/5">
+      <div className="flex gap-2 mb-12">
+        <div className="flex items-center border rounded-lg bg-white p-2 w-5/6">
           <Search className="text-gray-400 mr-2" />
           <input
             type="text"
@@ -168,32 +171,42 @@ const UserManagement = () => {
           />
         </div>
 
-        {/* Status Dropdown */}
-        <div className="relative w-1/5">
-          <input
-            type="text"
-            readOnly
-            value={selectedStatus}
-            onClick={() => setStatusOpen(!statusOpen)}
-            className="outline-none w-full bg-white border rounded-lg p-2 cursor-pointer"
-          />
-          {statusOpen && (
-            <div className="absolute left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-              {["All Status", "Active", "Inactive", "Suspended"].map((status) => (
-                <div
-                  key={status}
-                  className="p-2 hover:bg-blue-100 cursor-pointer"
-                  onClick={() => {
-                    setSelectedStatus(status);
-                    setStatusOpen(false);
-                  }}
-                >
-                  {status}
-                </div>
-              ))}
-            </div>
-          )}
+{/* Status Dropdown */}
+<div className="relative w-1/6">
+  <div
+    onClick={() => setStatusOpen(!statusOpen)}
+    className={`flex items-center justify-between cursor-pointer border rounded-lg py-3 px-4 bg-white ${
+      statusOpen ? "outline outline-2 outline-blue-400" : ""
+    }`}
+  >
+    <BiFilterAlt className="text-gray-500" size={22} /> {/* Left Icon */}
+    <span className="text-gray-700">{selectedStatus}</span> {/* Text in middle */}
+    <GoChevronDown
+      className={`text-gray-500 transition-transform duration-200 ${
+        statusOpen ? "rotate-180" : ""
+      }`}
+    size={20} /> {/* Right Icon */}
+  </div>
+
+  {statusOpen && (
+    <div className="absolute left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      {["All Status", "Active", "Inactive", "Suspended"].map((status) => (
+        <div
+          key={status}
+          className="p-2 hover:bg-blue-100 cursor-pointer"
+          onClick={() => {
+            setSelectedStatus(status);
+            setStatusOpen(false);
+          }}
+        >
+          {status}
         </div>
+      ))}
+    </div>
+  )}
+</div>
+
+
       </div>
 
       {/* User Table */}
@@ -265,7 +278,7 @@ const UserManagement = () => {
                     {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                   </span>
                 </td>
-                <td className="px-6 py-4 flex gap-2 relative">
+                <td className="px-6 py-4 flex gap-5 relative">
                   <button
                     className="text-gray-500 hover:text-gray-700"
                     onClick={() => setViewUser(user)}
