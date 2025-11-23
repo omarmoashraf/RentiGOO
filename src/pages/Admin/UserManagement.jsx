@@ -129,7 +129,7 @@ const UserManagement = () => {
         <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
           <div>
             <p className="text-gray-500 text-sm">Total Users</p>
-            <p className="text-xl font-bold">{users.length}</p>
+            <p className="text-xl font-bold  text-blue-600">{users.length}</p>
           </div>
           <Users className="text-blue-500" />
         </div>
@@ -152,14 +152,14 @@ const UserManagement = () => {
         <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
           <div>
             <p className="text-gray-500 text-sm">Avg. Spent</p>
-            <p className="text-xl font-bold">$1,245</p>
+            <p className="text-xl font-bold  text-blue-600 ">$1,245</p>
           </div>
           <CreditCard className="text-blue-500" />
         </div>
       </div>
 
       {/* Search & Status */}
-      <div className="flex gap-2 mb-12">
+      <div className="flex gap-2 mb-10">
         <div className="flex items-center border rounded-lg bg-white p-2 w-5/6">
           <Search className="text-gray-400 mr-2" />
           <input
