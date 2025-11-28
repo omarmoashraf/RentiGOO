@@ -20,6 +20,7 @@ import Cars from "./pages/cars/Cars";
 import CarDetails from "./pages/cardetails/CarDetails";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import UserProfile from "./pages/login/UserProfile"
 import Pricing from "./pages/pricing/Pricing";
 
 // Pages - User Protected
@@ -55,6 +56,7 @@ function App() {
 
         {/* ===== Auth Routes (Login/Register) with Auth Layout ===== */}
         <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+
         <Route path="/register" element={<AuthLayout><Register /></AuthLayout>} />
 
         {/* ===== Protected User Routes with User Layout ===== */}
@@ -157,6 +159,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+<Route
+  path="/UserProfile"
+  element={
+    <ProtectedRoute>
+      <UserLayout><UserProfile /></UserLayout>
+    </ProtectedRoute>
+  }
+/>
 
         {/* Redirect or 404 */}
         <Route path="/home" element={<Navigate to="/" replace />} />
