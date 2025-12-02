@@ -38,7 +38,9 @@ export default function CarDetails() {
   const primaryGradient = "linear-gradient(135deg,#005bb5 0%,#0072ff 100%)";
 
   useEffect(() => {
-    const API = import.meta.env.VITE_API_URL;
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
+
     if (!carID) {
       setError("No car id provided");
       setLoading(false);

@@ -1,4 +1,3 @@
-// CarManagement.jsx
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Option } from "@material-tailwind/react";
@@ -12,17 +11,17 @@ function CarManagement() {
   const navigate = useNavigate();
   const { theme } = useTheme();
 
-  // UI state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Data state (dynamic)
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const API = import.meta.env.VITE_API_URL;
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
+
     setLoading(true);
     setError(null);
 
