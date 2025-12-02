@@ -1,4 +1,5 @@
-import { useState } from "react";
+// CarManagement.jsx
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Select, Option } from "@material-tailwind/react";
 import { ArrowLeft, Plus } from "lucide-react";
@@ -9,145 +10,98 @@ import useTheme from "../../HOOKS/usetheme";
 
 function CarManagement() {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+
+  // UI state
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const allCars = [
-    {
-      id: "1",
-      name: "BMW 5 Series",
-      type: "Luxury Sedan",
-      price: 89,
-      originalPrice: 99,
-      rating: 4.9,
-      reviews: 127,
-      image:
-        "https://images.unsplash.com/photo-1656772119648-8fb884516e36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Auto", "5 Seats", "Premium"],
-      specs: { seats: 5, transmission: "Automatic", fuel: "Gasoline" },
-      available: true,
-      category: "luxury",
-    },
-    {
-      id: "2",
-      name: "Tesla Model 3",
-      type: "Electric Sedan",
-      price: 75,
-      originalPrice: 85,
-      rating: 4.8,
-      reviews: 89,
-      image:
-        "https://images.unsplash.com/photo-1651544022918-92083a5b7d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Electric", "5 Seats", "Eco-Friendly"],
-      specs: { seats: 5, transmission: "Automatic", fuel: "Electric" },
-      available: true,
-      category: "electric",
-    },
-    {
-      id: "3",
-      name: "Range Rover Sport",
-      type: "Luxury SUV",
-      price: 120,
-      originalPrice: 135,
-      rating: 4.9,
-      reviews: 156,
-      image:
-        "https://images.unsplash.com/photo-1758411898310-ada9284a3086?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["4WD", "7 Seats", "Premium"],
-      specs: { seats: 7, transmission: "Automatic", fuel: "Gasoline" },
-      available: true,
-      category: "suv",
-    },
-    {
-      id: "4",
-      name: "Porsche 911",
-      type: "Sports Car",
-      price: 199,
-      originalPrice: 220,
-      rating: 5.0,
-      reviews: 78,
-      image:
-        "https://images.unsplash.com/photo-1594182283857-f7e4bdfdf356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Manual", "2 Seats", "Sports"],
-      specs: { seats: 2, transmission: "Manual", fuel: "Gasoline" },
-      available: false,
-      category: "sports",
-    },
-    {
-      id: "5",
-      name: "Mercedes C-Class",
-      type: "Luxury Sedan",
-      price: 85,
-      originalPrice: 95,
-      rating: 4.7,
-      reviews: 203,
-      image:
-        "https://images.unsplash.com/photo-1648178326808-30e03de8049d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Auto", "5 Seats", "Premium"],
-      specs: { seats: 5, transmission: "Automatic", fuel: "Gasoline" },
-      available: true,
-      category: "luxury",
-    },
-    {
-      id: "6",
-      name: "BMW X5",
-      type: "Premium SUV",
-      price: 110,
-      originalPrice: 125,
-      rating: 4.8,
-      reviews: 134,
-      image:
-        "https://images.unsplash.com/photo-1758411898310-ada9284a3086?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["4WD", "7 Seats", "Premium"],
-      specs: { seats: 7, transmission: "Automatic", fuel: "Gasoline" },
-      available: true,
-      category: "suv",
-    },
-    {
-      id: "7",
-      name: "Audi A4 Convertible",
-      type: "Convertible",
-      price: 95,
-      originalPrice: 105,
-      rating: 4.6,
-      reviews: 89,
-      image:
-        "https://images.unsplash.com/photo-1656011475851-23f591606c0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Convertible", "4 Seats", "Premium"],
-      specs: { seats: 4, transmission: "Automatic", fuel: "Gasoline" },
-      available: true,
-      category: "convertible",
-    },
-    {
-      id: "8",
-      name: "Tesla Model Y",
-      type: "Electric SUV",
-      price: 89,
-      originalPrice: 99,
-      rating: 4.9,
-      reviews: 156,
-      image:
-        "https://images.unsplash.com/photo-1651544022918-92083a5b7d8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      features: ["Electric", "7 Seats", "Eco-Friendly"],
-      specs: { seats: 7, transmission: "Automatic", fuel: "Electric" },
-      available: true,
-      category: "electric",
-    },
-  ];
+  // Data state (dynamic)
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const filteredCars = allCars.filter((car) => {
-    const matchesSearch =
-      car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.type.toLowerCase().includes(searchQuery.toLowerCase());
+  useEffect(() => {
+    const API = import.meta.env.VITE_API_URL;
+    setLoading(true);
+    setError(null);
 
-    const matchesStatus =
-      selectedCategory === "all" ||
-      (selectedCategory === "available" && car.available) ||
-      (selectedCategory === "rented" && !car.available);
+    fetch(`${API}/api/v1/cars`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          throw new Error(`Status ${res.status} ${text}`);
+        }
+        return res.json();
+      })
+      .then((rawData) => {
+        // API returns { success, message, total, data: [...] }
+        const payload = rawData?.data || [];
+        const normalized = payload.map(normalizeCar);
+        setCars(normalized);
+      })
+      .catch((err) => {
+        console.error("Fetch cars error:", err);
+        setError(err.message || "Failed to load cars");
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-    return matchesSearch && matchesStatus;
-  });
-  const {theme}=useTheme();
+  function normalizeCar(item) {
+    return {
+      id: item.id ?? item._id ?? String(Math.random()).slice(2),
+      name: item.name ?? "Unknown",
+      type: item.type ?? "",
+      price: Number(item.price ?? 0),
+      originalPrice:
+        item.originalPrice !== undefined ? Number(item.originalPrice) : null,
+      rating: Number(item.rating ?? 0),
+      reviews: Number(item.reviews ?? 0),
+      image:
+        item.image ??
+        (item.images && item.images.length > 0 && item.images[0]) ??
+        "https://via.placeholder.com/1080x720?text=No+Image",
+      features: Array.isArray(item.features) ? item.features : [],
+      specs: {
+        seats:
+          item.specs?.seats ??
+          (item.seats !== undefined ? Number(item.seats) : undefined) ??
+          4,
+        transmission:
+          item.specs?.transmission ?? item.transmission ?? "Automatic",
+        fuel: item.specs?.fuel ?? item.fuel ?? "Gasoline",
+
+        doors: item.specs?.doors ?? item.doors ?? undefined,
+        engine: item.specs?.engine ?? item.engine ?? undefined,
+        mileage: item.specs?.mileage ?? item.mileage ?? undefined,
+      },
+      available:
+        typeof item.available === "boolean"
+          ? item.available
+          : item.isAvailable ?? true,
+      category: (item.category ?? "other").toString().toLowerCase(),
+      description: item.description ?? "",
+      included: Array.isArray(item.included) ? item.included : [],
+      _raw: item,
+    };
+  }
+
+  const filteredCars = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+
+    return cars.filter((car) => {
+      const matchesSearch =
+        car.name.toLowerCase().includes(q) ||
+        car.type.toLowerCase().includes(q);
+
+      const matchesStatus =
+        selectedCategory === "all" ||
+        (selectedCategory === "available" && car.available) ||
+        (selectedCategory === "rented" && !car.available);
+
+      return matchesSearch && matchesStatus;
+    });
+  }, [cars, searchQuery, selectedCategory]);
 
   return (
     <div className="p-6 space-y-6 bg-light-background dark:bg-dark-background">
@@ -166,7 +120,9 @@ function CarManagement() {
             <h1 className="text-3xl font-semibold bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
               Car Management
             </h1>
-            <p className="text-gray-700 dark:text-dark-secondary_text">Manage your fleet of vehicles</p>
+            <p className="text-gray-700 dark:text-dark-secondary_text">
+              Manage your fleet of vehicles
+            </p>
           </div>
         </div>
 
@@ -202,7 +158,9 @@ function CarManagement() {
               className="text-sm rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 dark:text-dark-secondary_text "
               labelProps={{ className: "before:border-0 after:border-0" }}
               containerProps={{ className: "shadow-none" }}
-              menuProps={{className:"bg-white dark:bg-dark-background border "}}
+              menuProps={{
+                className: "bg-white dark:bg-dark-background border ",
+              }}
             >
               <Option value="all">All Status</Option>
               <Option value="available">Available</Option>
@@ -212,11 +170,24 @@ function CarManagement() {
         </div>
       </div>
 
+      {/* Loading / Error */}
+      {loading && (
+        <div className="text-center py-6 text-gray-600">Loading cars…</div>
+      )}
+      {error && (
+        <div className="text-center py-6 text-red-500">Error: {error}</div>
+      )}
+
       {/* Cars Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
-        {filteredCars.map((car) => (
-          <AdminCarCard key={car.id} car={car} />
-        ))}
+        {!loading &&
+          !error &&
+          filteredCars.map((car) => <AdminCarCard key={car.id} car={car} />)}
+        {!loading && !error && filteredCars.length === 0 && (
+          <div className="col-span-full text-center text-gray-600">
+            No cars match your filters.
+          </div>
+        )}
       </div>
     </div>
   );
