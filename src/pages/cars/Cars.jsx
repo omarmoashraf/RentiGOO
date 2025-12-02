@@ -15,7 +15,9 @@ const Cars = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const API = import.meta.env.VITE_API_URL;
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
+
     setLoading(true);
     setError(null);
 
