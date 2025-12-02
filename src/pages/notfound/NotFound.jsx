@@ -3,14 +3,11 @@ import { FaHome, FaSearch, FaCar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import useTheme from "../../HOOKS/usetheme";
 
-
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  const {theme}=useTheme();
+  const { theme } = useTheme();
   return (
-
-   <div className="min-h-screen dark:bg-dark-background flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-
+    <div className="min-h-screen dark:bg-dark-background flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
       <div className="container mx-auto">
         <div className="max-w-2xl mx-auto">
           <Card className="bg-white/80 dark:bg-dark-background backdrop-blur-md shadow-md border border-gray-200">
@@ -35,13 +32,16 @@ const NotFoundPage = () => {
                   Page Not Found
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 max-w-md mx-auto px-2 xs:px-0">
-                  Oops! Looks like this route has taken a wrong turn. The page you're looking for doesn't exist or has been moved.
+                  Oops! Looks like this route has taken a wrong turn. The page
+                  you're looking for doesn't exist or has been moved.
                 </p>
               </div>
 
               {/* Suggestions */}
               <div className="bg-gray-100 dark:bg-dark-background rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 max-w-md mx-auto">
-                <h3 className="font-semibold text-gray-800 dark:text-dark-secondary_text mb-2 sm:mb-3 text-sm sm:text-base">What you can do:</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-dark-secondary_text mb-2 sm:mb-3 text-sm sm:text-base">
+                  What you can do:
+                </h3>
                 <div className="space-y-1.5 dark:text-dark-secondary_text sm:space-y-2 text-xs sm:text-sm text-gray-600 text-left">
                   <div className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-blue-700 rounded-full mt-1.5 sm:mt-2 flex-shrink-0" />
@@ -67,7 +67,7 @@ const NotFoundPage = () => {
                 <Button
                   size="lg"
                   onClick={() => navigate("/")}
-className="w-full xs:w-auto flex items-center justify-center text-sm sm:text-base bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                  className="w-full xs:w-auto flex items-center justify-center text-sm sm:text-base bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
                   <FaHome className="w-4 h-4 mr-2" />
                   Back to Home
@@ -76,8 +76,7 @@ className="w-full xs:w-auto flex items-center justify-center text-sm sm:text-bas
                   size="lg"
                   variant="outlined"
                   onClick={() => navigate("/cars")}
-                                 
-className="w-full xs:w-auto flex items-center justify-center border border-blue-900 bg-white bg-clip-text text-transparent font-semibold text-sm sm:text-base bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
+                  className="w-full xs:w-auto flex items-center justify-center border border-blue-900 bg-white bg-clip-text text-transparent font-semibold text-sm sm:text-base bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
                 >
                   <FaSearch className="w-4 h-4 mr-2" />
                   Browse Cars
