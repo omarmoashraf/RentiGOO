@@ -46,7 +46,7 @@ const Home = () => {
                 Experience Luxury
               </Typography>
               <div className="mb-8 opacity-80  md:text-base">
-                <span className="text-2xl text-[#06f] font-bold">
+                <span className="text-2xl text-dark-Buttons font-bold">
                   Premium Fleet at Your Service
                 </span>
                 <div className="text-white text-lg md:text-3xl">
@@ -88,7 +88,7 @@ const Home = () => {
                 Go Electric
               </Typography>
               <div className="mb-8 opacity-80 text-sm md:text-base">
-                <span className="text-3xl text-[#06f] font-bold">
+                <span className="text-3xl text-dark-Buttons font-bold">
                   Sustainable Future Driving
                 </span>
                 <div className="text-white text-lg md:text-3xl">
@@ -130,7 +130,7 @@ const Home = () => {
                 Unleash Power
               </Typography>
               <div className="mb-8 opacity-80 text-sm md:text-base">
-                <div className="text-3xl text-[#06f] font-bold">
+                <div className="text-3xl text-dark-Buttons font-bold">
                   Premium Sports Collection
                 </div>
 
@@ -310,7 +310,7 @@ const Home = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-400"
+                  className="mt-0.5 h-5 w-5 text-yellow-400"
                 >
                   <path
                     fillRule="evenodd"
