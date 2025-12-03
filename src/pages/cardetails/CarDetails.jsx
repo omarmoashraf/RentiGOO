@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Spinner } from "@material-tailwind/react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Card,
@@ -120,14 +121,18 @@ export default function CarDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-        <Typography variant="lead" className="text-gray-600 text-center">
-          Loading car details...
-        </Typography>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 dark:bg-dark-background">
+        <div>
+          <Spinner className="h-12 w-12 dark:text-dark-header_text " />
+        </div>
+
+        <h1 className="text-center dark:text-dark-header_text mt-2 ">
+          Loading cars details
+        </h1>
       </div>
     );
   }
-
+  <div className="flex justify-center align-middle h-screen w-full"></div>;
   const treatAsNotFound =
     !car ||
     (car && car.available === false) ||

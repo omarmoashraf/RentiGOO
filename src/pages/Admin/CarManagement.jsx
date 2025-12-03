@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import AdminCarCard from "./AdminCarCard";
 import useTheme from "../../HOOKS/usetheme";
-
+import { Spinner } from "@material-tailwind/react";
 function CarManagement() {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -171,7 +171,12 @@ function CarManagement() {
 
       {/* Loading / Error */}
       {loading && (
-        <div className="text-center py-6 text-gray-600">Loading cars…</div>
+        <div className="flex flex-col items-center justify-center h-screen w-full">
+          <Spinner className="h-12 w-12 dark:text-dark-header_text" />
+          <p className="text-center dark:text-dark-header_text mt-2">
+            Loading cars...
+          </p>
+        </div>
       )}
       {error && (
         <div className="text-center py-6 text-red-500">Error: {error}</div>

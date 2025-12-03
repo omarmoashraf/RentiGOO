@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsWindowDock } from "react-icons/bs";
+
 import {
   Camera,
   Car,
@@ -121,12 +122,12 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 dark:bg-dark-background">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-blue-600 mb-2">My Profile</h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-dark-secondary_text">
             Manage your account information and preferences
           </p>
         </div>
@@ -134,7 +135,7 @@ export default function ProfilePage() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="rounded-lg border shadow-sm bg-white sticky top-24 p-6 text-center space-y-4">
+            <div className="rounded-lg border shadow-sm bg-white sticky top-24 p-6 text-center space-y-4 dark:bg-dark-background">
               <div className="relative inline-block">
                 <span className="flex w-24 h-24 overflow-hidden rounded-full bg-blue-500 text-white text-2xl items-center justify-center">
                   JD
@@ -145,36 +146,36 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg">John Doe</h3>
-                <p className="text-sm text-gray-500">john.doe@example.com</p>
+                <h3 className="font-semibold text-lg dark:text-dark-header_text">John Doe</h3>
+                <p className="text-sm text-gray-500 dark:text-dark-secondary_text">john.doe@example.com</p>
                 <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium mt-2 bg-blue-100 text-blue-800">
                   Premium Member
                 </span>
               </div>
 
               <div className="border-t pt-3 space-y-3 text-left">
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm dark:text-dark-header_text">
                   <span>Member Since</span>
-                  <span className="font-medium">January 2023</span>
+                  <span className="font-medium dark:text-dark-secondary_text">January 2023</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm dark:text-dark-header_text">
                   <span>Total Bookings</span>
-                  <span className="font-medium">24</span>
+                  <span className="font-medium dark:text-dark-secondary_text">24</span>
                 </div>
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm dark:text-dark-header_text">
                   <span>Loyalty Points</span>
                   <span className="font-medium text-blue-600">850</span>
                 </div>
               </div>
 
               <div className="border-t pt-3 space-y-2">
-                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100">
+                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100 dark:text-dark-Buttons">
                   <Car size={16} /> My Bookings
                 </button>
-                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100">
+                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100 dark:text-dark-Buttons">
                   <Star size={16} /> Favorites
                 </button>
-                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100">
+                <button className="w-full flex items-center gap-4 px-3 py-2 text-sm border rounded-md hover:bg-gray-100 dark:text-dark-Buttons">
                   <CreditCard size={16} /> Wallet
                 </button>
               </div>
@@ -184,15 +185,15 @@ export default function ProfilePage() {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6">
             {/* Tabs */}
-            <div className="flex gap-2 p-1 mb-8 rounded-3xl bg-blue-gray-50">
+            <div className="flex gap-2 p-1 mb-8 rounded-3xl bg-blue-gray-50 dark:bg-dark-background">
               {["Personal", "Security", "Payment", "History"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`flex-1 px-4 py-1 text-sm font-medium border rounded-xl ${
                     activeTab === tab
-                      ? "bg-white shadow"
-                      : "hover:bg-gray-200 text-gray-700"
+                      ? "bg-white shadow dark:bg-dark-Buttons"
+                      : "hover:bg-gray-200 dark:hover:bg-dark-Buttons text-gray-700 "
                   }`}
                 >
                   {tab}
@@ -206,19 +207,19 @@ export default function ProfilePage() {
               {activeTab === "Personal" && (
                 <div className="space-y-6">
                   {/* Personal Info Card */}
-                  <div className="rounded-lg border shadow-sm bg-white p-6">
+                  <div className="rounded-lg border shadow-sm bg-white p-6 dark:bg-dark-background">
                     <div className="flex justify-between items-center mb-4">
                       <div>
-                        <h3 className="font-semibold">Personal Information</h3>
-                        <p className="text-sm text-gray-600">
+                        <h3 className="font-semibold dark:text-dark-header_text">Personal Information</h3>
+                        <p className="text-sm text-gray-600 dark:text-dark-secondary_text">
                           Update your personal details
                         </p>
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 dark:text-dark-header_text ">
                         {isEditingPersonal ? (
                           <>
                             <button
-                              className="flex items-center gap-2 px-3 py-2 border rounded-md hover:bg-gray-100"
+                              className="flex items-center gap-2 px-3 py-2 border rounded-md hover:bg-gray-100 dark:hover:bg-red-500 "
                               onClick={() => setIsEditingPersonal(false)}
                             >
                               <X size={16} /> Cancel
@@ -232,7 +233,7 @@ export default function ProfilePage() {
                           </>
                         ) : (
                           <button
-                            className="flex items-center gap-2 px-3 py-2 border rounded-md hover:bg-gray-100"
+                            className="flex items-center gap-2 px-3 py-2 border rounded-md hover:bg-gray-100 dark:hover:bg-dark-Buttons"
                             onClick={() => setIsEditingPersonal(true)}
                           >
                             Edit <EditIcon size={16} />
@@ -245,7 +246,7 @@ export default function ProfilePage() {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label
-                            className="text-base font-medium"
+                            className="text-base font-medium dark:text-dark-header_text"
                             htmlFor="firstName"
                           >
                             First Name
@@ -255,13 +256,13 @@ export default function ProfilePage() {
 
                             value={personalInfo.firstName}
                             onChange={handlePersonalChange}
-                            className="w-full px-3 py-1 mt-1 border text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
+                            className="w-full px-3 py-1 mt-1 border dark:bg-dark-background  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
                           />
                         </div>
 
                         <div>
                           <label
-                            className="text-base font-medium"
+                            className="text-base font-medium dark:text-dark-header_text"
                             htmlFor="lastName"
                           >
                             Last Name
@@ -270,56 +271,56 @@ export default function ProfilePage() {
                             id="lastName"
                             value={personalInfo.lastName}
                             onChange={handlePersonalChange}
-                            className="w-full px-3 py-1 mt-1 border  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
+                            className="w-full px-3 py-1 mt-1 border dark:bg-dark-background   text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-base font-medium" htmlFor="email">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="email">
                           Email Address
                         </label>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" size={16} />
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 dark:text-dark-secondary_text text-gray-600" size={16} />
                           <input
                             id="email"
                             value={personalInfo.email}
                             onChange={handlePersonalChange}
-                            className="w-full px-10 py-1 mt-1 border  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
+                            className="w-full px-10 py-1 mt-1 border dark:bg-dark-background   text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-base font-medium" htmlFor="phone">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="phone">
                           Phone Number
                         </label>
                         <div className="relative">
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 dark:text-dark-secondary_text text-gray-400" size={16} />
                           <input
                             id="phone"
                             value={personalInfo.phone}
                             onChange={handlePersonalChange}
-                            className="w-full px-10 py-1 mt-1 border  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
+                            className="w-full px-10 py-1 mt-1 border dark:bg-dark-background   text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
                           />
                         </div>
                       </div>
 
                       <div>
                         <label
-                          className="text-base font-medium"
+                          className="text-base font-medium dark:text-dark-header_text"
                           htmlFor="birthDate"
                         >
                           Birth Date
                         </label>
                         <div className="relative">
-                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                          <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 dark:text-dark-header_text text-gray-400" size={16} />
                           <input
                             type="date"
                             id="birthDate"
                             value={personalInfo.birthDate}
                             onChange={handlePersonalChange}
-                            className="w-full px-10 py-1 mt-1 border  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
+                            className="w-full px-10 py-1 mt-1 border dark:bg-dark-background  text-gray-400 bg-gray-50 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:bg-blue-gray-50"
                           />
                         </div>
                       </div>
@@ -327,16 +328,16 @@ export default function ProfilePage() {
                   </div>
 
                   {/* Address Card */}
-                  <div className="rounded-lg border shadow-sm bg-white p-6">
+                  <div className="rounded-lg border shadow-sm bg-white p-6 dark:bg-dark-background">
                     <div>
-                      <h3 className="font-semibold">Address Information</h3>
-                      <p className="text-sm text-gray-600">
+                      <h3 className="font-semibold dark:text-dark-header_text">Address Information</h3>
+                      <p className="text-sm text-gray-600 dark:text-dark-secondary_text">
                         Your billing and contact address
                       </p>
                     </div>
                     <div className="space-y-4 mt-4">
                       <div className="space-y-2">
-                        <label className="text-base font-medium" htmlFor="street">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="street">
                           Street Address
                         </label>
                         <div className="relative">
@@ -345,57 +346,57 @@ export default function ProfilePage() {
                             id="street"
                             value={addressInfo.street}
                             onChange={handleAddressChange}
-                            className="w-full px-10 py-1 border rounded-md text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                            className="w-full px-10 py-1 border rounded-md dark:bg-dark-background text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="text-base font-medium" htmlFor="city">
+                          <label className="text-base font-medium dark:text-dark-header_text" htmlFor="city">
                             City
                           </label>
                           <input
                             id="city"
                             value={addressInfo.city}
                             onChange={handleAddressChange}
-                            className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-1 border rounded-md dark:bg-dark-background  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                         <div>
-                          <label className="text-base font-medium" htmlFor="state">
+                          <label className="text-base font-medium dark:text-dark-header_text" htmlFor="state">
                             State
                           </label>
                           <input
                             id="state"
                             value={addressInfo.state}
                             onChange={handleAddressChange}
-                            className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-1 border rounded-md dark:bg-dark-background  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="text-base font-medium" htmlFor="zipCode">
+                          <label className="text-base font-medium dark:text-dark-header_text" htmlFor="zipCode">
                             ZIP Code
                           </label>
                           <input
                             id="zipCode"
                             value={addressInfo.zipCode}
                             onChange={handleAddressChange}
-                            className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-1 border rounded-md dark:bg-dark-background  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                         <div>
-                          <label className="text-base font-medium" htmlFor="country">
+                          <label className="text-base font-medium dark:text-dark-header_text" htmlFor="country">
                             Country
                           </label>
                           <input
                             id="country"
                             value={addressInfo.country}
                             onChange={handleAddressChange}
-                            className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-3 py-1 border rounded-md dark:bg-dark-background  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                       </div>
@@ -403,38 +404,38 @@ export default function ProfilePage() {
                   </div>
 
                   {/* Driver's License Card */}
-                  <div className="rounded-lg border shadow-sm bg-white p-6">
+                  <div className="rounded-lg border shadow-sm bg-white p-6 dark:bg-dark-background">
                     <div className="flex flex-col space-y-1.5 mb-4">
-                      <h3 className="font-semibold flex items-center gap-2">
+                      <h3 className="font-semibold flex items-center gap-2 dark:text-dark-header_text">
                         <Shield className="w-5 h-5 text-blue-500" /> Driver's License
                       </h3>
-                      <p className="text-sm text-gray-600">Your driving credentials</p>
+                      <p className="text-sm text-gray-600 dark:text-dark-secondary_text">Your driving credentials</p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="text-base font-medium" htmlFor="licenseNumber">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="licenseNumber">
                           License Number
                         </label>
                         <input
                           id="licenseNumber"
                           value={licenseInfo.licenseNumber}
                           onChange={handleLicenseChange}
-                          className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-1 border rounded-md dark:bg-dark-background  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
-                        <label className="text-base font-medium" htmlFor="licenseState">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="licenseState">
                           Issuing State
                         </label>
                         <input
                           id="licenseState"
                           value={licenseInfo.licenseState}
                           onChange={handleLicenseChange}
-                          className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-1 border rounded-md dark:bg-dark-background text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div>
-                        <label className="text-base font-medium" htmlFor="licenseExpiry">
+                        <label className="text-base font-medium dark:text-dark-header_text" htmlFor="licenseExpiry">
                           Expiry Date
                         </label>
                         <input
@@ -442,25 +443,25 @@ export default function ProfilePage() {
                           type="date"
                           value={licenseInfo.licenseExpiry}
                           onChange={handleLicenseChange}
-                          className="w-full px-3 py-1 border rounded-md  text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-1 border rounded-md dark:bg-dark-background text-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Notification Preferences */}
-                 <div className="rounded-lg border shadow-sm bg-white p-6 space-y-4">
+                 <div className="rounded-lg border shadow-sm bg-white p-6 space-y-4 dark:bg-dark-background">
   <div className="flex justify-between items-center mb-4">
     <div className="flex flex-col space-y-1.5">
-      <h3 className="font-semibold flex items-center gap-2">
+      <h3 className="font-semibold flex items-center gap-2 dark:text-dark-header_text">
         <Bell className="w-5 h-5 text-blue-500" /> Notification Preferences
       </h3>
-      <p className="text-sm text-gray-600">Manage how you receive updates</p>
+      <p className="text-sm text-gray-600 dark:text-dark-secondary_text">Manage how you receive updates</p>
     </div>
 
     <div className="flex gap-2">
       <button
-        className="px-3 py-1 border rounded-md hover:bg-gray-100"
+        className="px-3 py-1 border rounded-md hover:bg-gray-100 dark:hover:bg-dark-Buttons dark:text-dark-header_text"
         onClick={() => setIsEditingNotifications(!isEditingNotifications)}
       >
         {isEditingNotifications ? "Done" : "Edit"}
@@ -472,8 +473,8 @@ export default function ProfilePage() {
     {notifications.map((notif) => (
       <div key={notif.id} className="flex items-center justify-between">
         <div className="space-y-0.5">
-          <label className="text-sm font-medium">{notif.label}</label>
-          <p className="text-sm text-gray-500">{notif.desc}</p>
+          <label className="text-sm font-medium dark:text-dark-header_text">{notif.label}</label>
+          <p className="text-sm text-gray-500 dark:text-dark-secondary_text">{notif.desc}</p>
         </div>
 
         {/* Toggle button */}
@@ -489,7 +490,7 @@ export default function ProfilePage() {
             )
           }
           className={`inline-flex h-[1.15rem] w-8 items-center rounded-full border transition-all outline-none
-            ${notif.checked ? "bg-blue-500" : "bg-gray-300"}`}
+            ${notif.checked ? "bg-blue-500" : "bg-gray-300 dark:bg-dark-secondary_text"}`}
         >
           <span
             className={`block w-4 h-4 rounded-full bg-white transition-transform
@@ -508,16 +509,16 @@ export default function ProfilePage() {
                 <div className="space-y-6">
                   {/* Change Password */}
                   <div className="rounded-lg border p-6 shadow-sm">
-                    <h3 className="font-semibold flex items-center gap-2">🔒 Change Password</h3>
-                    <p className="text-sm text-gray-500">Update your account password</p>
+                    <h3 className="font-semibold flex items-center gap-2 dark:text-dark-header_text">🔒 Change Password</h3>
+                    <p className="text-sm text-gray-500 dark:text-dark-secondary_text">Update your account password</p>
                     <div className="space-y-4 mt-4">
                       <div className="space-y-1">
-                        <label htmlFor="currentPassword" className="text-sm font-medium">Current Password</label>
+                        <label htmlFor="currentPassword" className="text-sm font-medium dark:text-dark-header_text">Current Password</label>
                         <input
                           id="currentPassword"
                           type="password"
                           placeholder="Current password"
-                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border dark:bg-dark-background dark:text-d rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div className="space-y-1">

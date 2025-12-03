@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import CarCard from "./components/carCard/CarCard";
 import FilterSidebar from "./components/FilterSidebar/FilterSidebar";
 import CarsHeader from "./components/CarsHeader/CarsHeader";
+import { Spinner } from "@material-tailwind/react";
 
 const Cars = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -183,7 +184,14 @@ const Cars = () => {
           />
 
           <div className="p-4">
-            {loading && <p>Loading cars…</p>}
+            {loading && (
+              <div className="flex flex-col items-center justify-center h-screen w-full">
+                <Spinner className="h-12 w-12 dark:text-dark-header_text" />
+                <p className="text-center dark:text-dark-header_text mt-2">
+                  Loading cars..
+                </p>
+              </div>
+            )}
             {error && <p className="text-red-500">Error: {error}</p>}
             {!loading && !error && sortedCars.length === 0 && (
               <p>No cars match your filters.</p>

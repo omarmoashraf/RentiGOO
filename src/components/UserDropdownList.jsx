@@ -21,9 +21,6 @@ import useTheme from "../HOOKS/usetheme";
 
 const profileMenuItems = [
   { label: "My Profile", icon: UserCircleIcon },
-  { label: "Edit Profile", icon: Cog6ToothIcon },
-  { label: "Inbox", icon: InboxArrowDownIcon },
-  { label: "Help", icon: LifebuoyIcon },
   { label: "Sign Out", icon: PowerIcon },
 ];
 
@@ -40,15 +37,6 @@ export function AvatarWithUserDropdown() {
       logout();
     } else if (label === "My Profile") {
       navigate("/UserProfile"); // Navigate to UserProfile page
-    }
-    else if (label === "Edit Profile") {
-      navigate("/EditUserProfile"); // Navigate to EditUserProfile page
-    }
-    else if (label === "Inbox") {
-      navigate("/Inbox"); // Navigate to Inbox page
-    }
-    else if (label === "Help") {
-      navigate("/Help"); // Navigate to Help page
     }
     closeMenu();
   };

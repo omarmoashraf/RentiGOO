@@ -12,6 +12,8 @@ import { MdStarRate } from "react-icons/md";
 import { TbCircleLetterS } from "react-icons/tb";
 import { TbCircleLetterM } from "react-icons/tb";
 import { TbCircleLetterE } from "react-icons/tb";
+import React, { useState, useEffect } from "react";
+import { Spinner } from "@material-tailwind/react";
 import {
   CardHeader,
   CardBody,
@@ -21,6 +23,65 @@ import {
 } from "@material-tailwind/react";
 
 const Home = () => {
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Normalize car data
+  const normalizeCar = (car) => ({
+    id: car.id,
+    name: car.name,
+    image: car.image || "./default-car.jpg",
+    price: car.price || 0,
+    type: car.type || "Unknown",
+    rating: car.rating || 0,
+    reviews: car.reviews || 0,
+    features: car.features || [],
+    available: car.available ?? true,
+  });
+
+  useEffect(() => {
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
+
+    setLoading(true);
+    setError(null);
+
+    fetch(`${API}/api/v1/cars`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          throw new Error(`Status ${res.status} ${text}`);
+        }
+        return res.json();
+      })
+      .then((rawData) => {
+        const payload = Array.isArray(rawData)
+          ? rawData
+          : rawData?.data ?? rawData?.cars ?? [];
+
+        const normalized = payload.map(normalizeCar).slice(0, 4); // أربع عربيات فقط
+        setCars(normalized);
+      })
+      .catch((err) => {
+        console.error("Fetch Error:", err);
+        setError(err.message || "Failed to load cars");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 dark:bg-dark-background">
+        <div>
+          <Spinner className="h-12 w-12 dark:text-dark-header_text " />
+        </div>
+
+        <h1 className="text-center dark:text-dark-header_text mt-2 ">
+          Loading 
+        </h1>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="overflow-hidden">
@@ -46,10 +107,10 @@ const Home = () => {
                 Experience Luxury
               </Typography>
               <div className="mb-8 opacity-80  md:text-base">
-                <span className="text-2xl text-[#06f] font-bold">
+                <span className="text-2xl text-dark-Buttons font-bold">
                   Premium Fleet at Your Service
                 </span>
-                <div className="text-white text-lg md:text-3xl">
+                <div className="hidden sm:hidden md:block text-lg md:text-3xl md:text-white">
                   Drive the finest vehicles with cutting-edge technology and
                   unmatched comfort
                 </div>
@@ -88,10 +149,10 @@ const Home = () => {
                 Go Electric
               </Typography>
               <div className="mb-8 opacity-80 text-sm md:text-base">
-                <span className="text-3xl text-[#06f] font-bold">
+                <span className="text-3xl text-dark-Buttons font-bold">
                   Sustainable Future Driving
                 </span>
-                <div className="text-white text-lg md:text-3xl">
+                <div className="hidden sm:hidden md:block text-lg md:text-3xl md:text-white">
                   Experience the future with our eco-friendly electric vehicle
                   collection
                 </div>
@@ -130,11 +191,11 @@ const Home = () => {
                 Unleash Power
               </Typography>
               <div className="mb-8 opacity-80 text-sm md:text-base">
-                <div className="text-3xl text-[#06f] font-bold">
+                <div className="text-3xl text-dark-Buttons font-bold">
                   Premium Sports Collection
                 </div>
 
-                <div className="text-white text-lg md:text-3xl">
+                <div className="hidden sm:hidden md:block text-lg md:text-3xl md:text-white">
                   Feel the thrill with our exclusive selection of
                   high-performance sports cars
                 </div>
@@ -248,365 +309,91 @@ const Home = () => {
             any occasion.
           </p>
         </header>
-        <div
-          className="cards 
-  grid 
-  grid-cols-1 
-  sm:grid-cols-2 
-  lg:grid-cols-3 
-  xl:grid-cols-4 
-  gap-8 
-  p-6 
-  place-items-center"
-        >
-          {/* CARD 1 */}
-          <Card
-            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
-    border border-gray-300 dark:border-gray-300
-    rounded-2xl shadow-md
-    transition-transform duration-500 hover:scale-105"
-          >
-            <CardHeader floated={false} color="blue-gray" className="relative">
-              <img
-                src="./Homecard-1.jpg"
-                alt="BMW 5 Series"
-                className="w-full h-48 object-cover"
-              />
-              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
-              <Chip
-                value="Available"
-                color="green"
-                size="sm"
-                className="absolute top-3 right-3 font-semibold"
-              />
-            </CardHeader>
-
-            <CardBody>
-              <div className="mb-3 flex items-center justify-between">
-                <Typography
-                  variant="h5"
-                  color="blue-gray"
-                  className="font-bold dark:text-dark-header_text"
-                >
-                  BMW 5 Series
-                </Typography>
-                <div>
-                  <span className="text-[#06f]">$89</span>/day
-                </div>
-              </div>
-
-              <Typography
-                color="gray"
-                className="dark:text-dark-secondary_text"
-              >
-                Luxury Sedan
-              </Typography>
-
-              <Typography
+        <div className="cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 p-6 place-items-center">
+          {loading && (
+            <div className="flex justify-center align-middle h-screen w-full">
+              <Spinner className="h-12 w-12 dark:text-dark-header_text" />
+              <p className="text-center dark:text-dark-header_text mt-2 ">
+                Loading cars...
+              </p>
+            </div>
+          )}
+          {error && <p className="text-red-600">{error}</p>}
+          {cars.map((car) => (
+            <Card
+              key={car.id}
+              className="bg-light-background dark:bg-dark-background border border-gray-300 dark:border-gray-300 rounded-2xl shadow-md hover:scale-105 transition-transform duration-300"
+            >
+              <CardHeader
+                floated={false}
                 color="blue-gray"
-                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
+                className="relative"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-400"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c..."
-                    clipRule="evenodd"
-                  />
-                </svg>
-                5.0 (89 reviews)
-              </Typography>
-
-              <section className="grid grid-cols-3 gap-3 mt-5 text-center ">
-                <Chip
-                  variant="ghost"
-                  value="Auto"
-                  className="text-gray-700 dark:bg-dark-header_text"
+                <img
+                  src={car.image}
+                  alt={car.name}
+                  className="w-full h-48 object-cover"
                 />
                 <Chip
-                  variant="ghost"
-                  value="5 Seats"
-                  className="text-gray-700 dark:bg-dark-header_text"
+                  value={car.available ? "Available" : "BOOKED"}
+                  color={car.available ? "green" : "red"}
+                  size="sm"
+                  className={`absolute top-3 right-3 font-semibold ${
+                    !car.available ? "text-white" : ""
+                  }`}
                 />
-                <Chip
-                  variant="ghost"
-                  value="Premium"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-              </section>
+              </CardHeader>
 
-              <section className="price text-2xl mt-6 grid grid-cols-3">
-                <Link to="./cars/1">
-                  <Button color="blue">Book</Button>
-                </Link>
-              </section>
-            </CardBody>
-          </Card>
-
-          {/* CARD 2 */}
-          <Card
-            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
-    border border-gray-300 dark:border-gray-300
-    rounded-2xl shadow-md
-    transition-transform duration-500 hover:scale-105"
-          >
-            <CardHeader floated={false} color="blue-gray" className="relative">
-              <img
-                src="./Homecard-5.jpg"
-                alt="Tesla Model 3"
-                className="w-full h-48 object-cover"
-              />
-              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
-              <Chip
-                value="Available"
-                color="green"
-                size="sm"
-                className="absolute top-3 right-3 font-semibold"
-              />
-            </CardHeader>
-
-            <CardBody>
-              <div className="mb-3 flex items-center justify-between">
-                <Typography
-                  variant="h5"
-                  color="blue-gray"
-                  className="font-bold dark:text-dark-header_text"
-                >
-                  Tesla Model 3
-                </Typography>
-                <div>
-                  <span className="text-[#06f]">$75</span>/day
+              <CardBody>
+                <div className="mb-3 flex items-center justify-between">
+                  <Typography
+                    variant="h5"
+                    color="blue-gray"
+                    className="font-bold dark:text-dark-header_text"
+                  >
+                    {car.name}
+                  </Typography>
+                  <div>
+                    <span className="text-[#06f]">${car.price}</span>/day
+                  </div>
                 </div>
-              </div>
 
-              <Typography
-                color="gray"
-                className="dark:text-dark-secondary_text"
-              >
-                Electric Sedan
-              </Typography>
-
-              <Typography
-                color="blue-gray"
-                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-400"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c..."
-                    clipRule="evenodd"
-                  />
-                </svg>
-                4.8 (89 reviews)
-              </Typography>
-
-              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
-                <Chip
-                  variant="ghost"
-                  value="Electric"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="5 Seats"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="Economy"
-                  className="text-gray-700 w-50 dark:bg-dark-header_text"
-                />
-              </section>
-
-              <section className="price text-2xl mt-6 grid grid-cols-3">
-                <Link to="./cars/2">
-                  <Button color="blue">Book</Button>
-                </Link>
-              </section>
-            </CardBody>
-          </Card>
-
-          {/* CARD 3 */}
-          <Card
-            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
-    border border-gray-300 dark:border-gray-300
-    rounded-2xl shadow-md
-    transition-transform duration-500 hover:scale-105"
-          >
-            <CardHeader floated={false} color="blue-gray" className="relative">
-              <img
-                src="./Homecard-3.jpg"
-                alt="Range Rover"
-                className="w-full h-48 object-cover"
-              />
-              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
-              <Chip
-                value="Available"
-                color="green"
-                size="sm"
-                className="absolute top-3 right-3 font-semibold"
-              />
-            </CardHeader>
-
-            <CardBody>
-              <div className="mb-3 flex items-center justify-between">
                 <Typography
-                  variant="h5"
-                  color="blue-gray"
-                  className="font-bold dark:text-dark-header_text"
+                  color="gray"
+                  className="dark:text-dark-secondary_text"
                 >
-                  Range Rover
+                  {car.type}
                 </Typography>
-                <div>
-                  <span className="text-[#06f]">$120</span>/day
-                </div>
-              </div>
 
-              <Typography
-                color="gray"
-                className="dark:text-dark-secondary_text"
-              >
-                Luxury Sedan
-              </Typography>
-
-              <Typography
-                color="blue-gray"
-                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-400"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c..."
-                    clipRule="evenodd"
-                  />
-                </svg>
-                4.9 (156 reviews)
-              </Typography>
-
-              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
-                <Chip
-                  variant="ghost"
-                  value="4WD"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="7 Seats"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="Premium"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-              </section>
-
-              <section className="price text-2xl mt-6 grid grid-cols-3">
-                <Link to="./cars/3">
-                  <Button color="blue">Book</Button>
-                </Link>
-              </section>
-            </CardBody>
-          </Card>
-
-          {/* CARD 4 */}
-          <Card
-            className="w-full max-w-[22rem] bg-light-background dark:bg-dark-background
-    border border-gray-300 dark:border-gray-300
-    rounded-2xl shadow-md
-    transition-transform duration-500 hover:scale-105"
-          >
-            <CardHeader floated={false} color="blue-gray" className="relative">
-              <img
-                src="./Homecard-4.jpg"
-                alt="Porsche 911"
-                className="w-full h-48 object-cover"
-              />
-              <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
-              <Chip
-                value="BOOKED"
-                color="red"
-                size="sm"
-                className="absolute top-3 right-3 font-semibold text-white"
-              />
-            </CardHeader>
-
-            <CardBody>
-              <div className="mb-3 flex items-center justify-between">
                 <Typography
-                  variant="h5"
                   color="blue-gray"
-                  className="font-bold dark:text-dark-header_text"
+                  className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
                 >
-                  Porsche 911
+                  <FaStar className="text-yellow-600 mr-1" /> {car.rating} (
+                  {car.reviews} reviews)
                 </Typography>
-                <div>
-                  <span className="text-[#06f]">$200</span>/day
-                </div>
-              </div>
 
-              <Typography
-                color="gray"
-                className="dark:text-dark-secondary_text"
-              >
-                Luxury Sedan
-              </Typography>
+                <section className="grid grid-cols-3 gap-3 mt-5 text-center">
+                  {car.features.map((feature, idx) => (
+                    <Chip
+                      key={idx}
+                      variant="ghost"
+                      value={feature}
+                      className="text-gray-700 dark:bg-dark-header_text"
+                    />
+                  ))}
+                </section>
 
-              <Typography
-                color="blue-gray"
-                className="flex items-center mt-4 font-normal dark:text-dark-secondary_text"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-400"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.788 3.21c..."
-                    clipRule="evenodd"
-                  />
-                </svg>
-                5.0 (89 reviews)
-              </Typography>
-
-              <section className="grid grid-cols-3 gap-3 mt-5 text-center">
-                <Chip
-                  variant="ghost"
-                  value="Manual"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="2 Seats"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-                <Chip
-                  variant="ghost"
-                  value="Sport"
-                  className="text-gray-700 dark:bg-dark-header_text"
-                />
-              </section>
-
-              <section className="price text-2xl mt-6 grid grid-cols-3">
-                <Button color="blue" disabled>
-                  Book
-                </Button>
-              </section>
-            </CardBody>
-          </Card>
+                <section className="mt-6 ">
+                  <Link to={`./cars/${car.id}`}>
+                    <Button color="blue" disabled={!car.available}>
+                      Book
+                    </Button>
+                  </Link>
+                </section>
+              </CardBody>
+            </Card>
+          ))}
         </div>
       </div>
       <section className="flex justify-center m-8">
