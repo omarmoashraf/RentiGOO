@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../../api";
 import {
   Card,
   Input,
@@ -18,11 +19,8 @@ import {
   FaShieldAlt,
   FaHeadset,
   FaCar,
-  FaGoogle,
-  FaFacebook,
-  FaApple,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
 
 const Register = () => {
@@ -49,7 +47,6 @@ const Register = () => {
 
   const validate = () => {
     let newErrors = {};
-    const { theme } = useTheme();
 
     if (activeTab === "signup") {
       if (!formData.firstName.trim())
@@ -88,20 +85,39 @@ const Register = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validate()) return;
 
     if (activeTab === "signup") {
-      console.log("Registering user:", formData);
-      // navigate('/login');
-    } else {
-      console.log("Logging in user:", {
+      const payload = {
+        username: `${formData.firstName} ${formData.lastName}`, // <-- fixed
         email: formData.email,
         password: formData.password,
-      });
-      // navigate('/dashboard');
+        telephone: formData.telephone, // optional
+        role: "user", // optional
+      };
+
+      try {
+        const res = await fetch(`${API_URL}/auth/signup`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setErrors({ submit: data.message || "Registration failed" });
+          return;
+        }
+
+        alert("Account created successfully!");
+        navigate("/login");
+      } catch (err) {
+        setErrors({ submit: "Network error. Try again later." });
+      }
     }
   };
 
@@ -132,9 +148,8 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-light-background dark:bg-dark-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        {/* ---------- LEFT SECTION ---------- */}
+        {/* LEFT SECTION */}
         <div className="text-center lg:text-left space-y-8">
-          {/* Logo & Brand */}
           <div className="flex justify-center lg:justify-start items-center gap-3">
             <div className="w-12 h-12">
               <img
@@ -144,7 +159,10 @@ const Register = () => {
               />
             </div>
             <div>
-              <Typography variant="h4" className="font-bold text-light-primary_text dark:text-dark-header_text">
+              <Typography
+                variant="h4"
+                className="font-bold text-light-primary_text dark:text-dark-header_text"
+              >
                 RentiGO
               </Typography>
               <Typography className="text-gray-600 text-sm font-medium">
@@ -153,7 +171,6 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Headline */}
           <div className="space-y-4">
             <Typography
               variant="h1"
@@ -171,7 +188,7 @@ const Register = () => {
             </Typography>
           </div>
 
-          {/* Features Grid */}
+          {/* Features */}
           <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
             {features.map((feature, index) => (
               <div
@@ -197,10 +214,9 @@ const Register = () => {
           </div>
         </div>
 
-        {/* ---------- RIGHT SECTION ---------- */}
+        {/* RIGHT SECTION */}
         <div className="flex justify-center">
           <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-light-background dark:bg-dark-background">
-            {/* Tabs */}
             <div className="px-8 pt-8">
               <Tabs value={activeTab} className="overflow-visible">
                 <TabsHeader
@@ -209,20 +225,12 @@ const Register = () => {
                     className: "bg-white shadow-sm rounded-md",
                   }}
                 >
-                  <Tab
-                    value="signin"
-                    onClick={() => navigate("/login")}
-                    className="py-3"
-                  >
+                  <Tab value="signin" onClick={() => navigate("/login")}>
                     <Typography className="font-semibold text-sm">
                       Sign In
                     </Typography>
                   </Tab>
-                  <Tab
-                    value="signup"
-                    onClick={() => navigate("/register")}
-                    className="py-3"
-                  >
+                  <Tab value="signup" onClick={() => navigate("/register")}>
                     <Typography className="font-semibold text-sm">
                       Sign Up
                     </Typography>
@@ -232,44 +240,37 @@ const Register = () => {
             </div>
 
             <div className="p-8">
-              {/* Title */}
               <div className="text-center mb-8">
                 <Typography
                   variant="h3"
                   className="font-bold text-light-primary_text dark:text-dark-header_text mb-2"
                 >
-                  {activeTab === "signup" ? "Create Account" : "Welcome Back"}
+                  Create Account
                 </Typography>
                 <Typography className="text-gray-600">
-                  {activeTab === "signup"
-                    ? "Join RentiGO and start your journey"
-                    : "Sign in to your account to continue"}
+                  Join RentiGO and start your journey
                 </Typography>
               </div>
 
               <form className="space-y-6" onSubmit={handleSubmit}>
-                {activeTab === "signup" && (
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 ">
-                    <InputField
-                      label="First Name"
-                      placeholder="John"
-                      icon={<FaUser className="w-4 h-4" />}
-                      value={formData.firstName}
-                      onChange={(e) =>
-                        handleChange("firstName", e.target.value)
-                      }
-                      error={errors.firstName}
-                    />
-                    <InputField
-                      label="Last Name"
-                      placeholder="Doe"
-                      icon={<FaUser className="w-4 h-4" />}
-                      value={formData.lastName}
-                      onChange={(e) => handleChange("lastName", e.target.value)}
-                      error={errors.lastName}
-                    />
-                  </div>
-                )}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 ">
+                  <InputField
+                    label="First Name"
+                    placeholder="John"
+                    icon={<FaUser className="w-4 h-4" />}
+                    value={formData.firstName}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
+                    error={errors.firstName}
+                  />
+                  <InputField
+                    label="Last Name"
+                    placeholder="Doe"
+                    icon={<FaUser className="w-4 h-4" />}
+                    value={formData.lastName}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
+                    error={errors.lastName}
+                  />
+                </div>
 
                 <InputField
                   label="Email Address"
@@ -281,17 +282,15 @@ const Register = () => {
                   error={errors.email}
                 />
 
-                {activeTab === "signup" && (
-                  <InputField
-                    label="Phone Number"
-                    placeholder="+1 (555) 000-0000"
-                    type="tel"
-                    icon={<FaPhone className="w-4 h-4 rotate-90" />}
-                    value={formData.telephone}
-                    onChange={(e) => handleChange("telephone", e.target.value)}
-                    error={errors.telephone}
-                  />
-                )}
+                <InputField
+                  label="Phone Number"
+                  placeholder="+20 10 1234 5678"
+                  type="tel"
+                  icon={<FaPhone className="w-4 h-4 rotate-90" />}
+                  value={formData.telephone}
+                  onChange={(e) => handleChange("telephone", e.target.value)}
+                  error={errors.telephone}
+                />
 
                 <InputField
                   label="Password"
@@ -303,63 +302,45 @@ const Register = () => {
                   error={errors.password}
                 />
 
-                {activeTab === "signup" && (
-                  <InputField
-                    label="Confirm Password"
-                    placeholder="••••••••"
-                    type="password"
-                    icon={<FaLock className="w-4 h-4" />}
-                    value={formData.confirmPassword}
+                <InputField
+                  label="Confirm Password"
+                  placeholder="••••••••"
+                  type="password"
+                  icon={<FaLock className="w-4 h-4" />}
+                  value={formData.confirmPassword}
+                  onChange={(e) =>
+                    handleChange("confirmPassword", e.target.value)
+                  }
+                  error={errors.confirmPassword}
+                />
+
+                <div className="flex items-center gap-1 mt-4">
+                  <Checkbox
+                    checked={formData.agreeTerms}
                     onChange={(e) =>
-                      handleChange("confirmPassword", e.target.value)
+                      handleChange("agreeTerms", e.target.checked)
                     }
-                    error={errors.confirmPassword}
+                    className="mt-0"
+                    color="blue"
                   />
+                  <Typography variant="small" className="text-gray-700">
+                    I agree to the{" "}
+                    <span className="text-blue-600 font-medium">Terms</span> and{" "}
+                    <span className="text-blue-600 font-medium">
+                      Privacy Policy
+                    </span>
+                  </Typography>
+                </div>
+
+                {errors.agreeTerms && (
+                  <Typography className="text-red-500 text-xs">
+                    {errors.agreeTerms}
+                  </Typography>
                 )}
 
-                {activeTab === "signup" && (
-                  <div
-                    className="flex items-center gap-1"
-                    style={{
-                      marginTop:
-                        "calc(1rem * calc(1 - var(--tw-space-y-reverse)))",
-                    }}
-                  >
-                    <Checkbox
-                      checked={formData.agreeTerms}
-                      onChange={(e) =>
-                        handleChange("agreeTerms", e.target.checked)
-                      }
-                      className="mt-0"
-                      color="blue"
-                    />
-                    <Typography
-                      variant="small"
-                      className="text-gray-700 leading-[0.3]"
-                    >
-                      I agree to the{" "}
-                      <a
-                        href="#"
-                        className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-medium hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
-                      >
-                        Terms
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="#"
-                        className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-medium hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
-                      >
-                        Privacy Policy
-                      </a>
-                    </Typography>
-                  </div>
-                )}
-                {errors.agreeTerms && (
-                  <Typography
-                    variant="small"
-                    className="text-red-500 text-xs mt-1 ml-2"
-                  >
-                    {errors.agreeTerms}
+                {errors.submit && (
+                  <Typography className="text-red-500 text-sm">
+                    {errors.submit}
                   </Typography>
                 )}
 
@@ -367,57 +348,12 @@ const Register = () => {
                   type="submit"
                   size="lg"
                   fullWidth
-                  className={`text-white font-medium shadow-md transition-all 
-              bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
-              hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg`}
+                  className="text-white font-medium shadow-md transition-all 
+                    bg-gradient-to-r from-[#0066ff] to-[#0052cc] 
+                    hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
                 >
-                  {activeTab === "signup" ? "Create Account" : "Sign In"}
+                  Create Account
                 </Button>
-
-                {/* Divider */}
-                <div className="relative my-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200" />
-                  </div>
-                  <div className="relative flex justify-center">
-                    <Typography
-                      variant="small"
-                      className="bg-light-background dark:bg-dark-background px-4 text-gray-500 font-medium"
-                    >
-                      OR CONTINUE WITH
-                    </Typography>
-                  </div>
-                </div>
-
-                {/* Social Buttons */}
-                <div className="grid grid-cols-3 gap-3">
-                  <SocialButton
-                    icon={<FaGoogle className="w-4 h-4" />}
-                    brand="google"
-                  />
-                  <SocialButton
-                    icon={<FaFacebook className="w-4 h-4" />}
-                    brand="facebook"
-                  />
-                  <SocialButton
-                    icon={<FaApple className="w-4 h-4" />}
-                    brand="apple"
-                  />
-                </div>
-
-                <div className="text-center pt-4">
-                  <Typography className="text-gray-600 text-sm">
-                    {activeTab === "signup"
-                      ? "Already have an account?"
-                      : "Don't have an account?"}{" "}
-                    <Link
-                      to={activeTab === "signup" ? "/login" : "/register"}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
-                    >
-                      {activeTab === "signup" ? "Sign In" : "Sign Up"}
-                    </Link>
-                  </Typography>
-                </div>
               </form>
             </div>
           </Card>
@@ -428,7 +364,6 @@ const Register = () => {
 };
 
 /* ------------ SUBCOMPONENTS ------------ */
-
 const InputField = ({ label, icon, error, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
@@ -439,9 +374,7 @@ const InputField = ({ label, icon, error, ...props }) => (
         {...props}
         error={!!error}
         className="pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg"
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
+        labelProps={{ className: "before:content-none after:content-none" }}
         containerProps={{ className: "min-w-0" }}
       />
       <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
@@ -455,24 +388,5 @@ const InputField = ({ label, icon, error, ...props }) => (
     )}
   </div>
 );
-
-const SocialButton = ({ icon, brand }) => {
-  const brandColors = {
-    google: "hover:bg-red-50 border-gray-300",
-    facebook: "hover:bg-blue-50 border-gray-300",
-    apple: "hover:bg-gray-100 border-gray-300",
-  };
-
-  return (
-    <Button
-      variant="outlined"
-      size="sm"
-      fullWidth
-      className={`flex items-center justify-center p-3 rounded-lg border transition-colors ${brandColors[brand]}`}
-    >
-      <span className="text-gray-600">{icon}</span>
-    </Button>
-  );
-};
 
 export default Register;
