@@ -20,6 +20,7 @@ import Cars from "./pages/cars/Cars";
 import CarDetails from "./pages/cardetails/CarDetails";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import UserProfile from "./pages/login/UserProfile"
 import Pricing from "./pages/pricing/Pricing";
 
 // Pages - User Protected
@@ -34,8 +35,10 @@ import AddNewCar from "./pages/Admin/AddNewCar";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import CarManagement from "./pages/Admin/CarManagement";
 import EditCar from "./pages/Admin/EditCar";
+import UserManagement from "./pages/Admin/UserManagement";
 import ViewCarDetails from "./pages/Admin/ViewCarDetails";
 import BookingDetails from "./pages/Admin/BookingDetails";
+import { User } from "lucide-react";
 
 function App() {
   return (
@@ -53,6 +56,7 @@ function App() {
 
         {/* ===== Auth Routes (Login/Register) with Auth Layout ===== */}
         <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+
         <Route path="/register" element={<AuthLayout><Register /></AuthLayout>} />
 
         {/* ===== Protected User Routes with User Layout ===== */}
@@ -106,6 +110,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+  path="/User"
+  element={
+    <ProtectedRoute adminOnly={true}>
+      <AdminLayout><UserManagement /></AdminLayout>
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/AddNewCar"
           element={
@@ -146,6 +159,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+<Route
+  path="/UserProfile"
+  element={
+    <ProtectedRoute>
+      <UserLayout><UserProfile /></UserLayout>
+    </ProtectedRoute>
+  }
+/>
 
         {/* Redirect or 404 */}
         <Route path="/home" element={<Navigate to="/" replace />} />

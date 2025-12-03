@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Spinner } from "@material-tailwind/react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   Card,
@@ -24,18 +25,90 @@ import {
   ChevronRight,
   ChevronLeft,
 } from "lucide-react";
-import { allCars } from "../../data/allCars";
 
 export default function CarDetails() {
   const { carID } = useParams();
   const navigate = useNavigate();
 
-  const car = allCars.find((c) => c.id === carID);
+  const [car, setCar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const accentGradient = "linear-gradient(90deg,#00c6ff 0%,#0072ff 100%)";
-  const primaryGradient = "linear-gradient(135deg,#005bb5 0%,#0072ff 100%)"; // darker blue
+  const primaryGradient = "linear-gradient(135deg,#005bb5 0%,#0072ff 100%)";
 
-  if (!car || !car.available) {
+  useEffect(() => {
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
+
+    if (!carID) {
+      setError("No car id provided");
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    fetch(`${API}/api/v1/cars/${carID}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+
+          if (res.status === 404) throw new Error("Car not found");
+          throw new Error(`Status ${res.status} ${text}`);
+        }
+        return res.json();
+      })
+      .then((json) => {
+        const payload = json?.data ?? json;
+        if (!payload || Object.keys(payload).length === 0) {
+          throw new Error("Car not found");
+        }
+
+        const normalized = {
+          id: payload.id ?? payload._id ?? String(Math.random()).slice(2),
+          name: payload.name ?? "Unknown",
+          type: payload.type ?? "",
+          price: Number(payload.price ?? 0),
+          originalPrice:
+            payload.originalPrice !== undefined
+              ? Number(payload.originalPrice)
+              : null,
+          rating: Number(payload.rating ?? 0),
+          reviews: Number(payload.reviews ?? 0),
+          images:
+            Array.isArray(payload.images) && payload.images.length > 0
+              ? payload.images
+              : payload.image
+              ? [payload.image]
+              : [],
+          image: payload.image ?? (payload.images && payload.images[0]) ?? null,
+          features: Array.isArray(payload.features) ? payload.features : [],
+          specs: payload.specs ?? {},
+          available:
+            typeof payload.available === "boolean"
+              ? payload.available
+              : payload.isAvailable ?? true,
+          description: payload.description ?? "",
+          location: payload.location ?? "",
+          included: Array.isArray(payload.included) ? payload.included : [],
+          year: payload.year ?? payload.modelYear ?? null,
+          _raw: payload,
+        };
+
+        setCar(normalized);
+        setSelectedImage(0);
+      })
+      .catch((err) => {
+        console.error("Fetch single car error:", err);
+        setError(err.message || "Failed to load car");
+      })
+      .finally(() => setLoading(false));
+  }, [carID]);
+
+  function renderNotFoundUnavailable() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
         <Typography variant="lead" className="text-gray-600 text-center">
@@ -46,8 +119,47 @@ export default function CarDetails() {
     );
   }
 
-  const [selectedImage, setSelectedImage] = useState(0);
-  const images = Array(3).fill(car.image);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6 dark:bg-dark-background">
+        <div>
+          <Spinner className="h-12 w-12 dark:text-dark-header_text " />
+        </div>
+
+        <h1 className="text-center dark:text-dark-header_text mt-2 ">
+          Loading cars details
+        </h1>
+      </div>
+    );
+  }
+  <div className="flex justify-center align-middle h-screen w-full"></div>;
+  const treatAsNotFound =
+    !car ||
+    (car && car.available === false) ||
+    error === "Car not found" ||
+    error === "No car id provided";
+
+  if (treatAsNotFound) {
+    return renderNotFoundUnavailable();
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+        <Typography variant="lead" className="text-red-600 text-center">
+          {error}
+        </Typography>
+      </div>
+    );
+  }
+
+  const images =
+    car.images && car.images.length > 0
+      ? car.images
+      : [
+          car.image ??
+            "https://via.placeholder.com/1200x800?text=Image+not+available",
+        ];
 
   return (
     <div className="min-h-screen p-6 bg-light-background dark:bg-dark-background">
@@ -78,46 +190,33 @@ export default function CarDetails() {
                 }
               />
               {/* Carousel arrows */}
-              <button
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow"
-                onClick={() =>
-                  setSelectedImage(
-                    (prev) => (prev - 1 + images.length) % images.length
-                  )
-                }
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-700" />
-              </button>
-              <button
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow"
-                onClick={() =>
-                  setSelectedImage((prev) => (prev + 1) % images.length)
-                }
-              >
-                <ChevronRight className="w-5 h-5 text-gray-700" />
-              </button>
+              {images.length > 1 && (
+                <>
+                  <button
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow"
+                    onClick={() =>
+                      setSelectedImage(
+                        (prev) => (prev - 1 + images.length) % images.length
+                      )
+                    }
+                  >
+                    <ChevronLeft className="w-5 h-5 text-gray-700" />
+                  </button>
+                  <button
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow"
+                    onClick={() =>
+                      setSelectedImage((prev) => (prev + 1) % images.length)
+                    }
+                  >
+                    <ChevronRight className="w-5 h-5 text-gray-700" />
+                  </button>
+                </>
+              )}
 
               {/* Top-right actions */}
               <div className="absolute top-4 right-4 flex gap-2">
                 <IconButton size="sm" className="bg-white/90 hover:bg-white">
                   <Heart className="w-4 h-4 text-red-500" />
-                </IconButton>
-                <IconButton
-                  size="sm"
-                  className="bg-white/90 hover:bg-white"
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: car.name,
-                        text: `${car.name} - ${car.type}`,
-                        url: window.location.href,
-                      });
-                    } else {
-                      navigator.clipboard.writeText(window.location.href);
-                    }
-                  }}
-                >
-                  <Share2 className="w-4 h-4 text-gray-700" />
                 </IconButton>
               </div>
             </div>
@@ -135,6 +234,10 @@ export default function CarDetails() {
                       : "border-transparent hover:border-gray-300"
                   }`}
                   onClick={() => setSelectedImage(idx)}
+                  onError={(e) =>
+                    (e.currentTarget.src =
+                      "https://via.placeholder.com/320x240?text=No+Image")
+                  }
                 />
               ))}
             </div>
@@ -156,7 +259,7 @@ export default function CarDetails() {
               </span>
 
               {/* Save Badge */}
-              {car.originalPrice > car.price && (
+              {car.originalPrice !== null && car.originalPrice > car.price && (
                 <span
                   className="px-3 py-1 rounded-full text-white text-sm font-semibold"
                   style={{
@@ -208,11 +311,12 @@ export default function CarDetails() {
                 {/* Pricing */}
                 <div>
                   <div className="flex items-baseline gap-3">
-                    {car.originalPrice > car.price && (
-                      <span className="text-sm text-gray-400 line-through">
-                        ${car.originalPrice}
-                      </span>
-                    )}
+                    {car.originalPrice !== null &&
+                      car.originalPrice > car.price && (
+                        <span className="text-sm text-gray-400 line-through">
+                          ${car.originalPrice}
+                        </span>
+                      )}
                     <div
                       style={{
                         background: accentGradient,
@@ -258,17 +362,9 @@ export default function CarDetails() {
                     style={{
                       background: primaryGradient,
                     }}
-                    onClick={() => navigate("/booking")}
+                    onClick={() => navigate("/booking", { state: { car } })}
                   >
                     Book Now <ChevronRight className="w-4 h-4" />
-                  </Button>
-
-                  {/* Call Now button */}
-                  <Button
-                    variant="outlined"
-                    className="w-36 rounded-lg flex items-center justify-center gap-2 border-blue-600 text-blue-600 hover:bg-blue-50 mx-auto"
-                  >
-                    <Phone className="w-4 h-4" /> Call Now
                   </Button>
                 </div>
               </CardBody>
@@ -310,7 +406,9 @@ export default function CarDetails() {
                   <div className="font-semibold text-gray-900 dark:text-dark-secondary_text">
                     {item.value}
                   </div>
-                  <div className="text-sm text-light-secondary_text">{item.label}</div>
+                  <div className="text-sm text-light-secondary_text">
+                    {item.label}
+                  </div>
                 </Card>
               );
             })}
@@ -334,15 +432,21 @@ export default function CarDetails() {
                   <div className="space-y-2">
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Make</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.make}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.make}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Model</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.name}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.name}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Year</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.year}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.year}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Doors</span>
@@ -357,7 +461,9 @@ export default function CarDetails() {
                   <div className="space-y-2">
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Engine</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.engine}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.engine}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Transmission</span>
@@ -367,11 +473,15 @@ export default function CarDetails() {
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Fuel Type</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.fuel}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.fuel}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Fuel Economy</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.mileage}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.mileage}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -382,11 +492,15 @@ export default function CarDetails() {
                   <div className="space-y-2">
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Passengers</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.seats}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.seats}
+                      </span>
                     </div>
                     <div className="flex justify-between dark:text-dark-header_text">
                       <span>Luggage</span>
-                      <span className="font-medium dark:text-dark-header_text">{car.specs.luggage}</span>
+                      <span className="font-medium dark:text-dark-header_text">
+                        {car.specs.luggage}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -427,12 +541,13 @@ export default function CarDetails() {
                 What's Included
               </Typography>
               <div className="flex flex-col text-lg gap-3 text-gray-800">
-                {(
-                  car.included || [
-                    "Full Insurance Coverage",
-                    "24/7 Roadside Assistance",
-                    "Free Cancellation",
-                  ]
+                {(car.included.length
+                  ? car.included
+                  : [
+                      "Full Insurance Coverage",
+                      "24/7 Roadside Assistance",
+                      "Free Cancellation",
+                    ]
                 ).map((inc, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-blue-500" />

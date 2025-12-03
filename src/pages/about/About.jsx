@@ -7,6 +7,7 @@ import { FiTarget } from "react-icons/fi";
 import { FaEye } from "react-icons/fa";
 import { MdPeople } from "react-icons/md";
 import { BiSolidMedal } from "react-icons/bi";
+import { Spinner } from "@material-tailwind/react";
 
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+
 const About = () => {
   return (
     <div className="main">

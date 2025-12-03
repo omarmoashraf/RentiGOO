@@ -159,7 +159,7 @@ const isLogged = !!user;
             ) : (
               <Button
                 onClick={() => navigate("/login")}
-                className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                className="bg-gradient-to-r from-[#0066ff] dark:bg-dark-Buttons to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 "
               >
                 Sign In
               </Button>
@@ -228,8 +228,8 @@ const isLogged = !!user;
                 onClick={() => navigate("/favourites")}
                 className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
               >
-                <FaHeart className="w-4 h-4 text-dark-nav_icons" />
-                <span className="font-semibold text-dark-nav_icons">
+                <FaHeart className="w-4 h-4 dark:text-dark-nav_icons" />
+                <span className="font-semibold dark:text-dark-nav_icons text-center">
                   Favorites
                 </span>
               </Button>
@@ -239,8 +239,8 @@ const isLogged = !!user;
                 onClick={() => navigate("/wallet")}
                 className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
               >
-                <FaWallet className="w-4 h-4 text-dark-nav_icons" />
-                <span className="font-semibold text-dark-nav_icons">
+                <FaWallet className="w-4 h-4 dark:text-dark-nav_icons" />
+                <span className="font-semibold dark:text-dark-nav_icons text-center">
                   Wallet
                 </span>
               </Button>
