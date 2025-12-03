@@ -1,53 +1,72 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
+// ------------------- CUSTOM HOOK -------------------
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
 
+// ------------------- PROVIDER -------------------
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);      // Stores user object
+  const [token, setToken] = useState(null);    // Stores JWT
   const [loading, setLoading] = useState(true);
 
+  // Load saved login on app start
   useEffect(() => {
-    // Check if user is logged in on app start
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
+    const savedUser = localStorage.getItem("user");
+    const savedToken = localStorage.getItem("token");
+
+    if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
+      setToken(savedToken);
     }
+
     setLoading(false);
   }, []);
 
-  const login = (userData) => {
+  // ------------------- LOGIN -------------------
+  const login = (token, userData) => {
     setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    setToken(token);
+
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", token);
   };
 
+  // ------------------- LOGOUT -------------------
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    setToken(null);
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
-  const isAdmin = () => {
-    return user && user.role === 'admin';
-  };
+  // ------------------- CHECK ADMIN -------------------
+  const isAdmin = () => user?.role === "admin";
+
+  // ------------------- CHECK AUTH -------------------
+  const isAuthenticated = !!token;
 
   const value = {
     user,
+    token,
     login,
     logout,
+    loading,
     isAdmin,
-    loading
+    isAuthenticated,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

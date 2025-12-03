@@ -23,21 +23,24 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
-import { useLogged } from "../../HOOKS/UseLogged";
-import { useAuth } from "../../context/AuthContext"; // Add this import
+
+import { useAuth } from "../../context/AuthContext"; 
+import { API_URL } from "../../api";
 import useTheme from './../../HOOKS/usetheme';
 
 const Login = () => {
   const { theme } = useTheme();
-  const { login: loggedIn } = useLogged();
-  const { login: contextLogin } = useAuth(); // Use auth context instead of useLogged
+  const { login: contextLogin } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [showAdminDemo, setShowAdminDemo] = useState(false); // Toggle for admin demo
-  const navigate = useNavigate();
+  const [showAdminDemo, setShowAdminDemo] = useState(false);
 
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState(""); 
+
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -56,39 +59,50 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // ⭐ FINAL WORKING LOGIN FUNCTION ⭐
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError("");
 
     if (!validate()) return;
 
-    console.log("Logging in user:", { email, password });
-
-    // Check for admin credentials
+    // Admin override (demo)
     if (email === "admin@rentigo.com" && password === "admin123") {
-      const adminUser = {
-        id: 1,
+      contextLogin("admin-token", {
         name: "Admin User",
-        email: "admin@rentigo.com",
+        email,
         role: "admin",
-      };
-      contextLogin(adminUser);
+      });
       navigate("/admindashboard");
       return;
     }
 
-    // Regular user login
-    const regularUser = {
-      // id: Date.now(),
-      // name: email.split('@')[0], // Simple name from email
-      // email: email,
-      // role: "user"
-      email: email,
-      password: password,
-      role: "user",
+    // Backend login
+    const payload = {
+      email: email.trim(),
+      password: password.trim(),
     };
 
-    contextLogin(regularUser);
-    navigate("/");
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSubmitError(data.message || "Invalid login credentials");
+        return;
+      }
+
+      contextLogin(data.token, data.user);
+      navigate("/");
+    } catch (err) {
+      setSubmitError("Network error — please try again.");
+    }
   };
 
   const features = [
@@ -118,9 +132,9 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-light-background dark:bg-dark-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        {/* ---------- LEFT SECTION ---------- */}
+        
+        {/* LEFT SECTION */}
         <div className="text-center lg:text-left space-y-8">
-          {/* Logo & Brand */}
           <div className="flex justify-center lg:justify-start items-center gap-3">
             <div className="w-12 h-12">
               <img
@@ -139,7 +153,6 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Headline */}
           <div className="space-y-4">
             <Typography
               variant="h1"
@@ -156,7 +169,6 @@ const Login = () => {
             </Typography>
           </div>
 
-          {/* Features Grid */}
           <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
             {features.map((feature, index) => (
               <div
@@ -167,10 +179,7 @@ const Login = () => {
                   <div className="text-blue-600">{feature.icon}</div>
                 </div>
                 <div className="text-left">
-                  <Typography
-                    variant="h6"
-                    className="font-semibold text-dark-secondary_text mb-1"
-                  >
+                  <Typography variant="h6" className="font-semibold text-dark-secondary_text mb-1">
                     {feature.title}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
@@ -182,9 +191,10 @@ const Login = () => {
           </div>
         </div>
 
-        {/* ---------- RIGHT SECTION ---------- */}
+        {/* RIGHT SECTION */}
         <div className="flex justify-center">
           <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-white dark:bg-dark-background">
+
             {/* Tabs */}
             <div className="px-8 pt-8">
               <Tabs value="signin" className="overflow-visible">
@@ -216,8 +226,8 @@ const Login = () => {
               </Tabs>
             </div>
 
+            {/* FORM */}
             <div className="p-8">
-              {/* Title */}
               <div className="text-center mb-8">
                 <Typography
                   variant="h3"
@@ -231,6 +241,7 @@ const Login = () => {
               </div>
 
               <form className="space-y-6" onSubmit={handleSubmit}>
+
                 <InputField
                   label="Email Address"
                   placeholder="john@example.com"
@@ -239,7 +250,6 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   errors={errors.email}
-                  
                 />
 
                 <InputField
@@ -252,7 +262,13 @@ const Login = () => {
                   errors={errors.password}
                 />
 
-                {/* Remember Me & Forgot Password */}
+                {/* Submit Error */}
+                {submitError && (
+                  <Typography className="text-red-500 text-sm text-center">
+                    {submitError}
+                  </Typography>
+                )}
+
                 <div className="flex justify-between items-center">
                   <Checkbox
                     label={
@@ -302,7 +318,6 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* Social Buttons */}
                 <div className="grid grid-cols-3 gap-3">
                   <SocialButton
                     icon={<FaGoogle className="w-4 h-4" />}
@@ -329,6 +344,7 @@ const Login = () => {
                     </Link>
                   </Typography>
                 </div>
+
               </form>
             </div>
           </Card>
