@@ -165,15 +165,33 @@ const Order = ({
           <span className="text-light-primary_text dark:text-dark-secondary_text">24/7 roadside assistance</span>
         </div>
       </div>
-      <Link to="/paymentmethods">
+      {submitError && (
+        <div className="text-red-600 text-sm mb-2">{submitError}</div>
+      )}
+      {submitSuccess && (
+        <div className="text-green-600 text-sm mb-2">{submitSuccess}</div>
+      )}
+      {onConfirm ? (
         <Button
           color="blue"
           fullWidth
+          disabled={submitting}
+          onClick={onConfirm}
           className="font-semibold bg-gradient-to-r from-blue-600 to-cyan-500"
         >
-          Complete Payment
+          {submitting ? "Submitting booking..." : "Confirm Booking"}
         </Button>
-      </Link>
+      ) : (
+        <Link to="/paymentmethods" state={{ bookingData }}>
+          <Button
+            color="blue"
+            fullWidth
+            className="font-semibold bg-gradient-to-r from-blue-600 to-cyan-500"
+          >
+            Continue
+          </Button>
+        </Link>
+      )}
     </Card>
   );
 };
