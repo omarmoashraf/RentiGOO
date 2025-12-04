@@ -68,9 +68,12 @@ const Booking = () => {
     }
 
     const carId =
-      selectedCar.id || selectedCar._id || selectedCar._raw?._id || null;
-    const isObjectId = typeof carId === "string" && carId.length === 24;
-    if (!carId || !isObjectId) {
+      selectedCar._id ||
+      selectedCar.id ||
+      selectedCar._raw?._id ||
+      selectedCar._raw?.externalId ||
+      null;
+    if (!carId) {
       setSubmitError(
         "Selected vehicle is invalid for booking. Please re-open the car details and try again."
       );
