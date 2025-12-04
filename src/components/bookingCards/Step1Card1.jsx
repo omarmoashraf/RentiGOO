@@ -1,15 +1,25 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-  Input,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography, Input } from "@material-tailwind/react";
 import { FaCar, FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
-import { Select, Option } from "@material-tailwind/react";
 
-function Step1Card1() {
+const fallbackImage =
+  "https://via.placeholder.com/320x200.png?text=Select+a+car+to+book";
+
+function Step1Card1({
+  car,
+  startDate,
+  endDate,
+  onStartDateChange,
+  onEndDateChange,
+}) {
+  const image =
+    car?.image ||
+    (Array.isArray(car?.images) && car.images[0]) ||
+    car?._raw?.thumbnail ||
+    fallbackImage;
+  const name = car?.name || "Select a car to continue";
+  const type = car?.type || car?.category || "";
+  const price = car?.price ?? car?._raw?.price ?? 0;
+
   return (
     <Card
       className="w-full max-w-4xl mx-auto rounded-2xl border-0 shadow-none p-4 bg-light-background dark:bg-dark-background"
@@ -32,28 +42,29 @@ function Step1Card1() {
         <div className="flex justify-between items-center rounded-xl p-4 mb-6 bg-light-background dark:bg-dark-background">
           <div className="flex gap-4 items-center">
             <img
-              src="https://cdn.motor1.com/images/mgl/nkZZY/s3/2022-bmw-5-series-facelift-front.jpg"
-              alt="BMW 5 Series"
+              src={image}
+              alt={name}
               className="w-24 h-16 rounded-lg object-cover"
+              onError={(e) => (e.target.src = fallbackImage)}
             />
             <div>
               <Typography
                 variant="h6"
                 className="text-gray-900 dark:text-dark-header_text font-semibold"
               >
-                BMW 5 Series
+                {name}
               </Typography>
               <Typography variant="small" className="text-gray-600">
-                Luxury Sedan
+                {type || "Vehicle"}
               </Typography>
               <div className="mt-1 bg-gray-100 text-gray-800 text-sm px-2 py-1 rounded-lg inline-block">
-                $89/day
+                ${price}/day
               </div>
             </div>
           </div>
-          <Button size="sm" variant="outlined" color="blue">
-            Change
-          </Button>
+          <Typography className="text-gray-500 text-sm">
+            Booking details are based on your selected vehicle.
+          </Typography>
         </div>
 
         {/* Pickup & Return Details */}
@@ -70,32 +81,16 @@ function Step1Card1() {
               </Typography>
             </div>
             <div className="flex flex-col gap-3 bg-light-background dark:bg-dark-background  ">
-              <Select
-                className="text-gray-800 dark:text-dark-secondary_text"
-                label="Select pickup location"
-                variant="outlined"
-                color="blue"
-                labelProps={{
-                  className: "text-light-",
-                }}
-                menuProps={{
-                  className:
-                    "bg-light-background dark:bg-dark-background text-gray-800 dark:text-gray-100",
-                }}
-              >
-                <Option>Material Tailwind HTML</Option>
-                <Option>Material Tailwind React</Option>
-                <Option>Material Tailwind Vue</Option>
-                <Option>Material Tailwind Angular</Option>
-                <Option>Material Tailwind Svelte</Option>
-              </Select>
               <div className="flex flex-col sm:flex-row gap-3 w-full ">
                 <div className="w-full sm:w-1/2">
                   <Input
+                    type="date"
                     icon={<FaCalendarAlt />}
-                    label="Select date"
+                    label="Start date"
                     variant="outlined"
                     color="blue"
+                    value={startDate}
+                    onChange={(e) => onStartDateChange?.(e.target.value)}
                     className="text-light-secondary_text dark:text-dark-secondary_text"
                   />
                 </div>
@@ -123,37 +118,26 @@ function Step1Card1() {
               </Typography>
             </div>
             <div className="flex flex-col gap-3">
-              <Select
-                className="text-gray-800 dark:text-dark-secondary_text"
-                label="Select pickup location"
-                variant="outlined"
-                color="blue"
-                labelProps={{
-                  className: "text-light-",
-                }}
-                menuProps={{
-                  className:
-                    "bg-light-background dark:bg-dark-background text-gray-800 dark:text-gray-100",
-                }}
-              >
-                <Option>Material Tailwind HTML</Option>
-                <Option>Material Tailwind React</Option>
-                <Option>Material Tailwind Vue</Option>
-                <Option>Material Tailwind Angular</Option>
-                <Option>Material Tailwind Svelte</Option>
-              </Select>
               <div className="flex flex-col sm:flex-row gap-3 w-full">
                 <div className="w-full sm:w-1/2">
                   <Input
+                    type="date"
                     icon={<FaCalendarAlt />}
-                    label="Select date"
+                    label="End date"
                     variant="outlined"
                     color="blue"
+                    value={endDate}
+                    onChange={(e) => onEndDateChange?.(e.target.value)}
                     className="text-light-secondary_text dark:text-dark-secondary_text"
                   />
                 </div>
                 <div className="w-full sm:w-1/2">
-                  <Input label="Time" variant="outlined" color="blue"    className="text-light-secondary_text dark:text-dark-secondary_text" />
+                  <Input
+                    label="Time"
+                    variant="outlined"
+                    color="blue"
+                    className="text-light-secondary_text dark:text-dark-secondary_text"
+                  />
                 </div>
               </div>
             </div>

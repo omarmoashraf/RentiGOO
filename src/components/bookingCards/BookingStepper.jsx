@@ -1,17 +1,26 @@
 import React from "react";
-import { useState } from "react";
 import { Stepper, Step, Button } from "@material-tailwind/react";
 import Step1Card1 from "./Step1Card1";
 import Step1Card2 from "./Step1Card2";
 import PaymentDetails from "../../pages/paymentdetails/PaymentDetails";
 import { FaArrowLeft } from "react-icons/fa";
 
-function BookingStepper() {
+function BookingStepper({
+  car,
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+  totalPrice,
+  submitting,
+  submitError,
+  submitSuccess,
+  canProceed,
+  onSubmitBooking,
+}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
-  const [method, setMethod] = useState("card");
-  const [sameAddress, setSameAddress] = useState(false);
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
 
@@ -50,11 +59,22 @@ function BookingStepper() {
               {activeStep === 0 && (
                 <div className="flex flex-col lg:flex-row justify-between w-full gap-6">
                   <div className="lg:w-3/4 w-full  shadow-md rounded-lg p-6 border border-gray-300 bg-light-background dark:bg-dark-background">
-                    <Step1Card1 />
+                    <Step1Card1
+                      car={car}
+                      startDate={startDate}
+                      endDate={endDate}
+                      onStartDateChange={setStartDate}
+                      onEndDateChange={setEndDate}
+                    />
                   </div>
 
                   <div className="lg:w-[35%] w-full bg-light-background dark:bg-dark-background shadow-md rounded-lg p-6 border border-gray-300 flex justify-center lg:justify-start">
-                    <Step1Card2 />
+                    <Step1Card2
+                      startDate={startDate}
+                      endDate={endDate}
+                      totalPrice={totalPrice}
+                      car={car}
+                    />
                   </div>
                 </div>
               )}
@@ -64,7 +84,18 @@ function BookingStepper() {
       </div>
       {activeStep === 1 && (
         <div className="">
-          <PaymentDetails />
+          <PaymentDetails
+            bookingData={{
+              car,
+              startDate,
+              endDate,
+              totalPrice,
+            }}
+            onConfirm={onSubmitBooking}
+            submitting={submitting}
+            submitError={submitError}
+            submitSuccess={submitSuccess}
+          />
         </div>
       )}
       <div className="flex justify-center items-top mt-1">
@@ -81,7 +112,7 @@ function BookingStepper() {
             <Button
               onClick={handleNext}
               className="bg-light-Buttons text-light-primary_text dark:text-dark-header_text"
-              disabled={isLastStep}
+              disabled={isLastStep || (activeStep === 0 && !canProceed)}
             >
               Next
             </Button>
