@@ -50,35 +50,7 @@ const PaymentDetails = ({
 
   const handleConfirm = async () => {
     setFormError("");
-
-    if (method === "card") {
-      const number = cardFields.number.trim();
-      const name = cardFields.name.trim();
-      const expiry = cardFields.expiry.trim();
-      const cvv = cardFields.cvv.trim();
-      if (!number || !name || !expiry || !cvv) {
-        setFormError("Please complete all card details before continuing.");
-        return;
-      }
-    }
-
-    if (!sameAddress) {
-      const firstName = billingFields.firstName.trim();
-      const lastName = billingFields.lastName.trim();
-      const address = billingFields.address.trim();
-      const city = billingFields.city.trim();
-      const state = billingFields.state.trim();
-      const zip = billingFields.zip.trim();
-
-      if (!firstName || !lastName || !address || !city || !zip) {
-        setFormError("Please complete your billing address before continuing.");
-        return;
-      }
-    }
-
-    if (onConfirm) {
-      await onConfirm();
-    }
+    if (onConfirm) await onConfirm();
   };
 
   return (
