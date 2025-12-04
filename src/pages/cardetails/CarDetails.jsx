@@ -68,7 +68,8 @@ export default function CarDetails() {
         }
 
         const normalized = {
-          id: payload.id ?? payload._id ?? String(Math.random()).slice(2),
+          // prefer backend Mongo _id for downstream booking relations
+          id: payload._id ?? payload.id ?? String(Math.random()).slice(2),
           name: payload.name ?? "Unknown",
           type: payload.type ?? "",
           price: Number(payload.price ?? 0),

@@ -67,9 +67,19 @@ const Booking = () => {
       return;
     }
 
+    const carId =
+      selectedCar.id || selectedCar._id || selectedCar._raw?._id || null;
+    const isObjectId = typeof carId === "string" && carId.length === 24;
+    if (!carId || !isObjectId) {
+      setSubmitError(
+        "Selected vehicle is invalid for booking. Please re-open the car details and try again."
+      );
+      return;
+    }
+
     const payload = {
       user: userId,
-      car: selectedCar.id || selectedCar._id || selectedCar._raw?._id,
+      car: carId,
       startDate,
       endDate,
       totalPrice,
