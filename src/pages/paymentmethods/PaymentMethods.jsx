@@ -8,12 +8,64 @@ import { Button } from "@material-tailwind/react";
 
 const PaymentMethods = () => {
   const { state } = useLocation();
-  const bookingData = state?.bookingData;
+  const raw = state?.bookingData;
 
   // If the page is opened directly without state, send back to booking
-  if (!bookingData) {
+  if (!raw) {
     return <Navigate to="/booking" replace />;
   }
+
+  const days = (() => {
+    if (!raw.startDate || !raw.endDate) return 0;
+    const diff =
+      (new Date(raw.endDate).getTime() - new Date(raw.startDate).getTime()) /
+      (1000 * 60 * 60 * 24);
+    return diff > 0 ? Math.ceil(diff) : 0;
+  })();
+
+  const normalizedBooking = {
+    reference:
+      raw.booking?._id ||
+      raw.booking?.id ||
+      raw.booking?.reference ||
+      "BOOKING",
+    car: {
+      name: raw.car?.name || "Booked Vehicle",
+      type: raw.car?.type || raw.car?.category || "",
+      image:
+        raw.car?.image ||
+        (Array.isArray(raw.car?.images) && raw.car.images[0]) ||
+        "https://via.placeholder.com/320x200.png?text=Vehicle",
+      transmission:
+        raw.car?.specs?.transmission || raw.car?.transmission || "Automatic",
+      seats: raw.car?.specs?.seats || raw.car?.seats || "4 Seats",
+      package: raw.car?.package || "Standard",
+    },
+    pickup: {
+      date: raw.startDate || "TBD",
+      time: "10:00 AM",
+      location: raw.car?.location || "Pickup location",
+    },
+    return: {
+      date: raw.endDate || "TBD",
+      time: "10:00 AM",
+      location: raw.car?.location || "Return location",
+    },
+    customer: {
+      name: raw.booking?.user?.name || "Customer",
+      email: raw.booking?.user?.email || "example@email.com",
+      phone: raw.booking?.user?.phone || "+1 (555) 123-4567",
+      duration: days > 0 ? `${days} days` : "Duration",
+    },
+    payment: {
+      vehicle: raw.totalPrice || 0,
+      insurance: 0,
+      tax: 0,
+      service: 0,
+      total: raw.totalPrice || 0,
+      method: raw.method || "Card payment",
+    },
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen pt-20 w-full max-w-full">
@@ -30,8 +82,8 @@ const PaymentMethods = () => {
 
       <div className="flex flex-col lg:flex-row gap-8 p-4 sm:p-6 md:p-8 w-full">
         <div className="flex-1 flex flex-col gap-6">
-          <Booking bookingData={bookingData} />
-          <Customer bookingData={bookingData} />
+          <Booking bookingData={normalizedBooking} />
+          <Customer bookingData={normalizedBooking} />
           <Important />
 
           <div className="flex flex-wrap gap-4 mt-4 justify-center lg:justify-start">
@@ -63,7 +115,7 @@ const PaymentMethods = () => {
         </div>
 
         <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
-          <Payment bookingData={bookingData} />
+          <Payment bookingData={normalizedBooking} />
         </div>
       </div>
     </div>
