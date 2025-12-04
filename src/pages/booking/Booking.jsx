@@ -34,27 +34,41 @@ const Booking = () => {
     const end = new Date(endDate);
     const msInDay = 1000 * 60 * 60 * 24;
     const diff = Math.ceil((end - start) / msInDay);
-    const rentalDays = Number.isFinite(diff) && diff > 0 ? diff : 1;
-    return rentalDays * dailyPrice;
+    if (!Number.isFinite(diff) || diff <= 0) return 0;
+    return diff * dailyPrice;
   }, [startDate, endDate, dailyPrice]);
 
-  const canProceed = !!selectedCar && !!startDate && !!endDate;
+  const datesValid = useMemo(() => {
+    if (!startDate || !endDate) return false;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    return end > start;
+  }, [startDate, endDate]);
+
+  const canProceed = !!selectedCar && !!startDate && !!endDate && datesValid;
 
   const handleSubmitBooking = async () => {
     setSubmitError("");
     setSubmitSuccess("");
 
-    if (!canProceed) {
+    if (!selectedCar || !startDate || !endDate) {
       setSubmitError("Select start and end dates before continuing.");
       return;
     }
-    if (!user?.id && !user?._id) {
+
+    if (!datesValid) {
+      setSubmitError("End date must be after start date.");
+      return;
+    }
+
+    const userId = user?.id || user?._id || user?.userId;
+    if (!userId) {
       setSubmitError("Please sign in again to continue with your booking.");
       return;
     }
 
     const payload = {
-      user: user.id || user._id,
+      user: userId,
       car: selectedCar.id || selectedCar._id || selectedCar._raw?._id,
       startDate,
       endDate,
