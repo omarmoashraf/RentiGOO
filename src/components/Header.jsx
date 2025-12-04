@@ -24,11 +24,9 @@ import { useAuth } from "../context/AuthContext";
 import { useLogged } from "../HOOKS/UseLogged";
 import AvatarWithUserDropdown from "./UserDropdownList";
 
-
-
-const Header = ({ currentPage, onNavigate}) => {
+const Header = ({ currentPage, onNavigate }) => {
   const { user, logout } = useAuth();
-const isLogged = !!user;
+  const isLogged = !!user;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -245,12 +243,16 @@ const isLogged = !!user;
                 </span>
               </Button>
 
-              <Button
-                onClick={() => navigate("/login")}
-                className="col-span-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 py-3 transform hover:scale-105"
-              >
-                Sign In
-              </Button>
+              {isLogged ? (
+                <AvatarWithUserDropdown className="col-span-2" />
+              ) : (
+                <Button
+                  onClick={() => navigate("/login")}
+                  className="col-span-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 py-3 transform hover:scale-105"
+                >
+                  Sign In
+                </Button>
+              )}
             </div>
           </div>
         </div>
