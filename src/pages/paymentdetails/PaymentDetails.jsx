@@ -16,7 +16,8 @@ const PaymentDetails = ({
 }) => {
   const location = useLocation();
   const [method, setMethod] = useState("card");
-  const [sameAddress, setSameAddress] = useState(false);
+  // Default billing same as personal to reduce required inputs
+  const [sameAddress, setSameAddress] = useState(true);
   const [cardFields, setCardFields] = useState({
     number: "",
     name: "",
@@ -28,7 +29,7 @@ const PaymentDetails = ({
     lastName: "",
     address: "",
     city: "",
-    state: "",
+    state: "NY",
     zip: "",
   });
   const [formError, setFormError] = useState("");
@@ -51,7 +52,10 @@ const PaymentDetails = ({
     setFormError("");
 
     if (method === "card") {
-      const { number, name, expiry, cvv } = cardFields;
+      const number = cardFields.number.trim();
+      const name = cardFields.name.trim();
+      const expiry = cardFields.expiry.trim();
+      const cvv = cardFields.cvv.trim();
       if (!number || !name || !expiry || !cvv) {
         setFormError("Please complete all card details before continuing.");
         return;
@@ -59,8 +63,14 @@ const PaymentDetails = ({
     }
 
     if (!sameAddress) {
-      const { firstName, lastName, address, city, state, zip } = billingFields;
-      if (!firstName || !lastName || !address || !city || !state || !zip) {
+      const firstName = billingFields.firstName.trim();
+      const lastName = billingFields.lastName.trim();
+      const address = billingFields.address.trim();
+      const city = billingFields.city.trim();
+      const state = billingFields.state.trim();
+      const zip = billingFields.zip.trim();
+
+      if (!firstName || !lastName || !address || !city || !zip) {
         setFormError("Please complete your billing address before continuing.");
         return;
       }

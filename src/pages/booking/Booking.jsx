@@ -93,8 +93,8 @@ const Booking = () => {
       const res = await createBooking(payload, token);
       const booking = res?.booking || res;
       setSubmitSuccess("Booking created successfully.");
-      navigate("/paymentdetails", {
-        state: { booking, car: selectedCar, startDate, endDate, totalPrice },
+      navigate("/paymentmethods", {
+        state: { bookingData: { booking, car: selectedCar, startDate, endDate, totalPrice } },
       });
     } catch (err) {
       setSubmitError(err.message || "Failed to create booking");
