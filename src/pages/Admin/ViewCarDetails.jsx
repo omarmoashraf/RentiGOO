@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button, Typography, Card, CardBody } from "@material-tailwind/react";
 import {
@@ -14,25 +14,47 @@ import {
   Info,
   History,
 } from "lucide-react";
-import { allCars } from "../../data/allCars";
+import axios from "axios";
 import useTheme from "../../HOOKS/usetheme";
 
 export default function ViewCarDetails() {
   const { carID } = useParams();
+  const [car, setCar] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const { theme } = useTheme();
 
-  const car = allCars.find((c) => String(c.id) === String(carID));
+  useEffect(() => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    axios
+      .get(`${API_URL}/api/v1/cars/${carID}`)
+      .then((res) => {
+        if (res.data.success) {
+          setCar(res.data.data);
+        } else {
+          setCar(null);
+        }
+      })
+      .catch((err) => {
+        console.error("Axios error:", err);
+        setCar(null);
+      })
+      .finally(() => setLoading(false));
+  }, [carID]);
 
-  if (!car) {
+  if (loading) return <div className="text-center mt-20">Loading...</div>;
+
+  if (!car)
     return (
       <div className="text-center mt-20 text-red-500 font-semibold">
         Car not found
       </div>
     );
-  }
 
-  const images = car.images || [car.image, car.image, car.image];
+  const images =
+    car.images && car.images.length
+      ? car.images
+      : [car.image, car.image, car.image];
 
   const prevImage = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -42,7 +64,7 @@ export default function ViewCarDetails() {
   const rentalHistory = [
     {
       id: 1,
-      renter: "Ahmed Mohmed ",
+      renter: "Ahmed Mohmed",
       startDate: "2025-09-12",
       endDate: "2025-09-18",
       price: "$320",
@@ -68,7 +90,7 @@ export default function ViewCarDetails() {
 
   return (
     <div className="min-h-screen bg-white-50 dark:bg-dark-background py-10 px-6">
-      <div className="flex items-center justify-between mb-8 max-w-5xl mx-auto  ">
+      <div className="flex items-center justify-between mb-8 max-w-5xl mx-auto">
         <Link to="/CarManagement">
           <Button
             variant="outlined"
@@ -79,15 +101,14 @@ export default function ViewCarDetails() {
         </Link>
       </div>
 
-      <Card className="max-w-5xl mx-auto shadow-lg rounded-2xl overflow-hidden border dark:bg-dark-background  border-blue-100">
-        <div className="flex gap-6 p-6 bg-gray-200 dark:bg-dark-background  ">
+      <Card className="max-w-5xl mx-auto shadow-lg rounded-2xl overflow-hidden border dark:bg-dark-background border-blue-100">
+        <div className="flex gap-6 p-6 bg-gray-200 dark:bg-dark-background">
           <div className="relative w-3/5">
             <img
               src={images[currentIndex]}
               alt={car.name}
               className="w-full h-[480px] object-cover rounded-xl transition-all duration-300"
             />
-
             <button
               onClick={prevImage}
               className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow"
@@ -150,15 +171,15 @@ export default function ViewCarDetails() {
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 text-gray-800 dark:text-dark-secondary_text">
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Users size={18} className="text-blue-600" />
-              <strong>Seats:</strong> {car.specs.seats}
+              <strong>Seats:</strong> {car.specs.seats || "N/A"}
             </p>
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Gauge size={18} className="text-blue-600" />
-              <strong>Transmission:</strong> {car.specs.transmission}
+              <strong>Transmission:</strong> {car.specs.transmission || "N/A"}
             </p>
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Fuel size={18} className="text-blue-600" />
-              <strong>Fuel Type:</strong> {car.specs.fuel}
+              <strong>Fuel Type:</strong> {car.specs.fuel || "N/A"}
             </p>
             <p className="flex items-center gap-2 text-sm sm:text-base">
               <Zap size={18} className="text-blue-600" />
@@ -211,7 +232,10 @@ export default function ViewCarDetails() {
               </thead>
               <tbody>
                 {rentalHistory.map((rental) => (
-                  <tr key={rental.id} className="hover:bg-blue-50 dark:text-dark-Buttons">
+                  <tr
+                    key={rental.id}
+                    className="hover:bg-blue-50 dark:text-dark-Buttons"
+                  >
                     <td className="p-3 border-b">{rental.id}</td>
                     <td className="p-3 border-b">{rental.renter}</td>
                     <td className="p-3 border-b">{rental.startDate}</td>

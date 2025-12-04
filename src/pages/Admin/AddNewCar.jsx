@@ -27,6 +27,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import axios from "axios";
 
 export default function AddNewCar() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export default function AddNewCar() {
       hp: "",
     },
     available: true,
-    images: ["", "", ""], // Placeholder for image URLs
+    images: ["", "", ""],
   });
 
   const [uploadedImages, setUploadedImages] = useState([
@@ -108,7 +109,7 @@ export default function AddNewCar() {
         newImages[index] = e.target.result;
         setUploadedImages(newImages);
 
-        // Also update form data
+       
         const newFormImages = [...formData.images];
         newFormImages[index] = e.target.result;
         setFormData((prev) => ({ ...prev, images: newFormImages }));
@@ -117,15 +118,45 @@ export default function AddNewCar() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log("New car data:", formData);
 
-    // Simulate successful submission
-    alert("Car added successfully!");
-    navigate("/carmanagement");
+    try {
+      const payload = {
+        ...formData,
+        price: Number(formData.price),
+        originalPrice: formData.originalPrice
+          ? Number(formData.originalPrice)
+          : Number(formData.price),
+        specs: {
+          seats: Number(formData.specs.seats) || 0,
+          transmission: formData.specs.transmission || "Automatic",
+          fuel: formData.specs.fuel || "Gasoline",
+          hp: Number(formData.specs.hp) || 0,
+        },
+        images: formData.images.filter(Boolean), // Remove empty images
+        thumbnail: formData.thumbnail || formData.images[0] || "",
+        description: formData.description || "",
+        available: formData.available ?? true,
+      };
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/cars`,
+        payload
+      );
+
+      if (res.data.success) {
+        alert("Car added successfully!");
+        navigate("/carmanagement");
+      } else {
+        alert("Failed to add car: " + res.data.message);
+      }
+    } catch (err) {
+      console.error("Add car error:", err.response || err);
+      alert("Server error. Check console for details.");
+    }
   };
+
   const { theme } = useTheme();
   const nextImage = () =>
     setCurrentImageIndex((prev) => (prev === 2 ? 0 : prev + 1));
@@ -169,7 +200,7 @@ export default function AddNewCar() {
 
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
                 {/* Main Image Preview */}
-                <div className="relative w-full lg:w-3/5 dark:text-dark-secondary_text  ">
+                <div className="relative w-full lg:w-3/5 dark:text-dark-secondary_text">
                   <img
                     src={uploadedImages[currentImageIndex]}
                     alt="Car preview"
@@ -386,30 +417,11 @@ export default function AddNewCar() {
                       className="h-4 w-7 sm:h-5 sm:w-9"
                     />
                   </div>
-
-                  <div
-                    className={`p-3 rounded-lg ${
-                      formData.available
-                        ? "bg-green-50 border border-green-200"
-                        : "bg-red-50 border border-red-200"
-                    }`}
-                  >
-                    <Typography
-                      variant="small"
-                      className={`text-xs sm:text-sm ${
-                        formData.available ? "text-green-700" : "text-red-700"
-                      }`}
-                    >
-                      {formData.available
-                        ? "This car will be available for rental immediately after submission."
-                        : "This car will be marked as unavailable and won't appear in search results."}
-                    </Typography>
-                  </div>
                 </div>
               </div>
-            </div>
+           
 
-            {/* Specifications */}
+           
             <div className="bg-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <Typography
                 variant="h5"
