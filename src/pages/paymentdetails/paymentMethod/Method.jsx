@@ -15,7 +15,7 @@ import {
   FaCcMastercard,
 } from "react-icons/fa";
 
-const Method = ({ method, setMethod }) => {
+const Method = ({ method, setMethod, cardFields, setCardFields }) => {
   return (
     <div className="w-full">
       <Typography
@@ -123,6 +123,10 @@ const Method = ({ method, setMethod }) => {
                   className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
                    bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
                    focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  value={cardFields.number}
+                  onChange={(e) =>
+                    setCardFields((prev) => ({ ...prev, number: e.target.value }))
+                  }
                 />
               </div>
 
@@ -136,6 +140,10 @@ const Method = ({ method, setMethod }) => {
                   className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
                    bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
                    focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  value={cardFields.name}
+                  onChange={(e) =>
+                    setCardFields((prev) => ({ ...prev, name: e.target.value }))
+                  }
                 />
               </div>
 
@@ -150,6 +158,10 @@ const Method = ({ method, setMethod }) => {
                     className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
                      bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
                      focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                    value={cardFields.expiry}
+                    onChange={(e) =>
+                      setCardFields((prev) => ({ ...prev, expiry: e.target.value }))
+                    }
                   />
                 </div>
 
@@ -163,6 +175,10 @@ const Method = ({ method, setMethod }) => {
                     className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 
                      bg-white dark:bg-dark-background text-gray-800 dark:text-gray-100 
                      focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                    value={cardFields.cvv}
+                    onChange={(e) =>
+                      setCardFields((prev) => ({ ...prev, cvv: e.target.value }))
+                    }
                   />
                 </div>
               </div>

@@ -17,6 +17,21 @@ const PaymentDetails = ({
   const location = useLocation();
   const [method, setMethod] = useState("card");
   const [sameAddress, setSameAddress] = useState(false);
+  const [cardFields, setCardFields] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+  });
+  const [billingFields, setBillingFields] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+  });
+  const [formError, setFormError] = useState("");
 
   const derivedBooking = useMemo(() => {
     const stateData = location.state || {};
@@ -31,6 +46,30 @@ const PaymentDetails = ({
       booking: payload?.booking || stateData?.booking || null,
     };
   }, [bookingData, location.state]);
+
+  const handleConfirm = async () => {
+    setFormError("");
+
+    if (method === "card") {
+      const { number, name, expiry, cvv } = cardFields;
+      if (!number || !name || !expiry || !cvv) {
+        setFormError("Please complete all card details before continuing.");
+        return;
+      }
+    }
+
+    if (!sameAddress) {
+      const { firstName, lastName, address, city, state, zip } = billingFields;
+      if (!firstName || !lastName || !address || !city || !state || !zip) {
+        setFormError("Please complete your billing address before continuing.");
+        return;
+      }
+    }
+
+    if (onConfirm) {
+      await onConfirm();
+    }
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-8 bg-light-background dark:bg-dark-background min-h-screen pt-20">
@@ -53,17 +92,27 @@ const PaymentDetails = ({
           </Link>
         </div>
 
-        <Method method={method} setMethod={setMethod} />
-        <Billing sameAddress={sameAddress} setSameAddress={setSameAddress} />
+        <Method
+          method={method}
+          setMethod={setMethod}
+          cardFields={cardFields}
+          setCardFields={setCardFields}
+        />
+        <Billing
+          sameAddress={sameAddress}
+          setSameAddress={setSameAddress}
+          billingFields={billingFields}
+          setBillingFields={setBillingFields}
+        />
         <Secure />
       </div>
 
       <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
         <Order
           bookingData={derivedBooking}
-          onConfirm={onConfirm}
+          onConfirm={handleConfirm}
           submitting={submitting}
-          submitError={submitError}
+          submitError={formError || submitError}
           submitSuccess={submitSuccess}
         />
       </div>

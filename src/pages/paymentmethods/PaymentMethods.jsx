@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import Booking from "./bookingSummary/Booking";
 import Payment from "./paymentSummary/Payment";
 import Customer from "./customerInformation/Customer";
@@ -7,42 +7,13 @@ import { FaCheckCircle, FaPrint, FaHeart } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
 
 const PaymentMethods = () => {
-  const bookingData = {
-    reference: "RNT-2024-001234",
-    car: {
-      name: "BMW 5 Series",
-      type: "Luxury Sedan",
-      image:
-        "https://www.usnews.com/object/image/00000191-ba19-d7a3-a99b-fb1952050000/p90505005-2.jpeg?update-time=1725404107264&size=responsiveGallery&format=webp",
-      transmission: "Automatic",
-      seats: "5 Seats",
-      package: "Premium",
-    },
-    pickup: {
-      date: "Dec 20, 2024",
-      time: "10:00 AM",
-      location: "Downtown Office - 123 Main St",
-    },
-    return: {
-      date: "Dec 24, 2024",
-      time: "10:00 AM",
-      location: "Downtown Office - 123 Main St",
-    },
-    customer: {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+1 (555) 123-4567",
-      duration: "4 days",
-    },
-    payment: {
-      vehicle: 356.0,
-      insurance: 25.0,
-      tax: 42.72,
-      service: 15.0,
-      total: 438.72,
-      method: "Visa ending in ****4567",
-    },
-  };
+  const { state } = useLocation();
+  const bookingData = state?.bookingData;
+
+  // If the page is opened directly without state, send back to booking
+  if (!bookingData) {
+    return <Navigate to="/booking" replace />;
+  }
 
   return (
     <div className="bg-gray-50 min-h-screen pt-20 w-full max-w-full">

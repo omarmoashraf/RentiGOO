@@ -182,7 +182,7 @@ const Order = ({
           {submitting ? "Submitting booking..." : "Confirm Booking"}
         </Button>
       ) : (
-        <Link to="/paymentmethods">
+        <Link to="/paymentmethods" state={{ bookingData }}>
           <Button
             color="blue"
             fullWidth
