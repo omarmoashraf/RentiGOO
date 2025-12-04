@@ -19,14 +19,14 @@ import {
   FaGoogle,
   FaFacebook,
   FaApple,
-  FaUserShield,
+  FaSpinner,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import rentigoLogo from "../../assets/rentigo-logo.png";
 
-import { useAuth } from "../../context/AuthContext"; 
+import { useAuth } from "../../context/AuthContext";
 import { API_URL } from "../../api";
-import useTheme from './../../HOOKS/usetheme';
+import useTheme from "./../../HOOKS/usetheme";
 
 const Login = () => {
   const { theme } = useTheme();
@@ -35,10 +35,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [showAdminDemo, setShowAdminDemo] = useState(false);
-
   const [errors, setErrors] = useState({});
-  const [submitError, setSubmitError] = useState(""); 
+  const [submitError, setSubmitError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -59,31 +58,26 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ⭐ FINAL WORKING LOGIN FUNCTION ⭐
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
-
     if (!validate()) return;
 
-    // Admin override (demo)
-    if (email === "admin@rentigo.com" && password === "admin123") {
-      contextLogin("admin-token", {
-        name: "Admin User",
-        email,
-        role: "admin",
-      });
-      navigate("/admindashboard");
-      return;
-    }
-
-    // Backend login
-    const payload = {
-      email: email.trim(),
-      password: password.trim(),
-    };
+    setIsLoading(true); 
 
     try {
+      if (email === "admin@rentigo.com" && password === "admin123") {
+        contextLogin("admin-token", {
+          name: "Admin User",
+          email,
+          role: "admin",
+        });
+        navigate("/admindashboard");
+        return;
+      }
+
+      const payload = { email: email.trim(), password: password.trim() };
+
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -102,6 +96,8 @@ const Login = () => {
       navigate("/");
     } catch (err) {
       setSubmitError("Network error — please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -132,7 +128,6 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-light-background dark:bg-dark-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        
         {/* LEFT SECTION */}
         <div className="text-center lg:text-left space-y-8">
           <div className="flex justify-center lg:justify-start items-center gap-3">
@@ -144,7 +139,10 @@ const Login = () => {
               />
             </div>
             <div>
-              <Typography variant="h4" className="font-bold text-light-primary_text dark:text-dark-header_text">
+              <Typography
+                variant="h4"
+                className="font-bold text-light-primary_text dark:text-dark-header_text"
+              >
                 RentiGO
               </Typography>
               <Typography className="text-gray-600 text-sm font-medium">
@@ -179,7 +177,10 @@ const Login = () => {
                   <div className="text-blue-600">{feature.icon}</div>
                 </div>
                 <div className="text-left">
-                  <Typography variant="h6" className="font-semibold text-dark-secondary_text mb-1">
+                  <Typography
+                    variant="h6"
+                    className="font-semibold text-dark-secondary_text mb-1"
+                  >
                     {feature.title}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
@@ -194,7 +195,6 @@ const Login = () => {
         {/* RIGHT SECTION */}
         <div className="flex justify-center">
           <Card className="rounded-2xl shadow-lg w-full max-w-md border border-gray-100 bg-white dark:bg-dark-background">
-
             {/* Tabs */}
             <div className="px-8 pt-8">
               <Tabs value="signin" className="overflow-visible">
@@ -241,7 +241,6 @@ const Login = () => {
               </div>
 
               <form className="space-y-6" onSubmit={handleSubmit}>
-
                 <InputField
                   label="Email Address"
                   placeholder="john@example.com"
@@ -262,7 +261,6 @@ const Login = () => {
                   errors={errors.password}
                 />
 
-                {/* Submit Error */}
                 {submitError && (
                   <Typography className="text-red-500 text-sm text-center">
                     {submitError}
@@ -288,19 +286,27 @@ const Login = () => {
                   </Link>
                 </div>
 
+                {/* Sign In Button with Loading */}
                 <Button
                   type="submit"
                   size="lg"
                   fullWidth
-                  disabled={!email || !password}
+                  disabled={!email || !password || isLoading}
                   className={`text-white font-medium shadow-md transition-all 
                     ${
-                      !email || !password
+                      !email || !password || isLoading
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
                     }`}
                 >
-                  Sign In
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <FaSpinner className="animate-spin w-4 h-4" />
+                      Loading...
+                    </div>
+                  ) : (
+                    "Sign In"
+                  )}
                 </Button>
 
                 {/* Divider */}
@@ -311,7 +317,7 @@ const Login = () => {
                   <div className="relative flex justify-center">
                     <Typography
                       variant="small"
-                      className="bg-light-background dark:bg-dark-background px-4  font-medium"
+                      className="bg-light-background dark:bg-dark-background px-4 font-medium"
                     >
                       OR CONTINUE WITH
                     </Typography>
@@ -344,7 +350,6 @@ const Login = () => {
                     </Link>
                   </Typography>
                 </div>
-
               </form>
             </div>
           </Card>
@@ -368,9 +373,7 @@ const InputField = ({ label, icon, errors, ...props }) => (
         className={`pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg ${
           errors ? "!border-red-500 focus:!border-red-500" : ""
         }`}
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
+        labelProps={{ className: "before:content-none after:content-none" }}
         containerProps={{ className: "min-w-0" }}
       />
       <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">

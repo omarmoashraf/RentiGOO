@@ -522,21 +522,21 @@ export default function ProfilePage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="newPassword" className="text-sm font-medium">New Password</label>
+                        <label htmlFor="newPassword" className="text-sm font-medium dark:text-dark-header_text">New Password</label>
                         <input
                           id="newPassword"
                           type="password"
                           placeholder="New password"
-                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border rounded-md dark:bg-dark-background focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <div className="space-y-1">
-                        <label htmlFor="confirmPassword" className="text-sm font-medium">Confirm New Password</label>
+                        <label htmlFor="confirmPassword" className="text-sm font-medium dark:text-dark-header_text">Confirm New Password</label>
                         <input
                           id="confirmPassword"
                           type="password"
                           placeholder="Confirm new password"
-                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-3 py-2 border dark:bg-dark-background rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                       </div>
                       <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
@@ -547,14 +547,14 @@ export default function ProfilePage() {
 
                   {/* Two-Factor Authentication */}
                   <div className="rounded-lg border p-6 shadow-sm">
-                    <h3 className="font-semibold flex items-center gap-2">🛡 Two-Factor Authentication</h3>
-                    <p className="text-sm text-gray-500">Add an extra layer of security</p>
+                    <h3 className="font-semibold flex items-center gap-2 dark:text-dark-header_text">🛡 Two-Factor Authentication</h3>
+                    <p className="text-sm text-gray-500 dark:text-dark-secondary_text">Add an extra layer of security</p>
                     <div className="flex justify-between items-center mt-4">
                       <div>
-                        <label className="font-medium">Enable 2FA</label>
-                        <p className="text-sm text-gray-500">Protect your account with two-factor authentication</p>
+                        <label className="font-medium dark:text-dark-header_text">Enable 2FA</label>
+                        <p className="text-sm text-gray-500 dark:text-dark-secondary_text">Protect your account with two-factor authentication</p>
                       </div>
-                      <div className="w-12 h-6 rounded-full bg-gray-300 p-1 relative">
+                      <div className="w-12 h-6 rounded-full bg-gray-300 p-1 relative ">
                         <span className="absolute w-4 h-4 bg-white rounded-full shadow-md transform translate-x-0" />
                       </div>
                     </div>
@@ -562,19 +562,19 @@ export default function ProfilePage() {
 
                   {/* Active Sessions */}
                   <div className="rounded-lg border p-6 shadow-sm">
-                    <h3 className="font-semibold">Active Sessions</h3>
-                    <p className="text-sm text-gray-500">Manage your active login sessions</p>
+                    <h3 className="font-semibold dark:text-dark-header_text">Active Sessions</h3>
+                    <p className="text-sm text-gray-500 dark:text-dark-secondary_text">Manage your active login sessions</p>
                     <div className="mt-4 space-y-2">
-                      <div className="flex justify-between p-4 bg-gray-100 rounded-lg">
+                      <div className="flex justify-between p-4 bg-gray-100 dark:bg-dark-background rounded-lg">
                         <div>
-                          <p className="font-medium">Chrome on Windows</p>
+                          <p className="font-medium dark:text-dark-header_text">Chrome on Windows</p>
                           <p className="text-sm text-gray-500">New York, NY • Current session</p>
                         </div>
                         <span className="text-green-700 text-sm">Active</span>
                       </div>
-                      <div className="flex justify-between p-4 bg-gray-100 rounded-lg">
+                      <div className="flex justify-between p-4 dark:bg-dark-background bg-gray-100 rounded-lg">
                         <div>
-                          <p className="font-medium">Safari on iPhone</p>
+                          <p className="font-medium dark:text-dark-header_text">Safari on iPhone</p>
                           <p className="text-sm text-gray-500">New York, NY • 2 days ago</p>
                         </div>
                         <button className="text-sm px-2 py-1 bg-gray-200 rounded-md">Revoke</button>
@@ -596,8 +596,8 @@ export default function ProfilePage() {
       <div className="flex flex-col space-y-1.5 p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-bold leading-none tracking-tight">Payment Methods</h3>
-            <p className="text-sm text-gray-600">Manage your saved payment methods</p>
+            <h3 className="font-bold leading-none tracking-tight dark:text-dark-header_text">Payment Methods</h3>
+            <p className="text-sm text-gray-600 dark:text-dark-secondary_text">Manage your saved payment methods</p>
           </div>
           <button
       className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md 
