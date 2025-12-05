@@ -173,7 +173,7 @@ function AdminCarCard({
           </Link>
 
           {/* Edit Button */}
-          <Link to={`/editcar`} className="flex-1">
+          <Link to={`/editcar/${id}`} className="flex-1">
             <Button
               variant="outlined"
               size="sm"

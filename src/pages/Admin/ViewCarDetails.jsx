@@ -62,33 +62,6 @@ export default function ViewCarDetails() {
   const nextImage = () =>
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
-  const rentalHistory = [
-    {
-      id: 1,
-      renter: "Ahmed Mohmed",
-      startDate: "2025-09-12",
-      endDate: "2025-09-18",
-      price: "$320",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      renter: "Mona Ali",
-      startDate: "2025-10-01",
-      endDate: "2025-10-07",
-      price: "$410",
-      status: "Ongoing",
-    },
-    {
-      id: 3,
-      renter: "Omar Khaled",
-      startDate: "2025-10-20",
-      endDate: "2025-10-27",
-      price: "$280",
-      status: "Cancelled",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-white-50 dark:bg-dark-background py-10 px-6">
       <div className="flex items-center justify-between mb-8 max-w-5xl mx-auto">
@@ -213,50 +186,6 @@ export default function ViewCarDetails() {
               {car.description ||
                 `Experience luxury and performance with the ${car.name}. This premium sedan combines cutting-edge technology with exceptional comfort, making it perfect for business trips, special occasions, or when you simply want to travel in style.`}
             </Typography>
-          </div>
-
-          <div className="mt-10 bg-white dark:bg-dark-background shadow-md rounded-2xl p-4 sm:p-6 border border-blue-100 overflow-x-auto">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2 bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent">
-              <History size={22} className="text-blue-700" /> Rental History
-            </h2>
-
-            <table className="w-full min-w-[600px] border-collapse text-sm sm:text-base">
-              <thead>
-                <tr className="bg-blue-100 text-left">
-                  <th className="p-3 border-b">#</th>
-                  <th className="p-3 border-b">Renter</th>
-                  <th className="p-3 border-b">Start Date</th>
-                  <th className="p-3 border-b">End Date</th>
-                  <th className="p-3 border-b">Price</th>
-                  <th className="p-3 border-b">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rentalHistory.map((rental) => (
-                  <tr
-                    key={rental.id}
-                    className="hover:bg-blue-50 dark:text-dark-Buttons"
-                  >
-                    <td className="p-3 border-b">{rental.id}</td>
-                    <td className="p-3 border-b">{rental.renter}</td>
-                    <td className="p-3 border-b">{rental.startDate}</td>
-                    <td className="p-3 border-b">{rental.endDate}</td>
-                    <td className="p-3 border-b">{rental.price}</td>
-                    <td
-                      className={`p-3 border-b font-semibold ${
-                        rental.status === "Completed"
-                          ? "text-green-600"
-                          : rental.status === "Ongoing"
-                          ? "text-blue-600"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {rental.status}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </CardBody>
       </Card>
