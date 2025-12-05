@@ -36,13 +36,13 @@ function AdminCarCard({
     available,
   },
 }) {
+  const rawApi = import.meta.env.VITE_API_URL || "";
+  const API = rawApi.replace(/\/+$/, "");
   const handleDelete = async (carId) => {
     if (!window.confirm("Are you sure you want to delete this car?")) return;
 
     try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/v1/cars/${carId}`
-      );
+      const { data } = await axios.delete(`${API}/api/v1/cars/${carId}`);
 
       if (data.success) {
         alert("Car deleted successfully!");

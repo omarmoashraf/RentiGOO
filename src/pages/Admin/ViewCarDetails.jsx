@@ -25,9 +25,10 @@ export default function ViewCarDetails() {
   const { theme } = useTheme();
 
   useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL;
+    const rawApi = import.meta.env.VITE_API_URL || "";
+    const API = rawApi.replace(/\/+$/, "");
     axios
-      .get(`${API_URL}/api/v1/cars/${carID}`)
+      .get(`${API}/api/v1/cars/${carID}`)
       .then((res) => {
         if (res.data.success) {
           setCar(res.data.data);
