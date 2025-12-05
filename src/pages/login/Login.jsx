@@ -35,6 +35,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -58,37 +59,36 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // ⭐ FINAL WORKING LOGIN FUNCTION ⭐
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
-    if (!validate()) return;
-
     setIsLoading(true);
 
+    if (!validate()) {
+      setIsLoading(false);
+      return;
+    }
+
+    // Admin override (demo)
+    if (email === "admin@rentigo.com" && password === "admin123") {
+      contextLogin("admin-token", {
+        name: "Admin User",
+        email,
+        role: "admin",
+      });
+      setIsLoading(false);
+      navigate("/");
+      return;
+    }
+
+    // Backend login
+    const payload = {
+      email: email.trim(),
+      password: password.trim(),
+    };
+
     try {
-      // Admin override (demo)
-      if (email === "admin@rentigo.com" && password === "admin123") {
-        contextLogin("admin-token", {
-          name: "Admin User",
-          email,
-          role: "admin",
-        });
-        localStorage.setItem("token", "admin-token");
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            name: "Admin User",
-            email,
-            role: "admin",
-          })
-        );
-
-        navigate("/");
-        return;
-      }
-
-      const payload = { email: email.trim(), password: password.trim() };
-
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -100,18 +100,17 @@ const Login = () => {
 
       if (!res.ok) {
         setSubmitError(data.message || "Invalid login credentials");
+        setIsLoading(false);
         return;
       }
 
       contextLogin(data.token, data.user);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (err) {
       setSubmitError("Network error — please try again.");
-    } finally {
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
   const features = [
@@ -217,20 +216,12 @@ const Login = () => {
                     className: "bg-white shadow-sm rounded-md",
                   }}
                 >
-                  <Tab
-                    value="signin"
-                    onClick={() => navigate("/login")}
-                    className="py-3"
-                  >
+                  <Tab value="signin" onClick={() => navigate("/login")}>
                     <Typography className="font-semibold text-sm">
                       Sign In
                     </Typography>
                   </Tab>
-                  <Tab
-                    value="signup"
-                    onClick={() => navigate("/register")}
-                    className="py-3"
-                  >
+                  <Tab value="signup" onClick={() => navigate("/register")}>
                     <Typography className="font-semibold text-sm">
                       Sign Up
                     </Typography>
@@ -258,7 +249,7 @@ const Login = () => {
                   label="Email Address"
                   placeholder="john@example.com"
                   type="email"
-                  icon={<FaEnvelope className="w-4 h-4" />}
+                  icon={<FaEnvelope />}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   errors={errors.email}
@@ -268,7 +259,7 @@ const Login = () => {
                   label="Password"
                   placeholder="••••••••"
                   type="password"
-                  icon={<FaLock className="w-4 h-4" />}
+                  icon={<FaLock />}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   errors={errors.password}
@@ -293,13 +284,13 @@ const Login = () => {
                   />
                   <Link
                     to="/forgot-password"
-                    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
+                    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm"
                   >
                     Forgot password?
                   </Link>
                 </div>
 
-                {/* Sign In Button with Loading */}
+                {/* ⭐ BUTTON WITH LOADING ⭐ */}
                 <Button
                   type="submit"
                   size="lg"
@@ -338,18 +329,9 @@ const Login = () => {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
-                  <SocialButton
-                    icon={<FaGoogle className="w-4 h-4" />}
-                    brand="google"
-                  />
-                  <SocialButton
-                    icon={<FaFacebook className="w-4 h-4" />}
-                    brand="facebook"
-                  />
-                  <SocialButton
-                    icon={<FaApple className="w-4 h-4" />}
-                    brand="apple"
-                  />
+                  <SocialButton icon={<FaGoogle />} brand="google" />
+                  <SocialButton icon={<FaFacebook />} brand="facebook" />
+                  <SocialButton icon={<FaApple />} brand="apple" />
                 </div>
 
                 <div className="text-center pt-4">
@@ -357,7 +339,7 @@ const Login = () => {
                     Don't have an account?{" "}
                     <Link
                       to="/register"
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm"
                     >
                       Sign Up
                     </Link>
@@ -372,8 +354,7 @@ const Login = () => {
   );
 };
 
-/* ------------ SUBCOMPONENTS ------------ */
-
+/* ------------ INPUT COMPONENT ------------ */
 const InputField = ({ label, icon, errors, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
@@ -386,7 +367,9 @@ const InputField = ({ label, icon, errors, ...props }) => (
         className={`pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg ${
           errors ? "!border-red-500 focus:!border-red-500" : ""
         }`}
-        labelProps={{ className: "before:content-none after:content-none" }}
+        labelProps={{
+          className: "before:content-none after:content-none",
+        }}
         containerProps={{ className: "min-w-0" }}
       />
       <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
@@ -401,6 +384,7 @@ const InputField = ({ label, icon, errors, ...props }) => (
   </div>
 );
 
+/* ------------ SOCIAL BUTTON ------------ */
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {
     google: "hover:bg-red-50 border-gray-300",
