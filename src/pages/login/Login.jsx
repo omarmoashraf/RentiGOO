@@ -65,22 +65,27 @@ const Login = () => {
     setSubmitError("");
     setIsLoading(true);
 
-    if (!validate()) {
-      setIsLoading(false);
-      return;
-    }
+    try {
+      // Admin override (demo)
+      if (email === "admin@rentigo.com" && password === "admin123") {
+        contextLogin("admin-token", {
+          name: "Admin User",
+          email,
+          role: "admin",
+        });
+        localStorage.setItem("token", "admin-token");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: "Admin User",
+            email,
+            role: "admin",
+          })
+        );
 
-    // Admin override (demo)
-    if (email === "admin@rentigo.com" && password === "admin123") {
-      contextLogin("admin-token", {
-        name: "Admin User",
-        email,
-        role: "admin",
-      });
-      setIsLoading(false);
-      navigate("/");
-      return;
-    }
+        navigate("/");
+        return;
+      }
 
     // Backend login
     const payload = {
@@ -105,9 +110,13 @@ const Login = () => {
       }
 
       contextLogin(data.token, data.user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (err) {
       setSubmitError("Network error — please try again.");
+    } finally {
+      setIsLoading(false);
     }
 
     setIsLoading(false);
