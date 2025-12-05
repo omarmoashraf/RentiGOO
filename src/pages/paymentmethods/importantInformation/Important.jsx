@@ -3,13 +3,13 @@ import { FaInfoCircle } from "react-icons/fa";
 
 const Important = () => {
   return (
-    <Card className="p-6 rounded-lg shadow-md bg-white border border-gray-200">
+    <Card className="p-6 rounded-lg shadow-md bg-white border border-gray-200 dark:bg-dark-background">
       <CardBody className="space-y-4">
         <div className="flex items-center gap-3 mb-4 border-b pb-3">
           <div className="bg-blue-100 p-2 rounded-full">
             <FaInfoCircle className="text-blue-600 text-lg" />
           </div>
-          <Typography variant="h6" className="font-semibold text-gray-900">
+          <Typography variant="h6" className="font-semibold text-gray-900 dark:text-dark-header_text">
             Important Information
           </Typography>
         </div>
@@ -19,7 +19,7 @@ const Important = () => {
             <div className="flex items-start gap-2">
               <FaInfoCircle className="text-blue-500 mt-1 text-sm" />
 
-              <Typography className="font-semibold text-gray-900">
+              <Typography className="font-semibold text-gray-900 dark:text-dark-header_text">
                 Bring Required Documents
               </Typography>
             </div>
@@ -31,7 +31,7 @@ const Important = () => {
           <div>
             <div className="flex items-start gap-2">
               <FaInfoCircle className="text-blue-500 mt-1 text-sm" />
-              <Typography className="font-semibold text-gray-900">
+              <Typography className="font-semibold text-gray-900 dark:text-dark-header_text">
                 Arrival Time
               </Typography>
             </div>
@@ -43,7 +43,7 @@ const Important = () => {
           <div>
             <div className="flex items-start gap-2">
               <FaInfoCircle className="text-blue-500 mt-1 text-sm" />
-              <Typography className="font-semibold text-gray-900">
+              <Typography className="font-semibold text-gray-900 dark:text-dark-header_text">
                 Cancellation Policy
               </Typography>
             </div>
@@ -55,7 +55,7 @@ const Important = () => {
           <div>
             <div className="flex items-start gap-2">
               <FaInfoCircle className="text-blue-500 mt-1 text-sm" />
-              <Typography className="font-semibold text-gray-900">
+              <Typography className="font-semibold text-gray-900 dark:text-dark-header_text">
                 Support
               </Typography>
             </div>
