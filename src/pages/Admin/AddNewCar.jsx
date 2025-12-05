@@ -109,7 +109,6 @@ export default function AddNewCar() {
         newImages[index] = e.target.result;
         setUploadedImages(newImages);
 
-       
         const newFormImages = [...formData.images];
         newFormImages[index] = e.target.result;
         setFormData((prev) => ({ ...prev, images: newFormImages }));
@@ -117,6 +116,8 @@ export default function AddNewCar() {
       reader.readAsDataURL(file);
     }
   };
+  const rawApi = import.meta.env.VITE_API_URL || "";
+  const API = rawApi.replace(/\/+$/, "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,10 +141,7 @@ export default function AddNewCar() {
         available: formData.available ?? true,
       };
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/v1/cars`,
-        payload
-      );
+      const res = await axios.post(`${API}/api/v1/cars`, payload);
 
       if (res.data.success) {
         alert("Car added successfully!");
@@ -421,7 +419,6 @@ export default function AddNewCar() {
               </div>
             </div>
 
-           
             <div className="bg-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <Typography
                 variant="h5"
