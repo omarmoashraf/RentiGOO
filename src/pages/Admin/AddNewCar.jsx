@@ -419,7 +419,7 @@ export default function AddNewCar() {
                   </div>
                 </div>
               </div>
-           
+            </div>
 
            
             <div className="bg-blue-50 rounded-xl sm:rounded-2xl p-4 sm:p-6">
