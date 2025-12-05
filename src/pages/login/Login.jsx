@@ -35,7 +35,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -59,18 +58,17 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // ⭐ FINAL WORKING LOGIN FUNCTION ⭐
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
-    setIsLoading(true);
+    setIsLoading(true); // يبدأ Loading
 
     if (!validate()) {
       setIsLoading(false);
       return;
     }
 
-    // Admin override (demo)
+    // تسجيل دخول المدير التجريبي
     if (email === "admin@rentigo.com" && password === "admin123") {
       contextLogin("admin-token", {
         name: "Admin User",
@@ -82,7 +80,6 @@ const Login = () => {
       return;
     }
 
-    // Backend login
     const payload = {
       email: email.trim(),
       password: password.trim(),
@@ -110,7 +107,7 @@ const Login = () => {
       setSubmitError("Network error — please try again.");
     }
 
-    setIsLoading(false);
+    setIsLoading(false); // يوقف Loading بعد العملية
   };
 
   const features = [
@@ -216,12 +213,20 @@ const Login = () => {
                     className: "bg-white shadow-sm rounded-md",
                   }}
                 >
-                  <Tab value="signin" onClick={() => navigate("/login")}>
+                  <Tab
+                    value="signin"
+                    onClick={() => navigate("/login")}
+                    className="py-3"
+                  >
                     <Typography className="font-semibold text-sm">
                       Sign In
                     </Typography>
                   </Tab>
-                  <Tab value="signup" onClick={() => navigate("/register")}>
+                  <Tab
+                    value="signup"
+                    onClick={() => navigate("/register")}
+                    className="py-3"
+                  >
                     <Typography className="font-semibold text-sm">
                       Sign Up
                     </Typography>
@@ -249,7 +254,7 @@ const Login = () => {
                   label="Email Address"
                   placeholder="john@example.com"
                   type="email"
-                  icon={<FaEnvelope />}
+                  icon={<FaEnvelope className="w-4 h-4" />}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   errors={errors.email}
@@ -259,7 +264,7 @@ const Login = () => {
                   label="Password"
                   placeholder="••••••••"
                   type="password"
-                  icon={<FaLock />}
+                  icon={<FaLock className="w-4 h-4" />}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   errors={errors.password}
@@ -284,13 +289,12 @@ const Login = () => {
                   />
                   <Link
                     to="/forgot-password"
-                    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm"
+                    className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
                   >
                     Forgot password?
                   </Link>
                 </div>
 
-                {/* ⭐ BUTTON WITH LOADING ⭐ */}
                 <Button
                   type="submit"
                   size="lg"
@@ -299,7 +303,7 @@ const Login = () => {
                   className={`text-white font-medium shadow-md transition-all 
                     ${
                       !email || !password || isLoading
-                        ? "bg-gray-400 cursor-not-allowed"
+                        ? "bg-gray-400 cursor-not-allowed pointer-events-none"
                         : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
                     }`}
                 >
@@ -321,7 +325,7 @@ const Login = () => {
                   <div className="relative flex justify-center">
                     <Typography
                       variant="small"
-                      className="bg-light-background dark:bg-dark-background px-4 font-medium"
+                      className="bg-light-background dark:bg-dark-background px-4  font-medium"
                     >
                       OR CONTINUE WITH
                     </Typography>
@@ -329,9 +333,18 @@ const Login = () => {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
-                  <SocialButton icon={<FaGoogle />} brand="google" />
-                  <SocialButton icon={<FaFacebook />} brand="facebook" />
-                  <SocialButton icon={<FaApple />} brand="apple" />
+                  <SocialButton
+                    icon={<FaGoogle className="w-4 h-4" />}
+                    brand="google"
+                  />
+                  <SocialButton
+                    icon={<FaFacebook className="w-4 h-4" />}
+                    brand="facebook"
+                  />
+                  <SocialButton
+                    icon={<FaApple className="w-4 h-4" />}
+                    brand="apple"
+                  />
                 </div>
 
                 <div className="text-center pt-4">
@@ -339,7 +352,7 @@ const Login = () => {
                     Don't have an account?{" "}
                     <Link
                       to="/register"
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0052cc] bg-clip-text text-transparent font-semibold text-sm hover:from-[#0052cc] hover:to-[#004bb5] transition-all"
                     >
                       Sign Up
                     </Link>
@@ -354,7 +367,7 @@ const Login = () => {
   );
 };
 
-/* ------------ INPUT COMPONENT ------------ */
+/* ------------ SUBCOMPONENTS ------------ */
 const InputField = ({ label, icon, errors, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
@@ -367,9 +380,7 @@ const InputField = ({ label, icon, errors, ...props }) => (
         className={`pl-10 !border-gray-300 focus:!border-blue-500 bg-gray-50/50 rounded-lg ${
           errors ? "!border-red-500 focus:!border-red-500" : ""
         }`}
-        labelProps={{
-          className: "before:content-none after:content-none",
-        }}
+        labelProps={{ className: "before:content-none after:content-none" }}
         containerProps={{ className: "min-w-0" }}
       />
       <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
@@ -384,7 +395,6 @@ const InputField = ({ label, icon, errors, ...props }) => (
   </div>
 );
 
-/* ------------ SOCIAL BUTTON ------------ */
 const SocialButton = ({ icon, brand }) => {
   const brandColors = {
     google: "hover:bg-red-50 border-gray-300",
