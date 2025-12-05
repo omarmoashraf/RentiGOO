@@ -624,20 +624,20 @@ export default function ProfilePage() {
           <CreditCard size={28} className="text-white" />
         </div>
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 dark:text-dark-header_text">
             <p className="font-medium text-foreground">Visa ending in 4567</p>
-            <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs bg-gray-50 text-secondary-foreground">
+            <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs bg-gray-50 text-secondary-foreground dark:bg-dark-Buttons dark:text-light-primary_text">
               Default
             </span>
           </div>
-          <p className="text-sm text-gray-600">Expires 12/26</p>
+          <p className="text-sm text-gray-600 dark:text-dark-secondary_text">Expires 12/26</p>
         </div>
       </div>
     </div>
 
     {/* Action Buttons */}
     <div className="flex items-center gap-2">
-      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-background hover:bg-accent">
+      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-background hover:bg-accent bg-red-700 text-black">
         <RiDeleteBin6Line size={20}  />
       </button>
     </div>
@@ -653,17 +653,17 @@ export default function ProfilePage() {
 
       {/* Card Info */}
       <div>
-        <p className="font-medium text-foreground">Mastercard ending in 8901</p>
-        <p className="text-sm text-gray-600">Expires 08/27</p>
+        <p className="font-medium text-foreground dark:text-dark-header_text">Mastercard ending in 8901</p>
+        <p className="text-sm text-gray-600 dark:text-dark-secondary_text">Expires 08/27</p>
       </div>
     </div>
 
     {/* Action Buttons */}
     <div className="flex items-center gap-2">
-      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-gray-50 hover:bg-blue-100">
+      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-dark-Buttons hover:bg-blue-100">
         Set Default
       </button>
-      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-gray-50 hover:bg-red-100">
+      <button className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-sm rounded-md border bg-red-700  hover:bg-red-100">
         <RiDeleteBin6Line size={20}  />
       </button>
     </div>
@@ -674,27 +674,27 @@ export default function ProfilePage() {
     {/* Billing History Card */}
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm border-border">
       <div className="flex flex-col space-y-1.5 p-6">
-        <h3 className="font-semibold leading-none tracking-tight">Billing History</h3>
-        <p className="text-sm text-muted-foreground">View your past transactions</p>
+        <h3 className="font-semibold leading-none tracking-tight dark:text-dark-header_text">Billing History</h3>
+        <p className="text-sm text-muted-foreground dark:text-dark-secondary_text ">View your past transactions</p>
       </div>
-      <div className="p-6 pt-0 space-y-3">
+      <div className="p-6 pt-0 space-y-3 ">
         {[
           { title: "BMW 5 Series Rental", date: "Dec 20, 2024", amount: "$356.00" },
           { title: "Tesla Model 3 Rental", date: "Nov 15, 2024", amount: "$289.00" },
           { title: "Mercedes-Benz C-Class", date: "Oct 10, 2024", amount: "$425.00" },
         ].map((txn, idx) => (
-          <div key={idx} className="flex items-center justify-between p-3 bg-blue-gray-50 rounded-lg">
+          <div key={idx} className="flex items-center justify-between p-3 bg-blue-gray-50 rounded-lg dark:bg-dark-background">
             <div>
-              <p className="font-medium text-foreground">{txn.title}</p>
+              <p className="font-medium text-foreground dark:text-dark-header_text">{txn.title}</p>
               <p className="text-sm text-gray-600">{txn.date}</p>
             </div>
             <div className="text-right">
-              <p className="font-semibold text-foreground">{txn.amount}</p>
+              <p className="font-semibold text-foreground dark:text-dark-Buttons">{txn.amount}</p>
               <span className="inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs bg-green-100 text-green-700">Paid</span>
             </div>
           </div>
         ))}
-        <button className="w-full h-9 px-4 mt-4 text-sm font-medium rounded-md border bg-background hover:bg-accent">
+        <button className="w-full h-9 px-4 mt-4 text-sm font-medium rounded-md border bg-background hover:bg-accent bg-dark-Buttons">
           View All Transactions
         </button>
       </div>
@@ -711,7 +711,7 @@ export default function ProfilePage() {
     {bookingHistory.map((booking) => (
       <div
         key={booking.id}
-        className="flex items-center gap-4 p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
+        className="flex items-center gap-4 p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors dark:text-dark-header_text"
       >
         <div className="w-20 h-14 rounded-lg overflow-hidden bg-background flex-shrink-0">
           <img
@@ -738,52 +738,52 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <button className="px-3 py-1 border rounded-md hover:bg-gray-100">
+          <button className="px-3 py-1 border rounded-md hover:bg-gray-100 bg-dark-Buttons text-light-primary_text">
             View Details
           </button>
-          <button className="px-3 py-1 border rounded-md hover:bg-gray-100">
+          <button className="px-3 py-1 border rounded-md hover:bg-gray-100 bg-dark-Buttons text-light-primary_text">
             Book Again
           </button>
         </div>
       </div>
     ))}
 
-    <button className="w-full px-4 py-2 border rounded-md hover:bg-gray-100">
+    <button className="w-full px-4 py-2 border rounded-md hover:bg-gray-100 bg-dark-Buttons text-light-primary_text">
       View All Bookings
     </button>
 
     {/* Summary Cards */}
-    <div className="grid md:grid-cols-3 gap-6 mt-6">
+    <div className="grid md:grid-cols-3 gap-6 mt-6 ">
       {/* Total Rentals */}
-      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white">
+      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white dark:bg-dark-background">
         <div className="w-12 h-12 bg-blue-200 rounded-lg flex items-center justify-center">
           <Car className="text-blue-500" />
         </div>
         <div>
-          <p className="text-2xl font-bold text-gray-800">24</p>
-          <p className="text-sm text-gray-500">Total Rentals</p>
+          <p className="text-2xl font-bold text-gray-800 dark:text-dark-secondary_text">24</p>
+          <p className="text-sm text-gray-500 dark:text-dark-header_text">Total Rentals</p>
         </div>
       </div>
 
       {/* Total Spent */}
-      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white">
+      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white dark:bg-dark-background">
         <div className="w-12 h-12 bg-blue-200 rounded-lg flex items-center justify-center">
           <CreditCard className="text-blue-500" />
         </div>
         <div>
-          <p className="text-2xl font-bold text-gray-800">$4250.00</p>
-          <p className="text-sm text-gray-500">Total Spent</p>
+          <p className="text-2xl font-bold text-gray-800 dark:text-dark-secondary_text">$4250.00</p>
+          <p className="text-sm text-gray-500 dark:text-dark-header_text">Total Spent</p>
         </div>
       </div>
 
       {/* Loyalty Points */}
-      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white">
+      <div className="rounded-lg border shadow-sm p-6 flex items-center gap-3 bg-white dark:bg-dark-background">
         <div className="w-12 h-12 bg-blue-200 rounded-lg flex items-center justify-center">
           <Star className="text-blue-500" />
         </div>
         <div>
-          <p className="text-2xl font-bold text-gray-800">850</p>
-          <p className="text-sm text-gray-500">Loyalty Points</p>
+          <p className="text-2xl font-bold text-gray-800 dark:text-dark-secondary_text">850</p>
+          <p className="text-sm text-gray-500 dark:text-dark-header_text">Loyalty Points</p>
         </div>
       </div>
     </div>

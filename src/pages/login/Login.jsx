@@ -37,7 +37,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // ✅ State للـ loading
 
   const navigate = useNavigate();
 
@@ -66,6 +66,7 @@ const Login = () => {
     setIsLoading(true); 
 
     try {
+      // Admin override (demo)
       if (email === "admin@rentigo.com" && password === "admin123") {
         contextLogin("admin-token", {
           name: "Admin User",
@@ -97,7 +98,7 @@ const Login = () => {
     } catch (err) {
       setSubmitError("Network error — please try again.");
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // ✅ إيقاف الـ loading بعد انتهاء العملية
     }
   };
 

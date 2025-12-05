@@ -10,11 +10,11 @@ const Payment = ({ bookingData }) => {
   const { payment } = bookingData;
 
   return (
-    <Card className="p-6 rounded-xl shadow-md bg-white border border-gray-100">
+    <Card className="p-6 rounded-xl shadow-md bg-white border border-gray-100 dark:bg-dark-background">
       {/* العنوان */}
       <div className="flex items-center gap-2 mb-4">
         <FaRegCreditCard className="text-blue-600 text-lg" />
-        <Typography variant="h6" className="font-semibold text-gray-900">
+        <Typography variant="h6" className="font-semibold text-gray-900 dark:text-dark-header_text">
           Payment Summary
         </Typography>
       </div>
@@ -22,29 +22,29 @@ const Payment = ({ bookingData }) => {
       <CardBody className="space-y-3">
         {/* تفاصيل الدفع */}
         <div className="flex justify-between">
-          <Typography color="gray">Vehicle (4 days)</Typography>
-          <Typography className="font-medium">
+          <Typography color="gray" className="dark:text-dark-header_text">Vehicle (4 days)</Typography>
+          <Typography className="font-medium dark:text-dark-secondary_text">
             ${payment.vehicle.toFixed(2)}
           </Typography>
         </div>
 
         <div className="flex justify-between">
-          <Typography color="gray">Insurance</Typography>
-          <Typography className="font-medium">
+          <Typography color="gray" className="dark:text-dark-header_text">Insurance</Typography>
+          <Typography className="font-medium dark:text-dark-secondary_text">
             ${payment.insurance.toFixed(2)}
           </Typography>
         </div>
 
         <div className="flex justify-between">
-          <Typography color="gray">Tax (12%)</Typography>
-          <Typography className="font-medium">
+          <Typography color="gray" className="dark:text-dark-header_text">Tax (12%)</Typography>
+          <Typography className="font-medium dark:text-dark-secondary_text">
             ${payment.tax.toFixed(2)}
           </Typography>
         </div>
 
         <div className="flex justify-between">
-          <Typography color="gray">Service Fee</Typography>
-          <Typography className="font-medium">
+          <Typography color="gray" className="dark:text-dark-header_text">Service Fee</Typography>
+          <Typography className="font-medium dark:text-dark-secondary_text">
             ${payment.service.toFixed(2)}
           </Typography>
         </div>
@@ -54,7 +54,7 @@ const Payment = ({ bookingData }) => {
 
         {/* الإجمالي */}
         <div className="flex justify-between items-center text-lg font-semibold mb-2">
-          <Typography>Total Paid</Typography>
+          <Typography className="dark:text-dark-header_text">Total Paid</Typography>
           <Typography className="text-green-600">
             ${payment.total.toFixed(2)}
           </Typography>
@@ -76,7 +76,7 @@ const Payment = ({ bookingData }) => {
         {/* Need Help Section */}
         <Typography
           variant="small"
-          className="font-semibold text-gray-900 mb-2"
+          className="font-semibold text-gray-900 mb-2 dark:text-dark-header_text"
         >
           Need Help?
         </Typography>
@@ -85,16 +85,16 @@ const Payment = ({ bookingData }) => {
           <Button
             variant="outlined"
             color="blue"
-            className="flex items-center justify-center gap-2 border-gray-300 text-gray-700"
+            className="flex items-center justify-center gap-2 border-gray-300 text-gray-700 dark:text-dark-header_text"
           >
-            <FaPhoneAlt className="text-gray-600" /> Call Support
+            <FaPhoneAlt className="text-gray-600 dark:text-dark-header_text" /> Call Support
           </Button>
           <Button
             variant="outlined"
             color="blue"
-            className="flex items-center justify-center gap-2 border-gray-300 text-gray-700"
+            className="flex items-center justify-center gap-2 border-gray-300 text-gray-700 dark:text-dark-header_text"
           >
-            <FaEnvelope className="text-gray-600" /> Email Us
+            <FaEnvelope className="text-gray-600 dark:text-dark-header_text" /> Email Us
           </Button>
         </div>
       </CardBody>

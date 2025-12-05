@@ -5,8 +5,8 @@ const Customer = ({ bookingData }) => {
   const { customer } = bookingData;
 
   return (
-    <Card className="p-6 rounded-lg shadow-md">
-      <Typography variant="h5" className="mb-4 font-semibold">
+    <Card className="p-6 rounded-lg shadow-md dark:bg-dark-background">
+      <Typography variant="h5" className="mb-4 font-semibold dark:text-dark-header_text">
         Customer Information
       </Typography>
 
@@ -15,20 +15,20 @@ const Customer = ({ bookingData }) => {
           <div className="flex items-center gap-2">
             <FaUser className="text-blue-600" />
             <div>
-              <Typography color="gray" className="text-sm">
+              <Typography color="gray" className="text-sm dark:text-dark-header_text">
                 Name
               </Typography>
-              <Typography className="font-semibold">{customer.name}</Typography>
+              <Typography className="font-semibold dark:text-dark-secondary_text">{customer.name}</Typography>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <FaPhoneAlt className="text-blue-600" />
             <div>
-              <Typography color="gray" className="text-sm">
+              <Typography color="gray" className="text-sm dark:text-dark-header_text">
                 Phone
               </Typography>
-              <Typography className="font-semibold">
+              <Typography className="font-semibold dark:text-dark-secondary_text">
                 {customer.phone}
               </Typography>
             </div>
@@ -39,10 +39,10 @@ const Customer = ({ bookingData }) => {
           <div className="flex items-center gap-2">
             <FaEnvelope className="text-blue-600" />
             <div>
-              <Typography color="gray" className="text-sm">
+              <Typography color="gray" className="text-sm dark:text-dark-header_text">
                 Email
               </Typography>
-              <Typography className="font-semibold">
+              <Typography className="font-semibold dark:text-dark-secondary_text">
                 {customer.email}
               </Typography>
             </div>
@@ -51,10 +51,10 @@ const Customer = ({ bookingData }) => {
           <div className="flex items-center gap-2">
             <FaRegIdBadge className="text-blue-600" />
             <div>
-              <Typography color="gray" className="text-sm">
+              <Typography color="gray" className="text-sm dark:text-dark-header_text">
                 Booking Duration
               </Typography>
-              <Typography className="font-semibold">
+              <Typography className="font-semibold dark:text-dark-secondary_text">
                 {customer.duration}
               </Typography>
             </div>

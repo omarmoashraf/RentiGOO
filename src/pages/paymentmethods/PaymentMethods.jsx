@@ -45,13 +45,13 @@ const PaymentMethods = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-20 w-full max-w-full">
+    <div className="bg-gray-50 min-h-screen pt-20 w-full max-w-full dark:bg-dark-background">
       <div className="w-full flex flex-col items-center text-center mb-4">
         <FaCheckCircle className="text-green-500 text-5xl mb-4" />
-        <h2 className="text-2xl font-bold text-gray-800 mb-1">
+        <h2 className="text-2xl font-bold text-gray-800 mb-1 dark:text-dark-header_text">
           Payment Successful!
         </h2>
-        <p className="text-gray-600 max-w-md">
+        <p className="text-gray-600 max-w-md dark:text-dark-secondary_text">
           Your booking has been confirmed. We've sent a confirmation email to
           your inbox.
         </p>
