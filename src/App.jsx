@@ -20,7 +20,7 @@ import Cars from "./pages/cars/Cars";
 import CarDetails from "./pages/cardetails/CarDetails";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
-import UserProfile from "./pages/login/UserProfile"
+import UserProfile from "./pages/login/UserProfile";
 import Pricing from "./pages/pricing/Pricing";
 
 // Pages - User Protected
@@ -44,27 +44,85 @@ function App() {
   return (
     <AuthProvider>
       <ScrollToTop />
-      
+
       <Routes>
         {/* ===== Public Routes with User Layout ===== */}
-        <Route path="/" element={<UserLayout><Home /></UserLayout>} />
-        <Route path="/about" element={<UserLayout><About /></UserLayout>} />
-        <Route path="/contact" element={<UserLayout><Contact /></UserLayout>} />
-        <Route path="/cars" element={<UserLayout><Cars /></UserLayout>} />
-        <Route path="/pricing" element={<UserLayout><Pricing /></UserLayout>} />
-        <Route path="/cars/:carID" element={<UserLayout><CarDetails /></UserLayout>} />
+        <Route
+          path="/"
+          element={
+            <UserLayout>
+              <Home />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <UserLayout>
+              <About />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <UserLayout>
+              <Contact />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/cars"
+          element={
+            <UserLayout>
+              <Cars />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            <UserLayout>
+              <Pricing />
+            </UserLayout>
+          }
+        />
+        <Route
+          path="/cars/:carID"
+          element={
+            <UserLayout>
+              <CarDetails />
+            </UserLayout>
+          }
+        />
 
         {/* ===== Auth Routes (Login/Register) with Auth Layout ===== */}
-        <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+        <Route
+          path="/login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
 
-        <Route path="/register" element={<AuthLayout><Register /></AuthLayout>} />
+        <Route
+          path="/register"
+          element={
+            <AuthLayout>
+              <Register />
+            </AuthLayout>
+          }
+        />
 
         {/* ===== Protected User Routes with User Layout ===== */}
         <Route
           path="/wallet"
           element={
             <ProtectedRoute>
-              <UserLayout><Wallet /></UserLayout>
+              <UserLayout>
+                <Wallet />
+              </UserLayout>
             </ProtectedRoute>
           }
         />
@@ -72,7 +130,9 @@ function App() {
           path="/favourites"
           element={
             <ProtectedRoute>
-              <UserLayout><Favourites /></UserLayout>
+              <UserLayout>
+                <Favourites />
+              </UserLayout>
             </ProtectedRoute>
           }
         />
@@ -80,7 +140,9 @@ function App() {
           path="/booking"
           element={
             <ProtectedRoute>
-              <UserLayout><Booking /></UserLayout>
+              <UserLayout>
+                <Booking />
+              </UserLayout>
             </ProtectedRoute>
           }
         />
@@ -88,7 +150,9 @@ function App() {
           path="/paymentdetails"
           element={
             <ProtectedRoute>
-              <UserLayout><PaymentDetails /></UserLayout>
+              <UserLayout>
+                <PaymentDetails />
+              </UserLayout>
             </ProtectedRoute>
           }
         />
@@ -96,7 +160,9 @@ function App() {
           path="/paymentmethods"
           element={
             <ProtectedRoute>
-              <UserLayout><PaymentMethods /></UserLayout>
+              <UserLayout>
+                <PaymentMethods />
+              </UserLayout>
             </ProtectedRoute>
           }
         />
@@ -106,24 +172,30 @@ function App() {
           path="/AdminDashboard"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><AdminDashboard /></AdminLayout>
+              <AdminLayout>
+                <AdminDashboard />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
 
         <Route
-  path="/User"
-  element={
-    <ProtectedRoute adminOnly={true}>
-      <AdminLayout><UserManagement /></AdminLayout>
-    </ProtectedRoute>
-  }
-/>
+          path="/User"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminLayout>
+                <UserManagement />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/AddNewCar"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><AddNewCar /></AdminLayout>
+              <AdminLayout>
+                <AddNewCar />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
@@ -131,15 +203,19 @@ function App() {
           path="/CarManagement"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><CarManagement /></AdminLayout>
+              <AdminLayout>
+                <CarManagement />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
         <Route
-          path="/EditCar"
+          path="/EditCar/:carID"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><EditCar /></AdminLayout>
+              <AdminLayout>
+                <EditCar />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
@@ -147,7 +223,9 @@ function App() {
           path="/CarManagement/:carID"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><ViewCarDetails /></AdminLayout>
+              <AdminLayout>
+                <ViewCarDetails />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
@@ -155,23 +233,34 @@ function App() {
           path="/BookingDetails"
           element={
             <ProtectedRoute adminOnly={true}>
-              <AdminLayout><BookingDetails /></AdminLayout>
+              <AdminLayout>
+                <BookingDetails />
+              </AdminLayout>
             </ProtectedRoute>
           }
         />
 
-<Route
-  path="/UserProfile"
-  element={
-    <ProtectedRoute>
-      <UserLayout><UserProfile /></UserLayout>
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/UserProfile"
+          element={
+            <ProtectedRoute>
+              <UserLayout>
+                <UserProfile />
+              </UserLayout>
+            </ProtectedRoute>
+          }
+        />
 
         {/* Redirect or 404 */}
         <Route path="/home" element={<Navigate to="/" replace />} />
-        <Route path="*" element={<UserLayout><NotFound /></UserLayout>} />
+        <Route
+          path="*"
+          element={
+            <UserLayout>
+              <NotFound />
+            </UserLayout>
+          }
+        />
       </Routes>
     </AuthProvider>
   );
