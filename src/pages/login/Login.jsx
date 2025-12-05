@@ -63,7 +63,7 @@ const Login = () => {
     setSubmitError("");
     if (!validate()) return;
 
-    setIsLoading(true); 
+    setIsLoading(true);
 
     try {
       // Admin override (demo)
@@ -73,6 +73,18 @@ const Login = () => {
           email,
           role: "admin",
         });
+
+        // ✅ تخزين في LocalStorage
+        localStorage.setItem("token", "admin-token");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: "Admin User",
+            email,
+            role: "admin",
+          })
+        );
+
         navigate("/admindashboard");
         return;
       }

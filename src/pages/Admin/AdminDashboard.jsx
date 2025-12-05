@@ -5,9 +5,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { LuCalendar, LuCar, LuUsers, LuTrendingUp } from "react-icons/lu";
 import { FiDollarSign, FiAlertCircle } from "react-icons/fi";
 import { GoXCircle, GoCheckCircle } from "react-icons/go";
+import useTheme from "../../HOOKS/usetheme";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const theme=useTheme();
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-dark-background font-sans">
