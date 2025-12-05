@@ -61,34 +61,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError("");
-    if (!validate()) return;
+    setIsLoading(true); // يبدأ Loading
 
-    setIsLoading(true);
+    if (!validate()) {
+      setIsLoading(false);
+      return;
+    }
+
+    // تسجيل دخول المدير التجريبي
+    if (email === "admin@rentigo.com" && password === "admin123") {
+      contextLogin("admin-token", {
+        name: "Admin User",
+        email,
+        role: "admin",
+      });
+      setIsLoading(false);
+      navigate("/");
+      return;
+    }
+
+    const payload = {
+      email: email.trim(),
+      password: password.trim(),
+    };
 
     try {
-      // Admin override (demo)
-      if (email === "admin@rentigo.com" && password === "admin123") {
-        contextLogin("admin-token", {
-          name: "Admin User",
-          email,
-          role: "admin",
-        });
-        localStorage.setItem("token", "admin-token");
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            name: "Admin User",
-            email,
-            role: "admin",
-          })
-        );
-
-        navigate("/");
-        return;
-      }
-
-      const payload = { email: email.trim(), password: password.trim() };
-
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -100,18 +97,17 @@ const Login = () => {
 
       if (!res.ok) {
         setSubmitError(data.message || "Invalid login credentials");
+        setIsLoading(false);
         return;
       }
 
       contextLogin(data.token, data.user);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (err) {
       setSubmitError("Network error — please try again.");
-    } finally {
-      setIsLoading(false);
     }
+
+    setIsLoading(false); // يوقف Loading بعد العملية
   };
 
   const features = [
@@ -299,7 +295,6 @@ const Login = () => {
                   </Link>
                 </div>
 
-                {/* Sign In Button with Loading */}
                 <Button
                   type="submit"
                   size="lg"
@@ -308,7 +303,7 @@ const Login = () => {
                   className={`text-white font-medium shadow-md transition-all 
                     ${
                       !email || !password || isLoading
-                        ? "bg-gray-400 cursor-not-allowed"
+                        ? "bg-gray-400 cursor-not-allowed pointer-events-none"
                         : "bg-gradient-to-r from-[#0066ff] to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] hover:shadow-lg"
                     }`}
                 >
@@ -330,7 +325,7 @@ const Login = () => {
                   <div className="relative flex justify-center">
                     <Typography
                       variant="small"
-                      className="bg-light-background dark:bg-dark-background px-4 font-medium"
+                      className="bg-light-background dark:bg-dark-background px-4  font-medium"
                     >
                       OR CONTINUE WITH
                     </Typography>
@@ -373,7 +368,6 @@ const Login = () => {
 };
 
 /* ------------ SUBCOMPONENTS ------------ */
-
 const InputField = ({ label, icon, errors, ...props }) => (
   <div className="space-y-2">
     <Typography variant="small" className="font-semibold text-gray-700">
