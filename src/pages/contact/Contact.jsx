@@ -250,93 +250,90 @@ const Contact = () => {
 
             {/* Locations */}
             <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-dark-header_text">
-                  Our Locations
-                </h2>
-                <p className="text-gray-600">
-                  Visit any of our convenient locations for personalized service
-                  and support.
-                </p>
-              </div>
+  <div>
+    <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-dark-header_text">
+      Our Locations
+    </h2>
+    <p className="text-gray-600">
+      Visit any of our convenient locations for personalized service and support.
+    </p>
+  </div>
 
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border/50">
-                <div className="h-52 bg-blue-300 flex items-center justify-center">
-                  <div className="text-center space-y-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="48"
-                      height="48"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-primary mx-auto"
-                    >
-                      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                      <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <p className="text-foreground-secondary">Interactive Map</p>
-                    <p className="text-sm text-foreground-secondary">
-                      Find our locations near you
-                    </p>
-                  </div>
-                </div>
-              </div>
+  <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden border-border/50">
+    <div className="h-52 bg-blue-300 flex items-center justify-center">
+      <div className="text-center space-y-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="48"
+          height="48"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-primary mx-auto"
+        >
+          <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <p className="text-foreground-secondary">Interactive Map</p>
+        <p className="text-sm text-foreground-secondary">
+          Find our locations near you
+        </p>
+      </div>
+    </div>
+  </div>
 
-              {[
-                {
-                  city: "New York",
-                  img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80",
-                  address: "123 Main Street, NY 10001",
-                  phone: "+1 (555) 123-4567",
-                  hours: "6:00 AM - 10:00 PM",
-                },
-                {
-                  city: "Los Angeles",
-                  img: "https://images.unsplash.com/photo-1444927714506-8492d94b5ba0?w=400&q=80",
-                  address: "456 Sunset Blvd, CA 90028",
-                  phone: "+1 (555) 234-5678",
-                  hours: "7:00 AM - 9:00 PM",
-                },
-                {
-                  city: "Chicago",
-                  img: "https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?w=400&q=80",
-                  address: "789 Michigan Ave, IL 60611",
-                  phone: "+1 (555) 345-6789",
-                  hours: "6:30 AM - 9:30 PM",
-                },
-              ].map((loc, index) => (
-                <div
-                  key={index}
-                  className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 hover:shadow-lg transition-all duration-300 border-border/50"
-                >
-                  <div className="flex items-center gap-4">
-                    <img
-                      alt={loc.city}
-                      src={loc.img}
-                      className="w-16 h-16 object-cover rounded-lg text-dark-secondary_text"
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg text-dark-secondary_text">{loc.city}</h3>
-                      <p className="text-foreground-secondary text-sm text-dark-Buttons">
-                        {loc.address}
-                      </p>
-                      <div className="flex gap-4 mt-2 text-sm">
-                        <div className="flex items-center gap-1 text-dark-Buttons">
-                          <span>{loc.phone}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-dark-Buttons">
-                          <span>{loc.hours}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+  {[{
+      city: "New York",
+      img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&q=80",
+      address: "123 Main Street, NY 10001",
+      phone: "+1 (555) 123-4567",
+      hours: "6:00 AM - 10:00 PM",
+    },
+    {
+      city: "Los Angeles",
+      img: "https://images.unsplash.com/photo-1444927714506-8492d94b5ba0?w=400&q=80",
+      address: "456 Sunset Blvd, CA 90028",
+      phone: "+1 (555) 234-5678",
+      hours: "7:00 AM - 9:00 PM",
+    },
+    {
+      city: "Chicago",
+      img: "https://images.unsplash.com/photo-1477414348463-c0eb7f1359b6?w=400&q=80",
+      address: "789 Michigan Ave, IL 60611",
+      phone: "+1 (555) 345-6789",
+      hours: "6:30 AM - 9:30 PM",
+    }
+  ].map((loc, index) => (
+    <div
+      key={index}
+      className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 hover:shadow-lg transition-all duration-300 border-border/50"
+    >
+      <div className="flex items-center gap-4">
+        <img
+          alt={loc.city}
+          src={loc.img}
+          className="w-16 h-16 object-cover rounded-lg text-dark-secondary_text"
+        />
+        <div className="flex-1">
+          <h3 className="font-semibold text-lg text-dark-secondary_text">{loc.city}</h3>
+          <p className="text-foreground-secondary text-sm text-dark-Buttons">
+            {loc.address}
+          </p>
+
+          {/* Phone & Hours row */}
+          <div className="flex flex-row flex-wrap sm:flex-nowrap gap-4 mt-2 text-sm text-dark-Buttons">
+            <span className="flex-shrink-0">{loc.phone}</span>
+            <span className="flex-shrink-0">{loc.hours}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
           </div>
         </div>
       </section>

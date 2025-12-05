@@ -16,7 +16,23 @@ const PaymentDetails = ({
 }) => {
   const location = useLocation();
   const [method, setMethod] = useState("card");
-  const [sameAddress, setSameAddress] = useState(false);
+  // Default billing same as personal to reduce required inputs
+  const [sameAddress, setSameAddress] = useState(true);
+  const [cardFields, setCardFields] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+  });
+  const [billingFields, setBillingFields] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "NY",
+    zip: "",
+  });
+  const [formError, setFormError] = useState("");
 
   const derivedBooking = useMemo(() => {
     const stateData = location.state || {};
@@ -31,6 +47,11 @@ const PaymentDetails = ({
       booking: payload?.booking || stateData?.booking || null,
     };
   }, [bookingData, location.state]);
+
+  const handleConfirm = async () => {
+    setFormError("");
+    if (onConfirm) await onConfirm();
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-8 bg-light-background dark:bg-dark-background min-h-screen pt-20">
@@ -53,17 +74,27 @@ const PaymentDetails = ({
           </Link>
         </div>
 
-        <Method method={method} setMethod={setMethod} />
-        <Billing sameAddress={sameAddress} setSameAddress={setSameAddress} />
+        <Method
+          method={method}
+          setMethod={setMethod}
+          cardFields={cardFields}
+          setCardFields={setCardFields}
+        />
+        <Billing
+          sameAddress={sameAddress}
+          setSameAddress={setSameAddress}
+          billingFields={billingFields}
+          setBillingFields={setBillingFields}
+        />
         <Secure />
       </div>
 
       <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
         <Order
           bookingData={derivedBooking}
-          onConfirm={onConfirm}
+          onConfirm={handleConfirm}
           submitting={submitting}
-          submitError={submitError}
+          submitError={formError || submitError}
           submitSuccess={submitSuccess}
         />
       </div>
