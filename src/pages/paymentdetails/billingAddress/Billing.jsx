@@ -1,4 +1,9 @@
-const Billing = ({ sameAddress, setSameAddress }) => {
+const Billing = ({
+  sameAddress,
+  setSameAddress,
+  billingFields,
+  setBillingFields,
+}) => {
   return (
     <div className="bg-white dark:bg-dark-background rounded-xl p-6 shadow-sm border">
       <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -34,6 +39,10 @@ const Billing = ({ sameAddress, setSameAddress }) => {
               type="text"
               placeholder="John"
               className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.firstName}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, firstName: e.target.value }))
+              }
             />
           </div>
           <div>
@@ -44,6 +53,10 @@ const Billing = ({ sameAddress, setSameAddress }) => {
               type="text"
               placeholder="Doe"
               className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.lastName}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, lastName: e.target.value }))
+              }
             />
           </div>
           <div className="md:col-span-2">
@@ -54,6 +67,10 @@ const Billing = ({ sameAddress, setSameAddress }) => {
               type="text"
               placeholder="123 Main Street"
               className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.address}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, address: e.target.value }))
+              }
             />
           </div>
           <div>
@@ -64,17 +81,27 @@ const Billing = ({ sameAddress, setSameAddress }) => {
               type="text"
               placeholder="New York"
               className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.city}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, city: e.target.value }))
+              }
             />
           </div>
           <div>
             <label className="text-sm text-gray-600 dark:text-dark-secondary_text">
               State
             </label>
-            <select className="w-full p-3 border rounded-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text">
-              <option>Select state</option>
-              <option>New York</option>
-              <option>California</option>
-              <option>Texas</option>
+            <select
+              className="w-full p-3 border rounded-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.state}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, state: e.target.value }))
+              }
+            >
+              <option value="">Select state</option>
+              <option value="NY">New York</option>
+              <option value="CA">California</option>
+              <option value="TX">Texas</option>
             </select>
           </div>
           <div className="md:col-span-2">
@@ -85,6 +112,10 @@ const Billing = ({ sameAddress, setSameAddress }) => {
               type="text"
               placeholder="10001"
               className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-light-background dark:bg-dark-background dark:text-dark-secondary_text"
+              value={billingFields.zip}
+              onChange={(e) =>
+                setBillingFields((prev) => ({ ...prev, zip: e.target.value }))
+              }
             />
           </div>
         </form>

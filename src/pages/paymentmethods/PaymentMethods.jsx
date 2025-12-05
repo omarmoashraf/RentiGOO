@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import Booking from "./bookingSummary/Booking";
 import Payment from "./paymentSummary/Payment";
 import Customer from "./customerInformation/Customer";
@@ -7,40 +7,63 @@ import { FaCheckCircle, FaPrint, FaHeart } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
 
 const PaymentMethods = () => {
-  const bookingData = {
-    reference: "RNT-2024-001234",
+  const { state } = useLocation();
+  const raw = state?.bookingData;
+
+  // If the page is opened directly without state, send back to booking
+  if (!raw) {
+    return <Navigate to="/booking" replace />;
+  }
+
+  const days = (() => {
+    if (!raw.startDate || !raw.endDate) return 0;
+    const diff =
+      (new Date(raw.endDate).getTime() - new Date(raw.startDate).getTime()) /
+      (1000 * 60 * 60 * 24);
+    return diff > 0 ? Math.ceil(diff) : 0;
+  })();
+
+  const normalizedBooking = {
+    reference:
+      raw.booking?._id ||
+      raw.booking?.id ||
+      raw.booking?.reference ||
+      "BOOKING",
     car: {
-      name: "BMW 5 Series",
-      type: "Luxury Sedan",
+      name: raw.car?.name || "Booked Vehicle",
+      type: raw.car?.type || raw.car?.category || "",
       image:
-        "https://www.usnews.com/object/image/00000191-ba19-d7a3-a99b-fb1952050000/p90505005-2.jpeg?update-time=1725404107264&size=responsiveGallery&format=webp",
-      transmission: "Automatic",
-      seats: "5 Seats",
-      package: "Premium",
+        raw.car?.image ||
+        (Array.isArray(raw.car?.images) && raw.car.images[0]) ||
+        "https://via.placeholder.com/320x200.png?text=Vehicle",
+      transmission:
+        raw.car?.specs?.transmission || raw.car?.transmission || "Automatic",
+      seats: raw.car?.specs?.seats || raw.car?.seats || "4 Seats",
+      package: raw.car?.package || "Standard",
     },
     pickup: {
-      date: "Dec 20, 2024",
+      date: raw.startDate || "TBD",
       time: "10:00 AM",
-      location: "Downtown Office - 123 Main St",
+      location: raw.car?.location || "Pickup location",
     },
     return: {
-      date: "Dec 24, 2024",
+      date: raw.endDate || "TBD",
       time: "10:00 AM",
-      location: "Downtown Office - 123 Main St",
+      location: raw.car?.location || "Return location",
     },
     customer: {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+1 (555) 123-4567",
-      duration: "4 days",
+      name: raw.booking?.user?.name || "Customer",
+      email: raw.booking?.user?.email || "example@email.com",
+      phone: raw.booking?.user?.phone || "+1 (555) 123-4567",
+      duration: days > 0 ? `${days} days` : "Duration",
     },
     payment: {
-      vehicle: 356.0,
-      insurance: 25.0,
-      tax: 42.72,
-      service: 15.0,
-      total: 438.72,
-      method: "Visa ending in ****4567",
+      vehicle: raw.totalPrice || 0,
+      insurance: 0,
+      tax: 0,
+      service: 0,
+      total: raw.totalPrice || 0,
+      method: raw.method || "Card payment",
     },
   };
 
@@ -59,8 +82,8 @@ const PaymentMethods = () => {
 
       <div className="flex flex-col lg:flex-row gap-8 p-4 sm:p-6 md:p-8 w-full">
         <div className="flex-1 flex flex-col gap-6">
-          <Booking bookingData={bookingData} />
-          <Customer bookingData={bookingData} />
+          <Booking bookingData={normalizedBooking} />
+          <Customer bookingData={normalizedBooking} />
           <Important />
 
           <div className="flex flex-wrap gap-4 mt-4 justify-center lg:justify-start">
@@ -92,7 +115,7 @@ const PaymentMethods = () => {
         </div>
 
         <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
-          <Payment bookingData={bookingData} />
+          <Payment bookingData={normalizedBooking} />
         </div>
       </div>
     </div>

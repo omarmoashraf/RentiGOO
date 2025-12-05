@@ -40,19 +40,6 @@ function WalletMiniNavBar() {
         </div>
       ),
     },
-    {
-      label: "Payment Methods",
-      value: "payment-methods",
-      desc: `We're not always in the position that we want to be at.
-      We're constantly growing. We're constantly making mistakes. We're
-      constantly trying to express ourselves and actualize our dreams.`,
-    },
-    {
-      label: "Loyalty Program",
-      value: "loyalty-program",
-      desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
-    },
   ];
   return (
     <div>
@@ -69,7 +56,11 @@ function WalletMiniNavBar() {
               key={value}
               value={value}
               onClick={() => setActiveTab(value)}
-              className={activeTab === value ? "text-gray-900 dark:text-dark-Buttons" : "dark:text-dark-secondary_text"}
+              className={
+                activeTab === value
+                  ? "text-gray-900 dark:text-dark-Buttons"
+                  : "dark:text-dark-secondary_text"
+              }
             >
               {label}
             </Tab>

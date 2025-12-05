@@ -1,34 +1,28 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
+import { Card, CardHeader, CardBody, Typography } from "@material-tailwind/react";
 import { CiCalendar } from "react-icons/ci";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
-function CheckIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="h-3 w-3"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4.5 12.75l6 6 9-13.5"
-      />
-    </svg>
-  );
+function formatDate(value) {
+  if (!value) return "Select a date";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Select a valid date";
+  return date.toLocaleDateString();
 }
 
-function Step1Card2() {
+function getDays(startDate, endDate) {
+  if (!startDate || !endDate) return 0;
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const msInDay = 1000 * 60 * 60 * 24;
+  const diff = Math.ceil((end - start) / msInDay);
+  return diff > 0 ? diff : 0;
+}
+
+function Step1Card2({ startDate, endDate, totalPrice, car }) {
+  const days = getDays(startDate, endDate);
+  const dailyPrice =
+    car?.price ?? car?._raw?.price ?? car?.dailyPrice ?? undefined;
+
   return (
     <Card
       color=""
@@ -56,7 +50,21 @@ function Step1Card2() {
           <CiCalendar className="text-light-primary_text dark:text-dark-header_text" />
         </Typography>
         <div className="text-gray-700 dark:text-dark-secondary_text">
-          <p>Select pickup and return dates to see pricing</p>
+          <p>
+            {days > 0 && dailyPrice
+              ? `${days} day rental at $${dailyPrice}/day`
+              : "Select pickup and return dates to see pricing"}
+          </p>
+          <p className="text-sm mt-1">
+            {startDate && endDate
+              ? `${formatDate(startDate)} → ${formatDate(endDate)}`
+              : "Dates not set"}
+          </p>
+          {totalPrice > 0 && (
+            <p className="text-lg font-semibold text-light-primary_text dark:text-dark-header_text">
+              Estimated total: ${totalPrice.toFixed(2)}
+            </p>
+          )}
         </div>
       </CardHeader>
       <div className="w-full mx-auto border-t border-gray-700 pb-4 opacity-25"></div>

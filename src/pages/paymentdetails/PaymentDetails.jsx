@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useMemo } from "react";
 import Method from "./paymentMethod/Method";
 import Billing from "./billingAddress/Billing";
 import Secure from "./secure/Secure";
@@ -7,9 +7,51 @@ import Order from "./orderSummary/Order";
 import { Button } from "@material-tailwind/react";
 import { FaArrowLeft } from "react-icons/fa";
 
-const PaymentDetails = () => {
+const PaymentDetails = ({
+  bookingData,
+  onConfirm,
+  submitting = false,
+  submitError = "",
+  submitSuccess = "",
+}) => {
+  const location = useLocation();
   const [method, setMethod] = useState("card");
-  const [sameAddress, setSameAddress] = useState(false);
+  // Default billing same as personal to reduce required inputs
+  const [sameAddress, setSameAddress] = useState(true);
+  const [cardFields, setCardFields] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvv: "",
+  });
+  const [billingFields, setBillingFields] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    state: "NY",
+    zip: "",
+  });
+  const [formError, setFormError] = useState("");
+
+  const derivedBooking = useMemo(() => {
+    const stateData = location.state || {};
+    const payload = bookingData || stateData;
+    const car = payload?.car || payload?.booking?.car || stateData?.car;
+
+    return {
+      car,
+      startDate: payload?.startDate || stateData?.startDate || "",
+      endDate: payload?.endDate || stateData?.endDate || "",
+      totalPrice: payload?.totalPrice || stateData?.totalPrice || 0,
+      booking: payload?.booking || stateData?.booking || null,
+    };
+  }, [bookingData, location.state]);
+
+  const handleConfirm = async () => {
+    setFormError("");
+    if (onConfirm) await onConfirm();
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-8 bg-light-background dark:bg-dark-background min-h-screen pt-20">
@@ -32,13 +74,29 @@ const PaymentDetails = () => {
           </Link>
         </div>
 
-        <Method method={method} setMethod={setMethod} />
-        <Billing sameAddress={sameAddress} setSameAddress={setSameAddress} />
+        <Method
+          method={method}
+          setMethod={setMethod}
+          cardFields={cardFields}
+          setCardFields={setCardFields}
+        />
+        <Billing
+          sameAddress={sameAddress}
+          setSameAddress={setSameAddress}
+          billingFields={billingFields}
+          setBillingFields={setBillingFields}
+        />
         <Secure />
       </div>
 
       <div className="w-full lg:w-[30%] h-fit sticky top-10 self-start">
-        <Order />
+        <Order
+          bookingData={derivedBooking}
+          onConfirm={handleConfirm}
+          submitting={submitting}
+          submitError={formError || submitError}
+          submitSuccess={submitSuccess}
+        />
       </div>
     </div>
   );

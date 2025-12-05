@@ -11,8 +11,6 @@ import {
 } from "@material-tailwind/react";
 import {
   Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
@@ -22,21 +20,25 @@ import useTheme from "../HOOKS/usetheme";
 const profileMenuItems = [
   { label: "My Profile", icon: UserCircleIcon },
   { label: "Sign Out", icon: PowerIcon },
+  { label: "Admin Control", icon: Cog6ToothIcon }, 
 ];
 
 export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const {theme}=useTheme();
+  const { theme } = useTheme();
 
   const closeMenu = () => setIsMenuOpen(false);
+  const isAdmin = user?.role === "admin";
 
   const handleItemClick = (label) => {
     if (label === "Sign Out") {
       logout();
     } else if (label === "My Profile") {
-      navigate("/UserProfile"); // Navigate to UserProfile page
+      navigate("/UserProfile");
+    } else if (label === "Admin Control" && isAdmin) {
+      navigate("/AdminDashboard");
     }
     closeMenu();
   };
@@ -44,7 +46,11 @@ export function AvatarWithUserDropdown() {
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
-        <Button variant="text" color="blue-gray" className="flex items-center rounded-full p-0">
+        <Button
+          variant="text"
+          color="blue-gray"
+          className="flex items-center rounded-full p-0"
+        >
           <Avatar
             variant="circular"
             size="md"
@@ -59,18 +65,27 @@ export function AvatarWithUserDropdown() {
 
       <MenuList className="p-1 bg-light-background dark:bg-dark-background">
         {profileMenuItems.map(({ label, icon }, key) => {
+          if (label === "Admin Control" && !isAdmin) return null;
+
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
               onClick={() => handleItemClick(label)}
-              className={`flex items-center gap-2 rounded ${isLastItem ? "hover:bg-red-500/10" : ""}`}
+              className={`flex items-center gap-2 rounded ${
+                isLastItem ? "hover:bg-red-500/10" : ""
+              }`}
             >
               {React.createElement(icon, {
                 className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
                 strokeWidth: 2,
               })}
-              <Typography as="span" variant="small" className="font-normal" color={isLastItem ? "red" : "inherit"}>
+              <Typography
+                as="span"
+                variant="small"
+                className="font-normal"
+                color={isLastItem ? "red" : "inherit"}
+              >
                 {label}
               </Typography>
             </MenuItem>

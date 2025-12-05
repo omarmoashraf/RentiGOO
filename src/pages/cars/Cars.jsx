@@ -47,7 +47,8 @@ const Cars = () => {
 
   function normalizeCar(item) {
     return {
-      id: item.id ?? item._id ?? String(Math.random()).slice(2),
+      // prefer backend Mongo _id for downstream booking relations
+      id: item._id ?? item.id ?? String(Math.random()).slice(2),
       name: item.name ?? "Unknown",
       type: item.type ?? "",
       price: Number(item.price ?? 0),

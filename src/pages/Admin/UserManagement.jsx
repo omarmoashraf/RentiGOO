@@ -125,7 +125,7 @@ const UserManagement = () => {
       <p className="text-gray-500 mb-6">Manage customer accounts and profiles</p>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-4 rounded-lg shadow flex items-center justify-between">
           <div>
             <p className="text-gray-500 text-sm">Total Users</p>
@@ -159,167 +159,156 @@ const UserManagement = () => {
       </div>
 
       {/* Search & Status */}
-      <div className="flex gap-2 mb-10">
-        <div className="flex items-center border rounded-lg bg-white p-2 w-5/6">
-          <Search className="text-gray-400 mr-2" />
-          <input
-            type="text"
-            placeholder="Search users..."
-            className="outline-none w-full"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-
-{/* Status Dropdown */}
-<div className="relative w-1/6">
-  <div
-    onClick={() => setStatusOpen(!statusOpen)}
-    className={`flex items-center justify-between cursor-pointer border rounded-lg py-3 px-4 bg-white ${
-      statusOpen ? "outline outline-2 outline-blue-400" : ""
-    }`}
-  >
-    <BiFilterAlt className="text-gray-500" size={22} /> {/* Left Icon */}
-    <span className="text-gray-700">{selectedStatus}</span> {/* Text in middle */}
-    <GoChevronDown
-      className={`text-gray-500 transition-transform duration-200 ${
-        statusOpen ? "rotate-180" : ""
-      }`}
-    size={20} /> {/* Right Icon */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-10 w-full">
+  {/* Search Input */}
+  <div className="flex items-center border rounded-lg bg-white p-2 flex-1 min-w-0">
+    <Search className="text-gray-400 mr-2" />
+    <input
+      type="text"
+      placeholder="Search users..."
+      className="outline-none w-full text-sm sm:text-base"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+    />
   </div>
 
-  {statusOpen && (
-    <div className="absolute left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-      {["All Status", "Active", "Inactive", "Suspended"].map((status) => (
-        <div
-          key={status}
-          className="p-2 hover:bg-blue-100 cursor-pointer"
-          onClick={() => {
-            setSelectedStatus(status);
-            setStatusOpen(false);
-          }}
-        >
-          {status}
-        </div>
-      ))}
+  {/* Status Dropdown */}
+  <div className="relative w-full sm:w-40">
+    <div
+      onClick={() => setStatusOpen(!statusOpen)}
+      className={`flex items-center justify-between cursor-pointer border rounded-lg py-2 px-3 sm:py-3 sm:px-4 bg-white text-sm sm:text-base ${
+        statusOpen ? "outline outline-2 outline-blue-400" : ""
+      }`}
+    >
+      <BiFilterAlt className="text-gray-500" size={20} />
+      <span className="text-gray-700 truncate">{selectedStatus}</span>
+      <GoChevronDown
+        className={`text-gray-500 transition-transform duration-200 ${
+          statusOpen ? "rotate-180" : ""
+        }`}
+        size={18}
+      />
     </div>
-  )}
+
+    {statusOpen && (
+      <div className="absolute left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 text-sm sm:text-base">
+        {["All Status", "Active", "Inactive", "Suspended"].map((status) => (
+          <div
+            key={status}
+            className="p-2 hover:bg-blue-100 cursor-pointer truncate"
+            onClick={() => {
+              setSelectedStatus(status);
+              setStatusOpen(false);
+            }}
+          >
+            {status}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
 </div>
 
 
-      </div>
-
       {/* User Table */}
       <div className="bg-white rounded-lg shadow overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                User
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Contact
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Joined
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Bookings
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Total Spent
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td className="px-6 py-4 flex items-center gap-2">
-                  {user.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-sm font-bold">
-                      {user.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </div>
-                  )}
-                  <div>
-                    <p className="text-gray-900 font-medium">{user.name}</p>
-                    <p className="text-gray-400 text-sm">{user.id}</p>
-                  </div>
-                </td>
-                <td className="px-6 py-4 text-gray-900">
-                  <p>{user.email}</p>
-                  <p className="text-gray-400 text-sm">{user.phone}</p>
-                </td>
-                <td className="px-6 py-4 text-gray-900">{user.joined}</td>
-                <td className="px-6 py-4 text-gray-900">{user.bookings}</td>
-                <td className="px-6 py-4 text-gray-900 font-semibold">
-                  ${user.totalSpent}
-                </td>
-                <td className="px-6 py-4">
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusClasses(
-                      user.status
-                    )}`}
-                  >
-                    {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
-                  </span>
-                </td>
-                <td className="px-6 py-4 flex gap-5 relative">
-                  <button
-                    className="text-gray-500 hover:text-gray-700"
-                    onClick={() => setViewUser(user)}
-                  >
-                    <Eye size={16} />
-                  </button>
-                  <button
-                    className="text-gray-500 hover:text-gray-700"
-                    onClick={() =>
-                      setMenuOpen(menuOpen === user.id ? null : user.id)
-                    }
-                  >
-                    <MoreHorizontal size={16} />
-                  </button>
+  <table className="min-w-full divide-y divide-gray-200">
+    <thead className="bg-gray-50">
+      <tr>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          User
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Contact
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Joined
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Bookings
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Total Spent
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Status
+        </th>
+        <th className="px-6 py-3 text-left text-xs sm:text-[10px] md:text-xs font-medium text-gray-500 uppercase">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {filteredUsers.map((user) => (
+        <tr key={user.id}>
+          <td className="px-6 py-4 flex items-center gap-2 text-sm sm:text-[10px] md:text-xs">
+            {user.avatar ? (
+              <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full" />
+            ) : (
+              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center font-bold text-xs sm:text-[10px] md:text-xs">
+                {user.name.split(" ").map((n) => n[0]).join("")}
+              </div>
+            )}
+            <div>
+              <p className="text-gray-900 font-medium text-sm sm:text-[10px] md:text-xs">{user.name}</p>
+              <p className="text-gray-400 text-sm sm:text-[9px] md:text-xs">{user.id}</p>
+            </div>
+          </td>
+          <td className="px-6 py-4 text-gray-900 text-sm sm:text-[10px] md:text-xs">
+            <p>{user.email}</p>
+            <p className="text-gray-400 text-sm sm:text-[9px] md:text-xs">{user.phone}</p>
+          </td>
+          <td className="px-6 py-4 text-gray-900 text-sm sm:text-[10px] md:text-xs">{user.joined}</td>
+          <td className="px-6 py-4 text-gray-900 text-sm sm:text-[10px] md:text-xs">{user.bookings}</td>
+          <td className="px-6 py-4 text-gray-900 font-semibold text-sm sm:text-[10px] md:text-xs">
+            ${user.totalSpent}
+          </td>
+          <td className="px-6 py-4 text-sm sm:text-[10px] md:text-xs">
+            <span
+              className={`px-2 py-1 rounded-full font-semibold text-xs sm:text-[9px] md:text-[10px] ${getStatusClasses(
+                user.status
+              )}`}
+            >
+              {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+            </span>
+          </td>
+          <td className="px-6 py-4 flex gap-5 relative text-sm sm:text-[10px] md:text-xs">
+            <button className="text-gray-500 hover:text-gray-700" onClick={() => setViewUser(user)}>
+              <Eye size={16} />
+            </button>
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={() => setMenuOpen(menuOpen === user.id ? null : user.id)}
+            >
+              <MoreHorizontal size={16} />
+            </button>
 
-                  {/* Dropdown menu */}
-                  {menuOpen === user.id && (
-                    <div className="absolute top-6 right-0 bg-white border rounded shadow-md z-50 w-32">
-                      <div
-                        className="px-3 py-2 hover:bg-blue-100 cursor-pointer"
-                        onClick={() => {
-                          setEditUser(user);
-                          setMenuOpen(null);
-                        }}
-                      >
-                        Edit User
-                      </div>
-                      <div
-                        className="px-3 py-2 hover:bg-red-100 cursor-pointer text-red-600"
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        Delete User
-                      </div>
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            {menuOpen === user.id && (
+              <div className="absolute top-6 right-0 bg-white border rounded shadow-md z-50 w-32 text-sm sm:text-[10px] md:text-xs">
+                <div
+                  className="px-3 py-2 hover:bg-blue-100 cursor-pointer"
+                  onClick={() => {
+                    setEditUser(user);
+                    setMenuOpen(null);
+                  }}
+                >
+                  Edit User
+                </div>
+                <div
+                  className="px-3 py-2 hover:bg-red-100 cursor-pointer text-red-600"
+                  onClick={() => handleDelete(user.id)}
+                >
+                  Delete User
+                </div>
+              </div>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 
       {/* View User Modal */}
       {viewUser && (
