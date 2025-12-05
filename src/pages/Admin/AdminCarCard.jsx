@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function AdminCarCard({
   car: {
@@ -35,6 +36,25 @@ function AdminCarCard({
     available,
   },
 }) {
+  const handleDelete = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete this car?")) return;
+
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/v1/cars/${carId}`
+      );
+
+      if (data.success) {
+        alert("Car deleted successfully!");
+      } else {
+        alert("Failed to delete car: " + data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error while deleting car");
+    }
+  };
+
   return (
     <Card className="shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl overflow-hidden relative dark:bg-dark-background">
       {/* ----------- Image Section ----------- */}
@@ -68,11 +88,19 @@ function AdminCarCard({
       <CardBody className="p-4">
         {/* Car name & price */}
         <div className="flex justify-between items-start mb-2">
-          <Typography variant="h6" color="blue-gray" className="dark:text-dark-header_text">
+          <Typography
+            variant="h6"
+            color="blue-gray"
+            className="dark:text-dark-header_text"
+          >
             {name}
           </Typography>
           <div className="text-right">
-            <Typography variant="small" color="gray" className="line-through dark:text-gray-500 " >
+            <Typography
+              variant="small"
+              color="gray"
+              className="line-through dark:text-gray-500 "
+            >
               ${originalPrice}
             </Typography>
             <Typography
@@ -88,10 +116,16 @@ function AdminCarCard({
         {/* Rating */}
         <div className="flex items-center gap-1 mb-3">
           <Star size={18} className="text-yellow-500 fill-yellow-500" />
-          <Typography color="blue-gray" className="text-sm font-medium dark:text-dark-header_text">
+          <Typography
+            color="blue-gray"
+            className="text-sm font-medium dark:text-dark-header_text"
+          >
             {rating}
           </Typography>
-          <Typography color="gray" className="text-xs dark:text-dark-header_text ">
+          <Typography
+            color="gray"
+            className="text-xs dark:text-dark-header_text "
+          >
             ({reviews})
           </Typography>
         </div>
@@ -157,6 +191,7 @@ function AdminCarCard({
               size="sm"
               className="w-full flex items-center justify-center border dark:text-dark-secondary_text border-gray-300 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-200 py-1"
               aria-label="Delete"
+              onClick={() => handleDelete(id)}
             >
               <Trash2 className="w-4 h-4" />
             </Button>
