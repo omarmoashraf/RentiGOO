@@ -37,7 +37,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // ✅ State للـ loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -73,8 +73,6 @@ const Login = () => {
           email,
           role: "admin",
         });
-
-        // ✅ تخزين في LocalStorage
         localStorage.setItem("token", "admin-token");
         localStorage.setItem(
           "user",
@@ -85,7 +83,7 @@ const Login = () => {
           })
         );
 
-        navigate("/admindashboard");
+        navigate("/");
         return;
       }
 
@@ -106,11 +104,13 @@ const Login = () => {
       }
 
       contextLogin(data.token, data.user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
     } catch (err) {
       setSubmitError("Network error — please try again.");
     } finally {
-      setIsLoading(false); // ✅ إيقاف الـ loading بعد انتهاء العملية
+      setIsLoading(false);
     }
   };
 

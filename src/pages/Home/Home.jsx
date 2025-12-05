@@ -60,7 +60,7 @@ const Home = () => {
           ? rawData
           : rawData?.data ?? rawData?.cars ?? [];
 
-        const normalized = payload.map(normalizeCar).slice(0, 4); // أربع عربيات فقط
+        const normalized = payload.map(normalizeCar).slice(0, 4); 
         setCars(normalized);
       })
       .catch((err) => {
