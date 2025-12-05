@@ -68,9 +68,12 @@ const Booking = () => {
     }
 
     const carId =
-      selectedCar.id || selectedCar._id || selectedCar._raw?._id || null;
-    const isObjectId = typeof carId === "string" && carId.length === 24;
-    if (!carId || !isObjectId) {
+      selectedCar._id ||
+      selectedCar.id ||
+      selectedCar._raw?._id ||
+      selectedCar._raw?.externalId ||
+      null;
+    if (!carId) {
       setSubmitError(
         "Selected vehicle is invalid for booking. Please re-open the car details and try again."
       );
@@ -90,8 +93,8 @@ const Booking = () => {
       const res = await createBooking(payload, token);
       const booking = res?.booking || res;
       setSubmitSuccess("Booking created successfully.");
-      navigate("/paymentdetails", {
-        state: { booking, car: selectedCar, startDate, endDate, totalPrice },
+      navigate("/paymentmethods", {
+        state: { bookingData: { booking, car: selectedCar, startDate, endDate, totalPrice } },
       });
     } catch (err) {
       setSubmitError(err.message || "Failed to create booking");
