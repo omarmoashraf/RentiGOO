@@ -62,7 +62,7 @@ export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, mode } = useTheme();
   
   // Get user's current avatar or use default
   const userAvatar = user?.avatar || getDefaultAvatar(user?.name || "Guest");
@@ -189,7 +189,7 @@ export function AvatarWithUserDropdown() {
               Theme
             </Typography>
             <button
-              onClick={toggleTheme}
+              onClick={mode}
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-dark-secondary hover:bg-gray-200 dark:hover:bg-dark-hover transition-colors"
             >
               {theme === "dark" ? (

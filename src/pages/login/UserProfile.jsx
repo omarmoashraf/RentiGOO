@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsWindowDock } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import {
   Camera,
   Car,
@@ -157,6 +158,7 @@ export default function ProfilePage() {
     { id: "Payment", label: "Payment", icon: "💳" },
     { id: "History", label: "History", icon: "📋" },
   ];
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen dark:bg-dark-background bg-light-background transition-colors duration-200">
@@ -228,26 +230,50 @@ export default function ProfilePage() {
 
                 {/* Quick Links */}
                 <div className="pt-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
-                  {[
-                    { icon: <Car size={18} />, label: "My Bookings" },
-                    { icon: <Star size={18} />, label: "Favorites" },
-                    { icon: <CreditCard size={18} />, label: "Wallet" },
-                  ].map((link, index) => (
-                    <button
-                      key={index}
-                      className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="text-gray-600 dark:text-dark-secondary_text group-hover:text-light-Buttons dark:group-hover:text-dark-Buttons">
-                          {link.icon}
-                        </div>
-                        <span className="text-sm font-medium dark:text-dark-header_text group-hover:text-light-Buttons dark:group-hover:text-dark-Buttons">
-                          {link.label}
-                        </span>
-                      </div>
-                      <ChevronRight size={16} className="text-gray-400 group-hover:text-light-Buttons dark:group-hover:text-dark-Buttons" />
-                    </button>
-                  ))}
+                  <button
+                    onClick={() => navigate("/bookings")}
+                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background transition-colors group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Car
+                        size={18}
+                        className="text-gray-600 dark:text-dark-secondary_text"
+                      />
+                      <span className="text-sm font-medium dark:text-dark-header_text">
+                        My Bookings
+                      </span>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => navigate("/favourites")}
+                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background transition-colors group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Star
+                        size={18}
+                        className="text-gray-600 dark:text-dark-secondary_text"
+                      />
+                      <span className="text-sm font-medium dark:text-dark-header_text">
+                        Favorites
+                      </span>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={() => navigate("/wallet")}
+                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background transition-colors group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <CreditCard
+                        size={18}
+                        className="text-gray-600 dark:text-dark-secondary_text"
+                      />
+                      <span className="text-sm font-medium dark:text-dark-header_text">
+                        Wallet
+                      </span>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -351,7 +377,10 @@ export default function ProfilePage() {
                             Email Address
                           </label>
                           <div className="relative">
-                            <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text" size={18} />
+                            <Mail
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text"
+                              size={18}
+                            />
                             <input
                               id="email"
                               type="email"
@@ -368,7 +397,10 @@ export default function ProfilePage() {
                             Phone Number
                           </label>
                           <div className="relative">
-                            <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text" size={18} />
+                            <Phone
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text"
+                              size={18}
+                            />
                             <input
                               id="phone"
                               value={personalInfo.phone}
@@ -384,7 +416,10 @@ export default function ProfilePage() {
                             Birth Date
                           </label>
                           <div className="relative">
-                            <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text" size={18} />
+                            <Calendar
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text"
+                              size={18}
+                            />
                             <input
                               id="birthDate"
                               type="date"
@@ -424,7 +459,10 @@ export default function ProfilePage() {
                             Street Address
                           </label>
                           <div className="relative">
-                            <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text" size={18} />
+                            <MapPin
+                              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-dark-secondary_text"
+                              size={18}
+                            />
                             <input
                               id="street"
                               value={addressInfo.street}
@@ -574,7 +612,9 @@ export default function ProfilePage() {
                           </div>
                         </div>
                         <button
-                          onClick={() => setIsEditingNotifications(!isEditingNotifications)}
+                          onClick={() =>
+                            setIsEditingNotifications(!isEditingNotifications)
+                          }
                           className="flex items-center gap-2 px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background dark:text-dark-header_text transition-colors"
                         >
                           <EditIcon size={16} />
@@ -606,7 +646,9 @@ export default function ProfilePage() {
                             >
                               <span
                                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                  notif.checked ? "translate-x-6" : "translate-x-1"
+                                  notif.checked
+                                    ? "translate-x-6"
+                                    : "translate-x-1"
                                 }`}
                               />
                             </button>
@@ -649,10 +691,16 @@ export default function ProfilePage() {
                             />
                             <button
                               type="button"
-                              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                              onClick={() =>
+                                setShowCurrentPassword(!showCurrentPassword)
+                              }
                               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-dark-secondary_text hover:text-light-Buttons dark:hover:text-dark-Buttons"
                             >
-                              {showCurrentPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                              {showCurrentPassword ? (
+                                <EyeOff size={20} />
+                              ) : (
+                                <Eye size={20} />
+                              )}
                             </button>
                           </div>
                         </div>
@@ -669,10 +717,16 @@ export default function ProfilePage() {
                             />
                             <button
                               type="button"
-                              onClick={() => setShowNewPassword(!showNewPassword)}
+                              onClick={() =>
+                                setShowNewPassword(!showNewPassword)
+                              }
                               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-dark-secondary_text hover:text-light-Buttons dark:hover:text-dark-Buttons"
                             >
-                              {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                              {showNewPassword ? (
+                                <EyeOff size={20} />
+                              ) : (
+                                <Eye size={20} />
+                              )}
                             </button>
                           </div>
                         </div>
@@ -689,10 +743,16 @@ export default function ProfilePage() {
                             />
                             <button
                               type="button"
-                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                              onClick={() =>
+                                setShowConfirmPassword(!showConfirmPassword)
+                              }
                               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-dark-secondary_text hover:text-light-Buttons dark:hover:text-dark-Buttons"
                             >
-                              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                              {showConfirmPassword ? (
+                                <EyeOff size={20} />
+                              ) : (
+                                <Eye size={20} />
+                              )}
                             </button>
                           </div>
                         </div>
@@ -729,14 +789,18 @@ export default function ProfilePage() {
                         >
                           <span
                             className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              twoFactorEnabled ? "translate-x-6" : "translate-x-1"
+                              twoFactorEnabled
+                                ? "translate-x-6"
+                                : "translate-x-1"
                             }`}
                           />
                         </button>
                       </div>
 
                       <p className="text-sm text-gray-600 dark:text-dark-secondary_text">
-                        Protect your account with an extra layer of security. When enabled, you'll need to enter a verification code from your authenticator app when signing in.
+                        Protect your account with an extra layer of security.
+                        When enabled, you'll need to enter a verification code
+                        from your authenticator app when signing in.
                       </p>
                     </div>
 
@@ -758,8 +822,18 @@ export default function ProfilePage() {
 
                       <div className="space-y-4">
                         {[
-                          { device: "Chrome on Windows", location: "New York, NY", status: "active", time: "Current session" },
-                          { device: "Safari on iPhone", location: "New York, NY", status: "inactive", time: "2 days ago" },
+                          {
+                            device: "Chrome on Windows",
+                            location: "New York, NY",
+                            status: "active",
+                            time: "Current session",
+                          },
+                          {
+                            device: "Safari on iPhone",
+                            location: "New York, NY",
+                            status: "inactive",
+                            time: "2 days ago",
+                          },
                         ].map((session, index) => (
                           <div
                             key={index}
@@ -774,8 +848,16 @@ export default function ProfilePage() {
                               </p>
                             </div>
                             <div className="flex items-center gap-3 mt-3 sm:mt-0">
-                              <span className={`text-sm px-3 py-1 rounded-full ${session.status === "active" ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"}`}>
-                                {session.status === "active" ? "Active" : "Inactive"}
+                              <span
+                                className={`text-sm px-3 py-1 rounded-full ${
+                                  session.status === "active"
+                                    ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                                    : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                                }`}
+                              >
+                                {session.status === "active"
+                                  ? "Active"
+                                  : "Inactive"}
                               </span>
                               {session.status === "inactive" && (
                                 <button className="text-sm px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-background dark:text-dark-header_text transition-colors">
@@ -828,12 +910,18 @@ export default function ProfilePage() {
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                               <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-light-Buttons to-light-secondary flex items-center justify-center">
-                                  <CreditCard className="text-white" size={24} />
+                                  <CreditCard
+                                    className="text-white"
+                                    size={24}
+                                  />
                                 </div>
                                 <div>
                                   <div className="flex items-center gap-2">
                                     <p className="font-medium dark:text-dark-header_text">
-                                      {method.type === "visa" ? "Visa" : "Mastercard"} ending in {method.last4}
+                                      {method.type === "visa"
+                                        ? "Visa"
+                                        : "Mastercard"}{" "}
+                                      ending in {method.last4}
                                     </p>
                                     {method.isDefault && (
                                       <span className="px-2 py-1 text-xs bg-gradient-to-r from-light-Buttons to-light-secondary text-white rounded-full">
@@ -875,9 +963,24 @@ export default function ProfilePage() {
 
                       <div className="space-y-4">
                         {[
-                          { title: "BMW 5 Series Rental", date: "Dec 20, 2024", amount: "$356.00", status: "paid" },
-                          { title: "Tesla Model 3 Rental", date: "Nov 15, 2024", amount: "$289.00", status: "paid" },
-                          { title: "Mercedes-Benz C-Class", date: "Oct 10, 2024", amount: "$425.00", status: "paid" },
+                          {
+                            title: "BMW 5 Series Rental",
+                            date: "Dec 20, 2024",
+                            amount: "$356.00",
+                            status: "paid",
+                          },
+                          {
+                            title: "Tesla Model 3 Rental",
+                            date: "Nov 15, 2024",
+                            amount: "$289.00",
+                            status: "paid",
+                          },
+                          {
+                            title: "Mercedes-Benz C-Class",
+                            date: "Oct 10, 2024",
+                            amount: "$425.00",
+                            status: "paid",
+                          },
                         ].map((txn, idx) => (
                           <div
                             key={idx}
@@ -965,16 +1068,33 @@ export default function ProfilePage() {
                     {/* Summary Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {[
-                        { icon: <Car size={24} />, value: "24", label: "Total Rentals", color: "from-blue-500 to-blue-600" },
-                        { icon: <CreditCard size={24} />, value: "$4250.00", label: "Total Spent", color: "from-green-500 to-green-600" },
-                        { icon: <Star size={24} />, value: "850", label: "Loyalty Points", color: "from-yellow-500 to-yellow-600" },
+                        {
+                          icon: <Car size={24} />,
+                          value: "24",
+                          label: "Total Rentals",
+                          color: "from-blue-500 to-blue-600",
+                        },
+                        {
+                          icon: <CreditCard size={24} />,
+                          value: "$4250.00",
+                          label: "Total Spent",
+                          color: "from-green-500 to-green-600",
+                        },
+                        {
+                          icon: <Star size={24} />,
+                          value: "850",
+                          label: "Loyalty Points",
+                          color: "from-yellow-500 to-yellow-600",
+                        },
                       ].map((stat, idx) => (
                         <div
                           key={idx}
                           className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-dark-secondary p-6 shadow-sm"
                         >
                           <div className="flex items-center gap-4">
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center`}>
+                            <div
+                              className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center`}
+                            >
                               <div className="text-white">{stat.icon}</div>
                             </div>
                             <div>
