@@ -118,10 +118,6 @@ const Header = ({ currentPage, onNavigate }) => {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-3">
-          
-
-         
-
             {isLogged ? (
               <AvatarWithUserDropdown />
             ) : (
@@ -205,37 +201,29 @@ const Header = ({ currentPage, onNavigate }) => {
 
             {/* Mobile Action Buttons */}
             <div className="grid grid-cols-2 gap-3 pt-4 border-t border-gray-100">
-              <Button
-                variant="outlined"
-                onClick={() => navigate("/favourites")}
-                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
-              >
-                <FaHeart className="w-4 h-4 dark:text-dark-nav_icons" />
-                <span className="font-semibold dark:text-dark-nav_icons text-center">
-                  Favorites
-                </span>
-              </Button>
-
-              <Button
-                variant="outlined"
-                onClick={() => navigate("/wallet")}
-                className="flex items-center justify-center gap-2 rounded-lg border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600"
-              >
-                <FaWallet className="w-4 h-4 dark:text-dark-nav_icons" />
-                <span className="font-semibold dark:text-dark-nav_icons text-center">
-                  Wallet
-                </span>
-              </Button>
-
               {isLogged ? (
                 <AvatarWithUserDropdown className="col-span-2" />
               ) : (
-                <Button
-                  onClick={() => navigate("/login")}
-                  className="col-span-2 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 py-3 transform hover:scale-105"
-                >
-                  Sign In
-                </Button>
+                <>
+                  <IconButton
+                    variant="text"
+                    onClick={mode}
+                    className="rounded-lg text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    {theme === "dark" ? (
+                      <FaSun className="w-5 h-5 dark:text-dark-nav_icons" />
+                    ) : (
+                      <FaMoon className="w-5 h-5" />
+                    )}
+                  </IconButton>
+
+                  <Button
+                    onClick={() => navigate("/login")}
+                    className="bg-gradient-to-r from-[#0066ff] dark:bg-dark-Buttons to-[#0052cc] hover:from-[#0052cc] hover:to-[#004bb5] text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 "
+                  >
+                    Sign In
+                  </Button>
+                </>
               )}
             </div>
           </div>
