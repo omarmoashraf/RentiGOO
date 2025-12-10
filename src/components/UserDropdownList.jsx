@@ -5,7 +5,6 @@ import {
   Button,
   Menu,
   MenuHandler,
-  MenuItem,
   MenuList,
   Typography,
 } from "@material-tailwind/react";
@@ -13,32 +12,71 @@ import {
   Cog6ToothIcon,
   PowerIcon,
   UserCircleIcon,
+  SunIcon,
+  MoonIcon,
+  ShieldCheckIcon,
+  CreditCardIcon,
+  CalendarDaysIcon,
+  BellIcon,
+  CogIcon,
+  UserIcon,
 } from "@heroicons/react/24/solid";
 import { useAuth } from "../context/AuthContext";
 import useTheme from "../HOOKS/usetheme";
 
-const profileMenuItems = [
-  { label: "My Profile", icon: UserCircleIcon },
-  { label: "Sign Out", icon: PowerIcon },
-  { label: "Admin Control", icon: Cog6ToothIcon }, 
-];
+// Define menu items based on user role
+const getMenuItems = (isAdmin) => {
+  const baseItems = [
+    { label: "My Profile", icon: UserCircleIcon, path: "/UserProfile", color: "text-blue-500" },
+    { label: "My Bookings", icon: CalendarDaysIcon, path: "/bookings", color: "text-green-500" },
+    { label: "Notifications", icon: BellIcon, path: "/notifications", color: "text-yellow-500" },
+    { label: "Payment Methods", icon: CreditCardIcon, path: "/payment-methods", color: "text-purple-500" },
+    { label: "Settings", icon: CogIcon, path: "/settings", color: "text-gray-500" },
+    { label: "Sign Out", icon: PowerIcon, path: "/logout", color: "text-red-500", isDestructive: true },
+  ];
+
+  if (isAdmin) {
+    baseItems.splice(1, 0, { 
+      label: "Admin Dashboard", 
+      icon: ShieldCheckIcon, 
+      path: "/AdminDashboard", 
+      color: "text-indigo-500" 
+    });
+  }
+
+  return baseItems;
+};
+
+// Default guest avatar (using SVG placeholder)
+const getDefaultAvatar = (name) => {
+  // Generate initials for avatar
+  const initials = name 
+    ? name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+    : 'GU';
+  
+  // Create SVG with initials
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%230072ff"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="80" font-family="Arial, sans-serif">${initials}</text></svg>`;
+};
 
 export function AvatarWithUserDropdown() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  
+  // Get user's current avatar or use default
+  const userAvatar = user?.avatar || getDefaultAvatar(user?.name || "Guest");
+  
+  const isAdmin = user?.role === "admin";
+  const menuItems = getMenuItems(isAdmin);
 
   const closeMenu = () => setIsMenuOpen(false);
-  const isAdmin = user?.role === "admin";
 
-  const handleItemClick = (label) => {
-    if (label === "Sign Out") {
+  const handleItemClick = (item) => {
+    if (item.label === "Sign Out") {
       logout();
-    } else if (label === "My Profile") {
-      navigate("/UserProfile");
-    } else if (label === "Admin Control" && isAdmin) {
-      navigate("/AdminDashboard");
+    } else if (item.path) {
+      navigate(item.path);
     }
     closeMenu();
   };
@@ -49,48 +87,159 @@ export function AvatarWithUserDropdown() {
         <Button
           variant="text"
           color="blue-gray"
-          className="flex items-center rounded-full p-0"
+          className="flex items-center gap-2 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-dark-secondary transition-all duration-200"
         >
-          <Avatar
-            variant="circular"
-            size="md"
-            alt={user?.name || "User"}
-            withBorder
-            color="blue-gray"
-            className="p-0.5"
-            src={user?.avatar || "https://i.pravatar.cc/150?img=3"}
-          />
+          <div className="hidden sm:flex flex-col items-end">
+            <Typography
+              variant="small"
+              className="font-semibold text-gray-800 dark:text-dark-header_text"
+            >
+              {user?.name || "Guest User"}
+            </Typography>
+            <Typography
+              variant="small"
+              className="text-xs text-gray-600 dark:text-dark-secondary_text"
+            >
+              {user?.email || "guest@example.com"}
+            </Typography>
+          </div>
+          <div className="relative">
+            <Avatar
+              variant="circular"
+              size="md"
+              alt={user?.name || "Guest"}
+              src={userAvatar}
+              className="border-2 border-light-Buttons dark:border-dark-Buttons hover:scale-105 transition-transform duration-200"
+            />
+            {/* Online status indicator */}
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 dark:bg-green-400 rounded-full border-2 border-white dark:border-dark-background"></div>
+          </div>
         </Button>
       </MenuHandler>
 
-      <MenuList className="p-1 bg-light-background dark:bg-dark-background">
-        {profileMenuItems.map(({ label, icon }, key) => {
-          if (label === "Admin Control" && !isAdmin) return null;
+      <MenuList className="p-2 min-w-[240px] max-w-[320px] bg-white dark:bg-dark-background border border-gray-200 dark:border-gray-700 shadow-xl rounded-xl mt-2">
+        {/* User Info Section */}
+        <div className="flex items-center gap-3 p-3 border-b border-gray-100 dark:border-gray-700 mb-2">
+          <Avatar
+            size="lg"
+            src={userAvatar}
+            alt={user?.name || "Guest"}
+            className="border-2 border-light-Buttons dark:border-dark-Buttons"
+          />
+          <div className="flex-1 min-w-0">
+            <Typography
+              variant="h6"
+              className="font-bold text-gray-900 dark:text-dark-header_text truncate"
+            >
+              {user?.name || "Guest User"}
+            </Typography>
+            <Typography
+              variant="small"
+              className="text-gray-600 dark:text-dark-secondary_text truncate"
+            >
+              {user?.email || "guest@example.com"}
+            </Typography>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="px-2 py-1 text-xs font-medium rounded-full bg-gradient-to-r from-light-Buttons to-light-secondary text-white">
+                {user?.role === "admin" ? "Admin" : user?.membership || "Member"}
+              </span>
+              {user?.role === "admin" && (
+                <span className="px-2 py-1 text-xs font-medium rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200">
+                  Admin
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
 
-          const isLastItem = key === profileMenuItems.length - 1;
-          return (
-            <MenuItem
-              key={label}
-              onClick={() => handleItemClick(label)}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem ? "hover:bg-red-500/10" : ""
+        {/* Menu Items */}
+        <div className="py-1">
+          {menuItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleItemClick(item)}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 text-left ${
+                item.isDestructive
+                  ? "hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400"
+                  : "hover:bg-gray-50 dark:hover:bg-dark-secondary text-gray-800 dark:text-dark-header_text"
               }`}
             >
-              {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                strokeWidth: 2,
-              })}
+              <div className={`p-1.5 rounded-lg ${item.color} bg-opacity-10`}>
+                {React.createElement(item.icon, {
+                  className: `h-5 w-5 ${item.color}`,
+                })}
+              </div>
               <Typography
-                as="span"
                 variant="small"
-                className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
+                className={`font-medium ${item.isDestructive ? "text-red-600 dark:text-red-400" : ""}`}
               >
-                {label}
+                {item.label}
               </Typography>
-            </MenuItem>
-          );
-        })}
+            </button>
+          ))}
+        </div>
+
+        {/* Theme Toggle Section */}
+        <div className="p-3 border-t border-gray-100 dark:border-gray-700">
+          <div className="flex items-center justify-between">
+            <Typography
+              variant="small"
+              className="font-medium text-gray-700 dark:text-dark-secondary_text"
+            >
+              Theme
+            </Typography>
+            <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-dark-secondary hover:bg-gray-200 dark:hover:bg-dark-hover transition-colors"
+            >
+              {theme === "dark" ? (
+                <>
+                  <SunIcon className="h-4 w-4 text-yellow-500" />
+                  <Typography
+                    variant="small"
+                    className="font-medium text-gray-700 dark:text-dark-header_text"
+                  >
+                    Light
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <MoonIcon className="h-4 w-4 text-indigo-500" />
+                  <Typography
+                    variant="small"
+                    className="font-medium text-gray-700 dark:text-dark-header_text"
+                  >
+                    Dark
+                  </Typography>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="p-3 border-t border-gray-100 dark:border-gray-700">
+          <Typography
+            variant="small"
+            className="font-medium text-gray-700 dark:text-dark-secondary_text mb-2"
+          >
+            Quick Actions
+          </Typography>
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={() => navigate("/new-booking")}
+              className="px-3 py-2 text-xs font-medium rounded-lg bg-gradient-to-r from-light-Buttons to-light-secondary text-white hover:opacity-90 transition-opacity"
+            >
+              New Booking
+            </button>
+            <button
+              onClick={() => navigate("/support")}
+              className="px-3 py-2 text-xs font-medium rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-header_text hover:bg-gray-50 dark:hover:bg-dark-secondary transition-colors"
+            >
+              Get Help
+            </button>
+          </div>
+        </div>
       </MenuList>
     </Menu>
   );
