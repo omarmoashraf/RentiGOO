@@ -26,6 +26,7 @@ import Pricing from "./pages/pricing/Pricing";
 // Pages - User Protected
 import Favourites from "./pages/favourites/Favourites";
 import Booking from "./pages/booking/Booking";
+import BookingConfirmation from "./pages//booking/BookingConfirmation";
 import PaymentDetails from "./pages/paymentdetails/PaymentDetails";
 import PaymentMethods from "./pages/paymentmethods/PaymentMethods";
 import Wallet from "./pages/wallet/Wallet";
@@ -146,6 +147,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/booking-confirmation"
+  element={
+    <ProtectedRoute>
+      <UserLayout>
+        <BookingConfirmation />
+      </UserLayout>
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/paymentdetails"
           element={
