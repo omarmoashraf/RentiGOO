@@ -1,23 +1,11 @@
 import { motion } from "framer-motion";
-import { AiFillHeart, AiFillStar, AiOutlineCalendar } from "react-icons/ai";
-import { FaCarSide } from "react-icons/fa";
-import { Carousel, Typography, Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import { Card, Input, Checkbox } from "@material-tailwind/react";
-import { Chip } from "@material-tailwind/react";
-import CarCard from "../cars/components/carCard/CarCard.jsx";
+import { AiOutlineCalendar } from "react-icons/ai";
 import { CiFilter } from "react-icons/ci";
 import { CiStar } from "react-icons/ci";
 import { IoCarSportOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
+import CarCard from "../cars/components/carCard/CarCard.jsx";
 
-import {
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Tooltip,
-  IconButton,
-} from "@material-tailwind/react";
 export default function Favourites() {
   const cars = [
     {
@@ -83,109 +71,112 @@ export default function Favourites() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-light-background dark:bg-dark-background pt-8">
-      <div className="p-4 w-3/4 text-center">
-        <h1
-          className=" font-bold mb-2 text-4xl text-light-primary_text dark:text-dark-header_text"
-          
-        >
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-light-background dark:bg-dark-background pt-6 sm:pt-8">
+      {/* Header Section */}
+      <div className="px-4 sm:px-6 lg:px-8 w-full max-w-7xl text-center mb-6 sm:mb-8">
+        <h1 className="font-bold mb-2 text-3xl sm:text-4xl lg:text-5xl text-light-primary_text dark:text-dark-header_text">
           My Favorites
         </h1>
-        <p className="text-light-primary_text dark:text-dark-secondary_text ">
+        <p className="text-base sm:text-lg text-light-primary_text dark:text-dark-secondary_text px-4 sm:px-0">
           Keep track of your favorite vehicles and book them when you're ready
         </p>
       </div>
 
-      <div className="min-h-screen  flex flex-col items-center p-6">
+      <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 w-full max-w-7xl">
         {/* Stats Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full mb-8 sm:mb-12">
+          {/* Stat Card 1 */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            whileHover={{ scale: 1.03 }}
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-4 sm:p-6 w-full text-center border border-[#cccccc] flex flex-col items-center justify-center h-full min-h-[180px] sm:min-h-[200px]"
           >
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 shadow-lg mb-4">
-              <CiHeart className="h-8 w-8 text-blue-500" />
+            <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-blue-100 shadow-lg mb-3 sm:mb-4">
+              <CiHeart className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
             </div>
-            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
               6
             </h2>
-            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text">
+            <p className="text-xs sm:text-sm font-medium text-light-primary_text dark:text-dark-secondary_text mt-1 sm:mt-2">
               Total Favorites
             </p>
           </motion.div>
 
+          {/* Stat Card 2 */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            whileHover={{ scale: 1.03 }}
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-4 sm:p-6 w-full text-center border border-[#cccccc] flex flex-col items-center justify-center h-full min-h-[180px] sm:min-h-[200px]"
           >
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 shadow-lg mb-4">
-              <IoCarSportOutline className="h-8 w-8 text-green-500" />
+            <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-green-100 shadow-lg mb-3 sm:mb-4">
+              <IoCarSportOutline className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
             </div>
-            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
               5
             </h2>
-            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text" >
+            <p className="text-xs sm:text-sm font-medium text-light-primary_text dark:text-dark-secondary_text mt-1 sm:mt-2">
               Available Now
             </p>
           </motion.div>
 
+          {/* Stat Card 3 */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md  bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            whileHover={{ scale: 1.03 }}
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-4 sm:p-6 w-full text-center border border-[#cccccc] flex flex-col items-center justify-center h-full min-h-[180px] sm:min-h-[200px]"
           >
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 shadow-lg mb-4">
-              <CiStar className="h-8 w-8 text-blue-500" />
+            <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-blue-100 shadow-lg mb-3 sm:mb-4">
+              <CiStar className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500" />
             </div>
-            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
               4.8
             </h2>
-            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text" >
+            <p className="text-xs sm:text-sm font-medium text-light-primary_text dark:text-dark-secondary_text mt-1 sm:mt-2">
               Avg. Rating
             </p>
           </motion.div>
 
+          {/* Stat Card 4 */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-6 w-[250px] text-center border border-[#cccccc] flex flex-col items-center justify-center"
+            whileHover={{ scale: 1.03 }}
+            className="rounded-2xl shadow-md bg-white dark:bg-dark-background p-4 sm:p-6 w-full text-center border border-[#cccccc] flex flex-col items-center justify-center h-full min-h-[180px] sm:min-h-[200px]"
           >
-            <div className="flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 shadow-lg mb-4">
-              <AiOutlineCalendar className="h-8 w-8 text-orange-500" />
+            <div className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-orange-100 shadow-lg mb-3 sm:mb-4">
+              <AiOutlineCalendar className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
             </div>
-
-            <h2 className="text-3xl font-bold text-light-primary_text dark:text-dark-header_text" >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-light-primary_text dark:text-dark-header_text">
               $98
             </h2>
-            <p className="text-sm font-medium text-light-primary_text dark:text-dark-secondary_text">
+            <p className="text-xs sm:text-sm font-medium text-light-primary_text dark:text-dark-secondary_text mt-1 sm:mt-2">
               Avg. Price/Day
             </p>
           </motion.div>
         </div>
-        <div className="bg-white dark:bg-dark-background shadow-md rounded-2xl mt-12 p-8 w-4/5 border border-[#cccccc] text-center mb-5">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+
+        {/* Filter Section */}
+        <div className="bg-white dark:bg-dark-background shadow-md rounded-2xl p-4 sm:p-6 lg:p-8 w-full border border-[#cccccc] text-center mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 w-full">
             {/* Search Bar */}
             <input
               type="text"
               placeholder="Search cars..."
-              className="w-full sm:w-1/2 border dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full md:w-1/2 lg:w-2/5 border dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text border-gray-300 rounded-lg px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
             />
 
             {/* Availability Filter */}
-            <div className="flex items-center gap-1 ">
+            <div className="w-full md:w-auto flex justify-center">
               <select
                 id="availability"
-                className="border border-gray-300 bg-light-background dark:bg-dark-background rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-light-primary_text dark:text-dark-secondary_text"
+                className="w-full md:w-auto border border-gray-300 bg-light-background dark:bg-dark-background rounded-lg px-3 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-light-primary_text dark:text-dark-secondary_text text-sm sm:text-base"
               >
-                <option value="all" className="">All Cars</option>
+                <option value="all">All Cars</option>
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
               </select>
             </div>
 
             {/* Recently Viewed Filter */}
-            <div className="flex items-center gap-1">
+            <div className="w-full md:w-auto flex justify-center">
               <select
                 id="recent"
-                className="border border-gray-300 dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full md:w-auto border border-gray-300 dark:bg-dark-background text-light-primary_text dark:text-dark-secondary_text rounded-lg px-3 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
               >
                 <option value="recent">Recently Viewed</option>
                 <option value="none">No Filter</option>
@@ -195,11 +186,14 @@ export default function Favourites() {
             </div>
           </div>
         </div>
-        <div>
-          {/* Car Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center bg-light-background dark:bg-dark-background">
+
+        {/* Car Cards Grid */}
+        <div className="w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full">
             {cars.map((car) => (
-              <CarCard key={car.id} car={car} />
+              <div key={car.id} className="w-full">
+                <CarCard car={car} />
+              </div>
             ))}
           </div>
         </div>
